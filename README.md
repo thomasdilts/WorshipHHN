@@ -9,4 +9,5 @@ This software is designed to work on an apache, maria database and php environme
 3. Make sure your server has all the PHP modules you need by looking at the requirements.php page. Here is how mine looks http://jesusislord.se/whhn/requirements.php
 4. Create a database and user. Set the protected/config/db.php file to show all the necessary connections to your database.
 5. Install the initialize.sql onto your database to create all the tables and a startup of data for the tables.
-6. Your login will be username=creator, password=password0123
+6. Your login will be username=creator, password=password0123  Of course you want to change these as soon as you log in.
+7. The users, events, teams, all are there to simply show you how to start. You are welcome to erase them all except the user with the role theCreator. That you really need to keep.
