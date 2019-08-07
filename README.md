@@ -7,7 +7,7 @@ This software is designed to work on an apache, maria database and php environme
 
 1. Download the latest version zip file found at  https://github.com/thomasdilts/WorshipHHN/releases
 2. Install all the files found in the zip file onto your server.
-3. Make sure your server has all the PHP modules you need by looking at the requirements.php page. Here is how mine looks http://jesusislord.se/whhn/requirements.php
+3. Make sure your server has all the PHP modules you need by looking at the requirements.php page. Here is how mine looks http://worshiphhn.org/whhn/requirements.php
 4. Create a database and user. See below for how to setup WorshipHHN for your database.
 5. Install the Example.sql or the Empty.sql onto your database to create all the tables and a startup of data for the tables. You might want to try Example.sql first and then later install Empty.sql to start with an empty database.
 6. Your login will be username=Calum, password=1234AAaa  Of course you want to change these as soon as you log in.
