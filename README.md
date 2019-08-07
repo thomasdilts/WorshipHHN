@@ -47,13 +47,14 @@ The mail system must get your SMTP mail settings: Host, username, password, port
 plus you might want to change 'language' => 'en' to something else
 
 _protected/config/params.php
-adminEmail and senderEmail must get valid emails.
+adminEmail and senderEmail must get valid emails. showWhhnServerOffer you might want to set to 'false' because otherwise you will get some unwanted information printed on your home page for WorshipHHN
 ```php
   'adminEmail' => 'thomas@gmail.com', 
-	'senderEmail' => 'thomas@gmail.com',
+  'senderEmail' => 'thomas@gmail.com',
+  'showWhhnServerOffer' => 'true',
 ```
 
-Extreamly important is the .htaccess file. If you install the zip file correctly the .htaccess file should be installed. But if you make a mistake, below is the .htaccess file that must be in the root of where you installed WorshipHHN
+Extremely important is the .htaccess file. If you install the zip file correctly the .htaccess file should be installed. But if you make a mistake, below is the .htaccess file that must be in the root of where you installed WorshipHHN
 ```txt
 RewriteEngine on
 
