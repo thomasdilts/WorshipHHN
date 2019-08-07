@@ -1,5 +1,6 @@
 # WorshipHHN
 A worship service planer and organizer
+Documentation and details can be found at http://worshiphhn.org/whhn
 
 Eventually here will include instructions for a "composer" installation. But for now only a zip file installation is explained.
 
