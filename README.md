@@ -3,6 +3,8 @@ A worship service planer and organizer
 
 Eventually here will include instructions for a "composer" installation. But for now only a zip file installation is explained.
 
+Get the latest zip file version at https://github.com/thomasdilts/WorshipHHN/releases
+
 This software is designed to work on an apache, maria database and php environment.  A good such environment is XAMPP. see https://www.apachefriends.org/index.html. Perl however is not needed but doesn't harm anything.
 1. Download the latest version zip file
 2. Install all the files found in the zip file onto your server.
