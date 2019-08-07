@@ -53,3 +53,20 @@ adminEmail and senderEmail must get valid emails.
   'adminEmail' => 'thomas@gmail.com', 
 	'senderEmail' => 'thomas@gmail.com',
 ```
+
+Extreamly important is the .htaccess file. If you install the zip file correctly the .htaccess file should be installed. But if you make a mistake, below is the .htaccess file that must be in the root of where you installed WorshipHHN
+```txt
+RewriteEngine on
+
+# hide files and folders
+RedirectMatch 404 /_protected
+RedirectMatch 404 /\.git
+RedirectMatch 404 /composer\.
+RedirectMatch 404 /.bowerrc
+
+# If a directory or a file exists, use the request directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise forward the request to index.php
+RewriteRule . index.php
+```
