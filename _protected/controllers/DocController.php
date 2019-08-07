@@ -138,7 +138,9 @@ class DocController extends Controller
             return $this->render($page, ['model'=>$model,'returnName'=>$returnName,'returnUrl'=>$returnUrl ]);
         }
 		Yii::$app->language = $model->language_iso_name;
-        return $this->render($page, ['model'=>$model,'returnName'=>$returnName,'returnUrl'=>$returnUrl ]);
+		
+		//we need to do a one time recursion here to put the lang on the url
+		return $this->redirect(['doc','page'=>$page,'returnName'=>$returnName,'returnUrl'=>$returnUrl,'lang'=>$model->language_iso_name]);		
     }
 	
 	public function actionScreenshot($image,$returnName,$returnUrl,$lang='')
@@ -160,6 +162,7 @@ class DocController extends Controller
             return $this->render('screenshotviewer', ['image'=>$image,'model'=>$model,'returnName'=>$returnName,'returnUrl'=>$returnUrl ]);
         }
 		Yii::$app->language = $model->language_iso_name;
-        return $this->render('screenshotviewer', ['image'=>$image,'model'=>$model,'returnName'=>$returnName,'returnUrl'=>$returnUrl ]);
+		//we need to do a one time recursion here to put the lang on the url
+		return $this->redirect(['screenshot','image'=>$image,'returnName'=>$returnName,'returnUrl'=>$returnUrl,'lang'=>$model->language_iso_name]);		
     }
 }

@@ -10,7 +10,11 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-$lang = Yii::$app->request->$queryParams['lang'];
+$lang = '';
+if(array_key_exists('lang',Yii::$app->request->queryParams)){
+	$lang=Yii::$app->request->queryParams['lang'];
+}
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
