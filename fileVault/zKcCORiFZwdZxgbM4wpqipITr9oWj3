@@ -1,0 +1,724 @@
+./rbac/models/Role.php:            'item_name' => Yii::t('app', 'Role'),
+./controllers/UserController.php:            Yii::$app->session->setFlash('error', Yii::t('app', 'There was some error while saving user role.'));
+./controllers/UserController.php:            Yii::$app->session->setFlash('error', Yii::t('app', 'There was some error while saving user role.'));
+./controllers/UserController.php:            throw new ServerErrorHttpException(Yii::t('app', 'We could not delete this user.'));
+./controllers/UserController.php:            Yii::$app->session->setFlash('error', Yii::t('app', 'There was some error while deleting user role.'));
+./controllers/UserController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'You have successfuly deleted user and his role.'));
+./controllers/UserController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/SiteController.php:            Yii::$app->session->setFlash('error', Yii::t('app', 'There was some error while sending email.'));
+./controllers/SiteController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 
+./controllers/SiteController.php:            Yii::$app->session->setFlash('error', Yii::t('app', 
+./controllers/SiteController.php:            Yii::$app->session->setFlash('error', Yii::t('app', 
+./controllers/SiteController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Check your email for further instructions.'));
+./controllers/SiteController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'New password was saved.'));
+./controllers/SiteController.php:                'title' => Yii::t('app', 'Error'),
+./controllers/SiteController.php:                'message' => Yii::t('app', 'You have accessed this page incorrectly'),
+./controllers/SiteController.php:                'title' => Yii::t('app', 'Error'),
+./controllers/SiteController.php:                'message' => Yii::t('app', 'You have accessed this page incorrectly'),
+./controllers/SiteController.php:                'title' => Yii::t('app', 'Repeated reply'),
+./controllers/SiteController.php:                'message' => Yii::t('app', 'You have already replied to this request. Thanks anyway. Bye!'), 
+./controllers/SiteController.php:                'status' => Yii::t('app', $newMessageStatus)]);  
+./controllers/SiteController.php:                'title' => Yii::t('app', 'Repeated reply'),
+./controllers/SiteController.php:                'message' => Yii::t('app', 'You have now changed the status of this request. Thank you. Bye!'),
+./controllers/SiteController.php:                'status' => Yii::t('app', $newMessageStatus)]); 
+./controllers/SiteController.php:            'title' => Yii::t('app', 'Your reply is registered'),
+./controllers/SiteController.php:            'message' => Yii::t('app', 'Thank you for replying to this request'),  
+./controllers/SiteController.php:            'status' => Yii::t('app', $newMessageStatus)]);  
+./controllers/SiteController.php:            Yii::$app->session->setFlash('error', Yii::t('app', 'We couldn\'t sign you up, please contact us.'));
+./controllers/SiteController.php:            Yii::$app->session->setFlash('warning', Yii::t('app', 'Please try to log in.'));
+./controllers/SiteController.php:            Yii::$app->session->setFlash('error', Yii::t('app', 
+./controllers/SiteController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Hello').' '.Html::encode($user->username). '. ' .
+./controllers/SiteController.php:            Yii::t('app', 'To be able to log in, you need to confirm your registration. 
+./controllers/SiteController.php:            Yii::$app->session->setFlash('error', Html::encode($user->username). Yii::t('app', 
+./controllers/SiteController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Success! You can now log in.').' '.
+./controllers/SiteController.php:            Yii::t('app', 'Thank you').' '.Html::encode($user->username).' '.Yii::t('app', 'for joining us!'));
+./controllers/MessageTypeController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/MessageTypeController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/MessageTypeController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/MessageTypeController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/MessageTypeController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/EventTemplateController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/EventTemplateController.php:			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/EventTemplateController.php:			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful add'));
+./controllers/EventTemplateController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/EventTemplateController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/EventTemplateController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/EventTemplateController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/EventController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/EventController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/EventController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/EventController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/EventController.php:			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/EventController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/EventController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/EventController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/EventController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/ActivityTypeController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/ActivityTypeController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/ActivityTypeController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/ActivityTypeController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/ActivityTypeController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/ChurchController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/ChurchController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/ChurchController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/ChurchController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/ChurchController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/TeamTypeController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/TeamTypeController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/TeamTypeController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/TeamTypeController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/TeamTypeController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/SongController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/SongController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/SongController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/SongController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/SongController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/MessageTemplateController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/MessageTemplateController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/MessageTemplateController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/MessageTemplateController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/MessageTemplateController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/TeamController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/TeamController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/TeamController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/TeamController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/TeamController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/TeamController.php:			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/TeamController.php:			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful update'));
+./controllers/TeamController.php:			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful add'));
+./controllers/TeamController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/TeamController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/TeamController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/TeamController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/LanguageController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/LanguageController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/LanguageController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/LanguageController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/LanguageController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./controllers/UserBlockedController.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
+./controllers/UserBlockedController.php:				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+./controllers/UserBlockedController.php:			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+./controllers/UserBlockedController.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./controllers/UserBlockedController.php:            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+./models/TeamType.php:            'name' => Yii::t('app', 'Name'),
+./models/ResetPasswordForm.php:            throw new InvalidParamException(Yii::t('app', 'Password reset token cannot be blank.'));
+./models/ResetPasswordForm.php:            throw new InvalidParamException(Yii::t('app', 'Wrong password reset token.'));
+./models/ResetPasswordForm.php:            'password' => Yii::t('app', 'Password'),
+./models/LoginForm.php:            'username' => Yii::t('app', 'Username'),
+./models/LoginForm.php:            'password' => Yii::t('app', 'Password'),
+./models/LoginForm.php:            'email' => Yii::t('app', 'Email'),
+./models/LoginForm.php:            'rememberMe' => Yii::t('app', 'Remember me'),
+./models/Activity.php:            'name' => Yii::t('app', 'Name'),
+./models/Activity.php:            'description' => Yii::t('app', 'Description'),
+./models/Activity.php:            'start_time' => Yii::t('app', 'Start Time'),
+./models/Activity.php:            'end_time' => Yii::t('app', 'End Time'),
+./models/Activity.php:            'global_order' => Yii::t('app', 'Global Order'),
+./models/PasswordResetRequestForm.php:                                ->setSubject(Yii::t('app', 'Password reset for :') . Yii::$app->name)
+./models/Church.php:			$model->name=Yii::t('app', 'Generic Church');
+./models/Church.php:            'name' => Yii::t('app', 'Name'),
+./models/Church.php:            'admin_email' => Yii::t('app', 'Admin Email'),
+./models/SongImportOpenLpFile.php:                    $status.=Yii::t('app', 'Accepted');
+./models/SongImportOpenLpFile.php:                    $status.=Yii::t('app', 'Not replied yet');
+./models/SongImportOpenLpFile.php:                    $status.=Yii::t('app', 'Rejected');
+./models/SongImportOpenLpFile.php:                $status.=Yii::t('app', 'Unavailable-team');    
+./models/SongImportOpenLpFile.php:                $status.=Yii::t('app', 'Unavailable-user');
+./models/SongImportOpenLpFile.php:            $title=Yii::t('app', 'Tasks for team') . ' : '. $team->name;
+./models/SongImportOpenLpFile.php:            $title = Yii::t('app', 'Tasks for user') . ' : '.$user->display_name ;
+./models/SongImportOpenLpFile.php:            $title=Yii::t('app', 'Tasks for team') . ' : '. $data['model']->name;
+./models/SongImportOpenLpFile.php:            $title = Yii::t('app', 'Tasks for user') . ' : '.$data['model']->display_name;
+./models/SongImportOpenLpFile.php:		ActivityExportFile::SetBold('A2',$spreadsheet,Yii::t('app', 'Today'));
+./models/SongImportOpenLpFile.php:		ActivityExportFile::SetBold('A3',$spreadsheet,Yii::t('app', 'Event Name'));
+./models/SongImportOpenLpFile.php:		ActivityExportFile::SetBold('B3',$spreadsheet,Yii::t('app', 'Start Date'));
+./models/SongImportOpenLpFile.php:        ActivityExportFile::SetBold('C3',$spreadsheet,Yii::t('app', 'Team'));
+./models/SongImportOpenLpFile.php:        ActivityExportFile::SetBold('D3',$spreadsheet,Yii::t('app', 'Status'));
+./models/SongImportOpenLpFile.php:        ActivityExportFile::SetBold('E3',$spreadsheet,Yii::t('app', 'Activity'));
+./models/SongImportOpenLpFile.php:                    $status.=Yii::t('app', 'Accepted');
+./models/SongImportOpenLpFile.php:                    $status.=Yii::t('app', 'Not replied yet');
+./models/SongImportOpenLpFile.php:                    $status.=Yii::t('app', 'Rejected');
+./models/SongImportOpenLpFile.php:                $status.=Yii::t('app', 'Unavailable-team');    
+./models/SongImportOpenLpFile.php:                $status.=Yii::t('app', 'Unavailable-user');
+./models/SignupForm.php:                'message' => Yii::t('app', 'It\'s impossible to have that username.')],            
+./models/SignupForm.php:                'message' => Yii::t('app', 'This username has already been taken.')],
+./models/SignupForm.php:            'username' => Yii::t('app', 'Username'),
+./models/SignupForm.php:            'password' => Yii::t('app', 'Password'),
+./models/SignupForm.php:            'email' => Yii::t('app', 'Email'),
+./models/SignupForm.php:            'display_name' => Yii::t('app', 'display_name'),
+./models/SignupForm.php:            'church_id' => Yii::t('app', 'Church'),
+./models/SignupForm.php:                                ->setSubject(Yii::t('app', 'Account activation for :') . Yii::$app->name)
+./models/Team.php:            'team_type_id' => Yii::t('app', 'Team Type'),
+./models/Team.php:            'name' => Yii::t('app', 'Name'),
+./models/Team.php:			'team_type.name' => Yii::t('app', 'Team type name'),
+./models/Event.php:            'name' => Yii::t('app', 'Name'),
+./models/Event.php:            'description' => Yii::t('app', 'Description'),
+./models/Event.php:            'start_date' => Yii::t('app', 'Start Date'),
+./models/Event.php:            'end_date' => Yii::t('app', 'End Date'),
+./models/SongImportFile.php:                Yii::$app->session->setFlash("danger", Yii::t('app', 'Failed to upload file').' :'.$errMessage );
+./models/SongImportFile.php:                Yii::$app->session->setFlash("danger", Yii::t('app', 'Failed to copy file to new destination').' :'.$filePath );
+./models/SongImportFile.php:                Yii::$app->session->setFlash('success', Yii::t('app', 'Successful file import'). '; ' . Yii::t('app', 'Updated'). ' = '. $updated . ' ; ' . Yii::t('app', 'New'). ' = '. $new);
+./models/SongImportFile.php:                Yii::$app->session->setFlash("danger", Yii::t('app', 'Failed to unzip the file') );
+./models/SongImportFile.php:                Yii::$app->session->setFlash("danger", Yii::t('app', 'Unknown column name in the first row of the file').' : '.$name );
+./models/SongImportFile.php:        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful file import'). '; ' . Yii::t('app', 'Updated'). ' = '. $updated . ' ; ' . Yii::t('app', 'New'). ' = '. $new);
+./models/AccountActivation.php:            throw new InvalidParamException(Yii::t('app', 'Account activation token cannot be blank.'));
+./models/AccountActivation.php:            throw new InvalidParamException(Yii::t('app', 'Wrong account activation token.'));
+./models/User.php:                'message' => Yii::t('app', 'It\'s impossible to have that username.')],          
+./models/User.php:                'message' => Yii::t('app', 'This username has already been taken.')],
+./models/User.php:                'message' => Yii::t('app', 'This email address has already been taken.')],
+./models/User.php:            'id' => Yii::t('app', 'ID'),
+./models/User.php:            'username' => Yii::t('app', 'Username'),
+./models/User.php:            'password' => Yii::t('app', 'Password'),
+./models/User.php:            'email' => Yii::t('app', 'Email'),
+./models/User.php:            'status' => Yii::t('app', 'Status'),
+./models/User.php:            'created_at' => Yii::t('app', 'Created At'),
+./models/User.php:            'updated_at' => Yii::t('app', 'Updated At'),
+./models/User.php:            'item_name' => Yii::t('app', 'Role'),
+./models/User.php:            'church_id' => Yii::t('app', 'Church'),
+./models/User.php:            'display_name' => Yii::t('app', 'Display name'),
+./models/User.php:            'admin' => Yii::t('app', 'Always Notify'),
+./models/User.php:            'language_id' => Yii::t('app', 'Language'),
+./models/MessageType.php:            'name' => Yii::t('app', 'Name'),
+./models/Language.php:            'iso_name' => Yii::t('app', 'ISO Name'),
+./models/Language.php:            'display_name_english' => Yii::t('app', 'Name in English'),
+./models/Language.php:            'display_name_native' => Yii::t('app', 'Name in native language'),
+./models/ActivityType.php:            'name' => Yii::t('app','Name'),
+./models/ActivityType.php:            'use_team' => Yii::t('app','Use Team'),
+./models/ActivityType.php:            'use_user' => Yii::t('app','Use User'),
+./models/ActivityType.php:            'use_description' => Yii::t('app','Use Description'),
+./models/ActivityType.php:            'use_globally' => Yii::t('app','Use Globally (No start time)'),
+./models/ActivityType.php:            'use_song' => Yii::t('app','Use Song'),
+./models/ActivityType.php:            'use_file' => Yii::t('app','Use File'),
+./models/ActivityType.php:            'demand_team' => Yii::t('app','Demand Team'),
+./models/ActivityType.php:            'demand_user' => Yii::t('app','Demand User'),
+./models/ActivityType.php:            'demand_description' => Yii::t('app','Demand Description'),
+./models/ActivityType.php:            'notify_user_event_errors' => Yii::t('app','Notify this user of event problems'),
+./models/ActivityType.php:            'demand_song' => Yii::t('app','Demand Song'),
+./models/ActivityType.php:            'demand_file' => Yii::t('app','Demand File'),
+./models/ActivityType.php:            'default_start_time' => Yii::t('app','Default Start Time'),
+./models/ActivityType.php:            'default_end_time' => Yii::t('app','Default End Time'),
+./models/ActivityType.php:            'default_global_order' => Yii::t('app','Default global order'),
+./models/ActivityType.php:			'team_type_id' => Yii::t('app','Team type'),
+./models/ContactForm.php:            'name'=> Yii::t('app', 'Name'),
+./models/ContactForm.php:            'email' => Yii::t('app', 'Email'),
+./models/ContactForm.php:            'subject' => Yii::t('app', 'Subject'),
+./models/ContactForm.php:            'body' => Yii::t('app', 'Text'),
+./models/ContactForm.php:            'verifyCode' => Yii::t('app', 'Verification Code'),
+./models/File.php:				Yii::$app->session->setFlash("danger", Yii::t('app', 'Failed to upload file').' :'.$errMessage );
+./models/File.php:				Yii::$app->session->setFlash("danger", Yii::t('app', 'Failed to copy file to new destination').' :'.$fileDestination );
+./models/File.php:				Yii::$app->session->setFlash("danger", Yii::t('app', 'Failed to upload file'));
+./models/File.php:		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful file add'));
+./models/File.php:			Yii::$app->session->setFlash("danger", Yii::t('app', 'Failed to download the file. Deleting it instead.'));
+./models/File.php:			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+./models/TeamUser.php:            'admin' => Yii::t('app', 'Admin'),
+./models/TeamBlocked.php:            'start_date' => Yii::t('app', 'Start Date'),
+./models/TeamBlocked.php:            'end_date' => Yii::t('app', 'End Date'),
+./models/ActivityExportFile.php:                    $status.=Yii::t('app', 'Accepted');
+./models/ActivityExportFile.php:                    $status.=Yii::t('app', 'Not replied yet');
+./models/ActivityExportFile.php:                    $status.=Yii::t('app', 'Rejected');
+./models/ActivityExportFile.php:                $status.=Yii::t('app', 'Unavailable-team');    
+./models/ActivityExportFile.php:                $status.=Yii::t('app', 'Unavailable-user');
+./models/ActivityExportFile.php:            $title=Yii::t('app', 'Tasks for team') . ' : '. $team->name;
+./models/ActivityExportFile.php:            $title = Yii::t('app', 'Tasks for user') . ' : '.$user->display_name ;
+./models/ActivityExportFile.php:            $title=Yii::t('app', 'Tasks for team') . ' : '. $data['model']->name;
+./models/ActivityExportFile.php:            $title = Yii::t('app', 'Tasks for user') . ' : '.$data['model']->display_name;
+./models/ActivityExportFile.php:		ActivityExportFile::SetBold('A2',$spreadsheet,Yii::t('app', 'Today'));
+./models/ActivityExportFile.php:		ActivityExportFile::SetBold('A3',$spreadsheet,Yii::t('app', 'Event Name'));
+./models/ActivityExportFile.php:		ActivityExportFile::SetBold('B3',$spreadsheet,Yii::t('app', 'Start Date'));
+./models/ActivityExportFile.php:        ActivityExportFile::SetBold('C3',$spreadsheet,Yii::t('app', 'Team'));
+./models/ActivityExportFile.php:        ActivityExportFile::SetBold('D3',$spreadsheet,Yii::t('app', 'Status'));
+./models/ActivityExportFile.php:        ActivityExportFile::SetBold('E3',$spreadsheet,Yii::t('app', 'Activity'));
+./models/ActivityExportFile.php:                    $status.=Yii::t('app', 'Accepted');
+./models/ActivityExportFile.php:                    $status.=Yii::t('app', 'Not replied yet');
+./models/ActivityExportFile.php:                    $status.=Yii::t('app', 'Rejected');
+./models/ActivityExportFile.php:                $status.=Yii::t('app', 'Unavailable-team');    
+./models/ActivityExportFile.php:                $status.=Yii::t('app', 'Unavailable-user');
+./models/MessageTemplate.php:            'language_id' => Yii::t('app', 'Language'),
+./models/MessageTemplate.php:            'message_type_id' => Yii::t('app', 'Message Type'),
+./models/MessageTemplate.php:            'name' => Yii::t('app', 'Name'),
+./models/MessageTemplate.php:            'show_accept_button' => Yii::t('app', 'Show Accept Button'),
+./models/MessageTemplate.php:            'show_reject_button' => Yii::t('app', 'Show Reject Button'),
+./models/MessageTemplate.php:            'show_link_to_object' => Yii::t('app', 'Show Link To Object'),
+./models/MessageTemplate.php:            'allow_custom_message' => Yii::t('app', 'Allow Custom Message'),
+./models/MessageTemplate.php:            'accept_button_text' => Yii::t('app', 'Accept Button Text'),
+./models/MessageTemplate.php:            'reject_button_text' => Yii::t('app', 'Reject Button Text'),
+./models/MessageTemplate.php:            'use_auto_subject' => Yii::t('app', 'Use an automatically created subject'),
+./models/MessageTemplate.php:            'link_text' => Yii::t('app', 'Link Text'),
+./models/MessageTemplate.php:            'subject' => Yii::t('app', 'Subject'),
+./models/MessageTemplate.php:            'body' => Yii::t('app', 'Body'),
+./models/Notification.php:            'status' => Yii::t('app', 'Status'),
+./models/Notification.php:            'notified_date' => Yii::t('app', 'Notified Date'),
+./models/Notification.php:            'notify_replied_date' => Yii::t('app', 'Replied Date'),
+./models/Notification.php:            'message_name' => Yii::t('app', 'Message name'),
+./models/Notification.php:            'dates' => Yii::t('app', 'Notified Date / Replied Date'),
+./models/Notification.php:                $htmlMessage.=Yii::t('app', $subject).'<br />';
+./models/Notification.php:                $htmlMessage.="<span style='font-weight:bold;'>".Yii::t('app', 'Event') .'</span>'. ': '. $event->name. ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm").'<br />';
+./models/Notification.php:                $htmlMessage.="<span style='font-weight:bold;'>".Yii::t('app', 'Activity') .'</span>' . ': '. $activity->name.'<br />';
+./models/Notification.php:                $htmlMessage.="<span style='font-weight:bold;'>".Yii::t('app', 'User') .'</span>' . ': '. $user->display_name.'<br />';
+./models/Notification.php:                    ->setSubject(Yii::t('app', $subject))
+./models/Notification.php:                Yii::$app->session->setFlash('success', Yii::t('app', 'You have successfully rejected this task.'));
+./models/Notification.php:                Yii::$app->session->setFlash('success', Yii::t('app', 'You have successfully rejected this task.'));
+./models/Notification.php:                Yii::$app->session->setFlash('error', Yii::t('app', 'This task is already rejected.'));
+./models/Notification.php:                Yii::$app->session->setFlash('success', Yii::t('app', 'You have successfully rejected this task.'));
+./models/Notification.php:        $newNotify->message_name=Yii::t('app', 'Rejected internally.');
+./models/Notification.php:        $newNotify->message_html=Yii::t('app', 'Rejected internally.');
+./models/Notification.php:                Yii::$app->session->setFlash('error', Yii::t('app', 'This task is already accepted.'));
+./models/Notification.php:                Yii::$app->session->setFlash('success', Yii::t('app', 'You have successfully accepted this task.'));
+./models/Notification.php:                Yii::$app->session->setFlash('success', Yii::t('app', 'You have successfully accepted this task.'));
+./models/Notification.php:                Yii::$app->session->setFlash('success', Yii::t('app', 'You have successfully accepted this task.'));
+./models/Notification.php:        $newNotify->message_name=Yii::t('app', 'Accepted internally.');
+./models/Notification.php:        $newNotify->message_html=Yii::t('app', 'Accepted internally.');
+./models/SongExportCsvFile.php:        $title = Yii::t('app', 'Song export');
+./models/SongExportCsvFile.php:    		->setCellValue('A1',Yii::t('app', 'Name'))
+./models/SongExportCsvFile.php:    		->setCellValue('B1',Yii::t('app', 'Name2'))
+./models/SongExportCsvFile.php:            ->setCellValue('C1',Yii::t('app', 'Author'))
+./models/SongExportCsvFile.php:            ->setCellValue('D1',Yii::t('app', 'Description'));
+./models/UserBlocked.php:            'start_date' => Yii::t('app', 'Start Date'),
+./models/UserBlocked.php:            'end_date' => Yii::t('app', 'End Date'),
+./models/Song.php:            [['name', 'author'], 'unique', 'targetAttribute' => ['name', 'author'],'message' => Yii::t('app', 'Another song already has this name and author.')],
+./models/Song.php:            'name' => Yii::t('app', 'Name'),
+./models/Song.php:            'name2' => Yii::t('app', 'Name'). '2',
+./models/Song.php:            'author' => Yii::t('app', 'Author'),
+./models/Song.php:            'description' => Yii::t('app', 'Description'),
+./models/EventExportFile.php:            $value = $isRed ? Yii::t('app', 'Missing') : $model->start_time;
+./models/EventExportFile.php:                ->activityType->demand_song ? Yii::t('app', 'Missing-song') : '');
+./models/EventExportFile.php:                    $value.=Yii::t('app', 'Not replied yet');
+./models/EventExportFile.php:                    $value.=Yii::t('app', 'Rejected');
+./models/EventExportFile.php:					?Yii::t('app', 'Unavailable-team')
+./models/EventExportFile.php:					?Yii::t('app', 'Missing-team')
+./models/EventExportFile.php:			$value.=$user!=null && strlen($user->display_name)>0?($isUserBlocked?Yii::t('app', 'Unavailable-user'):$user->display_name):($model->activityType->demand_user?Yii::t('app', 'Missing-user'):'');		
+./models/EventExportFile.php:                $value .= Yii::t('app', 'Missing-file');
+./models/EventExportFile.php:                ->activityType->demand_description ? Yii::t('app', 'Missing-description') : '');
+./models/EventExportFile.php:		$this->SetBold('A2',$spreadsheet,Yii::t('app', 'Today'));
+./models/EventExportFile.php:		$this->SetBold('A3',$spreadsheet,Yii::t('app', 'Start time'));
+./models/EventExportFile.php:		$this->SetBold('B3',$spreadsheet,Yii::t('app', 'Name'));
+./models/EventExportFile.php:		$this->SetBold('C3',$spreadsheet,Yii::t('app', 'Other'));
+./vendor/yiisoft/yii2/BaseYii.php:     * echo \Yii::t('app', 'Hello, {username}!', ['username' => $username]);
+./views/site/home.php:$this->title = Yii::t('app', Yii::$app->name);
+./views/site/home.php:        <h1><?=Yii::t('app', 'Welcome to')?><br /> Worship H<span style="font-size:0.3em">is</span>H<span style="font-size:0.3em">oly</span>N<span style="font-size:0.3em">ame</span></h1>
+./views/site/home.php:        (<?=Yii::t('app', 'Worship His Holy Name')?>)
+./views/site/home.php:        <p class="lead"><?=Yii::t('app', 'A worship service planer and organizer')?></p>
+./views/site/home.php:                <h3><?=Yii::t('app', 'Login')?></h3>
+./views/site/home.php:                <p><?=Yii::t('app', 'If you already have an account with WorshipHHN then you just need to hit the login menu above')?></p>
+./views/site/home.php:                <h3><?=Yii::t('app', 'Signup')?></h3>
+./views/site/home.php:                <p><?=Yii::t('app', 'If you don\'t have an account then you can signup for an account by hitting the signup menu above. As soon as the administrator accepts your request you may start planning your service participation.')?></p>
+./views/site/home.php:                <h3><?=Yii::t('app', 'Curious?')?></h3>
+./views/site/home.php:                <p><?=Yii::t('app', 'If you are simply curious about what WorshipHHN has to offer just continue reading below. If you want more information you can select the contact menu above.')?></p>
+./views/site/home.php:				<?=Yii::t('app', 'WorshipHHN is designed to fit into whatever device you are using. Larger screens allow you to see the bigger picture but smaller screens can accomplish the same thing and are conveniently found in your pocket.')?>
+./views/site/about.php:$this->title = Yii::t('app', 'About');
+./views/site/login.php:$this->title = Yii::t('app', 'Login');
+./views/site/login.php:        <p><?= Yii::t('app', 'Please fill out the following fields to login:') ?></p>
+./views/site/login.php:                ['placeholder' => Yii::t('app', 'Enter your e-mail'), 'autofocus' => true]) ?>
+./views/site/login.php:                ['placeholder' => Yii::t('app', 'Enter your username'), 'autofocus' => true]) ?>
+./views/site/login.php:        <?= $form->field($model, 'password')->passwordInput(['placeholder' => Yii::t('app', 'Enter your password')]) ?>
+./views/site/login.php:            <?= Yii::t('app', 'If you forgot your password you can') ?>
+./views/site/login.php:            <?= Html::a(Yii::t('app', 'reset it'), ['site/request-password-reset']) ?>.
+./views/site/login.php:            <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+./views/site/resetPassword.php:$this->title = Yii::t('app', 'Reset password');
+./views/site/resetPassword.php:        <p><?= Yii::t('app', 'Please choose your new password:') ?></p>
+./views/site/resetPassword.php:                ['options' => ['placeholder' => Yii::t('app', 'Enter new password'), 'autofocus' => true]]) ?>
+./views/site/resetPassword.php:                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-primary']) ?>
+./views/site/error.php:    <p> <?= Yii::t('app', 'The above error occurred while the Web server was processing your request.') ?> </p>
+./views/site/error.php:    <p> <?= Yii::t('app', 'Please contact us if you think this is a server error. Thank you.') ?> </p>
+./views/site/contact.php:$this->title = Yii::t('app', 'Contact');
+./views/site/contact.php:            <?= Yii::t('app', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'); ?>
+./views/site/contact.php:                ['placeholder' => Yii::t('app', 'Enter your name'), 'autofocus' => true]) ?>
+./views/site/contact.php:            <?= $form->field($model, 'email')->input('email', ['placeholder' => Yii::t('app', 'Enter your e-mail')]) ?>
+./views/site/contact.php:            <?= $form->field($model, 'subject')->textInput(['placeholder' => Yii::t('app', 'Enter the subject')]) ?>
+./views/site/contact.php:                'options' => ['placeholder' => Yii::t('app', 'Enter verification code'),'class' => 'form-control'],
+./views/site/contact.php:                <?= Html::submitButton(Yii::t('app', 'Submit'), 
+./views/site/requestPasswordResetToken.php:$this->title = Yii::t('app', 'Request password reset');
+./views/site/requestPasswordResetToken.php:        <p><?= Yii::t('app', 'A link to reset password will be sent to your email.') ?></p>
+./views/site/requestPasswordResetToken.php:                ['placeholder' => Yii::t('app', 'Please fill out your email.'), 'autofocus' => true]) ?>
+./views/site/requestPasswordResetToken.php:                <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn btn-primary']) ?>
+./views/site/signup.php:$this->title = Yii::t('app', 'Signup');
+./views/site/signup.php:        <p><?= Yii::t('app', 'Please fill out the following fields to signup:') ?></p>
+./views/site/signup.php:			<?= $form->field($model, 'church_id')->dropDownList(Church::getList(),['prompt'=>Yii::t('app', 'Select a church')]);
+./views/site/signup.php:                ['placeholder' => Yii::t('app', 'Create your display name'), 'autofocus' => true]) ?>
+./views/site/signup.php:                ['placeholder' => Yii::t('app', 'Create your username'), 'autofocus' => true]) ?>
+./views/site/signup.php:            <?= $form->field($model, 'email')->input('email', ['placeholder' => Yii::t('app', 'Enter your e-mail')]) ?>
+./views/site/signup.php:                ['options' => ['placeholder' => Yii::t('app', 'Create your password')]]) ?>
+./views/site/signup.php:                <?= Html::submitButton(Yii::t('app', 'Signup'), 
+./views/site/signup.php:                <i>*<?= Yii::t('app', 'We will send you an email with account activation link.') ?></i>
+./views/user/view.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+./views/user/view.php:                <a href="index" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+./views/user/view.php:                <a href="delete?id=<?=$model->id?>" class='btn btn-danger'><span class="glyphicon glyphicon-remove"></span><?=Yii::t('app', 'Delete')?></a>
+./views/user/view.php:            <a href="<?=$updateUrl?>" class='btn btn-primary'><span class="glyphicon glyphicon-pencil"></span><?=Yii::t('app', 'Update')?></a>
+./views/user/_form.php:        <?= $form->field($user, 'email')->input('email', ['placeholder' => Yii::t('app', 'Enter e-mail')]) ?>
+./views/user/_form.php:                ['options' => ['placeholder' => Yii::t('app', 'Create password')]]) ?>
+./views/user/_form.php:                     ['options' => ['placeholder' => Yii::t('app', 'Change password ( if you want )')]]) ?> 
+./views/user/_form.php:        <?= Html::submitButton($user->isNewRecord ? Yii::t('app', 'Create') 
+./views/user/_form.php:            : Yii::t('app', 'Update'), ['class' => $user->isNewRecord 
+./views/user/_form.php:        <?= Html::a(Yii::t('app', 'Cancel'), [$returnUrl], ['class' => 'btn btn-default']) ?>
+./views/user/tasks.php:$this->title = Yii::t('app', 'Tasks') . ' - ' .$model->display_name;
+./views/user/tasks.php:                  <strong><?php echo Yii::t('app', 'Filters');?>
+./views/user/tasks.php:						<?= Html::submitButton('<i class="fa fa-filter"></i> ' . Yii::t('app', 'Filter'), ['class' => 'btn btn-primary']) ?>
+./views/user/tasks.php:						<?= Html::resetButton('<i class="fa fa-eraser"></i> ' . Yii::t('app', 'Clean'), ['class' => 'btn btn-default', 'onClick'=>'$( "#useractivitysearch-filter_start_date" ).val("");$( "#useractivitysearch-filter_end_date" ).val("");return false;']) ?>
+./views/user/tasks.php:				<a href="taskexportics?start=<?=$searchModel->filter_start_date?>&end=<?=$searchModel->filter_end_date?>" class='btn btn-success'><span class="glyphicon glyphicon-download-alt"></span><?=Yii::t('app', 'Calendar')?>-ICS</a>					
+./views/user/tasks.php:								return Html::a($model->event->name, URL::toRoute('event/activities'). '?id='.$model->event->id, ['title'=>Yii::t('app', 'View')]);
+./views/user/tasks.php:										$value.='<span style="color:lightgreen">'.Yii::t('app', 'Accepted').'</span>';
+./views/user/tasks.php:										$value.='<span style="color:goldenrod">'.Yii::t('app', 'Not replied yet').'</span>';
+./views/user/tasks.php:										$value.='<span style="color:red">'.Yii::t('app', 'Rejected').'</span>';
+./views/user/tasks.php:									$value.='<span style="color:red">'.Yii::t('app', 'Unavailable-team').'</span>';													
+./views/user/tasks.php:									$value.='<span style="color:red">'.Yii::t('app', 'Unavailable-user').'</span>';							
+./views/user/tasks.php:									Html::a($model->name, URL::toRoute('event/editactivity'). '?id='.$model->id.'&eventid='.$model->event->id, ['title'=>Yii::t('app', 'View')])
+./views/user/tasks.php:						'header' => Yii::t('app', 'Menu'),
+./views/user/tasks.php:									['title'=>Yii::t('app', 'Accept'), 
+./views/user/tasks.php:											'confirm' => Yii::t('app', 'Are you sure you want to accept this task?'),
+./views/user/tasks.php:									['title'=>Yii::t('app', 'Delete'), 
+./views/user/tasks.php:											'confirm' => Yii::t('app', 'Are you sure you want to reject this task?'),
+./views/user/tasks.php:								$value=Html::a($model->event->name, URL::toRoute('event/activities'). '?id='.$model->event->id, ['title'=>Yii::t('app', 'View')]);
+./views/user/tasks.php:									Html::a($model->name, URL::toRoute('event/editactivity'). '?id='.$model->id.'&eventid='.$model->event->id, ['title'=>Yii::t('app', 'View')])
+./views/user/tasks.php:										$value.='<br /><span style="color:lightgreen">'.Yii::t('app', 'Accepted').'</span>';
+./views/user/tasks.php:										$value.='<br /><span style="color:goldenrod">'.Yii::t('app', 'Not replied yet').'</span>';
+./views/user/tasks.php:										$value.='<br /><span style="color:red">'.Yii::t('app', 'Rejected').'</span>';
+./views/user/tasks.php:									$value.='<br /><span style="color:red">'.Yii::t('app', 'Unavailable-team').'</span>';													
+./views/user/tasks.php:									$value.='<br /><span style="color:red">'.Yii::t('app', 'Unavailable-user').'</span>';							
+./views/user/tasks.php:						'header' => Yii::t('app', 'Menu'),
+./views/user/tasks.php:									['title'=>Yii::t('app', 'Accept'), 
+./views/user/tasks.php:											'confirm' => Yii::t('app', 'Are you sure you want to accept this task?'),
+./views/user/tasks.php:									['title'=>Yii::t('app', 'Delete'), 
+./views/user/tasks.php:											'confirm' => Yii::t('app', 'Are you sure you want to reject this task?'),
+./views/user/update.php:$this->title = Yii::t('app', 'Update User') . ': ' . $user->username;
+./views/user/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+./views/user/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/user/index.php:$this->title = Yii::t('app', 'Users');
+./views/user/index.php:            <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create User')?></a>
+./views/user/index.php:            'header' => Yii::t('app', 'Menu'),
+./views/user/index.php:                                'confirm' => Yii::t('app', 'Are you sure you want to delete this user?'),
+./views/user/create.php:$this->title = Yii::t('app', 'Create User');
+./views/user/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+./views/language/_form.php:                ['placeholder' => Yii::t('app', 'ISO Name (xx or xx_xx)'), 'autofocus' => true]) ?>
+./views/language/_form.php:                ['placeholder' => Yii::t('app', 'Display Name English'), 'autofocus' => true]) ?>
+./views/language/_form.php:                ['placeholder' => Yii::t('app', 'Display Name Natie'), 'autofocus' => true]) ?>
+./views/language/_form.php:        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/language/_form.php:            : Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/language/_form.php:        <?= Html::a(Yii::t('app', 'Cancel'), ['language/index'], ['class' => 'btn btn-default']) ?>
+./views/language/update.php:$this->title = Yii::t('app', 'Update Language') . ': ' . $model->display_name_english;
+./views/language/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Languages'), 'url' => ['index']];
+./views/language/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/language/index.php:$this->title = Yii::t('app', 'Languages');
+./views/language/index.php:            <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Language')?></a>
+./views/language/index.php:            'header' => Yii::t('app', 'Menu'),
+./views/language/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']);
+./views/language/index.php:                        ['title'=>Yii::t('app', 'Delete'), 
+./views/language/index.php:                                'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/language/create.php:$this->title = Yii::t('app', 'Create Language');
+./views/language/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Languages'), 'url' => ['index']];
+./views/_notify.php:			<?= Html::encode( Yii::t('app', 'Choose message')) ?> 
+./views/_notify.php:			<?= $form->field($model, 'message_template_id')->dropDownList(ArrayHelper::map($templates, 'id', 'name'),['prompt' => Yii::t('app', 'Select')]) ?>
+./views/_notify.php:				<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/_notify.php:					: Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/_notify.php:				<?= Html::a(Yii::t('app', 'Cancel'), ['event/notifications?id='.$eventid], ['class' => 'btn btn-default','id'=>'cancel_button']) ?>
+./views/_notify.php:			<?= Html::encode( Yii::t('app', 'Preview')) ?> 
+./views/_notify.php:					$("#preview").append("<label style='min-width:100%;' class='col-lg-6'>" + "<?= Yii::t('app', 'To')?>" + "</label>");
+./views/_notify.php:					$("#preview").append("<label style='min-width:100%;' class='col-lg-6'>" + "<?= Yii::t('app', 'Subject')?>" + "</label>");
+./views/_notify.php:					$("#preview").append("<label style='min-width:100%;' class='col-lg-6'>" + "<?= Yii::t('app', 'Message')?>" + "</label>");
+./views/team-type/_form.php:                ['placeholder' => Yii::t('app', 'Create team type name'), 'autofocus' => true]) ?>
+./views/team-type/_form.php:        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/team-type/_form.php:            : Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/team-type/_form.php:        <?= Html::a(Yii::t('app', 'Cancel'), ['team-type/index'], ['class' => 'btn btn-default']) ?>
+./views/team-type/update.php:$this->title = Yii::t('app', 'Update Team Type') . ': ' . $model->name;
+./views/team-type/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Team Types'), 'url' => ['index']];
+./views/team-type/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/team-type/index.php:$this->title = Yii::t('app', 'Team Types');
+./views/team-type/index.php:            <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Team Type')?></a>
+./views/team-type/index.php:            'header' => Yii::t('app', 'Menu'),
+./views/team-type/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']);
+./views/team-type/index.php:                        ['title'=>Yii::t('app', 'Delete'), 
+./views/team-type/index.php:                                'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/team-type/create.php:$this->title = Yii::t('app', 'Create Team Type');
+./views/team-type/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Team Types'), 'url' => ['index']];
+./views/church/_form.php:                ['placeholder' => Yii::t('app', 'Create church name'), 'autofocus' => true]) ?>
+./views/church/_form.php:        <?= $form->field($model, 'admin_email')->input('email', ['placeholder' => Yii::t('app', 'Enter admin e-mail')]) ?>
+./views/church/_form.php:        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/church/_form.php:            : Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/church/_form.php:        <?= Html::a(Yii::t('app', 'Cancel'), ['church/index'], ['class' => 'btn btn-default']) ?>
+./views/church/update.php:$this->title = Yii::t('app', 'Update Church') . ': ' . $model->name;
+./views/church/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Churches'), 'url' => ['index']];
+./views/church/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/church/index.php:$this->title = Yii::t('app', 'Churches');
+./views/church/index.php:            <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Church')?></a>
+./views/church/index.php:                                'confirm' => Yii::t('app', 'Are you sure you want to delete this church? This is VERY bad and cannot be undone.'),
+./views/church/create.php:$this->title = Yii::t('app', 'Create Church');
+./views/church/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Churches'), 'url' => ['index']];
+./views/message-type/_form.php:                ['placeholder' => Yii::t('app', 'Create message type name'), 'autofocus' => true]) ?>
+./views/message-type/_form.php:        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/message-type/_form.php:            : Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/message-type/_form.php:        <?= Html::a(Yii::t('app', 'Cancel'), ['message-type/index'], ['class' => 'btn btn-default']) ?>
+./views/message-type/update.php:$this->title = Yii::t('app', 'Update Message Type') . ': ' . $model->name;
+./views/message-type/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Message Types'), 'url' => ['index']];
+./views/message-type/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/message-type/index.php:$this->title = Yii::t('app', 'Message Types');
+./views/message-type/index.php:            <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Message Type')?></a>
+./views/message-type/index.php:            'header' => Yii::t('app', 'Menu'),
+./views/message-type/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']);
+./views/message-type/index.php:                        ['title'=>Yii::t('app', 'Delete'), 
+./views/message-type/index.php:                                'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/message-type/create.php:$this->title = Yii::t('app', 'Create Message Type');
+./views/message-type/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Message Types'), 'url' => ['index']];
+./views/message-template/_form.php:			<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/message-template/_form.php:				: Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/message-template/_form.php:			<?= Html::a(Yii::t('app', 'Cancel'), ['message-template/index'], ['class' => 'btn btn-default']) ?>
+./views/message-template/update.php:$this->title = Yii::t('app', 'Update Message Template') . ': ' . $model->name;
+./views/message-template/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Message Templates'), 'url' => ['index']];
+./views/message-template/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/message-template/index.php:$this->title = Yii::t('app', 'Message templates');
+./views/message-template/index.php:            <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Message Template')?></a>
+./views/message-template/index.php:            'header' => Yii::t('app', 'Menu'),
+./views/message-template/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']);
+./views/message-template/index.php:                        ['title'=>Yii::t('app', 'Delete'), 
+./views/message-template/index.php:                                'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/message-template/create.php:$this->title = Yii::t('app', 'Create Message Template');
+./views/message-template/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Message Templates'), 'url' => ['index']];
+./views/team/files.php:$this->title = Yii::t('app', 'Team files');
+./views/team/files.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['index']];;
+./views/team/_unavailabilityform.php:				<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/team/_unavailabilityform.php:					: Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/team/_unavailabilityform.php:				<?= Html::a(Yii::t('app', 'Cancel'), ['team/unavailability?id='.$model->teamModel->id], ['class' => 'btn btn-default']) ?>
+./views/team/unavailability.php:$this->title = Yii::t('app', 'Team Unavailability'). ' : ' . $searchModel->teamModel->name;
+./views/team/unavailability.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['index']];
+./views/team/unavailability.php:        	<a href="index" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+./views/team/unavailability.php:				<a href='unavailabilitycreate?id=<?=$searchModel->teamModel->id?>' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Unavailability')?></a>
+./views/team/unavailability.php:                  <strong><?php echo Yii::t('app', 'Filters');?>
+./views/team/unavailability.php:						<?= Html::submitButton('<i class="fa fa-filter"></i> ' . Yii::t('app', 'Filter'), ['class' => 'btn btn-primary']) ?>
+./views/team/unavailability.php:						<?= Html::resetButton('<i class="fa fa-eraser"></i> ' . Yii::t('app', 'Clean'), ['class' => 'btn btn-default', 'onClick'=>'$( "#teamblockedsearch-filter_start_date" ).val("");$( "#teamblockedsearch-filter_end_date" ).val("");return false;']) ?>
+./views/team/unavailability.php:					'header' => Yii::t('app', 'Menu'),
+./views/team/unavailability.php:								return Yii::$app->user->can('TeamManager')?Html::a('', $url . '&teamid=' .$GLOBALS['teamid'], ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']):'';
+./views/team/unavailability.php:								['title'=>Yii::t('app', 'Delete'), 
+./views/team/unavailability.php:										'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/team/players.php:$this->title = Yii::t('app', 'Team Members');
+./views/team/players.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['team/index']];;
+./views/team/players.php:					<a href="index" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+./views/team/players.php:			<a href="mailto:<?=implode(';',ArrayHelper::getColumn($dataMembersProvider->query->all(), 'email', false))?>"><?=Yii::t('app', 'Send mail to all team members')?></a>
+./views/team/players.php:					'header' => Yii::t('app', 'Menu'),
+./views/team/players.php:								return Html::a('', $url. '&teamid='.$GLOBALS['teamid'], ['title'=>Yii::t('app', 'Delete'), 'class'=>'glyphicon glyphicon-trash', 'style'=>Yii::$app->user->can('TeamManager')?'display:inline;':'display:none;' ]);
+./views/team/players.php:				<?= Html::encode( Yii::t('app', 'Add members to the team')) ?> 
+./views/team/players.php:					'header' => Yii::t('app', 'Menu'),
+./views/team/players.php:								return Html::a('', $url. '&teamid='.$GLOBALS['teamid'], ['title'=>Yii::t('app', 'Add member to the team'), 'class'=>'glyphicon glyphicon-plus']);
+./views/team/_form.php:                ['placeholder' => Yii::t('app', 'Create team type name'), 'autofocus' => true]) ?>
+./views/team/_form.php:        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/team/_form.php:            : Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/team/_form.php:        <?= Html::a(Yii::t('app', 'Cancel'), ['team/index'], ['class' => 'btn btn-default']) ?>
+./views/team/unavailabilitycreate.php:$this->title = Yii::t('app', 'Create team unavailability'). ' : ' . $model->teamModel->name;
+./views/team/unavailabilitycreate.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['index']];
+./views/team/unavailabilitycreate.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Team Unavailability'), 'url' => ['unavailability?id='.$model->teamModel->id]];
+./views/team/tasks.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['team/index']];
+./views/team/tasks.php:$this->title = Yii::t('app', 'Tasks') . ' - ' .$model->name;
+./views/team/tasks.php:                  <strong><?php echo Yii::t('app', 'Filters');?>
+./views/team/tasks.php:						<?= Html::submitButton('<i class="fa fa-filter"></i> ' . Yii::t('app', 'Filter'), ['class' => 'btn btn-primary']) ?>
+./views/team/tasks.php:						<?= Html::resetButton('<i class="fa fa-eraser"></i> ' . Yii::t('app', 'Clean'), ['class' => 'btn btn-default', 'onClick'=>'$( "#useractivitysearch-filter_start_date" ).val("");$( "#useractivitysearch-filter_end_date" ).val("");return false;']) ?>
+./views/team/tasks.php:				<a href="index" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+./views/team/tasks.php:				<a href="taskexportics?id=<?=$model->id?>&start=<?=$searchModel->filter_start_date?>&end=<?=$searchModel->filter_end_date?>" class='btn btn-success'><span class="glyphicon glyphicon-download-alt"></span><?=Yii::t('app', 'Calendar')?>-ICS</a>
+./views/team/tasks.php:								return Html::a($model->event->name, URL::toRoute('event/activities'). '?id='.$model->event->id, ['title'=>Yii::t('app', 'View')]);
+./views/team/tasks.php:										$value.='<span style="color:lightgreen">'.Yii::t('app', 'Accepted').'</span>';
+./views/team/tasks.php:										$value.='<span style="color:goldenrod">'.Yii::t('app', 'Not replied yet').'</span>';
+./views/team/tasks.php:										$value.='<span style="color:red">'.Yii::t('app', 'Rejected').'</span>';
+./views/team/tasks.php:									$value.='<span style="color:red">'.Yii::t('app', 'Unavailable-team').'</span>';													
+./views/team/tasks.php:									$value.='<span style="color:red">'.Yii::t('app', 'Unavailable-user').'</span>';							
+./views/team/tasks.php:									Html::a($model->name, URL::toRoute('event/editactivity'). '?id='.$model->id.'&eventid='.$model->event->id, ['title'=>Yii::t('app', 'View')])
+./views/team/tasks.php:						'header' => Yii::t('app', 'Menu'),
+./views/team/tasks.php:									['title'=>Yii::t('app', 'Accept'), 
+./views/team/tasks.php:											'confirm' => Yii::t('app', 'Are you sure you want to accept this task?'),
+./views/team/tasks.php:									['title'=>Yii::t('app', 'Delete'), 
+./views/team/tasks.php:											'confirm' => Yii::t('app', 'Are you sure you want to reject this task?'),
+./views/team/tasks.php:								$value=Html::a($model->event->name, URL::toRoute('event/activities'). '?id='.$model->event->id, ['title'=>Yii::t('app', 'View')]);
+./views/team/tasks.php:									Html::a($model->name, URL::toRoute('event/editactivity'). '?id='.$model->id.'&eventid='.$model->event->id, ['title'=>Yii::t('app', 'View')])
+./views/team/tasks.php:										$value.='<br /><span style="color:lightgreen">'.Yii::t('app', 'Accepted').'</span>';
+./views/team/tasks.php:										$value.='<br /><span style="color:goldenrod">'.Yii::t('app', 'Not replied yet').'</span>';
+./views/team/tasks.php:										$value.='<br /><span style="color:red">'.Yii::t('app', 'Rejected').'</span>';
+./views/team/tasks.php:									$value.='<br /><span style="color:red">'.Yii::t('app', 'Unavailable-team').'</span>';													
+./views/team/tasks.php:									$value.='<br /><span style="color:red">'.Yii::t('app', 'Unavailable-user').'</span>';							
+./views/team/tasks.php:						'header' => Yii::t('app', 'Menu'),
+./views/team/tasks.php:									['title'=>Yii::t('app', 'Accept'), 
+./views/team/tasks.php:											'confirm' => Yii::t('app', 'Are you sure you want to accept this task?'),
+./views/team/tasks.php:									['title'=>Yii::t('app', 'Delete'), 
+./views/team/tasks.php:											'confirm' => Yii::t('app', 'Are you sure you want to reject this task?'),
+./views/team/update.php:$this->title = Yii::t('app', 'Update Team') . ': ' . $model->name;
+./views/team/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['index']];
+./views/team/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/team/index.php:$this->title = Yii::t('app', 'Teams');
+./views/team/index.php:                <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Team')?></a>
+./views/team/index.php:            'header' => Yii::t('app', 'Menu'),
+./views/team/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Tasks'), 'class'=>'glyphicon glyphicon-tasks menubutton']);
+./views/team/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Team members'), 'class'=>'glyphicon glyphicon-user menubutton']);
+./views/team/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Files'), 'class'=>'glyphicon glyphicon-folder-open menubutton']);
+./views/team/index.php:                        return Html::a('', $url , ['title'=>Yii::t('app', 'Unavailability'), 'class'=>'glyphicon glyphicon-ban-circle menubutton']);
+./views/team/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton', 'style'=>Yii::$app->user->can('TeamManager')?'display:inline;':'display:none;']);
+./views/team/index.php:                        ['title'=>Yii::t('app', 'Delete team'), 
+./views/team/index.php:                                'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/team/unavailabilityupdate.php:$this->title = Yii::t('app', 'Team Unavailability') . ' : ' . $model->teamModel->name;
+./views/team/unavailabilityupdate.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['index']];
+./views/team/unavailabilityupdate.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Team Unavailability'), 'url' => ['unavailability?id='.$model->teamModel->id]];
+./views/team/unavailabilityupdate.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/team/create.php:$this->title = Yii::t('app', 'Create Team');
+./views/team/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['index']];
+./views/_file.php:			<?= Html::encode( Yii::t('app', 'File sharing')) ?> 
+./views/_file.php:				<a href="<?=$backurl?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+./views/_file.php:				'header' => Yii::t('app', 'Menu'),
+./views/_file.php:							return Html::a('', $url. $GLOBALS['urlAddition'], ['title'=>Yii::t('app', 'Download'), 'class'=>'glyphicon glyphicon-download-alt menubutton']);
+./views/_file.php:							['title'=>Yii::t('app', 'Delete'), 
+./views/_file.php:									'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/_file.php:				<?= Html::encode( Yii::t('app', 'Add files to file sharing')) ?> 		
+./views/event/files.php:$this->title = Yii::t('app', 'Event files');
+./views/event/files.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Events'), 'url' => ['event/index']];;
+./views/event/seenotify.php:$this->title = Yii::t('app', 'Notification');
+./views/event/seenotify.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Events'), 'url' => ['index']];
+./views/event/seenotify.php:                <?= Html::a(Yii::t('app', 'Back'), ['notifications?id='.$event->id], ['class' => 'btn btn-warning']) ?>
+./views/event/seenotify.php:        <label style='min-width:100%;' ><?= Yii::t('app', 'Status')?></label>       
+./views/event/seenotify.php:        <span style='margin-left:40px;background-color:<?=$colors[$model->status]?>;'><?=Yii::t('app', $model->status)?></span>
+./views/event/seenotify.php:        <label style='min-width:100%;' ><?= Yii::t('app', 'Notified Date')?></label>
+./views/event/seenotify.php:        <label style='min-width:100%;' ><?= Yii::t('app', 'Replied Date')?></label>
+./views/event/seenotify.php:            <label style='min-width:100%;' ><?= Yii::t('app', 'Team')?></label>
+./views/event/seenotify.php:        <label style='min-width:100%;' ><?= Yii::t('app', 'To')?></label>
+./views/event/seenotify.php:        <label style='min-width:100%;' ><?= Yii::t('app', 'Subject')?></label>
+./views/event/seenotify.php:        <label style='min-width:100%;' ><?= Yii::t('app', 'Message')?></label>
+./views/event/activities.php:$this->title = Yii::t('app', 'Tasks');
+./views/event/activities.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Events'), 'url' => ['index']];
+./views/event/activities.php:				<?= Html::encode( Yii::t('app', 'Tasks'))?>  
+./views/event/activities.php:					<a href="index" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+./views/event/activities.php:								$value=$model->start_time==null || strlen($model->start_time)==0 ? '<span style="color:red">'.Yii::t('app', 'Missing').'</span>': 
+./views/event/activities.php:								$value.=$song!=null && strlen($song->name)>0?$song->name:($model->activityType->demand_song?'<span style="color:red">'.Yii::t('app', 'Missing-song').'</span>':'');							
+./views/event/activities.php:										$value.='<span style="color:goldenrod">'.Yii::t('app', 'Not replied yet').'</span>';
+./views/event/activities.php:										$value.='<span style="color:red">'.Yii::t('app', 'Rejected').'</span>';
+./views/event/activities.php:										?'<span style="color:red">'.Yii::t('app', 'Unavailable-team').'</span>'
+./views/event/activities.php:										?'<span style="color:red">'.Yii::t('app', 'Missing-team').'</span>'
+./views/event/activities.php:								$value.=$user!=null && strlen($user->display_name)>0?($isUserBlocked?'<span style="color:red">'.Yii::t('app', 'Unavailable-user').'</span>':$user->display_name):($model->activityType->demand_user?'<span style="color:red">'.Yii::t('app', 'Missing-user').'</span>':'');							
+./views/event/activities.php:										$value.=Html::a($file->name, 'fileactivitydownload?id='.$file->id.'&fileownerid='.$model->id.'&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Download')]);
+./views/event/activities.php:									$value.='<span style="color:red">'.Yii::t('app', 'Missing-file').'</span>';
+./views/event/activities.php:								$value.=$model->description!=null && strlen($model->description)>0?$model->description:($model->activityType->demand_description?'<span style="color:red">'.Yii::t('app', 'Missing-description').'</span>':'');						
+./views/event/activities.php:					'header' => Yii::t('app', 'Menu'),
+./views/event/activities.php:								return Yii::$app->user->can('EventEditor')?Html::a('', $url. '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']):'';
+./views/event/activities.php:								return Yii::$app->user->can('EventEditor')?Html::a('', $url. '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Remove task from the event'), 'class'=>'glyphicon glyphicon-trash menubutton']):'';
+./views/event/activities.php:					<?= Html::encode( Yii::t('app', 'Add task to the event'))?>  
+./views/event/activities.php:						'header' => Yii::t('app', 'Menu'),
+./views/event/activities.php:									return Html::a('', $url. '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Add task to the event'), 'class'=>'glyphicon glyphicon-plus']);
+./views/event/_form.php:					['placeholder' => Yii::t('app', 'Create Event name'), 'autofocus' => true]) ?>
+./views/event/_form.php:				<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/event/_form.php:					: Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/event/_form.php:				<?= Html::a(Yii::t('app', 'Cancel'), ['event/index'], ['class' => 'btn btn-default']) ?>
+./views/event/notifications.php:$this->title = Yii::t('app', 'Notifications');
+./views/event/notifications.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Events'), 'url' => ['index']];
+./views/event/notifications.php:			<?= Html::encode( Yii::t('app', 'Users in the event'))?>  
+./views/event/notifications.php:				<a href="index" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+./views/event/notifications.php:					<a href='notify?eventid=<?=$model->id?>&userid=0&actionid=0' class='btn btn-success'><span class="glyphicon glyphicon-envelope"></span><?=Yii::t('app', 'Notify All')?></a>
+./views/event/notifications.php:						<th><?= Yii::t('app', 'Tasks')?> </th>
+./views/event/notifications.php:						<th><?= Yii::t('app', 'User')?> </th>
+./views/event/notifications.php:						<th><?= Yii::t('app', 'Team')?> </th>
+./views/event/notifications.php:						<th class="action-column"><?= Yii::t('app', 'Menu')?></th>
+./views/event/notifications.php:				<?= Html::encode( Yii::t('app', 'Notifications'))?>  
+./views/event/notifications.php:							return "<span style='background-color:".$colors[$model->status] . ";'>" . Yii::t('app', $model->status) . '</span>';
+./views/event/notifications.php:		            'header' => Yii::t('app', 'Menu'),
+./views/event/notifications.php:		                        return Html::a('', $url . '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'See details'), 'class'=>'glyphicon glyphicon-eye-open menubutton']);
+./views/event/notifications.php:		                        return Yii::$app->user->can('EventManager')?Html::a('', $url . '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Delete'), 'class'=>'glyphicon glyphicon-trash menubutton','data' => [
+./views/event/notifications.php:											'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/event/notifications.php:				<?= Html::encode( Yii::t('app', 'Notifications'))?>  
+./views/event/notifications.php:							return "<span style='background-color:".$colors[$model->status] . ";'>" . Yii::t('app', $model->status) . '</span>';
+./views/event/notifications.php:		            'header' => Yii::t('app', 'Menu'),
+./views/event/notifications.php:		                        return Html::a('', $url . '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'See details'), 'class'=>'glyphicon glyphicon-eye-open menubutton']);
+./views/event/notifications.php:		                        return Yii::$app->user->can('EventManager')?Html::a('', $url . '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Delete'), 'class'=>'glyphicon glyphicon-trash menubutton','data' => [
+./views/event/notifications.php:											'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/event/editactivity.php:$this->title = Yii::t('app', 'Update event task') . ': ' . $model->name;
+./views/event/editactivity.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Event'), 'url' => ['index']];
+./views/event/editactivity.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Task');
+./views/event/editactivity.php:			<a href="activities?id=<?=$modelEvent->id?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>   	
+./views/event/editactivity.php:					['placeholder' => Yii::t('app', 'Add a description'), 'autofocus' => true]) ?>
+./views/event/editactivity.php:						['placeholder' => Yii::t('app', 'Global order')]) ?>	
+./views/event/editactivity.php:					'team_type_id' => $modelActivityType->team_type_id])->orderBy("name ASC")->all(), 'id', 'name'),['prompt' => Yii::t('app', 'Select')]) ?>
+./views/event/editactivity.php:					'church_id' => $modelEvent->church_id])->orderBy("display_name ASC")->all(), 'id', 'display_name'),['prompt' => Yii::t('app', 'Select')]) ?>
+./views/event/editactivity.php:				<?= Html::submitButton(Yii::t('app', 'Update'), ['class' => 'btn btn-primary']) ?>
+./views/event/editactivity.php:				<?= Html::a(Yii::t('app', 'Cancel'), ['event/activities','id'=>$modelEvent->id], ['class' => 'btn btn-default']) ?>
+./views/event/editactivity.php:	<h3><?= Html::encode( Yii::t('app', 'Select Song')) ?></h3>
+./views/event/editactivity.php:                        return Html::a('', $url. '&activityid='.$GLOBALS['activityid']. '&eventid='.$GLOBALS['eventid'], ['title'=>Yii::t('app', 'Select song for task'), 'class'=>'glyphicon glyphicon-check']);
+./views/event/notify.php:$this->title = Yii::t('app', 'Event notify');
+./views/event/notify.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Events'), 'url' => ['event/index']];
+./views/event/notify.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Notifications'), 'url' => ['event/notifications?id='.$eventid]];
+./views/event/update.php:$this->title = Yii::t('app', 'Update Event') . ': ' . $model->name;
+./views/event/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Event'), 'url' => ['index']];
+./views/event/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/event/index.php:$this->title = Yii::t('app', 'Event');
+./views/event/index.php:				<a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Event')?></a>
+./views/event/index.php:                  <strong><?php echo Yii::t('app', 'Filters');?>
+./views/event/index.php:						<?= Html::submitButton('<i class="fa fa-filter"></i> ' . Yii::t('app', 'Filter'), ['class' => 'btn btn-primary']) ?>
+./views/event/index.php:						<?= Html::resetButton('<i class="fa fa-eraser"></i> ' . Yii::t('app', 'Clean'), ['class' => 'btn btn-default', 'onClick'=>'$( "#eventsearch-filter_start_date" ).val("");$( "#eventsearch-filter_end_date" ).val("");return false;']) ?>
+./views/event/index.php:					'header' => Yii::t('app', 'Menu'),
+./views/event/index.php:								return Html::a('', $url, ['title'=>Yii::t('app', 'Tasks'), 'class'=>'glyphicon glyphicon-tasks menubutton']);
+./views/event/index.php:								return Html::a('', $url, ['title'=>Yii::t('app', 'Notifications'), 'class'=>'glyphicon glyphicon-envelope menubutton']);
+./views/event/index.php:								return Yii::$app->user->can('EventManager')?Html::a('', $url, ['title'=>Yii::t('app', 'Copy'), 'class'=>'glyphicon glyphicon-duplicate menubutton']):'';
+./views/event/index.php:								return Html::a('', $url, ['title'=>Yii::t('app', 'Shared files'), 'class'=>'glyphicon glyphicon-folder-open menubutton']);
+./views/event/index.php:								return Yii::$app->user->can('EventManager')?Html::a('', $url, ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']):'';
+./views/event/index.php:								['title'=>Yii::t('app', 'Delete'), 
+./views/event/index.php:										'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/event/create.php:$this->title = Yii::t('app', 'Create Event');
+./views/event/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Event'), 'url' => ['index']];
+./views/activity-type/_form.php:					'church_id' => $model->church_id])->orderBy("name ASC")->all(), 'id', 'name'),['prompt' => Yii::t('app', 'Select')]) ?>
+./views/activity-type/_form.php:        <?= $form->field($model, 'default_global_order')->textInput(['type' => 'number','placeholder' => Yii::t('app', 'Integer value')]);?>
+./views/activity-type/_form.php:			<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/activity-type/_form.php:				: Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/activity-type/_form.php:			<?= Html::a(Yii::t('app', 'Cancel'), ['activity-type/index'], ['class' => 'btn btn-default']) ?>
+./views/activity-type/update.php:$this->title = Yii::t('app', 'Update Task Type') . ': ' . $model->name;
+./views/activity-type/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Task Types'), 'url' => ['index']];
+./views/activity-type/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/activity-type/index.php:$this->title = Yii::t('app', 'Task Types');
+./views/activity-type/index.php:            <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Task Type')?></a>
+./views/activity-type/index.php:            'header' => Yii::t('app', 'Menu'),
+./views/activity-type/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']);
+./views/activity-type/index.php:                        ['title'=>Yii::t('app', 'Delete'), 
+./views/activity-type/index.php:                                'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/activity-type/create.php:$this->title = Yii::t('app', 'Create Task Type');
+./views/activity-type/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Task Types'), 'url' => ['index']];
+./views/user-blocked/_form.php:				<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/user-blocked/_form.php:					: Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/user-blocked/_form.php:				<?= Html::a(Yii::t('app', 'Cancel'), ['user-blocked/index'], ['class' => 'btn btn-default']) ?>
+./views/user-blocked/update.php:$this->title = Yii::t('app', 'Unavailability') . ' : ' . $model->user_display_name;
+./views/user-blocked/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Team'), 'url' => ['index']];
+./views/user-blocked/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/user-blocked/index.php:$this->title = Yii::t('app', 'Unavailability'). ' : ' . $searchModel->user_display_name;
+./views/user-blocked/index.php:                  <strong><?php echo Yii::t('app', 'Filters');?>
+./views/user-blocked/index.php:						<?= Html::submitButton('<i class="fa fa-filter"></i> ' . Yii::t('app', 'Filter'), ['class' => 'btn btn-primary']) ?>
+./views/user-blocked/index.php:						<?= Html::resetButton('<i class="fa fa-eraser"></i> ' . Yii::t('app', 'Clean'), ['class' => 'btn btn-default', 'onClick'=>'$( "#eventsearch-filter_start_date" ).val("");$( "#eventsearch-filter_end_date" ).val("");return false;']) ?>
+./views/user-blocked/index.php:	        	<a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Unavailability')?></a>
+./views/user-blocked/index.php:					'header' => Yii::t('app', 'Menu'),
+./views/user-blocked/index.php:								return Html::a('', $url, ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']);
+./views/user-blocked/index.php:								['title'=>Yii::t('app', 'Delete'), 
+./views/user-blocked/index.php:										'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/user-blocked/create.php:$this->title = Yii::t('app', 'Create unavailability'). ' : ' . $model->user_display_name;
+./views/user-blocked/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Unavailability'), 'url' => ['index']];
+./views/song/_form.php:                ['placeholder' => Yii::t('app', 'Name'), 'autofocus' => true]) ?>
+./views/song/_form.php:                ['placeholder' => Yii::t('app', 'Alternative name')]) ?>
+./views/song/_form.php:                ['placeholder' => Yii::t('app', 'Description')]) ?>
+./views/song/_form.php:        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
+./views/song/_form.php:            : Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
+./views/song/_form.php:        <?= Html::a(Yii::t('app', 'Cancel'), ['song/index'], ['class' => 'btn btn-default']) ?>
+./views/song/update.php:$this->title = Yii::t('app', 'Update Song') . ': ' . $model->name;
+./views/song/update.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Songs'), 'url' => ['index']];
+./views/song/update.php:$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+./views/song/index.php:$this->title = Yii::t('app', 'Songs');
+./views/song/index.php:            <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Song')?></a>
+./views/song/index.php:            'header' => Yii::t('app', 'Menu'),
+./views/song/index.php:                        return Html::a('', $url, ['title'=>Yii::t('app', 'Edit Team Type'), 'class'=>'glyphicon glyphicon-pencil menubutton']);
+./views/song/index.php:                        ['title'=>Yii::t('app', 'Delete team type'), 
+./views/song/index.php:                                'confirm' => Yii::t('app', 'Are you sure you want to delete this?'),
+./views/song/songimport.php:$this->title = Yii::t('app', 'Import Songs') ;
+./views/song/songimport.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Songs'), 'url' => ['index']];
+./views/song/songimport.php:					<?= Html::encode( Yii::t('app', 'Add files to file sharing')) ?> 		
+./views/song/create.php:$this->title = Yii::t('app', 'Create Song');
+./views/song/create.php:$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Songs'), 'url' => ['index']];
+./views/layouts/main.php:    $menuItems[] = ['label' => '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> '.Yii::t('app', 'Home'), 'url' => ['/site/home']];
+./views/layouts/main.php:        $menuItems[] = ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']];
+./views/layouts/main.php:        $menuItems[] = ['label' => '<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> '.Yii::t('app', 'Events'), 'url' => ['/event/index']];
+./views/layouts/main.php:        $menuItems[] = ['label' => '<span class="glyphicon glyphicon-tower" aria-hidden="true"></span> '.Yii::t('app', 'Teams'), 'url' => ['/team/index']];
+./views/layouts/main.php:        $menuItems[] = ['label' => '<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> '.Yii::t('app', 'Songs'), 'url' => ['/song/index']];
+./views/layouts/main.php:        $menuItems[] = ['label' => Yii::t('app', 'Churches'), 'url' => ['/church/index']];
+./views/layouts/main.php:        $menuItems[] = ['label' => '<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> '.Yii::t('app', 'Admin'),
+./views/layouts/main.php:					['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']],
+./views/layouts/main.php:					['label' => Yii::t('app', 'Team types'), 'url' => ['/team-type/index']],
+./views/layouts/main.php:                    ['label' => Yii::t('app', 'Task templates'), 'url' => ['/activity-type/index']],
+./views/layouts/main.php:                    ['label' => Yii::t('app', 'Message templates'), 'url' => ['/message-template/index']],
+./views/layouts/main.php:                    ['label' => Yii::t('app', 'Message types'), 'url' => ['/message-type/index']],
+./views/layouts/main.php:					['label' => Yii::t('app', 'Languages'), 'url' => ['/language/index']],
+./views/layouts/main.php:            'label' => Yii::t('app', 'Logout'). ' (' . Yii::$app->user->identity->username . ')',
+./views/layouts/main.php:        $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
+./views/layouts/main.php:        $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+./views/layouts/main.php:					['label' => '<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> '.Yii::t('app', 'Profile'), 'url' => ['/user/viewme']],
+./views/layouts/main.php:					['label' => '<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> '.Yii::t('app', 'Tasks'), 'url' => ['/user/tasks']],
+./views/layouts/main.php:					['label' => '<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> '.Yii::t('app', 'Unavailability'), 'url' => ['/user-blocked/index']],
+./views/layouts/main.php:					['label' => '<i class="glyphicon glyphicon-off"></i> '.Yii::t('app', 'Sign Out'),
+./views/layouts/main.php:        <p class="pull-left">&copy; <?= Yii::t('app', Yii::$app->name) ?> <?= date('Y') ?></p>
