@@ -17,6 +17,7 @@ class SignupForm extends Model
     public $status;
     public $church_id;
     public $display_name;
+	public $language_iso_name;
 	
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
@@ -98,7 +99,7 @@ class SignupForm extends Model
             'username' => Yii::t('app', 'Username'),
             'password' => Yii::t('app', 'Password'),
             'email' => Yii::t('app', 'Email'),
-            'display_name' => Yii::t('app', 'display_name'),
+            'display_name' => Yii::t('app', 'Display name'),
             'church_id' => Yii::t('app', 'Church'),
         ];
     }

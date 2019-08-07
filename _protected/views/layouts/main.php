@@ -10,7 +10,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-
+$lang = Yii::$app->request->$queryParams['lang'];
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -57,12 +57,12 @@ $this->beginBody() ?>
     ]);
 
     // everyone can see Home page
-    $menuItems[] = ['label' => '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> '.Yii::t('app', 'Home'), 'url' => ['/site/home']];
+    $menuItems[] = ['label' => '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> '.Yii::t('app', 'Home'), 'url' => ['/site/home','lang'=>$lang]];
 
     // we do not need to display Contact pages to employee+ roles
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('app', 'Documentation'), 'url' => ['/doc/doc','page'=>'home','returnName'=>'home','returnUrl'=>'/home']];
-        $menuItems[] = ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']];
+        $menuItems[] = ['label' => Yii::t('app', 'Documentation'), 'url' => ['/doc/doc','page'=>'home','returnName'=>'home','returnUrl'=>'/site/home','lang'=>$lang]];
+        $menuItems[] = ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact','lang'=>$lang]];
     }
 	else{
         $menuItems[] = ['label' => '<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> '.Yii::t('app', 'Events'), 'url' => ['/event/index']];
@@ -99,8 +99,8 @@ $this->beginBody() ?>
 
     // display Signup and Login pages to guests of the site
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+        $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup','lang'=>$lang]];
+        $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login','lang'=>$lang]];
     }
 	else {
 		$menuItems[] = ['label' => '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> '. Yii::$app->user->identity->display_name,

@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\DocForm;
 use app\models\User;
 use app\models\Church;
 use app\models\Language;
@@ -110,9 +111,28 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionHome()
+    public function actionHome($lang='')
     {
-        return $this->render('home');
+		$model = new DocForm();
+		if (!$model->load(Yii::$app->request->post())) {
+			if (Yii::$app->user->isGuest) {
+				$model->language_iso_name=strlen($lang)>1?$lang:Yii::$app->language;
+				if (strlen($lang)>1) {
+					$model->language_iso_name=strlen($lang)>1?$lang:Yii::$app->language;
+					Yii::$app->language = $model->language_iso_name;
+				}
+			}
+			else{
+				$language=Language::findOne(Yii::$app->user->identity->language_id);
+				$model->language_iso_name=$language->iso_name;				
+			}			
+			
+            return $this->render('home', ['model'=>$model ]);
+        }
+		Yii::$app->language = $model->language_iso_name;
+		
+		//we need to do a one time recursion here to put the lang on the url
+		return $this->redirect(['home','lang'=>$model->language_iso_name]);
     }
 
     /**
@@ -130,10 +150,13 @@ class SiteController extends Controller
      *
      * @return string|\yii\web\Response
      */
-    public function actionContact()
+    public function actionContact($lang='')
     {
         $model = new ContactForm();
-
+		if (strlen($lang)>1) {
+			$model->language_iso_name=strlen($lang)>1?$lang:Yii::$app->language;
+			Yii::$app->language = $model->language_iso_name;
+		}
         if (!$model->load(Yii::$app->request->post()) || !$model->validate()) {
             return $this->render('contact', ['model' => $model]);
         }
@@ -159,7 +182,7 @@ class SiteController extends Controller
      *
      * @return string|\yii\web\Response
      */
-    public function actionLogin()
+    public function actionLogin($lang='')
     {
         // user is logged in, he doesn't need to login
         if (!Yii::$app->user->isGuest) {
@@ -174,7 +197,10 @@ class SiteController extends Controller
 
         // monitor login status
         $successfulLogin = true;
-
+		if (strlen($lang)>1) {
+			$model->language_iso_name=strlen($lang)>1?$lang:Yii::$app->language;
+			Yii::$app->language = $model->language_iso_name;
+		}
         // posting data or login has failed
         if (!$model->load(Yii::$app->request->post()) || !$model->login()) {
             $successfulLogin = false;
@@ -334,14 +360,17 @@ class SiteController extends Controller
      *
      * @return string|\yii\web\Response
      */
-    public function actionSignup()
+    public function actionSignup($lang='')
     {  
         // get setting value for 'Registration Needs Activation'
         $rna = Yii::$app->params['rna'];
 
         // if 'rna' value is 'true', we instantiate SignupForm in 'rna' scenario
         $model = $rna ? new SignupForm(['scenario' => 'rna']) : new SignupForm();
-
+		if (strlen($lang)>1) {
+			$model->language_iso_name=strlen($lang)>1?$lang:Yii::$app->language;
+			Yii::$app->language = $model->language_iso_name;
+		}
         // if validation didn't pass, reload the form to show errors
         if (!$model->load(Yii::$app->request->post()) || !$model->validate()) {
             return $this->render('signup', ['model' => $model]);  

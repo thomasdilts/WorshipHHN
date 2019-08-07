@@ -14,7 +14,8 @@ class LoginForm extends Model
     public $password;
     public $rememberMe = true;
     public $status; // holds the information about user status
-
+	public $language_iso_name;
+	
     /**
      * @var \app\models\User
      */

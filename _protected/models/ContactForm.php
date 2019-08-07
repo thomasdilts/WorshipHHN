@@ -14,6 +14,7 @@ class ContactForm extends Model
     public $subject;
     public $body;
     public $verifyCode;
+	public $language_iso_name;
 
     /**
      * Returns the validation rules for attributes.

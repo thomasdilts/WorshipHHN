@@ -1,13 +1,23 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Language;
+use app\models\DocForm;
 
 $this->title = Yii::$app->name;
 ?>
 <div class="site-index">
-
+	<span class="pull-right" style="">		
+		<?php if(Yii::$app->user->isGuest){ ?>
+			<?php $form = ActiveForm::begin(['id' => 'form-home']); ?>
+				<?= $form->field($model, 'language_iso_name')->dropDownList(DocForm::getLanguages(),['onChange'=>'this.form.submit();']) ?>
+			<?php ActiveForm::end(); ?>
+		<?php } ?>		
+	</span>	 
     <div class="jumbotron">
-        <h1><?=Yii::t('app', 'Welcome to')?><br /> Worship H<span style="font-size:0.3em">is</span>H<span style="font-size:0.3em">oly</span>N<span style="font-size:0.3em">ame</span></h1>
+		<h1><?=Yii::t('app', 'Welcome to')?><br /> Worship H<span style="font-size:0.3em">is</span>H<span style="font-size:0.3em">oly</span>N<span style="font-size:0.3em">ame</span></h1>
         (<?=Yii::t('app', 'Worship His Holy Name')?>)
         <p class="lead"><?=Yii::t('app', 'A worship service planer and organizer')?></p>
     </div>
@@ -15,15 +25,15 @@ $this->title = Yii::$app->name;
     <div class="body-content">
         <div class="row">
             <div class="col-lg-4">
-                <h3><a style="display:block;" href="<?=URL::toRoute('doc/doc')?>?page=features&returnName=<?=Yii::t('app', "Features")?>&returnUrl=<?=URL::toRoute('home')?>%3Fpage%3Dhome%26returnName%3D<?=Yii::t('app', "Home")?>%26returnUrl%3D<?=URL::toRoute('site/home')?>">
+                <h3><a style="display:block;" href="<?=URL::toRoute('doc/doc')?>?page=features&returnName=<?=Yii::t('app', "Features")?>&returnUrl=<?=URL::toRoute('home')?>%3Fpage%3Dhome%26returnName%3D<?=Yii::t('app', "Home")?>%26returnUrl%3D<?=URL::toRoute('site/home')?>&lang=<?=$model->language_iso_name?>">
 					<?= Html::encode(Yii::t('app', "Features")) ?></a></h3>
             </div>
             <div class="col-lg-4">
-                <h3><a style="display:block;" href="<?=URL::toRoute('doc/doc')?>?page=screenshots&returnName=<?=Yii::t('app', "Screenshots")?>&returnUrl=<?=URL::toRoute('home')?>%3Fpage%3Dhome%26returnName%3D<?=Yii::t('app', "Home")?>%26returnUrl%3D<?=URL::toRoute('site/home')?>">
+                <h3><a style="display:block;" href="<?=URL::toRoute('doc/doc')?>?page=screenshots&returnName=<?=Yii::t('app', "Screenshots")?>&returnUrl=<?=URL::toRoute('home')?>%3Fpage%3Dhome%26returnName%3D<?=Yii::t('app', "Home")?>%26returnUrl%3D<?=URL::toRoute('site/home')?>&lang=<?=$model->language_iso_name?>">
 					<?= Html::encode(Yii::t('app', "Screenshots")) ?></a></h3>
             </div>
             <div class="col-lg-4">
-                <h3><a style="display:block;" href="<?=URL::toRoute('doc/doc')?>?page=home&returnName=<?=Yii::t('app', "Home")?>&returnUrl=<?=URL::toRoute('home')?>%3Fpage%3Dhome%26returnName%3D<?=Yii::t('app', "Home")?>%26returnUrl%3D<?=URL::toRoute('site/home')?>">
+                <h3><a style="display:block;" href="<?=URL::toRoute('doc/doc')?>?page=home&returnName=<?=Yii::t('app', "Home")?>&returnUrl=<?=URL::toRoute('home')?>%3Fpage%3Dhome%26returnName%3D<?=Yii::t('app', "Home")?>%26returnUrl%3D<?=URL::toRoute('site/home')?>&lang=<?=$model->language_iso_name?>">
 					<?= Html::encode(Yii::t('app', "Documentation")) ?></a></h3>
             </div>
         </div>

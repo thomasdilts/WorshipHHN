@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\DocForm;
 use app\models\User;
 use app\models\Language;
 use app\models\Activity;
@@ -118,15 +119,47 @@ class DocController extends Controller
      *
      * @return string
      */
-    public function actionDoc($page,$returnName,$returnUrl)
+    public function actionDoc($page,$returnName,$returnUrl,$lang='')
     {
-		Yii::info('actionDoc page='.$page,'DocController');
-        return $this->render($page, ['returnName'=>$returnName,'returnUrl'=>$returnUrl]);
+		$model = new DocForm();
+		if (!$model->load(Yii::$app->request->post())) {
+			if (Yii::$app->user->isGuest) {
+				$model->language_iso_name=strlen($lang)>1?$lang:Yii::$app->language;
+				if (strlen($lang)>1) {
+					$model->language_iso_name=strlen($lang)>1?$lang:Yii::$app->language;
+					Yii::$app->language = $model->language_iso_name;
+				}
+			}
+			else{
+				$language=Language::findOne(Yii::$app->user->identity->language_id);
+				$model->language_iso_name=$language->iso_name;				
+			}			
+			
+            return $this->render($page, ['model'=>$model,'returnName'=>$returnName,'returnUrl'=>$returnUrl ]);
+        }
+		Yii::$app->language = $model->language_iso_name;
+        return $this->render($page, ['model'=>$model,'returnName'=>$returnName,'returnUrl'=>$returnUrl ]);
     }
 	
-	public function actionScreenshot($image,$returnName,$returnUrl)
+	public function actionScreenshot($image,$returnName,$returnUrl,$lang='')
     {
-		Yii::info('actionScreenshot image='.$image,'DocController');
-        return $this->render('screenshotviewer', ['image'=>$image,'returnName'=>$returnName,'returnUrl'=>$returnUrl]);
+		$model = new DocForm();
+		if (!$model->load(Yii::$app->request->post())) {
+			if (Yii::$app->user->isGuest) {
+				$model->language_iso_name=strlen($lang)>1?$lang:Yii::$app->language;
+				if (strlen($lang)>1) {
+					$model->language_iso_name=strlen($lang)>1?$lang:Yii::$app->language;
+					Yii::$app->language = $model->language_iso_name;
+				}
+			}
+			else{
+				$language=Language::findOne(Yii::$app->user->identity->language_id);
+				$model->language_iso_name=$language->iso_name;				
+			}			
+			
+            return $this->render('screenshotviewer', ['image'=>$image,'model'=>$model,'returnName'=>$returnName,'returnUrl'=>$returnUrl ]);
+        }
+		Yii::$app->language = $model->language_iso_name;
+        return $this->render('screenshotviewer', ['image'=>$image,'model'=>$model,'returnName'=>$returnName,'returnUrl'=>$returnUrl ]);
     }
 }
