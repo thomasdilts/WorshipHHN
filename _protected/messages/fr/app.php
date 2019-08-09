@@ -2,7 +2,7 @@
 'A link to reset password will be sent to your email.' => 'Un lien pour réinitialiser le mot de passe sera envoyé à votre adresse email.',
 'A square photo will look the best.' => 'Une photo carrée sera la meilleure.',
 'A user has requested access to your church planner' => 'Un utilisateur a demandé l\'accès à votre planificateur d\'église',
-'A worship service planer and organizer' => 'Un organisateur et un organisateur de services de culte',
+'A worship service planner and organizer' => 'Un organisateur et un organisateur de services de culte',
 'About' => 'À propos',
 'Accept Button Text' => 'Accepter le texte du bouton',
 'Accept' => 'Acceptez',

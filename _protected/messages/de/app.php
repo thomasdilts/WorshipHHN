@@ -2,7 +2,7 @@
 'A link to reset password will be sent to your email.' => 'Ein Link zum Zurücksetzen des Passworts wird an Ihre E-Mail-Adresse gesendet.',
 'A square photo will look the best.' => 'Ein quadratisches Foto sieht am besten aus.',
 'A user has requested access to your church planner' => 'Ein Benutzer hat den Zugang zu Ihrem Kirchenplaner angefordert',
-'A worship service planer and organizer' => 'Ein Gottesdienstplaner und Organisator',
+'A worship service planner and organizer' => 'Ein Gottesdienstplaner und Organisator',
 'About' => 'Über',
 'Accept Button Text' => 'Text der Schaltfläche akzeptieren',
 'Accept' => 'Akzeptieren',

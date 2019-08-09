@@ -1,5 +1,5 @@
 # WorshipHHN
-A worship service planer and organizer.
+A worship service planner and organizer.
 
 Documentation and details can be found at http://worshiphhn.org/whhn
 

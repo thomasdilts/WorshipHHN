@@ -7,7 +7,7 @@ return [
 'A link to reset password will be sent to your email.' => 'En länk för att återställa lösenord skickas till din e-post.',
 'A square photo will look the best.'=>'En kvadratisk foto kommer att se bäst.',
 'A user has requested access to your church planner'=>'En person har begärt tillgång till din kyrkas planerare.',
-'A worship service planer and organizer' => 'En gudstjänst planerare och arrangör',
+'A worship service planner and organizer' => 'En gudstjänst planerare och arrangör',
 'About' => 'Handla om',
 'Accept Button Text' => 'Acceptera knapptext',
 'Accept' => 'Acceptera',

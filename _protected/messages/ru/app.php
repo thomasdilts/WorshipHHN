@@ -2,7 +2,7 @@
 'A link to reset password will be sent to your email.' => 'Ссылка для сброса пароля будет отправлена на ваш электронный адрес.',
 'A square photo will look the best.' => 'Квадратное фото будет выглядеть лучше всего.',
 'A user has requested access to your church planner' => 'Пользователь запросил доступ к вашему церковному планировщику',
-'A worship service planer and organizer' => 'Планировщик и организатор богослужения',
+'A worship service planner and organizer' => 'Планировщик и организатор богослужения',
 'About' => 'Около',
 'Accept Button Text' => 'Принять текст кнопки',
 'Accept' => 'принимать',

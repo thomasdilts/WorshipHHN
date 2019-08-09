@@ -2,7 +2,7 @@
 'A link to reset password will be sent to your email.' => 'Sähköpostiisi lähetetään linkki salasanan palauttamiseksi.',
 'A square photo will look the best.' => 'Neljäs valokuva näyttää parhaiten.',
 'A user has requested access to your church planner' => 'Käyttäjä on pyytänyt pääsyä kirkon suunnittelijaan',
-'A worship service planer and organizer' => 'Palvonnan suunnittelija ja järjestäjä',
+'A worship service planner and organizer' => 'Palvonnan suunnittelija ja järjestäjä',
 'About' => 'Noin',
 'Accept Button Text' => 'Hyväksy painiketeksti',
 'Accept' => 'Hyväksyä',

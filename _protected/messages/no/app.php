@@ -2,7 +2,7 @@
 'A link to reset password will be sent to your email.' => 'En lenke for å tilbakestille passord vil bli sendt til din e-post.',
 'A square photo will look the best.' => 'Et firkantet bilde vil se best ut.',
 'A user has requested access to your church planner' => 'En bruker har bedt om tilgang til kirkeplanleggeren din',
-'A worship service planer and organizer' => 'En gudstjeneste høvler og arrangør',
+'A worship service planner and organizer' => 'En gudstjeneste høvler og arrangør',
 'About' => 'Handle om',
 'Accept Button Text' => 'Godta knappetekst',
 'Accept' => 'Aksepterer',

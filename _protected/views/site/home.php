@@ -19,7 +19,7 @@ $this->title = Yii::$app->name;
     <div class="jumbotron">
 		<h1><?=Yii::t('app', 'Welcome to')?><br /> Worship H<span style="font-size:0.3em">is</span>H<span style="font-size:0.3em">oly</span>N<span style="font-size:0.3em">ame</span></h1>
         (<?=Yii::t('app', 'Worship His Holy Name')?>)
-        <p class="lead"><?=Yii::t('app', 'A worship service planer and organizer')?></p>
+        <p class="lead"><?=Yii::t('app', 'A worship service planner and organizer')?></p>
     </div>
 
     <div class="body-content">
