@@ -61,7 +61,7 @@ class AppController extends Controller
                     ],					
                     [
                         'controllers' => ['user','team-type','activity-type','event-template','message-template','message-type'],
-                        'actions' => ['index', 'create', 'update', 'delete', 'view', 'addtotemplate','activities', 'removefromtemplate','fileuploadadmin','filedeleteadmin',],
+                        'actions' => ['index', 'create','deletemessage','deletetype','createtype','createmessage', 'update', 'delete', 'view', 'addtotemplate','activities', 'removefromtemplate','fileuploadadmin','filedeleteadmin',],
                         'allow' => true,
                         'roles' => ['ChurchAdmin','theCreator'],
 					],
