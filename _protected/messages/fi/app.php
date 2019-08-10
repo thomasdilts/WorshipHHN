@@ -73,6 +73,7 @@
 'Create' => 'Luoda',
 'Created At' => 'Luotu klo',
 'Curious?' => 'Utelias?',
+'Custom Message' => 'Mukautettu viesti',
 'Default End Time' => 'Oletus päättymisaika',
 'Default Start Time' => 'Oletusarvoinen aloitusaika',
 'Default global order' => 'Oletus globaali järjestys',

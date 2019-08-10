@@ -71,6 +71,8 @@ class Notification extends \yii\db\ActiveRecord
             'notify_replied_date' => Yii::t('app', 'Replied Date'),
             'message_name' => Yii::t('app', 'Message name'),
             'dates' => Yii::t('app', 'Notified Date / Replied Date'),
+            'custom_message' => Yii::t('app', 'Custom Message'),
+            'message_template_id' => Yii::t('app', 'Message Templates'),
         ];
     }
 

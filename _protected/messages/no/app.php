@@ -73,6 +73,7 @@
 'Create' => 'Skape',
 'Created At' => 'Opprettet kl',
 'Curious?' => 'Nysgjerrig?',
+'Custom Message' => 'Tilpasset melding',
 'Default End Time' => 'Standard sluttid',
 'Default Start Time' => 'Standard starttid',
 'Default global order' => 'Standard global ordre',

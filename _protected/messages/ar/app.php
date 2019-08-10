@@ -73,6 +73,7 @@
 'Create' => 'خلق',
 'Created At' => 'أنشئت في',
 'Curious?' => 'فضولي؟',
+'Custom Message' => 'رسالة مخصصة',
 'Default End Time' => 'وقت الانتهاء الافتراضي',
 'Default Start Time' => 'وقت البدء الافتراضي',
 'Default global order' => 'النظام العالمي الافتراضي',

@@ -73,6 +73,7 @@
 'Create' => 'Erstellen',
 'Created At' => 'Hergestellt in',
 'Curious?' => 'Neugierig?',
+'Custom Message' => 'Benutzerdefinierte Nachricht',
 'Default End Time' => 'Standardendzeit',
 'Default Start Time' => 'Standardstartzeit',
 'Default global order' => 'Globale Standardreihenfolge',

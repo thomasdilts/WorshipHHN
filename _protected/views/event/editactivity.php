@@ -126,7 +126,7 @@ $GLOBALS['eventid']=$modelEvent->id;
 				], 
 				// buttons
 				['class' => 'yii\grid\ActionColumn',
-				'header' => "Menu",
+				'header' => Yii::t('app', 'Menu'),
 				'template' => '{selectsong}',
 					'buttons' => [
 						'selectsong' => function ($url, $model, $key) {

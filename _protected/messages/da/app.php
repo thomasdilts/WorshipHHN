@@ -73,6 +73,7 @@
 'Create' => 'skab',
 'Created At' => 'Oprettet kl',
 'Curious?' => 'Nysgerrig?',
+'Custom Message' => 'Tilpasset besked',
 'Default End Time' => 'Standard sluttid',
 'Default Start Time' => 'Standard starttid',
 'Default global order' => 'Standard global ordre',

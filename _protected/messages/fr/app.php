@@ -73,6 +73,7 @@
 'Create' => 'Créer',
 'Created At' => 'Créé à',
 'Curious?' => 'Curieuse?',
+'Custom Message' => 'Message personnalisé',
 'Default End Time' => 'Heure de fin par défaut',
 'Default Start Time' => 'Heure de début par défaut',
 'Default global order' => 'Ordre global par défaut',

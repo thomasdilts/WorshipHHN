@@ -78,6 +78,7 @@ return [
 'Create' => 'Skapa',
 'Created At' => 'Skapad vid',
 'Curious?' => 'Nyfiken?',
+'Custom Message' => 'Anpassat meddelande',
 'Default End Time' => 'Standard sluttid',
 'Default Start Time' => 'Standard starttid',
 'Default global order' => 'Standard global order',

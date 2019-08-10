@@ -73,6 +73,7 @@
 'Create' => 'Создайте',
 'Created At' => 'Создан в',
 'Curious?' => 'Любопытно?',
+'Custom Message' => 'Пользовательское сообщение',
 'Default End Time' => 'Время окончания по умолчанию',
 'Default Start Time' => 'Время начала по умолчанию',
 'Default global order' => 'Глобальный порядок по умолчанию',

@@ -73,6 +73,7 @@
 'Create' => 'Crio',
 'Created At' => 'Criado em',
 'Curious?' => 'Curioso?',
+'Custom Message' => 'Mensagem personalizada',
 'Default End Time' => 'Hora de término padrão',
 'Default Start Time' => 'Hora de início padrão',
 'Default global order' => 'Ordem global padrão',
