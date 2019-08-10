@@ -68,7 +68,7 @@ use yii\widgets\ActiveForm;
 						$('label[for=notification-custom_message]').show();
 						$("#notification-custom_message").show();
 						$("#preview").append("<div  style='min-width:100%;' class='col-lg-6' id='custom-message-preview'></div>");
-						$("#preview").append("<hr style='color:lightblue;background-color:lightblue;height:2px;margin:3px;'>");
+						$("#preview").append("<hr style='color:lightblue;background-color:lightblue;height:2px;margin:3px;padding:2px;'>");
 					}
 
 					$("#preview").append("<p  style='width:100%;' class='col-lg-6'>" + foundTemplate.body + '</p>');
@@ -88,7 +88,7 @@ use yii\widgets\ActiveForm;
 					$("#create_button").show();
 				}
 			});
-			$("#notification-custom_message").keypress(function(){
+			$("#notification-custom_message").keyup(function(){
 				$("#custom-message-preview").html($("#notification-custom_message").val().replace(/\r\n/g,'<br />').replace(/\n/g,'<br />'));
 			});
 			$('label[for=notification-custom_message]').hide();
