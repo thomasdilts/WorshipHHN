@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::encode($this->title) ?>
         <span class="pull-right" style="margin-bottom:5px">
             <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Task Template')?></a>
-            <a href='<?=URL::toRoute('doc/doc')?>?page=activity-type-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('activity-type/index')?>' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			
+            <a href='<?=URL::toRoute('doc/doc')?>?page=activity-type-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('activity-type/index')?>%3Ftemp%3Dtemp' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			
         </span>         
     </h1>
 

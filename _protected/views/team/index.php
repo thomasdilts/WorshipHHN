@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php if(Yii::$app->user->can('EventManager')) { ?>
                 <a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Team')?></a>
             <?php } ?>               
-			<a href='<?=URL::toRoute('doc/doc')?>?page=team-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('team/index')?>' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			                 
+			<a href='<?=URL::toRoute('doc/doc')?>?page=team-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('team/index')?>%3Ftemp%3Dtemp' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			                 
         </span>     
 		<?php } ?> 		
     </h1>

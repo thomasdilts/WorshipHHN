@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title)?>
         <span class="pull-right" style="margin-bottom:5px">
-			<a href='<?=URL::toRoute('doc/doc')?>?page=team-type-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('team-type/create')?>' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			                 
+			<a href='<?=URL::toRoute('doc/doc')?>?page=team-type-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('team-type/create')?>%3Ftemp%3Dtemp' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			                 
         </span>         
 	</h1>
 

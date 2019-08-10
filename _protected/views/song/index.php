@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <a href="songimportopenlp" class='btn btn-success'><span class="glyphicon glyphicon-open"></span>Open LP</a>
             <a href="songimportcsv" class='btn btn-success'><span class="glyphicon glyphicon-open"></span>CSV</a>
             <a href="songexportcsv" class='btn btn-success'><span class="glyphicon glyphicon-download-alt"></span>CSV</a>  
-            <a href='<?=URL::toRoute('doc/doc')?>?page=song-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('song/index')?>' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			                 
+            <a href='<?=URL::toRoute('doc/doc')?>?page=song-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('song/index')?>%3Ftemp%3Dtemp' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			                 
         </span>         
     </h1>
 
