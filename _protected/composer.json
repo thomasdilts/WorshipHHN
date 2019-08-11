@@ -1,7 +1,7 @@
 {
-    "name": "worshiphhn/whhn",
+    "name": "thomasdilts/worshiphhn",
     "description": "Church service organizer and planner",
-    "keywords": ["yii2", "framework", "basic", "project template"],
+    "keywords": ["church", "organizer", "planner", "events"],
     "homepage": "http://worshiphhn.org/",
     "type": "project",
     "license": "GPL-3.0",
