@@ -85,3 +85,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # Otherwise forward the request to index.php
 RewriteRule . index.php
 ```
+
+If you are installing this in your own linux/ubuntu type server then you will probably need to run the following command in the root of your installation to get the ownerships correct.
+
+```txt
+sudo chown -R www-data:www-data *
+```
+
