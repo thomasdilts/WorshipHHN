@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use nex\datepicker\DatePicker;
 use app\models\Language;
-Yii::setAlias('@bower', dirname(__DIR__,2). DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bower-asset');
 $language=Language::findOne(Yii::$app->user->identity->language_id);
 ?>
 <div class="team-blocked-form">

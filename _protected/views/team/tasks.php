@@ -10,7 +10,6 @@ use yii\helpers\ArrayHelper;
 use app\models\Language;
 
 $language=Language::findOne(Yii::$app->user->identity->language_id);
-Yii::setAlias('@bower', dirname(__DIR__,2). DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bower-asset');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['team/index']];
 $this->title = Yii::t('app', 'Tasks') . ' - ' .$model->name;
 $this->params['breadcrumbs'][] = $this->title;

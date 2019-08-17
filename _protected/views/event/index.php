@@ -8,7 +8,6 @@ use app\models\Language;
 use yii\helpers\Url;
 
 $language=Language::findOne(Yii::$app->user->identity->language_id);
-Yii::setAlias('@bower', dirname(__DIR__,2). DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bower-asset');
 $this->title = Yii::t('app', 'Event');
 $this->params['breadcrumbs'][] = $this->title;
 ?>

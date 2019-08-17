@@ -7,7 +7,6 @@ use yii\helpers\ArrayHelper;
 use app\models\Language;
 
 $language=Language::findOne(Yii::$app->user->identity->language_id);
-Yii::setAlias('@bower', dirname(__DIR__,2). DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bower-asset');
 ?>
  
 <div class="activitytype-form">

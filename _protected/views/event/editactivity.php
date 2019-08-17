@@ -11,7 +11,6 @@ use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use app\models\Language;
 $language=Language::findOne(Yii::$app->user->identity->language_id);
-Yii::setAlias('@bower', dirname(__DIR__,2). DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bower-asset');
 
 $this->title = Yii::t('app', 'Update event task') . ': ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Event'), 'url' => ['index']];

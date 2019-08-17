@@ -5,7 +5,6 @@ use yii\widgets\ActiveForm;
 use nex\datepicker\DatePicker;
 use yii\helpers\ArrayHelper;
 
-Yii::setAlias('@bower', dirname(__DIR__,2). DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bower-asset');
 ?>
 <div class="messagetemplate-form"> 
 
