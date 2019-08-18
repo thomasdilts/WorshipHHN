@@ -12,16 +12,18 @@ $this->title = Yii::t('app', 'Event');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-
-    <h1>
-        <?= Html::encode($this->title) ?>
-        <span class="pull-right" style="margin-bottom:5px">
-			<?php if(Yii::$app->user->can('EventManager')) { ?>
-				<a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Event')?></a>
-			<?php } ?>        	
-			<a href='<?=URL::toRoute('doc/doc')?>?page=event-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('event/index')?>%3Ftemp%3Dtemp' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>
-        </span>         
-    </h1>
+	<div class="row">
+		<h1 style="margin-left:15px;">
+			<?= Html::encode($this->title) ?>
+			<span class="pull-right" style="margin-bottom:5px;">
+				<?php if(Yii::$app->user->can('EventManager')) { ?>
+					<a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Event')?></a>
+				<?php } ?>        	
+				<a href='alltasks' class='btn btn-primary'><span class="glyphicon glyphicon-tasks"></span><?=Yii::t('app', 'Tasks')?></a>
+				<a href='<?=URL::toRoute('doc/doc')?>?page=event-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('event/index')?>%3Ftemp%3Dtemp' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>
+			</span>         
+		</h1>
+	</div>
 	<div class="row">
         <div class="col-sm-3">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

@@ -67,19 +67,19 @@ class AppController extends Controller
 					],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['deleteactivityfile','fileactivitydownload','index', 'create', 'update', 'delete','removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'copy', 'notifications', 'exportexcel', 'exportpdf', 'notify', 'seenotify', 'deletenotify'],
+                        'actions' => ['deleteactivityfile','fileactivitydownload','alltasks','index', 'create', 'update', 'delete','removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'copy', 'notifications', 'exportexcel', 'exportpdf', 'notify', 'seenotify', 'deletenotify'],
                         'allow' => true,
                         'roles' => ['EventManager','ChurchAdmin','theCreator'],
 					],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['deleteactivityfile','fileactivitydownload','index', 'removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
+                        'actions' => ['deleteactivityfile','fileactivitydownload','alltasks','index', 'removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
                         'allow' => true,
                         'roles' => ['TeamManager','EventEditor'],
                     ],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['fileactivitydownload','filesup','index', 'activities','files', 'filedownload', 'deletefile', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
+                        'actions' => ['fileactivitydownload','filesup','alltasks','index', 'activities','files', 'filedownload', 'deletefile', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
                         'allow' => true,
                         'roles' => ['Member'],
                     ],
