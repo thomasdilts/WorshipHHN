@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?php if(Yii::$app->user->can('EventManager')) { ?>
 					<a href='create' class='btn btn-success'><span class="glyphicon glyphicon-plus"></span><?=Yii::t('app', 'Create Event')?></a>
 				<?php } ?>        	
-				<a href='alltasks' class='btn btn-primary'><span class="glyphicon glyphicon-tasks"></span><?=Yii::t('app', 'Tasks')?></a>
+				<a href='alltasks?start=<?=$searchModel->filter_start_date?>&end=<?=$searchModel->filter_end_date?>' class='btn btn-primary'><span class="glyphicon glyphicon-tasks"></span><?=Yii::t('app', 'Tasks')?></a>
 				<a href='<?=URL::toRoute('doc/doc')?>?page=event-index&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('event/index')?>%3Ftemp%3Dtemp' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>
 			</span>         
 		</h1>

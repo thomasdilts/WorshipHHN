@@ -312,21 +312,13 @@ class EventController extends AppController
 		$model=Event::findOne(['id'=>$eventid]);
         return $this->redirect(['activities','id'=>$eventid]);
 	}
-    public function actionAlltasks()
+    public function actionAlltasks($start, $end)
     {
-		//only need to get the filter from the event search
-		$searchModel = new EventSearch();
-		$searchModel->filter_start_date = date('Y-m-d'); // get start date
-		$searchModel->filter_end_date = date("Y-m-d", strtotime('+2 month'));
-		$searchModel->load(Yii::$app->request->queryParams);
-		
-		
-		//now the real search query
-		$searchModel2 = new EventActivitySearch();
-		$searchModel2->filter_start_date = $searchModel->filter_start_date;
-		$searchModel2->filter_end_date = $searchModel->filter_end_date ;
+		$searchModel = new EventActivitySearch();
+		$searchModel->filter_start_date = $start;
+		$searchModel->filter_end_date = $end;
 
-        $dataProvider = $searchModel2->search(Yii::$app->request->queryParams, 50);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 50);
 
         return $this->render('alltasks', [
             'searchModel' => $searchModel,

@@ -12,14 +12,15 @@ use app\models\User;
 use yii\helpers\Url;
 
 $this->title = Yii::t('app', 'Tasks');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Events'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Events'), 'url' => ['index?EventSearch%5Bfilter_start_date%5D='.$searchModel->filter_start_date.'&EventSearch%5Bfilter_end_date%5D='.$searchModel->filter_end_date]];
+$this->params['breadcrumbs'][] = $this->title ;
 ?>
 
 <div class="eventtemplate-form">
 	<h1>
 		<?= Html::encode( Yii::t('app', 'Tasks'))?>  
 		<span class="pull-right">
-			<a href="index" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+			<a href="index?EventSearch%5Bfilter_start_date%5D=<?=$searchModel->filter_start_date?>&EventSearch%5Bfilter_end_date%5D=<?=$searchModel->filter_end_date?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
 		</span>  			
 	</h1>
 	<div class="row">
