@@ -55,7 +55,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup', 'reply'],
+                'only' => ['logout', 'signup', 'reply', 'forum'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -64,6 +64,11 @@ class SiteController extends Controller
                     ],
                     [
                         'actions' => ['reply'],
+                        'allow' => true,
+                        'roles' => ['?','TeamManager','ChurchAdmin','theCreator','EventManager','Member'],
+                    ],
+                    [
+                        'actions' => ['forum'],
                         'allow' => true,
                         'roles' => ['?','TeamManager','ChurchAdmin','theCreator','EventManager','Member'],
                     ],
@@ -144,7 +149,10 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-
+    public function actionForum()
+    {
+        return $this->render('forum');
+    }
     /**
      * Displays the contact static page and sends the contact email.
      *

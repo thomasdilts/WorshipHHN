@@ -65,9 +65,9 @@ $this->beginBody() ?>
 
     // we do not need to display Contact pages to employee+ roles
     if (Yii::$app->user->isGuest) {
-        if(Yii::$app->params['showWhhnServerOffer']=='true'){
-                $menuItems[] = ['label' => Yii::t('app', 'Forum'), 'url' => ['../mybb']];
-        }	    
+	if(Yii::$app->params['showWhhnServerOffer']=='true'){
+        	$menuItems[] = ['label' => Yii::t('app', 'Forum'), 'url' => ['site/forum']];
+	}
         $menuItems[] = ['label' => Yii::t('app', 'Documentation'), 'url' => ['/doc/doc','page'=>'home','returnName'=>'home','returnUrl'=>'/site/home','lang'=>$lang]];
         $menuItems[] = ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact','lang'=>$lang]];
     }

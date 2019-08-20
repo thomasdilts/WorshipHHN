@@ -7,7 +7,7 @@
     "license": "GPL-3.0",
     "support": {
         "issues": "https://github.com/thomasdilts/WorshipHHN/issues?state=open",
-        "forum": "http://worshiphhn.org/mybb/",
+        "forum": "http://worshiphhn.org/forum/",
         "wiki": "https://github.com/thomasdilts/WorshipHHN/wiki",
         "source": "https://github.com/thomasdilts/WorshipHHN"
     },
@@ -53,11 +53,9 @@
         "yii\\composer\\Installer::postCreateProject": {
             "setPermission": [
                 {
-                    "_protected/runtime": "0777",
-                    "_protected/web/assets": "0777",
-                    "assets": "0777",
-                    "fileVault": "0777",
-                    "_protected/yii": "0755"
+                    "runtime": "0777",
+                    "web/assets": "0777",
+                    "yii": "0755"
                 }
             ]
         },
