@@ -122,6 +122,7 @@
 'Files' => 'Tiedostot',
 'Filter' => 'Suodattaa',
 'Filters' => 'Suodattimet',
+'Forum' => 'Foorumi',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => 'Ilmainen ja avoin lähdekoodi, jos laitat ohjelman omalle palvelimellesi. Koska tämä ohjelmisto on tarkoitettu kirkoille, yritämme pitää kaikki palvelut ilmaiseksi.',
 'Generic Church' => 'Yleinen kirkko',
 'Global Order' => 'Globaali järjestys',

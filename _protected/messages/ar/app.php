@@ -122,6 +122,7 @@
 'Files' => 'ملفات',
 'Filter' => 'منقي',
 'Filters' => 'مرشحات',
+'Forum' => 'المنتدى',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => 'مصدر مجاني ومفتوح إذا وضعت البرنامج على الخادم الخاص بك. لأن هذا البرنامج مخصص للكنائس ، فنحن نحاول الحفاظ على جميع خدماتنا مجانية.',
 'Generic Church' => 'الكنيسة العامة',
 'Global Order' => 'النظام العالمي',

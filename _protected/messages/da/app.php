@@ -122,6 +122,7 @@
 'Files' => 'Filer',
 'Filter' => 'Filter',
 'Filters' => 'filtre',
+'Forum' => 'Forum',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => 'Gratis og open source, hvis du lægger programmet på din egen server. Da denne software er til kirker, prøver vi at holde alle vores tjenester gratis.',
 'Generic Church' => 'Generisk kirke',
 'Global Order' => 'Global orden',

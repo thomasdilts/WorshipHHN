@@ -127,6 +127,7 @@ return [
 'Files' => 'Filer',
 'Filter' => 'Filtrera',
 'Filters' => 'Filtrera',
+'Forum' => 'Forum',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => 'Gratis och öppen källkod om du sätter programmet på din egen server. Eftersom denna programvara är för kyrkor försöker vi hålla alla våra tjänster kostnadsfritt.',
 'Generic Church' => 'Generisk kyrka',
 'Global Order' => 'Ordningsnummer',

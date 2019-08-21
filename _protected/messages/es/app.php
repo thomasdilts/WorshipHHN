@@ -122,6 +122,7 @@
 'Files' => 'Archivos',
 'Filter' => 'Filtrar',
 'Filters' => 'Filtros',
+'Forum' => 'Foro',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => 'De código abierto y gratuito si coloca el programa en su propio servidor. Debido a que este software es para iglesias, tratamos de mantener todos nuestros servicios de forma gratuita.',
 'Generic Church' => 'Iglesia genérica',
 'Global Order' => 'Orden global',
