@@ -53,7 +53,7 @@
         "yii\\composer\\Installer::postCreateProject": {
             "setPermission": [
                 {
-                    "filelVault": "0777",
+                    "fileVault": "0777",
                     "assets": "0777",
                     "_protected/runtime": "0777",
                     "_protected/web/assets": "0777",
