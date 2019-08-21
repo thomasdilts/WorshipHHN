@@ -122,6 +122,7 @@
 'Files' => 'Mga file',
 'Filter' => 'Filter',
 'Filters' => 'Mga Filter',
+'Forum' => 'Forum',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => 'Libre at bukas na mapagkukunan kung ilalagay mo ang programa sa iyong sariling server. Dahil ang software na ito ay para sa mga simbahan sinusubukan naming panatilihing walang bayad ang lahat ng aming mga serbisyo.',
 'Generic Church' => 'Generic Church',
 'Global Order' => 'Pangkalahatang Order',

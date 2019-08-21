@@ -122,6 +122,7 @@
 'Files' => '档',
 'Filter' => '过滤',
 'Filters' => '过滤器',
+'Forum' => '论坛',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => '如果您将程序放在自己的服务器上，那么免费和开源。由于该软件适用于教堂，因此我们会尽量免费提供所有服务。',
 'Generic Church' => '通用教会',
 'Global Order' => '全球秩序',

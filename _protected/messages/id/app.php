@@ -122,6 +122,7 @@
 'Files' => 'File',
 'Filter' => 'Filter',
 'Filters' => 'Filter',
+'Forum' => 'Forum',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => 'Sumber gratis dan terbuka jika Anda meletakkan program di server Anda sendiri. Karena perangkat lunak ini untuk gereja, kami berusaha menjaga semua layanan kami tanpa biaya.',
 'Generic Church' => 'Gereja Generik',
 'Global Order' => 'Tatanan Global',

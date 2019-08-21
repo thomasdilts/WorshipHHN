@@ -122,6 +122,7 @@
 'Files' => 'ไฟล์',
 'Filter' => 'กรอง',
 'Filters' => 'ฟิลเตอร์',
+'Forum' => 'ฟอรั่ม',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => 'ฟรีและโอเพนซอร์สหากคุณวางโปรแกรมไว้บนเซิร์ฟเวอร์ของคุณเอง เนื่องจากซอฟต์แวร์นี้มีไว้สำหรับคริสตจักรเราจึงพยายามให้บริการทั้งหมดของเราฟรี',
 'Generic Church' => 'คริสตจักรทั่วไป',
 'Global Order' => 'การสั่งซื้อทั่วโลก',

@@ -122,6 +122,7 @@
 'Files' => '파일',
 'Filter' => '필터',
 'Filters' => '필터',
+'Forum' => '법정',
 'Free and open source if you put the program on your own server. Because this software is for churches we try to keep all our services free of charge.' => '자신의 서버에 프로그램을 넣는 경우 무료 및 오픈 소스. 이 소프트웨어는 교회 용이므로 모든 서비스를 무료로 유지하려고합니다.',
 'Generic Church' => '일반 교회',
 'Global Order' => '글로벌 주문',
