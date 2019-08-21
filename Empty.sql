@@ -296,7 +296,7 @@ CREATE TABLE `language` (
 --
 
 INSERT INTO `language` (`id`, `iso_name`, `display_name_english`, `display_name_native`, `church_id`) VALUES
-(3, 'en', 'English', 'English', 2),
+(3, 'en-US', 'English', 'English', 2),
 (4, 'sv', 'Swedish', 'Svenska', 2),
 (6, 'fr', 'French', 'Française', 2),
 (7, 'de', 'German', 'Deutsche', 2),
@@ -306,7 +306,15 @@ INSERT INTO `language` (`id`, `iso_name`, `display_name_english`, `display_name_
 (11, 'es', 'Spanish', 'Español', 2),
 (12, 'ar', 'Arabic', 'العربية', 2),
 (13, 'no', 'Norwegian', 'Norsk', 2),
-(14, 'da', 'Danish', 'Dansk', 2);
+(14, 'da', 'Danish', 'Dansk', 2),
+(38, 'ja', 'Japanese', '日本人', 2),
+(39, 'ko', 'Korean', '한국어', 2),
+(40, 'it', 'Italian', 'Italiana', 2),
+(41, 'zh-CN', 'Simplified Chinese', '中文', 2),
+(42, 'zh-TW', 'Traditional Chinese', '繁體中文', 2),
+(43, 'th', 'Thai', 'ไทย', 2),
+(44, 'tl', 'Filipino', 'Pilipino', 2),
+(45, 'id', 'Indonesian', 'Bahasa Indonesia', 2);
 
 -- --------------------------------------------------------
 
