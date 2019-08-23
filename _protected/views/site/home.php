@@ -9,17 +9,27 @@ use app\models\DocForm;
 $this->title = Yii::$app->name;
 ?>
 <div class="site-index">
-	<span class="pull-right" style="">		
-		<?php if(Yii::$app->user->isGuest){ ?>
-			<?php $form = ActiveForm::begin(['id' => 'form-home']); ?>
-				<?= $form->field($model, 'language_iso_name')->dropDownList(DocForm::getLanguages(),['onChange'=>'this.form.submit();']) ?>
-			<?php ActiveForm::end(); ?>
-		<?php } ?>		
-	</span>	 
-    <div class="jumbotron">
-		<h1><?=Yii::t('app', 'Welcome to')?><br /> Worship H<span style="font-size:0.3em">is</span>H<span style="font-size:0.3em">oly</span>N<span style="font-size:0.3em">ame</span></h1>
-        (<?=Yii::t('app', 'Worship His Holy Name')?>)
-        <p class="lead"><?=Yii::t('app', 'A worship service planner and organizer')?></p>
+	<?php if(Yii::$app->params['showWhhnServerOffer']=='true'){ ?>
+		<div class="col-lg-6" id="div_wide"  style="display:none;">
+			<iframe width="500px" height="280px" src="https://www.youtube.com/embed/_yHIqsgiw8k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
+		</div>	
+		<div class="col-lg-6" id="div_thin"  style="display:none;">
+			<iframe width="100%" src="https://www.youtube.com/embed/_yHIqsgiw8k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
+		</div>	
+	<?php } ?>	
+    <div class="<?=Yii::$app->params['showWhhnServerOffer']=='true'?'col-lg-6':'jumbotron'?>">
+		<span class="pull-right" style="">		
+			<?php if(Yii::$app->user->isGuest){ ?>
+				<?php $form = ActiveForm::begin(['id' => 'form-home']); ?>
+					<?= $form->field($model, 'language_iso_name')->dropDownList(DocForm::getLanguages(),['onChange'=>'this.form.submit();']) ?>
+				<?php ActiveForm::end(); ?>
+			<?php } ?>		
+		</span>	 
+		<div class="jumbotron">
+			<h2  style="font-size:3.0em"><?=Yii::t('app', 'Welcome to')?><br /> Worship H<span style="font-size:0.3em">is</span>H<span style="font-size:0.3em">oly</span>N<span style="font-size:0.3em">ame</span></h2>
+			(<?=Yii::t('app', 'Worship His Holy Name')?>)
+			<p class="lead"><?=Yii::t('app', 'A worship service planner and organizer')?></p>
+		</div>
     </div>
 
     <div class="body-content">
@@ -70,4 +80,24 @@ $this->title = Yii::$app->name;
 		</div>	
     </div>
 </div>
+<?php if(Yii::$app->params['showWhhnServerOffer']=='true'){ ?>
+	<script>
+		function showThinScreen(){
+			if($(window).outerWidth()<768){
+				$( "#div_wide" ).hide();
+				$( "#div_thin" ).show();
+			}
+			else{
+				$( "#div_wide" ).show();
+				$( "#div_thin" ).hide();
+			}		
+		}
+		$( document ).ready(function() {
+			showThinScreen();
+			$( window ).on('resize', function() {
+				showThinScreen();
+			});
+		});
 
+	</script>
+<?php } ?>	
