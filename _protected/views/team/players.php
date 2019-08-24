@@ -12,6 +12,11 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teams'), 'url' => ['
 $this->params['breadcrumbs'][] = $this->title;
 $GLOBALS['teamid']=$model->id;
 ?>
+<style>
+.grid-view td {
+    white-space: normal;
+}
+</style>
 <div class="user-index">
 	<div class="row">
 		<div class="col-lg-6">

@@ -55,7 +55,18 @@ class Song extends \yii\db\ActiveRecord
             'description' => Yii::t('app', 'Description'),
         ];
     }
-
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'id='.$this->id.'; name='.$this->name.'; name2='.$this->name2.'; author='
+				.$this->author.'; description='.$this->description;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

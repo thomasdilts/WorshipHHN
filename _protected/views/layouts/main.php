@@ -88,6 +88,7 @@ $this->beginBody() ?>
                     ['label' => Yii::t('app', 'Task templates'), 'url' => ['/activity-type/index']],
                     ['label' => Yii::t('app', 'Message templates'), 'url' => ['/message-template/index']],
 					['label' => Yii::t('app', 'Languages'), 'url' => ['/language/index']],
+					['label' => Yii::t('app', 'Activity log'), 'url' => ['/log/index']],
 					['label' => Yii::t('app', 'Churches'), 'url' => Yii::$app->user->can('theCreator')?['/church/index']:['/church/update?id='.Yii::$app->user->identity->church_id]],
 				],
 			];

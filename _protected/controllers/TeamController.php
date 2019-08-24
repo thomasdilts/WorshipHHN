@@ -2,6 +2,9 @@
 
 namespace app\controllers; 
 
+use app\models\Log;
+use app\models\LogWhat;
+use app\models\User;
 use app\models\Team;
 use app\models\TeamUser;
 use app\models\TeamSearch;
@@ -70,6 +73,7 @@ class TeamController extends AppController
 	public function actionUnavailabilityupdate($id,$teamid)
     {
         $model = TeamBlocked::findOne($id);
+		$modelOld=clone $model;
 		$model->teamModel=Team::findOne($teamid);
 	
         if (!$model->load(Yii::$app->request->post())) {
@@ -79,6 +83,7 @@ class TeamController extends AppController
 			return $this->render('unavailabilityupdate', ['model' => $model]);
 		}
         if ($model->save()) {
+			Log::write('TeamBlocked', LogWhat::UPDATE, (string)$modelOld, (string)$model);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
             return $this->redirect(['unavailability','id'=>$teamid]);
         } else {
@@ -104,20 +109,22 @@ class TeamController extends AppController
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
             return $this->render('unavailabilitycreate', ['model' => $model]);
         }
+		Log::write('TeamBlocked', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect(['unavailability','id'=>$id]);
     }
 	public function actionUnavailabilitydelete($id,$teamid)
     {
 		try {
-			if (!TeamBlocked::findOne($id)->delete()) {
+			$model=TeamBlocked::findOne($id);
+			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
 		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 			return $this->redirect(['unavailability','id'=>$id]);
 		}       
-
+		Log::write('TeamBlocked', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
         
         return $this->redirect(['unavailability','id'=>$teamid]);
@@ -135,6 +142,7 @@ class TeamController extends AppController
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
             return $this->render('create', ['model' => $model, 'church_id' => Yii::$app->user->identity->church_id]);
         }
+		Log::write('Team', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect('index');
     }
@@ -167,9 +175,12 @@ class TeamController extends AppController
 	}		
 	public function actionRemovefromteam($id,$teamid)
     {
+		$modelOld= $this->findModel($teamid);
+		$modelOldString= (string)$modelOld;
 		if (!TeamUser::findOne(['user_id'=>$id,'team_id'=>$teamid])->delete()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to delete"));
         }else{
+			Log::write('Team', LogWhat::UPDATE, (string)$modelOldString, (string)$this->findModel($teamid));
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
 		}
 
@@ -182,6 +193,7 @@ class TeamController extends AppController
 		if (!$teamUser->save()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to update"));
         }else{
+			Log::write('Team', LogWhat::UPDATE, 'actionPlayersadmin user='.User::findOne($userid)->email.'; isAdmin='.$teamUser->admin, (string)$this->findModel($id));
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful update'));
 		}
 
@@ -195,7 +207,7 @@ class TeamController extends AppController
 			Yii::$app->session->setFlash("danger", Yii::t("app", "The member is already in the team"));
 			return $this->redirect(['players','id'=>$teamid]);	
 		}
-		
+		$modelOldString= (string)$this->findModel($teamid);
 		
         $teamUser = new TeamUser(['scenario' => 'create']);
 		$teamUser->user_id=$id;
@@ -205,6 +217,7 @@ class TeamController extends AppController
         if (!$teamUser->save()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to add"));
         }else{
+			Log::write('Team', LogWhat::UPDATE, $modelOldString, (string)$this->findModel($teamid));
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful add'));
 		}
         return $this->redirect(['players','id'=>$teamid]);		
@@ -238,10 +251,12 @@ class TeamController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$modelOld= clone $model;
         if (!$model->load(Yii::$app->request->post())) {
             return $this->render('update', ['model' => $model, 'church_id' => Yii::$app->user->identity->church_id]);
         }			
         if ($model->save()) {
+			Log::write('Team', LogWhat::UPDATE, (string)$modelOld, (string)$model);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
             return $this->redirect(['index']);
         } else {
@@ -253,14 +268,15 @@ class TeamController extends AppController
     public function actionDelete($id)
     {
 		try {
-			if (!$this->findModel($id)->delete()) {
+			$model=$this->findModel($id);
+			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
 		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 			return $this->redirect(['index']);
 		}       
-
+		Log::write('Team', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
         
         return $this->redirect(['index']);

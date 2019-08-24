@@ -56,7 +56,18 @@ class Language extends \yii\db\ActiveRecord
             'display_name_native' => Yii::t('app', 'Name in native language'),
         ];
     }
-
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'id='.$this->id.'; iso_name='.$this->iso_name.'; display_name_english='.$this->display_name_english.'; display_name_native='
+				.$this->display_name_native;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

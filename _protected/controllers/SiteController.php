@@ -2,6 +2,8 @@
 namespace app\controllers;
 
 use app\models\DocForm;
+use app\models\Log;
+use app\models\LogWhat;
 use app\models\User;
 use app\models\Church;
 use app\models\Language;
@@ -225,7 +227,8 @@ class SiteController extends Controller
         if ($successfulLogin === false) {
             return $this->render('login', ['model' => $model]);
         }
-
+		
+		Log::write('Login', LogWhat::LOGIN, null, null);
         // login was successful, let user go wherever he previously wanted
         return $this->goBack();
     }
@@ -237,6 +240,7 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
+		Log::write('Logout', LogWhat::LOGOUT, null, null);
         Yii::$app->user->logout();
 
         return $this->goHome();
@@ -341,6 +345,8 @@ class SiteController extends Controller
         $message->status=$newMessageStatus;
         $message->notify_replied_date=date("Y-m-d H:i:s",time());
         $message->save();
+		
+		Log::write('Notification', $type=='accept'?LogWhat::TASK_ACCEPT:LogWhat::TASK_REJECT, 'actionReply', (string)$message);
         
         If($oldMessageStatus!='Not replied yet'){
             return $this->render('reply', [

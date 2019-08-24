@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php if($model->language_id != ''){ ?>   
 	<div class="row">
 		<div class="col-lg-6 well">
-			<?php $form = ActiveForm::begin(['id' => 'form-messagetemplate','action'=>'update']); ?>         
+			<?php $form = ActiveForm::begin(['id' => 'form-messagetemplate','action'=>'update?typeid='.$model->message_type_id.'&langid='.$model->language_id]); ?>         
 				<?= $form->field($model, 'message_name')->textInput(
 						['autofocus' => true]) ?>
 				<?= Html::activeHiddenInput($model, 'message_id') ?> 

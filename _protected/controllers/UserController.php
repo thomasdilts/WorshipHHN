@@ -1,6 +1,8 @@
 <?php
 namespace app\controllers;
 
+use app\models\Log;
+use app\models\LogWhat;
 use app\models\User;
 use app\models\File;
 use app\models\Language;
@@ -106,6 +108,7 @@ class UserController extends AppController
         $model = $this->findModel(Yii::$app->user->identity->id);
         $file=File::findOne(['model'=>$model->tableName(),'itemId'=>$model->id]);
         File::deletefile($file->id);
+		Log::write('User', LogWhat::FILE_DELETE, null, (string)'name='.$file->name.'; size='.$file->size);
         return $this->redirect('updateme');
     }
     public function actionFileuploadadmin($id)
@@ -121,6 +124,7 @@ class UserController extends AppController
 		$model = $this->findModel($id);
         $file=File::findOne(['model'=>$model->tableName(),'itemId'=>$model->id]);
         File::deletefile($file->id);
+		Log::write('User', LogWhat::FILE_DELETE, null, (string)'name='.$file->name.'; size='.$file->size);
         return $this->redirect(['update','id'=>$id]);
     }	
     /**
@@ -153,7 +157,7 @@ class UserController extends AppController
         if (!$info) {
             Yii::$app->session->setFlash('error', Yii::t('app', 'There was some error while saving user role.'));
         }
-
+		Log::write('User', LogWhat::CREATE, null, (string)$user);
         return $this->redirect(['index','id'=>Yii::$app->user->identity->id]);
     }
     public function actionUpdateme()
@@ -173,7 +177,7 @@ class UserController extends AppController
     {
         // load user data
         $user = $this->findModel($id);
-
+		$userOldString=(string)$user;
         $auth = Yii::$app->authManager;
 
         // get user role if he has one
@@ -225,7 +229,7 @@ class UserController extends AppController
         if (!$info) {
             Yii::$app->session->setFlash('error', Yii::t('app', 'There was some error while saving user role.'));
         }
-
+		Log::write('User', LogWhat::UPDATE, (string)$userOldString, (string)$user);
         return $redirectUrl=='view'?$this->redirect([$redirectUrl, 'id' => $user->id]):$this->redirect([$redirectUrl]);
     }
 
@@ -241,7 +245,9 @@ class UserController extends AppController
     public function actionDelete($id)
     {
         // delete user or throw exception if could not
-        if (!$this->findModel($id)->delete()) {
+		$user=$this->findModel($id);
+		$userString = (string)$user;
+        if (!$user->delete()) {
             throw new ServerErrorHttpException(Yii::t('app', 'We could not delete this user.'));
         }
 
@@ -265,7 +271,7 @@ class UserController extends AppController
         }
 
         Yii::$app->session->setFlash('success', Yii::t('app', 'You have successfuly deleted user and his role.'));
-
+		Log::write('User', LogWhat::DELETE, (string)$userString, null);
         return $this->redirect(['index']);
     }
 

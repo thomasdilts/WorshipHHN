@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Log;
+use app\models\LogWhat;
 use app\models\MessageType;
 use app\models\MessageTypeForm;
 use app\models\MessageTemplate;
@@ -70,6 +72,16 @@ class MessageTemplateController extends AppController
 		}else{
 			//select the langid for this type
 			$messTemp=MessageTemplate::find()->where(['message_type_id'=>$model->message_type_id,'language_id'=>$langid])->one();
+			if(!$messTemp){
+				$messTemp=MessageTemplate::find()->where(['message_type_id'=>$model->message_type_id])->one();
+				if(!$messTemp){
+					$model->language_id='';
+					
+					$this->render('index', [
+						'model' => $model]);
+				}
+			}
+
 			$model->language_id=$messTemp->language_id;
 			$model->message_id=$messTemp->id;
 			$model->message_name=$messTemp->name;
@@ -83,6 +95,7 @@ class MessageTemplateController extends AppController
 			$model->subject=$messTemp->subject;
 			$model->use_auto_subject=$messTemp->use_auto_subject;
 			$model->body=$messTemp->body;
+			
 		}			
 
 		return $this->render('index', [
@@ -105,6 +118,7 @@ class MessageTemplateController extends AppController
 			Yii::$app->session->setFlash("danger",Yii::t('app', 'Failed to create'). ': ' . Yii::t('app', 'Message Type') . ' ' . Yii::t('app', 'Name'));
 			return $this->redirect(['index', 'typeid' => $model->message_type_id,'langid' => $model->language_id]);
 		}	
+		Log::write('MessageType', LogWhat::CREATE, null, (string)$newType);
 		Yii::$app->session->setFlash("success", Yii::t("app", "Successful create"));
 		return $this->redirect(['index', 'typeid' => $newType->id]);
 	}
@@ -138,13 +152,15 @@ class MessageTemplateController extends AppController
 			Yii::$app->session->setFlash("danger",Yii::t('app', 'Failed to create'). ': ' . Yii::t('app', 'Message Template'));
 			return $this->redirect(['index', 'typeid' => $model->message_type_id,'langid' => $model->language_id]);
 		}	
+		Log::write('MessageTemplate', LogWhat::CREATE, null, (string)$newTemplate);
 		Yii::$app->session->setFlash("success", Yii::t("app", "Successful create"));
 		return $this->redirect(['index', 'typeid' => $newTemplate->message_type_id,'langid' => $newTemplate->language_id]);
 	}
     public function actionDeletetype($typeid, $langid)
     {
 		try {
-			if (!MessageType::findOne($typeid)->delete()) {
+			$model=MessageType::findOne($typeid);
+			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
 			$typeid=''; 
@@ -152,7 +168,7 @@ class MessageTemplateController extends AppController
 		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 		}       
-
+		Log::write('MessageType', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
 
 		return $this->redirect(['index', 'typeid' => $typeid,'langid' => $langid]);
@@ -161,23 +177,26 @@ class MessageTemplateController extends AppController
     public function actionDeletemessage($typeid, $langid, $messageid)
     {
 		try {
-			if (!MessageTemplate::findOne($messageid)->delete()) {
+			$model=MessageTemplate::findOne($messageid);
+			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
 			$langid='';
 		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 		}    		
+		Log::write('MessageTemplate', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
 		$this->redirect(['index', 'typeid' => $typeid,'langid' => $langid]);
 	}
 
-    public function actionUpdate()
+    public function actionUpdate($typeid, $langid)
     {
         $model = new MessageTypeForm(['scenario' => 'create']);
 		$model->load(Yii::$app->request->post());	
 
 		$updateTemplate=MessageTemplate::findOne($model->message_id);
+		$updateTemplateOld=clone $updateTemplate;
 		$updateTemplate->name= $model->message_name;
 		$updateTemplate->show_accept_button= $model->show_accept_button;
 		$updateTemplate->use_auto_subject= $model->use_auto_subject;
@@ -191,9 +210,10 @@ class MessageTemplateController extends AppController
 		$updateTemplate->subject= $model->subject?$model->subject:'';
 
         if ($updateTemplate->save()) {
+			Log::write('MessageTemplate', LogWhat::UPDATE, (string)$updateTemplateOld, (string)$updateTemplate);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
         } else {
-			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to update"));
+			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to update") . "; ". serialize($updateTemplate->errors));
         }		
         return $this->redirect(['index','typeid'=>$model->message_type_id,'langid'=>$model->language_id]);
     }

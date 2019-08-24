@@ -5,6 +5,7 @@ namespace app\models;
 use \app\models\TeamUser;
 use \app\models\User;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "team".
@@ -61,7 +62,19 @@ class Team extends \yii\db\ActiveRecord
             'imageFiles' => Yii::t('app', 'Files'),                        
         ];
     }
-
+	public function __toString()
+    {
+        try 
+        {
+			$users = implode(': ',ArrayHelper::getColumn($this->getTeamUsers()->all(), 'email', false));
+            return (string) 'id='.$this->id.'; name='.$this->name.'; team_type_id='.$this->team_type_id.'; teamUsers='
+				.$users;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

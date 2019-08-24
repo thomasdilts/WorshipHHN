@@ -734,6 +734,27 @@ CREATE TABLE `user_blocked` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `log` (
+  `id` int(11) NOT NULL,
+  `datestamp` datetime NOT NULL,
+  `place` varchar(100) NOT NULL,
+  `what` varchar(100) NOT NULL,
+  `who` varchar(255) NOT NULL,
+  `before` text DEFAULT NULL,
+  `after` text DEFAULT NULL,
+  `church_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `church_id` (`church_id`);
+
+ALTER TABLE `log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
+ALTER TABLE `log`
+  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`church_id`) REFERENCES `church` (`id`);
+
 --
 -- Indexes for dumped tables
 --

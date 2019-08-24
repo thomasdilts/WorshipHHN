@@ -54,7 +54,7 @@ class AppController extends Controller
                         'roles' => ['ChurchAdmin'],
                     ],
                     [
-                        'controllers' => ['team-type','language'],
+                        'controllers' => ['team-type','language','log'],
                         'actions' => ['index', 'create', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['ChurchAdmin','theCreator'],

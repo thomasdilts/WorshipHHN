@@ -329,4 +329,10 @@
 'for joining us!' => 'untuk bergabung dengan kami!',
 'reset it' => 'atur ulang',
 'up' => 'naik',
+'Activity log' => 'Log aktivitas',
+'Where' => 'Dimana',
+'What' => 'Apa',
+'Who' => 'Siapa',
+'Before' => 'Sebelum',
+'After' => 'Setelah',
 ];

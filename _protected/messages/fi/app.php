@@ -329,4 +329,10 @@
 'for joining us!' => 'liittymisestämme!',
 'reset it' => 'nollaa se',
 'up' => 'ylös',
+'Activity log' => 'Aktiviteettiloki',
+'Where' => 'Missä',
+'What' => 'Mitä',
+'Who' => 'Kuka',
+'Before' => 'Ennen',
+'After' => 'Jälkeen',
 ];

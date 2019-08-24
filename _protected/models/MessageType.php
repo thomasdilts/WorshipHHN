@@ -40,7 +40,17 @@ class MessageType extends \yii\db\ActiveRecord
             [['church_id'], 'exist', 'skipOnError' => true, 'targetClass' => Church::className(), 'targetAttribute' => ['church_id' => 'id']],
         ];
     }
-
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'id='.$this->id.'; name='.$this->name;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
     /**
      * {@inheritdoc}
      */

@@ -329,4 +329,10 @@
 'for joining us!' => 'for å bli med oss!',
 'reset it' => 'tilbakestill den',
 'up' => 'opp',
+'Activity log' => 'Aktivitetsloggen',
+'Where' => 'Hvor',
+'What' => 'Hva',
+'Who' => 'Hvem',
+'Before' => 'Før',
+'After' => 'Etter',
 ];

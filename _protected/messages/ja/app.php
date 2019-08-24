@@ -329,4 +329,10 @@
 'for joining us!' => 'ご参加いただきありがとうございます！',
 'reset it' => 'リセットする',
 'up' => 'アップ',
+'Activity log' => '活動記録',
+'Where' => 'どこで',
+'What' => '何',
+'Who' => '誰',
+'Before' => '前',
+'After' => '後',
 ];

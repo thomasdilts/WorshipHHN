@@ -329,4 +329,10 @@
 'for joining us!' => 'para sa pagsali sa amin!',
 'reset it' => 'i-reset ito',
 'up' => 'pataas',
+'Activity log' => 'Log ng aktibidad',
+'Where' => 'Saan',
+'What' => 'Ano',
+'Who' => 'Sino',
+'Before' => 'Bago',
+'After' => 'Pagkatapos',
 ];

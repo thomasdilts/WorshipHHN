@@ -59,7 +59,19 @@ class Notification extends \yii\db\ActiveRecord
             [['message_template_id'], 'exist', 'skipOnError' => true, 'targetClass' => MessageTemplate::className(), 'targetAttribute' => ['message_template_id' => 'id']],
         ];
     }
-
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'id='.$this->id.'; status='.$this->status.'; notified_date='.$this->notified_date.'; message_name='
+				.$this->message_name.'; activity_id='.$this->activity_id.'; event_id='
+				.$this->event_id.'; user_id='.$this->user_id;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
     /**
      * {@inheritdoc}
      */
@@ -173,7 +185,6 @@ class Notification extends \yii\db\ActiveRecord
         if($template->show_link_to_object){
             $htmlMessage.="<a href='" . $linkHost . '/event/activities?id=' . $event->id  . "' style='background-color: #d2f5ff;color:blue;text-decoration:underline;width:100%'>" . Html::encode($template->link_text) . "</a>";
         }
-
         Yii::$app->mailer->compose()
             ->setTo($user->email)
             ->setFrom(Yii::$app->params['senderEmail'])
@@ -195,7 +206,7 @@ class Notification extends \yii\db\ActiveRecord
         $newNotify->message_template_id=$template->id;
 
         $newNotify->save();
-
+		Log::write('Notification', LogWhat::CREATE, 'email'.$user->email.'; subject='.$subject, 'template='.$template->name.'; custom_message='.$model->custom_message);
     } 
     private function HtmlizeString($toHtmlize){
         $mess=str_replace("\r\n",'<br />',Html::encode($toHtmlize));
@@ -248,6 +259,7 @@ class Notification extends \yii\db\ActiveRecord
             $notify->status='Rejected';
             $notify->notify_replied_date=date("Y-m-d H:i:s",time());
             $notify->save();
+			Log::write('Notification', LogWhat::TASK_REJECT, 'rejectInternallyNotification', (string)$notify);
             Notification::notifyEventManger($notify, 'An activity in your event has been rejected.',Yii::$app->user->identity);
             return; 
         }
@@ -267,6 +279,7 @@ class Notification extends \yii\db\ActiveRecord
         $newNotify->message_template_id=MessageTemplate::find()->one()->id;
 
         $newNotify->save();
+		Log::write('Notification', LogWhat::TASK_REJECT, 'rejectInternallyNotification', (string)$newNotify);
         Notification::notifyEventManger($newNotify, 'An activity in your event has been rejected.',Yii::$app->user->identity);
         return;
     }
@@ -294,6 +307,7 @@ class Notification extends \yii\db\ActiveRecord
             $notify->status='Accepted';
             $notify->notify_replied_date=date("Y-m-d H:i:s",time());
             $notify->save();
+			Log::write('Notification', LogWhat::TASK_ACCEPT, 'acceptInternallyNotification', (string)$notify);
             return; 
         }
         // got to create the notification
@@ -312,6 +326,7 @@ class Notification extends \yii\db\ActiveRecord
         $newNotify->message_template_id=MessageTemplate::find()->one()->id;
 
         $newNotify->save();
+		Log::write('Notification', LogWhat::TASK_ACCEPT, 'acceptInternallyNotification', (string)$newNotify);
         return;
     }    
 }

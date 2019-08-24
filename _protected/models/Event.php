@@ -64,7 +64,18 @@ class Event extends \yii\db\ActiveRecord
 
         ];
     }
-
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'id='.$this->id.'; name='.$this->name.'; Description='.$this->description.'; start_date='
+				.$this->start_date.'; end_date='.$this->end_date;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

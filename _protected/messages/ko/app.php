@@ -329,4 +329,10 @@
 'for joining us!' => '우리와 함께 해주셔서 감사합니다!',
 'reset it' => '재설정',
 'up' => '쪽으로',
+'Activity log' => '활동 로그',
+'Where' => '어디에',
+'What' => '뭐',
+'Who' => '누구',
+'Before' => '전에',
+'After' => '후',
 ];

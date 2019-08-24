@@ -79,7 +79,20 @@ class Activity extends \yii\db\ActiveRecord
 			'bible_verse' => Yii::t('app', 'Bible verses'), 
         ];
     }
-
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'id='.$this->id.'; name='.$this->name.'; description='.$this->description.'; start_time='
+				.$this->start_time.'; end_time='.$this->end_time.'; global_order='
+				.$this->global_order.'; team_id='.$this->team_id.'; user_id='.$this->user_id
+				.'; song_id='.$this->song_id.'; bible_verse='.$this->bible_verse;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

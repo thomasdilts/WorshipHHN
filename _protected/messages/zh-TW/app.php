@@ -329,4 +329,10 @@
 'for joining us!' => '加入我們！',
 'reset it' => '重置它',
 'up' => '向上',
+'Activity log' => '活動日誌',
+'Where' => '哪裡',
+'What' => '什麼',
+'Who' => '誰',
+'Before' => '之前',
+'After' => '後',
 ];

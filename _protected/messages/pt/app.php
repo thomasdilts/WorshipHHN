@@ -329,4 +329,10 @@
 'for joining us!' => 'por se juntar a nós!',
 'reset it' => 'redefini-lo',
 'up' => 'acima',
+'Activity log' => 'Registro de atividade',
+'Where' => 'Onde',
+'What' => 'o que',
+'Who' => 'Quem',
+'Before' => 'Antes',
+'After' => 'Depois de',
 ];

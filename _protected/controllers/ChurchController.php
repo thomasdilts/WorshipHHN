@@ -1,6 +1,8 @@
 <?php
 namespace app\controllers;
 
+use app\models\Log;
+use app\models\LogWhat;
 use app\models\Church;
 use app\models\Language;
 use app\models\ChurchSearch;
@@ -45,7 +47,7 @@ class ChurchController extends AppController
 			Yii::info('Language validate errors ' . serialize($lang->errors),'actionCreate');
 			$lang->save();
 		}
-		
+		Log::write('Church', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect('index');
     }
@@ -64,6 +66,7 @@ class ChurchController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$oldModel = clone $model;
         if (!$model->load(Yii::$app->request->post())) {
             return $this->render('update', ['model' => $model]);
         }		
@@ -72,6 +75,7 @@ class ChurchController extends AppController
 			return $this->redirect(['/home']);
 		}
 		if ($model->save()) {
+			Log::write('Church', LogWhat::UPDATE, (string)$oldModel, (string)$model);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
 			if(Yii::$app->user->can('theCreator')){
 				return $this->redirect(['index']);
@@ -88,14 +92,15 @@ class ChurchController extends AppController
     {
         // delete Church or throw exception if could not
 		try {
-			if (!$this->findModel($id)->delete()) {
+			$model=$this->findModel($id);
+			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
 		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 			return $this->redirect(['index']);
 		}
-
+		Log::write('Church', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
         
         return $this->redirect(['index']);

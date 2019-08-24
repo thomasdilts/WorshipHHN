@@ -20,6 +20,7 @@ use Yii;
  */
 class Church extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -66,7 +67,19 @@ class Church extends \yii\db\ActiveRecord
             ['admin_email', 'string', 'max' => 100],			
         ];
     }
-
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'id='.$this->id.'; name='.$this->name.'; time_zone='.$this->time_zone.'; paper_size='
+				.$this->paper_size.'; admin_email='.$this->admin_email.'; margin-top='
+				.$this->paper_margin_top_bottom.'; margin-side='.$this->paper_margin_right_left;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
     /**
      * {@inheritdoc}
      */

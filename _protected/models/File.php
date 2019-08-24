@@ -122,6 +122,9 @@ class File extends ActiveRecord
 			break; //only one file allowed
 		}
 		UploadedFile::reset();
+		$className=str_replace('app\\models\\','',get_class($model));
+		Log::write($className, LogWhat::FILE_ADD, null, (string)'name='.$fileModel->name.'; size='.$fileModel->size);
+		
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful file add'));		
 	}
 	private static function getError($file)
@@ -207,6 +210,8 @@ class File extends ActiveRecord
 				Yii::$app->session->setFlash("danger", Yii::t('app', 'Failed to upload file'));
 				return;	
 			}
+			$className=str_replace('app\\models\\','',get_class($model));
+			Log::write($className, LogWhat::FILE_ADD, null, (string)'name='.$fileModel->name.'; size='.$fileModel->size);
 		}
 		UploadedFile::reset();
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful file add'));
@@ -275,6 +280,10 @@ class File extends ActiveRecord
         }else{
 			if(file_exists ($filePath)){
 				unlink($filePath);
+			}
+			if($controller){
+				$className=str_replace('app\\controllers\\','',str_replace('Controller','',get_class($controller)));
+				Log::write($className, LogWhat::FILE_DELETE, null, (string)'name='.$file->name.'; size='.$file->size);
 			}
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
 		}

@@ -56,6 +56,17 @@ class UserBlocked extends \yii\db\ActiveRecord
             'filter_end_date' => Yii::t('app', 'End Date'),  
         ];
     }
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'id='.$this->id.'; start_date='.$this->start_date.'; end_date='.$this->end_date;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }	
     public static function IsValidDates($model){
 		// check to make sure the dates are reasonable
 		if($model->start_date > $model->end_date){

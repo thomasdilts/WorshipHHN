@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Log;
+use app\models\LogWhat;
 use app\models\Song;
 use app\models\SongImportFile;
 use app\models\SongSearch;
@@ -28,8 +30,9 @@ class SongController extends AppController
             $filePath=SongImportFile::getFileFromUser($model);
             if($filePath && strlen($filePath)>0){
                 SongImportFile::importOpenLp($filePath);
+				Log::write('Song', LogWhat::CREATE, null, (string)'actionSongimportopenlp');
             }
-
+			
             return $this->redirect('index');
         }   
 
@@ -45,11 +48,12 @@ class SongController extends AppController
             $filePath=SongImportFile::getFileFromUser($model);
             if($filePath && strlen($filePath)>0){
                 SongImportFile::importCsv($filePath);
+				Log::write('Song', LogWhat::CREATE, null, (string)'actionSongimportcsv');
             }
-
+			
             return $this->redirect('index');
         }   
-
+		
         return $this->render('songimport',['mimeType'=>'text/csv','model'=>$model]);
     }
     public function actionSongexportcsv()
@@ -69,6 +73,7 @@ class SongController extends AppController
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
             return $this->render('create', ['model' => $model]);
         }
+		Log::write('Song', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect('index');
     }
@@ -87,10 +92,12 @@ class SongController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$modelOld= clone $model;
         if (!$model->load(Yii::$app->request->post())) {
             return $this->render('update', ['model' => $model]);
         }		
         if ($model->save()) {
+			Log::write('Song', LogWhat::UPDATE, (string)$modelOld, (string)$model);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
             return $this->redirect(['index']);
         } else {
@@ -102,14 +109,15 @@ class SongController extends AppController
     public function actionDelete($id)
     {
 		try {
-			if (!$this->findModel($id)->delete()) {
+			$model=$this->findModel($id);
+			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
 		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 			return $this->redirect(['index']);
 		}       
-
+		Log::write('Song', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
         
         return $this->redirect(['index']);

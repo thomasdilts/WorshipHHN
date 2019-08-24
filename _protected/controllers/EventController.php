@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Log;
+use app\models\LogWhat;
 use app\models\User;
 use app\models\File;
 use app\models\Event;
@@ -112,6 +114,7 @@ class EventController extends AppController
     {
         $modelEvent = $this->findModel($eventid);
 		$modelActivity = Activity::findOne($id);
+		$modelActivityOld= clone $modelActivity;
 		$modelActivityType=ActivityType::findOne($modelActivity->activity_type_id);
 		
         $searchModel = new SongSearch();
@@ -128,6 +131,7 @@ class EventController extends AppController
             return $this->render('editactivity', $arrayViewModel);
         }		
         if ($modelActivity->save()) {
+			Log::write('Activity', LogWhat::UPDATE, (string)$modelActivityOld, (string)$modelActivity);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
 			File::addFiles($modelActivity);
 			return $this->redirect(['activities', 'id'=>$eventid]);			
@@ -150,6 +154,7 @@ class EventController extends AppController
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
             return $this->redirect('index');
         }
+		Log::write('Event', LogWhat::CREATE, null, (string)$newModel);
 		$query = Activity::getAllActivities($modelToCopy->id)->all();
 		foreach($query as $activity){
 			$newActivity = new Activity(['scenario' => 'create']);
@@ -180,7 +185,7 @@ class EventController extends AppController
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
             return $this->render('create', ['model'=>$model]);
         }
-		
+		Log::write('Event', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect('index');
     }
@@ -188,10 +193,12 @@ class EventController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$modelOld=clone $model;
         if (!$model->load(Yii::$app->request->post())) {
             return $this->render('update', ['model'=>$model]);
         }		
         if ($model->save()) {
+			Log::write('Event', LogWhat::UPDATE, (string)$modelOld, (string)$model);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
             return $this->redirect(['index']);
         } else {
@@ -220,14 +227,15 @@ class EventController extends AppController
 	public function actionDeletenotify($id, $eventid)
     {
     	try {
-			if (!Notification::findOne($id)->delete()) {
+			$model=Notification::findOne($id);
+			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
 		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 			return $this->redirect(['notifications','id'=>$eventid]);
 		}       
-
+		Log::write('Notification', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
 
     	return $this->redirect(['notifications','id'=>$eventid]);
@@ -282,9 +290,11 @@ class EventController extends AppController
 	}
 	public function actionRemovefromevent($id,$eventid)
     {
-		if (!Activity::findOne(['id'=>$id])->delete()) {
+		$model=Activity::findOne(['id'=>$id]);
+		if (!$model->delete()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to delete"));
         }else{
+			Log::write('Activity', LogWhat::DELETE, (string)$model, null);
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
 		}
 		$model=Event::findOne(['id'=>$eventid]);
@@ -307,6 +317,7 @@ class EventController extends AppController
         if (!$eventActivity->save()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to add"));
         }else{
+			Log::write('Activity', LogWhat::CREATE, null , (string)$eventActivity);
 			return $this->redirect(['editactivity','id'=>$eventActivity->id,'eventid'=>$eventid]);
 		}
 		$model=Event::findOne(['id'=>$eventid]);
@@ -343,14 +354,15 @@ class EventController extends AppController
     public function actionDelete($id)
     {
 		try {
-			if (!$this->findModel($id)->delete()) {
+			$model=$this->findModel($id);
+			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
 		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 			return $this->redirect(['index']);
 		}       
-
+		Log::write('Event', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
         
         return $this->redirect(['index']);

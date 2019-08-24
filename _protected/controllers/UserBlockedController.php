@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Log;
+use app\models\LogWhat;
 use app\models\User;
 use app\models\UserBlocked;
 use app\models\UserBlockedSearch;
@@ -37,6 +39,7 @@ class UserBlockedController extends AppController
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
             return $this->render('create', ['model' => $model]);
         }
+		Log::write('UserBlocked', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect(['index','id'=>Yii::$app->user->identity->id]);
     }
@@ -61,6 +64,7 @@ class UserBlockedController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$modelOld=clone $model;
 		$model->user_display_name=Yii::$app->user->identity->display_name;
 		
 		if(Yii::$app->user->identity->id != $model->user_id){
@@ -76,6 +80,7 @@ class UserBlockedController extends AppController
 			return $this->render('create', ['model' => $model]);
 		}
         if ($model->save()) {
+			Log::write('UserBlocked', LogWhat::UPDATE, (string)$modelOld, (string)$model);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
             return $this->redirect(['index','id'=>$model->user_id]);
         } else {
@@ -99,7 +104,7 @@ class UserBlockedController extends AppController
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 			return $this->redirect(['index','id'=>$model->user_id]);
 		}       
-
+		Log::write('UserBlocked', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
         
         return $this->redirect(['index','id'=>$model->user_id]);

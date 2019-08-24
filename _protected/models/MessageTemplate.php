@@ -79,6 +79,22 @@ class MessageTemplate extends \yii\db\ActiveRecord
             'body' => Yii::t('app', 'Body'),
         ];
     }
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'id='.$this->id.'; name='.$this->name.'; message_type_id='.$this->message_type_id.'; language_id='
+				.$this->language_id.'; show_accept_button='.$this->show_accept_button.'; show_reject_button='
+				.$this->show_reject_button.'; show_link_to_object='.$this->show_link_to_object
+				.'; allow_custom_message='.$this->allow_custom_message.'; accept_button_text='.$this->accept_button_text
+				.'; reject_button_text='.$this->reject_button_text.'; use_auto_subject='.$this->use_auto_subject
+				.'; link_text='.$this->link_text.'; subject='.$this->subject.'; body='.$this->body;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
 
     /**
      * @return \yii\db\ActiveQuery
