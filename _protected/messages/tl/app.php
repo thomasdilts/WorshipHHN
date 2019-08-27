@@ -335,4 +335,5 @@
 'Who' => 'Sino',
 'Before' => 'Bago',
 'After' => 'Pagkatapos',
+'Tasks by event' => 'Mga Gawain ayon sa kaganapan',
 ];

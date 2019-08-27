@@ -335,4 +335,5 @@
 'Who' => 'Vem',
 'Before' => 'Innan',
 'After' => 'Efter',
+'Tasks by event' => 'Uppgifter efter evenemang',
 ];

@@ -335,4 +335,5 @@
 'Who' => 'Siapa',
 'Before' => 'Sebelum',
 'After' => 'Setelah',
+'Tasks by event' => 'Tugas berdasarkan acara',
 ];

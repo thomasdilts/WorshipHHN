@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\i18n\Formatter;
 use app\models\Notification;
 use app\models\Activity;
+use app\models\EventActivitySearch;
 use app\models\BibleVerse;
 use yii\helpers\ArrayHelper;
 use app\models\User;
@@ -19,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title ;
 <div class="eventtemplate-form">
 	<h1>
 		<?= Html::encode( Yii::t('app', 'Tasks'))?>  
-		<span class="pull-right">
+		<span class="pull-right" style="margin-bottom:5px;display:inline-block">
+			<a href='alltasksbyevent?start=<?=$searchModel->filter_start_date?>&end=<?=$searchModel->filter_end_date?>' class='btn btn-primary'><span class="glyphicon glyphicon-tasks"></span><?=Yii::t('app', 'Tasks by event')?></a>
 			<a href="index?EventSearch%5Bfilter_start_date%5D=<?=$searchModel->filter_start_date?>&EventSearch%5Bfilter_end_date%5D=<?=$searchModel->filter_end_date?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
 		</span>  			
 	</h1>
@@ -29,11 +31,11 @@ $this->params['breadcrumbs'][] = $this->title ;
 
 				<?= GridView::widget([
 					'dataProvider' => $dataProvider,
-
+					'filterModel' => $searchModel,
 					'summary' => false,
 					'columns' => [
 						[
-							'attribute' => 'event.name',
+							'attribute' => 'event_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
 								return Html::a($model->event->name, URL::toRoute('event/activities'). '?id='.$model->event->id, ['title'=>Yii::t('app', 'View')]);
@@ -47,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title ;
 							},
 						],						
 						[
-							'attribute' => 'team.name',
+							'attribute' => 'team_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
 								return $model->team ? Html::encode($model->team->name) : '';
@@ -60,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title ;
 							}
 						],
 						[
-							'attribute' => 'user.display_name',
+							'attribute' => 'user_display_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
 								return $model->user ? Html::encode($model->user->display_name) : '';
@@ -70,27 +72,7 @@ $this->params['breadcrumbs'][] = $this->title ;
 							'attribute' => 'status',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
-								$value='';
-								$notifications= Notification::find()->where(['activity_id'=>$model->id])->all();
-								if($notifications && count($notifications)>0) {									
-									$statuses = ArrayHelper::getColumn($notifications,'status');
-									if(in_array('Accepted',$statuses)){
-										$value.='<span style="color:lightgreen">'.Yii::t('app', 'Accepted').'</span>';
-									}elseif(in_array('Not replied yet',$statuses)) {
-										$value.='<span style="color:goldenrod">'.Yii::t('app', 'Not replied yet').'</span>';
-									}elseif(in_array('Rejected',$statuses)) {
-										$value.='<span style="color:red">'.Yii::t('app', 'Rejected').'</span>';
-									}
-								}
-								if(isset($model->team) && $model->team->IsTeamBlocked($model->event->start_date)){
-									$value.=strlen($value)>0?'; ':'';
-									$value.='<span style="color:red">'.Yii::t('app', 'Unavailable-team').'</span>';													
-								}elseif(isset($model->user) && $model->user->IsUserBlocked($model->event->start_date)){
-									$value.=strlen($value)>0?'; ':'';
-									$value.='<span style="color:red">'.Yii::t('app', 'Unavailable-user').'</span>';							
-								}
-
-								return $value;
+								return EventActivitySearch::getStatus($model)[0];
 							},
 						],						
 						[

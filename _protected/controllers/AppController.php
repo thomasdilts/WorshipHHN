@@ -73,7 +73,7 @@ class AppController extends Controller
 					],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['deleteactivityfile','fileactivitydownload','alltasks','index', 'removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
+                        'actions' => ['deleteactivityfile','fileactivitydownload','exportalltasksbyevent','alltasksbyevent','alltasks','index', 'removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
                         'allow' => true,
                         'roles' => ['TeamManager','EventEditor'],
                     ],

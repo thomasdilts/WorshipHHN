@@ -335,4 +335,5 @@
 'Who' => 'Chi',
 'Before' => 'Prima',
 'After' => 'Dopo',
+'Tasks by event' => 'Compiti per evento',
 ];

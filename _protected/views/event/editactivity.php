@@ -26,8 +26,8 @@ $GLOBALS['eventid']=$modelEvent->id;
 
     <h1>
     	<?= Html::encode($this->title) ?>
-        <span class="pull-right">
-			<a href="activities?id=<?=$modelEvent->id?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>   	
+        <span class="pull-right" style="margin-bottom:5px;display:inline-block">
+			<a href="<?=urldecode($returnurl)?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>   	
         </span>    
     </h1>
 
@@ -98,7 +98,7 @@ $GLOBALS['eventid']=$modelEvent->id;
 			<div class="form-group" style="margin-top:20px;">     
 				<?= Html::submitButton(Yii::t('app', 'Update'), ['class' => 'btn btn-primary']) ?>
 
-				<?= Html::a(Yii::t('app', 'Cancel'), ['event/activities','id'=>$modelEvent->id], ['class' => 'btn btn-default']) ?>
+				<?= Html::a(Yii::t('app', 'Cancel'), [urldecode($returnurl)], ['class' => 'btn btn-default']) ?>
 			</div>
 
 		<?php ActiveForm::end(); ?>

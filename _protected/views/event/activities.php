@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 		<div class="col-lg-6">
 			<h1>
 				<?= Html::encode( Yii::t('app', 'Tasks'))?>  
-				<span class="pull-right">
+				<span class="pull-right" style="margin-bottom:5px;display:inline-block">
 					<a href="index" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
 					<a href="exportexcel?id=<?=$model->id?>" class='btn btn-success'><span class="glyphicon glyphicon-download-alt"></span>Excel</a>
 					<a href="exportpdf?id=<?=$model->id?>" class='btn btn-success'><span class="glyphicon glyphicon-download-alt"></span>PDF</a>
@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 					'template' => '{editactivity} {removefromevent}',
 						'buttons' => [
 							'editactivity' => function ($url, $model, $key) {
-								return Yii::$app->user->can('EventEditor')?Html::a('', $url. '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']):'';
+								return Yii::$app->user->can('EventEditor')?Html::a('', $url. '&eventid='.$GLOBALS['event_id'].'&returnurl=activities%3Fid%3D'.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']):'';
 							},
 							
 							'removefromevent' => function ($url, $model, $key) {

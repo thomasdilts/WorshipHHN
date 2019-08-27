@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\AllEventsExportFile;
 use app\models\Log;
 use app\models\LogWhat;
 use app\models\User;
@@ -97,7 +98,7 @@ class EventController extends AppController
 		$modelActivity->song_id=$id;
 		$modelActivity->save();
 
-		return $this->redirect(['editactivity','id'=>$activityid,'eventid'=>$eventid]);
+		return $this->redirect(['editactivity','id'=>$activityid,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
 	}
 	
 	public function actionFileactivitydownload($id,$fileownerid, $eventid)
@@ -107,10 +108,10 @@ class EventController extends AppController
 	public function actionDeleteactivityfile($id,$fileownerid, $eventid)
     {
 		File::deleteFile($id,$fileownerid,$this);
-		return $this->redirect(['editactivity','id'=>$fileownerid,'eventid'=>$eventid]);
+		return $this->redirect(['editactivity','id'=>$fileownerid,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
 	}	
 	
-    public function actionEditactivity($id,$eventid)
+    public function actionEditactivity($id,$eventid,$returnurl)
     {
         $modelEvent = $this->findModel($eventid);
 		$modelActivity = Activity::findOne($id);
@@ -126,6 +127,7 @@ class EventController extends AppController
 		$arrayViewModel['modelActivityType']=$modelActivityType;
 		$arrayViewModel['searchModel']=$searchModel;
 		$arrayViewModel['dataProvider']=$dataProvider;
+		$arrayViewModel['returnurl']=$returnurl;
 
         if (!$modelActivity->load(Yii::$app->request->post())) {
             return $this->render('editactivity', $arrayViewModel);
@@ -134,7 +136,7 @@ class EventController extends AppController
 			Log::write('Activity', LogWhat::UPDATE, (string)$modelActivityOld, (string)$modelActivity);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
 			File::addFiles($modelActivity);
-			return $this->redirect(['activities', 'id'=>$eventid]);			
+			return $this->redirect([urldecode($returnurl)]);			
         } else {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to update"));
             return $this->render('editactivity', $arrayViewModel);
@@ -318,10 +320,26 @@ class EventController extends AppController
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to add"));
         }else{
 			Log::write('Activity', LogWhat::CREATE, null , (string)$eventActivity);
-			return $this->redirect(['editactivity','id'=>$eventActivity->id,'eventid'=>$eventid]);
+			return $this->redirect(['editactivity','id'=>$eventActivity->id,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
 		}
 		$model=Event::findOne(['id'=>$eventid]);
         return $this->redirect(['activities','id'=>$eventid]);
+	}
+	public function actionExportalltasksbyevent($start, $end)
+    {
+    	return AllEventsExportFile::exportExcel($start, $end);
+	}
+    public function actionAlltasksbyevent($start, $end)
+    {
+		$queries = AllEventsExportFile::getDataArray($start, $end);
+		return $this->render('alltasksbyevent', [
+            'start' => $start,
+            'end' => $end,
+            'columns' => $queries[1],
+            'dataRows' => $queries[0],
+            'start' => $start,
+            'end' => $end,
+        ]);
 	}
     public function actionAlltasks($start, $end)
     {

@@ -335,4 +335,5 @@
 'Who' => '谁',
 'Before' => '之前',
 'After' => '后',
+'Tasks by event' => '事件任务',
 ];

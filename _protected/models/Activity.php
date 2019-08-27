@@ -77,6 +77,11 @@ class Activity extends \yii\db\ActiveRecord
             'song_id' => Yii::t('app', 'Song'),   
             'imageFiles' => Yii::t('app', 'Files'),  
 			'bible_verse' => Yii::t('app', 'Bible verses'), 
+			'user_display_name' => Yii::t('app', 'Display name'), 
+			'status' => Yii::t('app', 'Status'),
+			'team_name' => Yii::t('app', 'Name'),
+			'start_date' => Yii::t('app', 'Start Date'),
+			'event_name' => Yii::t('app', 'Name'),
         ];
     }
 	public function __toString()

@@ -335,4 +335,5 @@
 'Who' => 'Quem',
 'Before' => 'Antes',
 'After' => 'Depois de',
+'Tasks by event' => 'Tarefas por evento',
 ];

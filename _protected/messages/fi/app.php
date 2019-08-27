@@ -335,4 +335,5 @@
 'Who' => 'Kuka',
 'Before' => 'Ennen',
 'After' => 'Jälkeen',
+'Tasks by event' => 'Tehtävät tapahtumittain',
 ];

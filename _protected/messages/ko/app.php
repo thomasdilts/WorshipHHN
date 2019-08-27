@@ -335,4 +335,5 @@
 'Who' => '누구',
 'Before' => '전에',
 'After' => '후',
+'Tasks by event' => '이벤트 별 작업',
 ];

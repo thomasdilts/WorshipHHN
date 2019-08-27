@@ -335,4 +335,5 @@
 'Who' => 'Hvem',
 'Before' => 'Før',
 'After' => 'Efter',
+'Tasks by event' => 'Opgaver efter begivenhed',
 ];
