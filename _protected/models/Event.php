@@ -20,6 +20,9 @@ use Yii;
  */
 class Event extends \yii\db\ActiveRecord
 {
+	public $copyFromEventId;
+	public $copyAllPersonsTeams;
+	public $copyAllSongs;
     public $imageFiles;
     /**
      * {@inheritdoc}
@@ -30,7 +33,7 @@ class Event extends \yii\db\ActiveRecord
     }
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['name', 'description', 'start_date','end_date','church_id'];
+		$scenarios['create'] = ['copyFromEventId','copyAllPersonsTeams','copyAllSongs','name', 'description', 'start_date','end_date','church_id'];
 		return $scenarios;
 	}
     /**

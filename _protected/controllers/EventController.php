@@ -145,48 +145,55 @@ class EventController extends AppController
 
 	public function actionCopy($id)
     {
-		$modelToCopy = $this->findModel($id);
-		$newModel = new Event(['scenario' => 'create']);
-		$newModel->church_id=Yii::$app->user->identity->church_id;
-		$newModel->description=$modelToCopy->description;
-		$newModel->start_date=$modelToCopy->start_date;
-		$newModel->end_date=$modelToCopy->end_date;
-		$newModel->name=$modelToCopy->name;
-        if (!$newModel->save()) {
-			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
-            return $this->redirect('index');
-        }
-		Log::write('Event', LogWhat::CREATE, null, (string)$newModel);
-		$query = Activity::getAllActivities($modelToCopy->id)->all();
-		foreach($query as $activity){
-			$newActivity = new Activity(['scenario' => 'create']);
-			$newActivity->activity_type_id=$activity->activity_type_id;
-			$newActivity->event_id=$newModel->id;		
-			$newActivity->start_time=$activity->start_time;
-			$newActivity->end_time=$activity->end_time;
-			$newActivity->global_order=$activity->global_order;
-			$newActivity->name=$activity->name;
-			$newActivity->user_id=$activity->user_id;
-			$newActivity->team_id=$activity->team_id;
-			$newActivity->song_id=$activity->song_id;
-			$newActivity->save();
-		}
-		
-		return $this->redirect(['update','id'=>$newModel->id]);
+        return $this->redirect(['create', 'copyFromEventId'=>$id]);
 	}
-    public function actionCreate()
+    public function actionCreate($copyFromEventId=null)
     {
         $model = new Event(['scenario' => 'create']);
-
+		$model->church_id=Yii::$app->user->identity->church_id;
         if (!$model->load(Yii::$app->request->post())) {
+			if($copyFromEventId){
+				$modelToCopy = $this->findModel($copyFromEventId);
+
+				$model = new Event(['scenario' => 'create']);
+				$model->church_id=Yii::$app->user->identity->church_id;
+				$model->description=$modelToCopy->description;
+				$model->start_date=$modelToCopy->start_date;
+				$model->end_date=$modelToCopy->end_date;
+				$model->name=$modelToCopy->name;
+				$model->copyFromEventId=$copyFromEventId;
+				$model->copyAllPersonsTeams=0;
+				$model->copyAllSongs=0;			
+			}
             return $this->render('create', ['model'=>$model]);
         }
-		$model->church_id=Yii::$app->user->identity->church_id;
-		
+			
         if (!$model->save()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
             return $this->render('create', ['model'=>$model]);
         }
+	
+		if($copyFromEventId){
+			$query = Activity::getAllActivities($copyFromEventId)->all();
+			foreach($query as $activity){
+				$newActivity = new Activity(['scenario' => 'create']);
+				$newActivity->activity_type_id=$activity->activity_type_id;
+				$newActivity->event_id=$model->id;		
+				$newActivity->start_time=$activity->start_time;
+				$newActivity->end_time=$activity->end_time;
+				$newActivity->global_order=$activity->global_order;
+				$newActivity->name=$activity->name;
+				if($model->copyAllPersonsTeams){
+					$newActivity->user_id=$activity->user_id;
+					$newActivity->team_id=$activity->team_id;
+				}
+				if($model->copyAllSongs){
+					$newActivity->song_id=$activity->song_id;
+				}
+				$newActivity->save();
+			}			
+		}
+		
 		Log::write('Event', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect('index');
