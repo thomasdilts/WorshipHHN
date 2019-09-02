@@ -102,8 +102,8 @@ my SMS module that I personally use you need to add the following component in t
 ...
 	'SmsMessaging' => [
 		'class' => 'thomasdilts\sms_worshiphhn_ip1\SmsForIp1',
-		'account' => 'ip1-16957',
-		'password' => 's3325xTRGrEnHDbbffyE',
+		'account' => 'YOUR_ACCOUNT',
+		'password' => 'YOUR_PASSWORD',
 		'apiUrl' => 'api.ip1sms.com',
 		'messageFrom' => 'iP.1',
 		'phoneNumberCountryCode' => '46', 
