@@ -64,6 +64,7 @@ class MessageTemplateController extends AppController
 				$model->link_text=$messTemp->link_text;
 				$model->subject=$messTemp->subject;
 				$model->use_auto_subject=$messTemp->use_auto_subject;
+				$model->message_system=$messTemp->message_system;
 				$model->body=$messTemp->body;
 			}else{
 				return $this->render('index', [
@@ -94,6 +95,7 @@ class MessageTemplateController extends AppController
 			$model->link_text=$messTemp->link_text;
 			$model->subject=$messTemp->subject;
 			$model->use_auto_subject=$messTemp->use_auto_subject;
+			$model->message_system=$messTemp->message_system;
 			$model->body=$messTemp->body;
 			
 		}			
@@ -147,6 +149,7 @@ class MessageTemplateController extends AppController
 		$newTemplate->reject_button_text= '';
 		$newTemplate->link_text= '';
 		$newTemplate->subject= '';
+		$newTemplate->message_system='Email';
 		
 		if(!$newTemplate->save()){
 			Yii::$app->session->setFlash("danger",Yii::t('app', 'Failed to create'). ': ' . Yii::t('app', 'Message Template'));
@@ -208,6 +211,7 @@ class MessageTemplateController extends AppController
 		$updateTemplate->reject_button_text= $model->reject_button_text?$model->reject_button_text:'';
 		$updateTemplate->link_text= $model->link_text?$model->link_text:'';
 		$updateTemplate->subject= $model->subject?$model->subject:'';
+		$updateTemplate->message_system=$model->message_system?$model->message_system:'Email';
 
         if ($updateTemplate->save()) {
 			Log::write('MessageTemplate', LogWhat::UPDATE, (string)$updateTemplateOld, (string)$updateTemplate);

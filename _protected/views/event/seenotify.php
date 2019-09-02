@@ -59,7 +59,7 @@ $notify_replied_date->setTimezone(new DateTimeZone($church->time_zone));
 
         <label style='min-width:100%;' ><?= Yii::t('app', 'Message')?></label>
         <div class='well'>
-            <?= $htmlMessage?>
+            <?=$template->message_system=='Email'?$htmlMessage:str_replace("\r\n",'<br />',Html::encode($htmlMessage))?>
         </div>
     </div>
 </div>

@@ -29,18 +29,19 @@ class MessageTypeForm extends Model
     public $type_name_create;
     public $language_id_create;
 	public $message_id;
+	public $message_system;
 	
 	
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['use_auto_subject','message_id','type_name_create','language_id_create','body', 'subject', 'link_text','reject_button_text','accept_button_text','allow_custom_message','show_link_to_object','church_id','show_reject_button','show_accept_button','language_id','message_name','type_name','message_type_id'];
+		$scenarios['create'] = ['use_auto_subject','message_system','message_id','type_name_create','language_id_create','body', 'subject', 'link_text','reject_button_text','accept_button_text','allow_custom_message','show_link_to_object','church_id','show_reject_button','show_accept_button','language_id','message_name','type_name','message_type_id'];
 		return $scenarios;
 	}
 
     public function rules()
     {
         return [
-            [['body', ], 'safe'],
+            [['body','message_system', ], 'safe'],
             [['accept_button_text', 'reject_button_text', 'link_text', 'subject'], 'string', 'max' => 200],
             [['church_id'], 'exist', 'skipOnError' => true, 'targetClass' => Church::className(), 'targetAttribute' => ['church_id' => 'id']],
             [['language_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['language_id' => 'id']],
@@ -70,6 +71,7 @@ class MessageTypeForm extends Model
             'body' => Yii::t('app', 'Body'),
             'type_name_create' => Yii::t('app', 'Message Type') . ' ' . Yii::t('app', 'Name'),
             'language_id_create' => Yii::t('app', 'Language'),
+            'message_system' => Yii::t('app', 'Messaging system'),
         ];
     }
 

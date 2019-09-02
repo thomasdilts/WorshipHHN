@@ -47,7 +47,7 @@ class User extends UserIdentity
 	
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['username', 'password', 'email','status','created_at','updated_at','item_name','church_id','display_name','admin','language_id','image','hide_user_icons'];
+		$scenarios['create'] = ['username','mobilephone', 'password', 'email','status','created_at','updated_at','item_name','church_id','display_name','admin','language_id','image','hide_user_icons'];
 		return $scenarios;
 	}
     /**
@@ -72,6 +72,7 @@ class User extends UserIdentity
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
+            ['mobilephone', 'string', 'max' => 50],
             [['church_id', 'email'], 'unique', 'targetAttribute' => ['church_id', 'email'],
                 'message' => Yii::t('app', 'This email address has already been taken.')],
 				
@@ -146,6 +147,7 @@ class User extends UserIdentity
             'image' => Yii::t('app', 'Image'), 
             'hide_user_icons' => Yii::t('app', 'Hide user icons'), 
             'imageFiles' => Yii::t('app', 'Files'), 
+            'mobilephone' => Yii::t('app', 'Mobilephone number'), 
         ];
     }
 	public function __toString()

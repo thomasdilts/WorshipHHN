@@ -28,6 +28,7 @@ $fileVault = substr(Yii::$app->params['fileVaultPath'],strlen(dirname(__DIR__,3)
                 <?= $form->field($model, 'display_name')->textInput() ?>
 
                 <?= $form->field($model, 'email')->input('email', ['placeholder' => Yii::t('app', 'Enter e-mail')]) ?>
+                <?= $form->field($model, 'mobilephone')->textInput() ?>
 
                 <?php if ($model->scenario === 'create'): ?>
 

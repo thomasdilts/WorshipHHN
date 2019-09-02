@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'display_name',
             'username',
             'email:email',
+            'mobilephone',
             //'password_hash',
             [
                 'attribute'=>'status',

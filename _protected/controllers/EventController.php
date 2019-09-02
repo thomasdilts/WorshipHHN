@@ -273,14 +273,20 @@ class EventController extends AppController
 	public function actionNotifications($id)
     {
 		$model=Event::findOne(['id'=>$id]);
-		
+
 		$searchPersonsModel = new EventActivityUserSearch();
 		$searchPersonsModel->event = $model;
         $dataPersonsProvider = $searchPersonsModel->search(Yii::$app->request->queryParams, $this->_pageSize);			
         $searchNotificationModel = new NotificationSearch();
         $searchNotificationModel->event = $model;
         $dataNotificationProvider = $searchNotificationModel->search(Yii::$app->request->queryParams, $this->_pageSize);		
-		
+		if (Yii::$app->request->post()) {
+			//this is a request to refresh SMS notifications.
+			foreach($dataNotificationProvider->query->all() as $notify){
+				$notify->updateSmsNotificationStatus();
+			}
+			
+        }			
         return $this->render('notifications', [
         	'userArray'=> $searchPersonsModel->getArray(),
 			'model' => $model, 

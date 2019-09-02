@@ -9,6 +9,7 @@ use yii\helpers\ArrayHelper;
 use app\models\User;
 use app\models\Church;
 use yii\helpers\Url;
+use thomasdilts\sms_worshiphhn\Sms;
 
 $GLOBALS['event_id']=$model->id;
 $GLOBALS['start_date']=$model->start_date;
@@ -77,10 +78,19 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 		
 	</div>
 	<div class="row">
+		<h1>
+			<?= Html::encode( Yii::t('app', 'Notifications'))?>  
+			<?php if(Yii::$app->user->can('EventManager') && Yii::$app->has('SmsMessaging') && (Yii::$app->SmsMessaging->getImplementationLevel()&Sms::IMPLEMENTED_ID_AND_STATUS)==Sms::IMPLEMENTED_ID_AND_STATUS) { ?>
+				<span class="pull-right">				
+					<?php $form = ActiveForm::begin(['id' => 'form-notifications','action'=>'notifications?id='.$model->id]); ?>         
+						<div class="form-group">     
+							<?= Html::submitButton(Yii::t('app', 'Refresh SMS status'), ['class' => 'btn btn-primary']) ?>
+						</div>
+					<?php ActiveForm::end(); ?>			
+				</span>  
+			<?php } ?>
+		</h1>
 		<div id="div_wide" style="display:none;">
-			<h1>
-				<?= Html::encode( Yii::t('app', 'Notifications'))?>  
-			</h1>
 			<?= GridView::widget([
 				'dataProvider' => $dataNotificationProvider,
 				'summary' => false,
@@ -131,6 +141,13 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 							$dt->setTimezone(new DateTimeZone($GLOBALS['time_zone']));
 							return $dt->format('Y-m-d H:i');
 						},
+					],
+					[
+						'attribute' => 'sms_status',
+						'format' => 'raw',
+						'value' => function ($model, $index, $widget) {
+							return $model->sms_status_id . ': ' . Yii::t('app', $model->sms_status);
+						},
 					],			
 					// buttons
 		            ['class' => 'yii\grid\ActionColumn',
@@ -154,9 +171,11 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 			]); ?>				
 		</div>
 		<div id="div_thin" style="display:none">
-			<h1>
-				<?= Html::encode( Yii::t('app', 'Notifications'))?>  
-			</h1>
+<style>
+.grid-view td {
+    white-space: normal;
+}
+</style>		
 			<?= GridView::widget([
 				'dataProvider' => $dataNotificationProvider,
 				'summary' => false,
@@ -207,7 +226,13 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 							return $value;
 						},
 					],				
-		
+					[
+						'attribute' => 'sms_status',
+						'format' => 'raw',
+						'value' => function ($model, $index, $widget) {
+							return $model->sms_status_id . ': ' . Yii::t('app', $model->sms_status);
+						},
+					],				
 					// buttons
 		            ['class' => 'yii\grid\ActionColumn',
 		            'header' => Yii::t('app', 'Menu'),

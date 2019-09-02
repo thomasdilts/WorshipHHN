@@ -37,7 +37,7 @@ class MessageTemplate extends \yii\db\ActiveRecord
     
     public function scenarios() {
         $scenarios = parent::scenarios(); // This will cover you
-        $scenarios['create'] = ['church_id', 'language_id', 'message_type_id','name', 'show_accept_button', 'use_auto_subject', 'show_reject_button', 'show_link_to_object', 'allow_custom_message', 'accept_button_text', 'reject_button_text', 'link_text', 'subject','body'];
+        $scenarios['create'] = ['church_id', 'language_id','message_system', 'message_type_id','name', 'show_accept_button', 'use_auto_subject', 'show_reject_button', 'show_link_to_object', 'allow_custom_message', 'accept_button_text', 'reject_button_text', 'link_text', 'subject','body'];
         return $scenarios;
     }
     /**
@@ -48,7 +48,7 @@ class MessageTemplate extends \yii\db\ActiveRecord
         return [
             [['church_id', 'message_type_id','language_id', 'name', 'show_accept_button','use_auto_subject', 'show_reject_button', 'show_link_to_object', 'allow_custom_message','body',], 'required'],
             [['church_id', 'show_accept_button', 'show_reject_button', 'show_link_to_object', 'allow_custom_message','language_id','message_type_id'], 'integer'],
-            [['body'], 'string'],
+            [['body','message_system'], 'string'],
             [['name'], 'string', 'max' => 100],
             [['body', ], 'safe'],
             [['accept_button_text', 'reject_button_text', 'link_text', 'subject'], 'string', 'max' => 200],
@@ -88,7 +88,7 @@ class MessageTemplate extends \yii\db\ActiveRecord
 				.$this->show_reject_button.'; show_link_to_object='.$this->show_link_to_object
 				.'; allow_custom_message='.$this->allow_custom_message.'; accept_button_text='.$this->accept_button_text
 				.'; reject_button_text='.$this->reject_button_text.'; use_auto_subject='.$this->use_auto_subject
-				.'; link_text='.$this->link_text.'; subject='.$this->subject.'; body='.$this->body;
+				.'; link_text='.$this->link_text.'; subject='.$this->subject.'; message_system='.$this->message_system.'; body='.$this->body;
         } 
         catch (Exception $exception) 
         {

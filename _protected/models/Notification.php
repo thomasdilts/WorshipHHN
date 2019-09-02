@@ -25,6 +25,7 @@ use Yii;
 class Notification extends \yii\db\ActiveRecord
 {
     public $custom_message;
+	public $send_from_address;
     /**
      * {@inheritdoc}
      */
@@ -35,7 +36,7 @@ class Notification extends \yii\db\ActiveRecord
 
     public function scenarios() {
         $scenarios = parent::scenarios(); // This will cover you
-        $scenarios['create'] = ['message_template_id', 'custom_message'];
+        $scenarios['create'] = ['message_template_id', 'custom_message','send_from_address'];
         return $scenarios;
     }
 
@@ -85,6 +86,8 @@ class Notification extends \yii\db\ActiveRecord
             'dates' => Yii::t('app', 'Notified Date / Replied Date'),
             'custom_message' => Yii::t('app', 'Custom Message'),
             'message_template_id' => Yii::t('app', 'Message Templates'),
+            'sms_status' => Yii::t('app', 'SMS status'),
+			'send_from_address' => Yii::t('app', 'Send SMS replies to me'),			
         ];
     }
 
@@ -141,7 +144,15 @@ class Notification extends \yii\db\ActiveRecord
         if(!$template){
             $template=$templateTemp;
         }
-
+		if($template->message_system=='SMS' && !Yii::$app->has('SmsMessaging')){
+			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to send the message."));
+			return;
+		}
+		if($template->message_system=='SMS' && (!$user->mobilephone || strlen($user->mobilephone)==0)){
+			Yii::$app->session->setFlash("danger", Yii::t("app", "Cannot send message because the user has no mobilephone number.") . ' ' . $user->display_name);
+			return;
+		}
+		
         $hash=File::random_str(50);
         
         $activityname='';
@@ -150,54 +161,81 @@ class Notification extends \yii\db\ActiveRecord
             $activity=Activity::findOne($actionid);
             $activityname = $activity->name;
         }
+		$linkHost = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 
+				"https" : "http") . "://" . $_SERVER['HTTP_HOST'] . Yii::$app->request->baseUrl; 
+		$htmlMessage='';
+		$smsId='';
+		$smsStatusId='';
+		$smsStatusText='';
+		if($template->message_system=='Email'){
+			if($template->use_auto_subject){
+				$subject = Html::encode($event->name . ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm") . ' ' . $activityname);
+			}
+			else{
+				$subject = Html::encode($template->subject) ;
+			}
+			
+			if($template->allow_custom_message){
+				$htmlMessage.="<div  style='min-width:100%;' >".Notification::HtmlizeString($model->custom_message)."</div>\r\n";
+				$htmlMessage.="<hr style='color:lightblue;background-color:lightblue;height:2px;margin:3px;' />\r\n";
+			}
 
-        if($template->use_auto_subject){
-            $subject = Html::encode($event->name . ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm") . ' ' . $activityname);
-        }
-        else{
-            $subject = Html::encode($template->subject) ;
-        }
-        $htmlMessage='';
-        if($template->allow_custom_message){
-            $htmlMessage.="<div  style='min-width:100%;' >".Notification::HtmlizeString($model->custom_message)."</div>\r\n";
-            $htmlMessage.="<hr style='color:lightblue;background-color:lightblue;height:2px;margin:3px;' />\r\n";
-        }
+			$htmlMessage.="<p  style='width:100%;margin-bottom:30px;' >" . Notification::HtmlizeString($template->body) . "</p>\r\n";
+			if($template->show_reject_button || $template->show_accept_button){
+				$htmlMessage.="<div  style='min-width:100%;' >\r\n";
+			}
+			if($template->show_accept_button){
+				$htmlMessage.="<div style='display:inline-block;margin-bottom:40px;white-space: nowrap'><a href='" . $linkHost . "/site/reply?type=accept&hash=".$hash . "' style='text-decoration: none;background-color:lightgreen;color:black;padding:10px;margin:5px;border-top: 2px solid #CCCCCC;border-right: 2px solid #333333;border-bottom: 2px solid #333333;border-left: 2px solid #CCCCCC;' >" . Html::encode($template->accept_button_text) . "</a></div>\r\n";
+			}
 
-        $htmlMessage.="<p  style='width:100%;margin-bottom:30px;' >" . Notification::HtmlizeString($template->body) . "</p>\r\n";
-        $linkHost = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 
-                "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . Yii::$app->request->baseUrl; 
-        if($template->show_reject_button || $template->show_accept_button){
-            $htmlMessage.="<div  style='min-width:100%;' >\r\n";
-        }
-        if($template->show_accept_button){
-            $htmlMessage.="<div style='display:inline-block;margin-bottom:40px;white-space: nowrap'><a href='" . $linkHost . "/site/reply?type=accept&hash=".$hash . "' style='text-decoration: none;background-color:lightgreen;color:black;padding:10px;margin:5px;border-top: 2px solid #CCCCCC;border-right: 2px solid #333333;border-bottom: 2px solid #333333;border-left: 2px solid #CCCCCC;' >" . Html::encode($template->accept_button_text) . "</a></div>\r\n";
-        }
-
-        if($template->show_reject_button){
-            $htmlMessage.="<div style='display:inline-block;margin-bottom:40px;white-space: nowrap'><a href='" . $linkHost . "/site/reply?type=reject&hash=".$hash ;
-            $htmlMessage.="' style='text-decoration: none;background-color:lightpink;color:black;padding:10px;margin:5px;";
-            $htmlMessage.="border-top: 2px solid #CCCCCC;border-right: 2px solid #333333;border-bottom: 2px solid #333333;border-left: 2px solid #CCCCCC;' >";
-            $htmlMessage.=Html::encode($template->reject_button_text) . "</a></div>\r\n";
-        }
-        if($template->show_reject_button || $template->show_accept_button){
-            $htmlMessage.="</div>\r\n";
-        }
-        if($template->show_link_to_object){
-            $htmlMessage.="<a href='" . $linkHost . '/event/activities?id=' . $event->id  . "' style='background-color: #d2f5ff;color:blue;text-decoration:underline;width:100%'>" . Html::encode($template->link_text) . "</a>";
-        }
-        Yii::$app->mailer->compose()
-            ->setTo($user->email)
-            ->setFrom(Yii::$app->params['senderEmail'])
-            ->setSubject($subject)
-            ->setHtmlBody($htmlMessage)
-            ->send();
-
+			if($template->show_reject_button){
+				$htmlMessage.="<div style='display:inline-block;margin-bottom:40px;white-space: nowrap'><a href='" . $linkHost . "/site/reply?type=reject&hash=".$hash ;
+				$htmlMessage.="' style='text-decoration: none;background-color:lightpink;color:black;padding:10px;margin:5px;";
+				$htmlMessage.="border-top: 2px solid #CCCCCC;border-right: 2px solid #333333;border-bottom: 2px solid #333333;border-left: 2px solid #CCCCCC;' >";
+				$htmlMessage.=Html::encode($template->reject_button_text) . "</a></div>\r\n";
+			}
+			if($template->show_reject_button || $template->show_accept_button){
+				$htmlMessage.="</div>\r\n";
+			}
+			if($template->show_link_to_object){
+				$htmlMessage.="<a href='" . $linkHost . '/event/activities?id=' . $event->id  . "' style='background-color: #d2f5ff;color:blue;text-decoration:underline;width:100%'>" . Html::encode($template->link_text) . "</a>";
+			}
+			Yii::$app->mailer->compose()
+				->setTo($user->email)
+				->setFrom(Yii::$app->params['senderEmail'])
+				->setSubject($subject)
+				->setHtmlBody($htmlMessage)
+				->send();
+			Log::write('Notification', LogWhat::CREATE, 'email='.$user->email.'; subject='.$subject, 'template='.$template->name.'; custom_message='.$model->custom_message);
+		}else{
+			// SMS
+			$htmlMessage=$template->body;
+			if($template->allow_custom_message && $model->custom_message && strlen($model->custom_message)>0){
+				$htmlMessage.="\r\n" . $model->custom_message;
+			}			
+			if($template->use_auto_subject){
+				$subject = "\r\n" . $event->name . ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm") . ' ' . $activityname;
+			}
+			if($template->show_link_to_object){
+				$htmlMessage.= "\r\n" . $linkHost. '/event/activities?id=' . $event->id;
+			}
+			
+			$smsResponse = Yii::$app->SmsMessaging->sendSms($htmlMessage, $user->mobilephone, $model->send_from_address?Yii::$app->user->identity->mobilephone:'');
+			
+			$smsId=$smsResponse['id'];
+			$smsStatusId=$smsResponse['statusId'];
+			$smsStatusText=$smsResponse['statusText'];
+			Log::write('Notification', LogWhat::CREATE, 'SMS='.$user->mobilephone.'; smsId='.$smsId, 'template='.$template->name.'; custom_message='.$model->custom_message);
+		}
         $newNotify= new Notification();
 
-        $newNotify->status=$template->show_accept_button?'Not replied yet':'No reply requested';
+        $newNotify->sms_id=$smsId;
+        $newNotify->sms_status_id=$smsStatusId;
+        $newNotify->sms_status=$smsStatusText;
+        $newNotify->status=$template->show_accept_button && $template->message_system!='SMS'?'Not replied yet':'No reply requested';
         $newNotify->activity_id=$actionid;
         $newNotify->event_id=$event->id;
-        $newNotify->notify_key=($template->show_reject_button || $template->show_accept_button)?$hash:null;;
+        $newNotify->notify_key=($template->show_reject_button || $template->show_accept_button) && $template->message_system!='SMS'?$hash:null;;
         $newNotify->team_id=$activity?$activity->team_id:null;
         $newNotify->user_id=$userid;
         $newNotify->notified_date=date("Y-m-d H:i:s",time());
@@ -206,8 +244,18 @@ class Notification extends \yii\db\ActiveRecord
         $newNotify->message_template_id=$template->id;
 
         $newNotify->save();
-		Log::write('Notification', LogWhat::CREATE, 'email'.$user->email.'; subject='.$subject, 'template='.$template->name.'; custom_message='.$model->custom_message);
     } 
+	public function updateSmsNotificationStatus()
+    {	
+		if($this->sms_id && strlen($this->sms_id)>0){
+			$smsResponse = Yii::$app->SmsMessaging->getSmsStatus($this->sms_id, $this->sms_status_id, $this->sms_status);
+			if($smsResponse['statusId']!=$this->sms_status_id || $smsResponse['statusText']!=$this->sms_status){
+				$this->sms_status_id=$smsResponse['statusId'];
+				$this->sms_status=$smsResponse['statusText'];
+				$this->save();
+			}
+		}		
+	}
     private function HtmlizeString($toHtmlize){
         $mess=str_replace("\r\n",'<br />',Html::encode($toHtmlize));
         return str_replace("\n",'<br />',$mess);

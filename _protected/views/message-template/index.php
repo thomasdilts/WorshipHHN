@@ -70,15 +70,22 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?= Html::activeHiddenInput($model, 'message_id') ?> 
 				<?= Html::activeHiddenInput($model, 'message_type_id') ?>  
 				<?= Html::activeHiddenInput($model, 'language_id') ?>
-				<?= $form->field($model, 'show_accept_button')->checkbox(['onChange'=>'redrawPreview();']);?>
-				<?= $form->field($model, 'accept_button_text')->textInput(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>
-				<?= $form->field($model, 'show_reject_button')->checkbox(['onChange'=>'redrawPreview();']);?>
-				<?= $form->field($model, 'reject_button_text')->textInput(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>
+				<?= $form->field($model, 'message_system')->dropDownList(['Email'=>Yii::t('app', 'Email'),'SMS'=>Yii::t('app', 'SMS'),],['onChange'=>'redrawPreview();']) ?>
+				<div id='show_accept_button'>
+					<?= $form->field($model, 'show_accept_button')->checkbox(['onChange'=>'redrawPreview();']);?>
+					<?= $form->field($model, 'accept_button_text')->textInput(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>
+					<?= $form->field($model, 'show_reject_button')->checkbox(['onChange'=>'redrawPreview();']);?>
+					<?= $form->field($model, 'reject_button_text')->textInput(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>
+				</div>
 				<?= $form->field($model, 'show_link_to_object')->checkbox(['onChange'=>'redrawPreview();']);?>
-				<?= $form->field($model, 'link_text')->textInput(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>
+				<div id='link_text'>
+					<?= $form->field($model, 'link_text')->textInput(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>
+				</div>
 				<?= $form->field($model, 'allow_custom_message')->checkbox(['onChange'=>'redrawPreview();']);?>
 				<?= $form->field($model, 'use_auto_subject')->checkbox(['onChange'=>'redrawPreview();']);?>
-				<?= $form->field($model, 'subject')->textInput(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>
+				<div id='subject'>
+					<?= $form->field($model, 'subject')->textInput(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>
+				</div>
 				<?= $form->field($model, 'body')->textArea(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>
 				<div class="form-group">     
 					<?= Html::submitButton(Yii::t('app', 'Update'), ['class' => 'btn btn-primary']) ?>
@@ -99,45 +106,72 @@ $this->params['breadcrumbs'][] = $this->title;
 <script>
 function redrawPreview(){
 	$("#preview").html('');
-	$("#preview").append("<label style='min-width:100%;' class='col-lg-6'>" + "<?= Yii::t('app', 'To')?>" + "</label>");
-	$("#preview").append(
-			"<div style='background-color: #d2f5ff;width:100%;border-style: solid;border-color: lightblue;margin:5px' class='col-lg-6'></div>");
-	$("#preview").append("<label style='min-width:100%;' class='col-lg-6'>" + "<?= Yii::t('app', 'Subject')?>" + "</label>");
-	if($('#messagetypeform-use_auto_subject').is(":checked")){
-		$( "#messagetypeform-subject" ).prop( "disabled", true );
-		$("#preview").append(
-			"<div style='background-color: #d2f5ff;width:100%;border-style: solid;border-color: lightblue;margin:5px' class='col-lg-6'>" + '<?=Yii::t('app', 'Use an automatically created subject')?>' + "</div>");
-	}
-	else{
-		$( "#messagetypeform-subject" ).prop( "disabled", false );
-		$("#preview").append(
-			"<div style='background-color: #d2f5ff;width:100%;border-style: solid;border-color: lightblue;margin:5px' class='col-lg-6'>" + $('#messagetypeform-subject').val() + "</div>");
-	}
-	$("#preview").append("<label style='min-width:100%;' class='col-lg-6'>" + "<?= Yii::t('app', 'Message')?>" + "</label>");
-	if($('#messagetypeform-allow_custom_message').is(":checked")){
-		$("#preview").append("<div  style='min-width:100%;' class='col-lg-6' id='custom-message-preview'><?=Yii::t('app', 'Allow Custom Message')?></div>");
-		$("#preview").append("<hr style='color:lightblue;background-color:lightblue;height:2px;margin:3px;'>");
-	}
 
-	$("#preview").append("<p  style='width:100%;' class='col-lg-6'>" + $('#messagetypeform-body').val() + '</p>');
-	if($('#messagetypeform-show_accept_button').is(":checked")){
-		$( "#messagetypeform-accept_button_text" ).prop( "disabled", false );
-		$("#preview").append("<div style='background-color: lightgreen;border-style: solid;border-color: lightblue;padding:10px;margin:5px;text-align:center;max-width:40%;' class='col-lg-5' >" + $('#messagetypeform-accept_button_text').val() + "</div>");
+	if($('#messagetypeform-message_system').val()=='Email'){
+		$( "#show_accept_button" ).show();
+		$( "#subject" ).show();
+		$( "#link_text" ).show();
+		$("#preview").append("<label style='min-width:100%;' class='col-lg-6'>" + "<?= Yii::t('app', 'To')?>" + "</label>");
+		$("#preview").append(
+				"<div style='background-color: #d2f5ff;width:100%;border-style: solid;border-color: lightblue;margin:5px' class='col-lg-6'></div>");
+		$("#preview").append("<label style='min-width:100%;' class='col-lg-6'>" + "<?= Yii::t('app', 'Subject')?>" + "</label>");
+
+		if($('#messagetypeform-use_auto_subject').is(":checked")){
+			$( "#messagetypeform-subject" ).prop( "disabled", true );
+			$("#preview").append(
+				"<div style='background-color: #d2f5ff;width:100%;border-style: solid;border-color: lightblue;margin:5px' class='col-lg-6'>" + '<?=Yii::t('app', 'Use an automatically created subject')?>' + "</div>");
+		}
+		else{
+			$( "#messagetypeform-subject" ).prop( "disabled", false );
+			$("#preview").append(
+				"<div style='background-color: #d2f5ff;width:100%;border-style: solid;border-color: lightblue;margin:5px' class='col-lg-6'>" + $('#messagetypeform-subject').val() + "</div>");
+		}
+		$("#preview").append("<label style='min-width:100%;' class='col-lg-6'>" + "<?= Yii::t('app', 'Message')?>" + "</label>");
+		if($('#messagetypeform-allow_custom_message').is(":checked")){
+			$("#preview").append("<div  style='min-width:100%;' class='col-lg-6' id='custom-message-preview'><?=Yii::t('app', 'Allow Custom Message')?></div>");
+			$("#preview").append("<hr style='color:lightblue;background-color:lightblue;height:2px;margin:3px;'>");
+		}
+
+		$("#preview").append("<p  style='width:100%;' class='col-lg-6'>" + $('#messagetypeform-body').val() + '</p>');
+		if($('#messagetypeform-show_accept_button').is(":checked")){
+			$( "#messagetypeform-accept_button_text" ).prop( "disabled", false );
+			$("#preview").append("<div style='background-color: lightgreen;border-style: solid;border-color: lightblue;padding:10px;margin:5px;text-align:center;max-width:40%;' class='col-lg-5' >" + $('#messagetypeform-accept_button_text').val() + "</div>");
+		}else{
+			$( "#messagetypeform-accept_button_text" ).prop( "disabled", true );
+		}
+		if($('#messagetypeform-show_reject_button').is(":checked")){
+			$( "#messagetypeform-reject_button_text" ).prop( "disabled", false );
+			$("#preview").append("<div style='background-color: #DDB0A0;border-style: solid;border-color: lightblue;padding:10px;margin:5px;text-align:center;max-width:40%;'  class='col-lg-5'>" + $('#messagetypeform-reject_button_text').val() + "</div>");
+		}else{
+			$( "#messagetypeform-reject_button_text" ).prop( "disabled", true );
+		}
+		if($('#messagetypeform-show_link_to_object').is(":checked")){
+			$( "#messagetypeform-link_text" ).prop( "disabled", false );
+			$("#preview").append("<div style='background-color: #d2f5ff;color:blue;text-decoration:underline;margin:5px' class='col-lg-6'>" + $('#messagetypeform-link_text').val() + "</div>");
+		}else{
+			$( "#messagetypeform-link_text" ).prop( "disabled", true );
+		}
 	}else{
-		$( "#messagetypeform-accept_button_text" ).prop( "disabled", true );
+		$( "#show_accept_button" ).hide();
+		$( "#subject" ).hide();
+		$( "#link_text" ).hide();
+		$("#preview").append("<p  style='width:100%;' class='col-lg-6'>" + $('#messagetypeform-body').val() + '</p>');
+		if($('#messagetypeform-allow_custom_message').is(":checked")){
+			$("#preview").append("<div  style='min-width:100%;' class='col-lg-6' id='custom-message-preview'><?=Yii::t('app', 'Allow Custom Message')?></div>");
+		}
+		if($('#messagetypeform-use_auto_subject').is(":checked")){
+			$("#preview").append(
+				"<div style='background-color: #d2f5ff;width:100%;margin:5px' class='col-lg-6'>" + '<?=Yii::t('app', 'Use an automatically created subject')?>' + "</div>");
+		}
+		
+		if($('#messagetypeform-show_link_to_object').is(":checked")){
+			$linkHost = '<?=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . Yii::$app->request->baseUrl?>'; 
+			$("#preview").append("<div style='background-color: #d2f5ff;color:blue;text-decoration:underline;margin:5px' class='col-lg-6'>" + $linkHost + "/event/activities?id=19</div>");
+		}else{
+			$( "#messagetypeform-link_text" ).prop( "disabled", true );
+		}		
 	}
-	if($('#messagetypeform-show_reject_button').is(":checked")){
-		$( "#messagetypeform-reject_button_text" ).prop( "disabled", false );
-		$("#preview").append("<div style='background-color: #DDB0A0;border-style: solid;border-color: lightblue;padding:10px;margin:5px;text-align:center;max-width:40%;'  class='col-lg-5'>" + $('#messagetypeform-reject_button_text').val() + "</div>");
-	}else{
-		$( "#messagetypeform-reject_button_text" ).prop( "disabled", true );
-	}
-	if($('#messagetypeform-show_link_to_object').is(":checked")){
-		$( "#messagetypeform-link_text" ).prop( "disabled", false );
-		$("#preview").append("<div style='background-color: #d2f5ff;color:blue;text-decoration:underline;margin:5px' class='col-lg-6'>" + $('#messagetypeform-link_text').val() + "</div>");
-	}else{
-		$( "#messagetypeform-link_text" ).prop( "disabled", true );
-	}
+	
 }
 
 	<?php if($model->language_id != ''){ ?>  
