@@ -91,4 +91,31 @@ If you are installing this in your own linux/ubuntu type server then you will pr
 ```txt
 sudo chown -R www-data:www-data *
 ```
+### SMS Messaging
 
+Adding the SMS messaging to your installation of WorshipHHN is only for people with programming experience.
+This is because you will surely need to add your own SMS module that you yourself program for your SMS supplier. However if you want to try
+my SMS module that I personally use you need to add the following component in the _protected/config/web.php
+
+```txt
+    'components' => [
+...
+	'SmsMessaging' => [
+		'class' => 'thomasdilts\sms_worshiphhn_ip1\SmsForIp1',
+		'account' => 'ip1-16957',
+		'password' => 's3325xTRGrEnHDbbffyE',
+		'apiUrl' => 'api.ip1sms.com',
+		'messageFrom' => 'iP.1',
+		'phoneNumberCountryCode' => '46', 
+		'removeLeadingZeroFromPhoneNumber' => 'true', 			
+	]		
+    ],
+```
+
+if you are doing a "Composer installation" then you need to run
+
+```txt
+composer require thomasdilts/sms_worshiphhn_ip1
+```
+You then need to eventually completely rewrite the file _protected/vendor/thomasdilts/sms_worshiphhn_ip1/SmsForIp1.php to 
+make it work with your SMS supplier.
