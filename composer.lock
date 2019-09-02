@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5db116f436f1930e6a9f5db67e56aa20",
+    "content-hash": "f36da19faaa32df1fbba4f0ee33642d5",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1591,6 +1591,91 @@
                 "shim"
             ],
             "time": "2019-08-06T08:03:45+00:00"
+        },
+        {
+            "name": "thomasdilts/sms_worshiphhn",
+            "version": "v1.0.6-stable",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thomasdilts/sms_worshiphhn.git",
+                "reference": "98add95f94076c92d7d312b3e8d3ed807c648e95"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thomasdilts/sms_worshiphhn/zipball/98add95f94076c92d7d312b3e8d3ed807c648e95",
+                "reference": "98add95f94076c92d7d312b3e8d3ed807c648e95",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "thomasdilts\\sms_worshiphhn\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Dilts",
+                    "email": "thomas@worshiphhn.org"
+                }
+            ],
+            "description": "The SMS class that all sms libraries must subclass to be used by the worshiphhn project",
+            "homepage": "http://worshiphhn.org",
+            "keywords": [
+                "sms",
+                "worshiphhn",
+                "yii2"
+            ],
+            "time": "2019-09-02T14:23:36+00:00"
+        },
+        {
+            "name": "thomasdilts/sms_worshiphhn_ip1",
+            "version": "v1.0.4-stable",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thomasdilts/sms_worshiphhn_ip1.git",
+                "reference": "4a863bda7c297f57c67bbd87ef8bd5d3b3b4a541"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thomasdilts/sms_worshiphhn_ip1/zipball/4a863bda7c297f57c67bbd87ef8bd5d3b3b4a541",
+                "reference": "4a863bda7c297f57c67bbd87ef8bd5d3b3b4a541",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0",
+                "thomasdilts/sms_worshiphhn": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "thomasdilts\\sms_worshiphhn_ip1\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Dilts",
+                    "email": "thomas@worshiphhn.org"
+                }
+            ],
+            "description": "This is an SMS system using the sms supplier https://ip1sms.com for the worshiphhn project.",
+            "homepage": "http://worshiphhn.org",
+            "keywords": [
+                "sms",
+                "worshiphhn",
+                "yii2"
+            ],
+            "time": "2019-09-02T14:31:38+00:00"
         },
         {
             "name": "yiisoft/yii2",
