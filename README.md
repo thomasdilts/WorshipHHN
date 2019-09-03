@@ -112,10 +112,5 @@ my SMS module that I personally use you need to add the following component in t
     ],
 ```
 
-if you are doing a "Composer installation" then you need to run
-
-```txt
-composer require thomasdilts/sms_worshiphhn_ip1
-```
 You then need to eventually completely rewrite the file _protected/vendor/thomasdilts/sms_worshiphhn_ip1/SmsForIp1.php to 
-make it work with your SMS supplier.
+make it work with your SMS supplier. By "rewrite" I mean to copy to another file and class and then rewrite. Your class must be a sub-class of thomasdilts\sms_worshiphhn\Sms to be useable by WorshipHHN.
