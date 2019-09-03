@@ -112,5 +112,5 @@ my SMS module that I personally use you need to add the following component in t
     ],
 ```
 
-You then need to eventually completely rewrite the file _protected/vendor/thomasdilts/sms_worshiphhn_ip1/SmsForIp1.php to 
-make it work with your SMS supplier. By "rewrite" I mean to copy to another file and class and then rewrite. Your class must be a sub-class of thomasdilts\sms_worshiphhn\Sms to be useable by WorshipHHN.
+You then need to eventually completely rewrite the file [_protected/vendor/thomasdilts/sms_worshiphhn_ip1/SmsForIp1.php](https://github.com/thomasdilts/sms_worshiphhn_ip1) to 
+make it work with your SMS supplier. By "rewrite" I mean to copy to another file and class and then rewrite. Your class must be a sub-class of [thomasdilts\sms_worshiphhn\Sms](https://github.com/thomasdilts/sms_worshiphhn) to be useable by WorshipHHN.
