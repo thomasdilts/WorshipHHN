@@ -88,7 +88,7 @@ class AllEventsExportFile extends Activity
             ->request->queryParams, 10000);
         if (($sort = $dataProvider->getSort()) !== false) {
             $dataProvider->query->addOrderBy($sort->getOrders());
-        }		
+        }	
 
 		$dataByRows=$dataProvider->query->all();
 		$dataByEvent=[];
@@ -97,7 +97,7 @@ class AllEventsExportFile extends Activity
         {
 			if(!array_key_exists($row->event_id,$dataByEvent)){
 				$event = [];
-				$event['event_name']=$row->event->name;
+				$event['event_name']=($isHtml?'<a href="'.URL::toRoute('event/activities').'?id='.$row->event_id.'">':'').$row->event->name.($isHtml?'</a>':'');
 				$event['start_date']=date('Y-m-d H:i',strtotime($row->event->start_date));
 				$dataByEvent[$row->event_id]=$event;
 			}	
