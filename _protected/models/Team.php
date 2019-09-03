@@ -60,6 +60,7 @@ class Team extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Name'),
 			'team_type.name' => Yii::t('app', 'Team type name'),
             'imageFiles' => Yii::t('app', 'Files'),                        
+            'teamtypename' => Yii::t('app', 'Team type name'),                        
         ];
     }
 	public function __toString()
