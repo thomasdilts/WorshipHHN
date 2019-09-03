@@ -19,7 +19,7 @@ class TeamSearch extends Team
     public function rules()
     {
         return [
-            [['name','team-type'], 'safe'],
+            [['name','team-type','teamtypename'], 'safe'],
         ];
     }
 
@@ -62,7 +62,7 @@ class TeamSearch extends Team
             'desc' => ['team.name' => SORT_DESC],
         ];
 
-        $dataProvider->sort->attributes['team_type.name'] = [
+        $dataProvider->sort->attributes['teamtypename'] = [
             'asc' => ['team_type.name' => SORT_ASC],
             'desc' => ['team_type.name' => SORT_DESC],
         ];
@@ -72,7 +72,7 @@ class TeamSearch extends Team
             return $dataProvider;
         }
         $query->andFilterWhere(['like', 'team.name', $this->name])
-			  ->andFilterWhere(['like', 'teamType.name', $this->teamtypename]);
+			  ->andFilterWhere(['like', 'team_type.name', $this->teamtypename]);
         return $dataProvider;
     }
 }

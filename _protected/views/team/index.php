@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'name',
 			[
-				'attribute' => 'teamType.name',
+				'attribute' => 'teamtypename',
 				'format' => 'raw',
 				'value' => function ($model, $index, $widget) {
 					return $model->teamType->name;
