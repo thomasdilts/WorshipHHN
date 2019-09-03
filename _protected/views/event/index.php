@@ -89,10 +89,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-sm-9">
 			<?= GridView::widget([
 				'dataProvider' => $dataProvider,
-
+				'filterModel' => $searchModel,
 				'summary' => false,
 				'columns' => [
-					'name',
 					[
 						'attribute' => 'start_date',
 						'format' => 'raw',
@@ -100,6 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							return date('Y-m-d H:i',strtotime($model->start_date));
 						},
 					],						
+					'name',
 					// buttons
 					['class' => 'yii\grid\ActionColumn',
 					'header' => Yii::t('app', 'Menu'),

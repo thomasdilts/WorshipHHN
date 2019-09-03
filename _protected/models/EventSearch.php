@@ -57,13 +57,18 @@ class EventSearch extends Event
             'asc' => ['start_date' => SORT_ASC],
             'desc' => ['start_date' => SORT_DESC],
         ];
+        $dataProvider->sort->attributes['name'] = [
+            'asc' => ['name' => SORT_ASC],
+            'desc' => ['name' => SORT_DESC],
+        ];
 		
 		$this->load($params);
         if (!$this->validate()) {
             return $dataProvider;
         }
 
-		$query->andFilterWhere(['between', 'start_date', $this->filter_start_date, $this->filter_end_date]);
+		$query->andFilterWhere(['between', 'start_date', $this->filter_start_date, $this->filter_end_date])
+			->andFilterWhere(['like', 'name', $this->name]);
         return $dataProvider;
     }
 }
