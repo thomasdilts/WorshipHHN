@@ -105,7 +105,7 @@ my SMS module that I personally use you need to add the following component in t
 		'account' => 'YOUR_ACCOUNT',
 		'password' => 'YOUR_PASSWORD',
 		'apiUrl' => 'api.ip1sms.com',
-		'messageFrom' => 'iP.1',
+		'messageFrom' => 'FROM_NAME_OR_PHONE_NUMBER',
 		'phoneNumberCountryCode' => '46', 
 		'removeLeadingZeroFromPhoneNumber' => 'true', 			
 	]		
