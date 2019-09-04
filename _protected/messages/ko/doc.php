@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => '이 이메일의 주제에 주어진 작업을 수행 할 예정입니다. 아래 버튼 중 하나를 클릭하여 올 수 있는지 여부를 알려주십시오. 이벤트에 대한 자세한 내용을 보려면 이메일 하단의 링크를 클릭하십시오. 감사하고 신의 축복을 빕니다!',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => '항상 이것을 true로 설정해야합니다. 그러면 이메일 하단에 사용자가 링크를 누르면 메시지와 관련된 정확한 이벤트가 표시되는 링크가 추가됩니다.',
 'the Creator' => '창조주',
+'Allow text name entry for team' => '팀의 텍스트 이름 입력 허용',
+'If you want a team selected will you allow a text entry of the team instead?' => '팀을 선택하려면 대신 팀의 텍스트 입력을 허용 하시겠습니까?',
+'Allow text name entry for user' => '사용자의 텍스트 이름 입력 허용',
+'If you want a user selected will you allow a text entry of the user instead?' => '사용자를 선택하려면 대신 사용자의 텍스트 입력을 허용 하시겠습니까?',
+'Mobilephone number' => '휴대 전화 번호',
+'This is used by the SMS messaging system to send SMS to this user.' => 'SMS 메시징 시스템에서이 사용자에게 SMS를 보내는 데 사용됩니다.',
 ];

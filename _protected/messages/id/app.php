@@ -347,4 +347,7 @@
 'Delivered to the GSM network	' => 'Dikirim ke jaringan GSM',
 'Delivered to the phone' => 'Dikirim ke telepon',
 'Delivery to phone failed' => 'Pengiriman ke ponsel gagal',
+'Allow text name entry' => 'Izinkan entri nama teks',
+'Text name entry' => 'Entri nama teks',
+'Mobilephone number' => 'Nomor ponsel',
 ];

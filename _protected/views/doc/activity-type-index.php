@@ -40,6 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
 						<td></td>	
 					</tr>
 					<tr>
+						<td><?= Html::encode(Yii::t('doc', 'Allow text name entry for team'))?> </td>
+						<td><?= Html::encode(Yii::t('doc', 'If you want a team selected will you allow a text entry of the team instead?'))?></td>	
+						<td></td>	
+					</tr>
+					<tr>
 						<td><?= Html::encode(Yii::t('doc', 'Team Type'))?> </td>
 						<td><?= Html::encode(Yii::t('doc', 'If you are using a team to do this task then this MUST be defined. Otherwise it will be impossible to select any team for the task. You may need to go back and define all your team types first if this list is empty.'))?></td>	
 						<td><?= Html::encode(Yii::t('doc', 'Team type examples: Prayer team, Hosting team, Usher team, Praise and psalm team'))?></td>	
@@ -47,6 +52,11 @@ $this->params['breadcrumbs'][] = $this->title;
 					<tr>
 						<td><?= Html::encode(Yii::t('doc', 'Use User'))?> </td>
 						<td><?= Html::encode(Yii::t('doc', 'Will a user be needed or used to do this task?'))?></td>	
+						<td></td>	
+					</tr>
+					<tr>
+						<td><?= Html::encode(Yii::t('doc', 'Allow text name entry for user'))?> </td>
+						<td><?= Html::encode(Yii::t('doc', 'If you want a user selected will you allow a text entry of the user instead?'))?></td>	
 						<td></td>	
 					</tr>
 					<tr>

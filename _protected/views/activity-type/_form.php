@@ -14,11 +14,17 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
     <?php $form = ActiveForm::begin(['id' => 'form-activitytype']); ?>
 
         <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
-		<?= $form->field($model, 'using_team')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
+		<?= $form->field($model, 'using_team')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand')],['onChange'=>'redrawScreen();']) ?>
+        <div id="using_the_team" style = "padding-left:30px">
+		<?= $form->field($model, 'allow_freehand_team')->checkbox();?>
 		<?= $form->field($model, 'team_type_id')->dropDownList(ArrayHelper::map(app\models\TeamType::find()->where([
 					'church_id' => $model->church_id])->orderBy("name ASC")->all(), 'id', 'name'),['prompt' => Yii::t('app', 'Select')]) ?>
-		<?= $form->field($model, 'using_user')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
+		</div>
+		<?= $form->field($model, 'using_user')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),],['onChange'=>'redrawScreen();']) ?>
+        <div id="using_the_user" style = "padding-left:30px">
+		<?= $form->field($model, 'allow_freehand_user')->checkbox();?>
         <?= $form->field($model, 'notify_user_event_errors')->checkbox();?>
+		</div>
 		<?= $form->field($model, 'description')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
 		<?= $form->field($model, 'using_song')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
 		<?= $form->field($model, 'file')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
@@ -26,8 +32,11 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
 		<?= $form->field($model, 'special_needs')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
 
 		
-        <?= $form->field($model, 'use_globally')->checkbox();?>
+        <?= $form->field($model, 'use_globally')->checkbox(['onChange'=>'redrawScreen();']);?>
+		<div id="using_use_globally" style = "padding-left:30px">
         <?= $form->field($model, 'default_global_order')->textInput(['type' => 'number','placeholder' => Yii::t('app', 'Integer value')]);?>
+		</div>
+		<div id="not_using_use_globally" style = "padding-left:30px">
 		<?= $form->field($model, 'default_start_time')->widget(
 			DatePicker::className(), [
 				'addon' => false,
@@ -38,6 +47,7 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
 					'stepping' => 1,
 				],
 		]);?>
+		</div>
 		<div class="form-group">     
 			<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
 				: Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
@@ -49,3 +59,33 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
     <?php ActiveForm::end(); ?>
  
 </div>
+<script>
+function redrawScreen(){
+	
+	if($('#activitytype-using_team').val()=='Not used'){
+		$( "#using_the_team" ).hide();
+		$( "#activitytype-allow_freehand_team" ).prop( "checked", false );
+	}else{
+		$( "#using_the_team" ).show();
+	}
+	if($('#activitytype-using_user').val()=='Not used' ){
+		$( "#using_the_user" ).hide();
+		$( "#activitytype-allow_freehand_user" ).prop( "checked", false );
+		$( "#activitytype-notify_user_event_errors" ).prop( "checked", false );
+	}else{
+		$( "#using_the_user" ).show();
+	}
+	if($('#activitytype-use_globally').is(":checked")){
+		$( "#not_using_use_globally" ).hide();
+		$( "#using_use_globally" ).show();
+	}else{
+		$( "#activitytype-default_global_order" ).val('0');
+		$( "#using_use_globally" ).hide();
+		$( "#not_using_use_globally" ).show();
+	}
+}
+
+$( document ).ready(function() {
+	redrawScreen()
+});
+</script>

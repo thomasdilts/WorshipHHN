@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => '您计划执行此电子邮件主题中给出的任务。如果您能来或不通过点击下面的其中一个按钮，请告诉我们。如果您想了解有关该活动的更多信息，请单击电子邮件底部的链接。谢谢，祝愿上帝保佑你！',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => '您可能应该始终将此设置为true。这将在电子邮件的底部添加一个链接，如果用户按下该链接，他们将进入该消息的确切事件。',
 'the Creator' => '创造者',
+'Allow text name entry for team' => '允许团队输入文本名称',
+'If you want a team selected will you allow a text entry of the team instead?' => '如果您希望选择一个团队，您是否允许团队的文本输入？',
+'Allow text name entry for user' => '允许用户输入文本名称',
+'If you want a user selected will you allow a text entry of the user instead?' => '如果您想要选择用户，您是否允许用户输入文本？',
+'Mobilephone number' => '手机号码',
+'This is used by the SMS messaging system to send SMS to this user.' => 'SMS消息传递系统使用它向此用户发送SMS。',
 ];

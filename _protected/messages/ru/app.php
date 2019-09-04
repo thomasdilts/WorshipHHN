@@ -347,4 +347,7 @@
 'Delivered to the GSM network	' => 'Доставлено в сеть GSM',
 'Delivered to the phone' => 'Доставлено на телефон',
 'Delivery to phone failed' => 'Доставка на телефон не удалась',
+'Allow text name entry' => 'Разрешить ввод имени текста',
+'Text name entry' => 'Текстовое имя',
+'Mobilephone number' => 'Номер мобильного телефона',
 ];

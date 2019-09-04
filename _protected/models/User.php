@@ -161,7 +161,7 @@ class User extends UserIdentity
 				// it's enough for us the get first assigned role name
 				$role = array_keys($roles)[0];
 			}
-            return (string) 'id='.$this->id.'; username='.$this->username.'; email='.$this->email
+            return (string) 'id='.$this->id.'; username='.$this->username.'; email='.$this->email.'; mobilephone='.$this->mobilephone
 				.'; status='.$this->statusList[$this->status]
 				.'; role='.$role.'; display_name='.$this->display_name.'; language_id='.$this->language_id
 				.'; hide_user_icons='.$this->hide_user_icons;

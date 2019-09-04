@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => 'Du er planlagt å utføre oppgaven gitt i emnet for denne e-posten. Gi oss beskjed om du kan komme eller ikke ved å klikke på en av knappene nedenfor. Hvis du vil se mer om arrangementet, kan du klikke på lenken nederst i e-posten. Takk for meg og lov til å Gud velsigne deg!',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => 'Du bør sannsynligvis alltid stille dette til å være sant. Dette vil legge til en lenke nederst i e-posten som hvis brukeren trykker på lenken vil de komme til den nøyaktige hendelsen meldingen handler om.',
 'the Creator' => 'skaperen',
+'Allow text name entry for team' => 'Tillat tekstnavnoppføring for teamet',
+'If you want a team selected will you allow a text entry of the team instead?' => 'Hvis du vil ha et lag valgt, vil du tillate en tekstinnføring av teamet i stedet?',
+'Allow text name entry for user' => 'Tillat tekstnavnoppføring for brukeren',
+'If you want a user selected will you allow a text entry of the user instead?' => 'Hvis du vil at en bruker er valgt, vil du tillate en tekstinnføring av brukeren i stedet?',
+'Mobilephone number' => 'Mobiltelefonnummer',
+'This is used by the SMS messaging system to send SMS to this user.' => 'Dette brukes av SMS-meldingssystemet for å sende SMS til denne brukeren.',
 ];

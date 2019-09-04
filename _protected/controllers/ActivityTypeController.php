@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\LogWhat;
+use app\models\Log;
 use app\models\ActivityType;
 use app\models\ActivityTypeSearch;
 use yii\web\NotFoundHttpException;
@@ -35,6 +37,7 @@ class ActivityTypeController extends AppController
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
             return $this->render('create', ['model' => $model]);
         }
+		Log::write('ActivityType', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect('index');
     }
@@ -53,6 +56,7 @@ class ActivityTypeController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$modelOld= clone $model;
         if (!$model->load(Yii::$app->request->post())) {
             return $this->render('update', ['model' => $model]);
         }	
@@ -60,6 +64,7 @@ class ActivityTypeController extends AppController
 			$model->default_global_order=0;
 		}	
         if ($model->save()) {
+			Log::write('ActivityType', LogWhat::UPDATE, (string)$modelOld, (string)$model);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
             return $this->redirect(['index']);
         } else {
@@ -71,14 +76,15 @@ class ActivityTypeController extends AppController
     public function actionDelete($id)
     {
 		try {
-			if (!$this->findModel($id)->delete()) {
+			$model=$this->findModel($id);
+			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
 		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 			return $this->redirect(['index']);
 		}       
-
+		Log::write('ActivityType', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
         
         return $this->redirect(['index']);

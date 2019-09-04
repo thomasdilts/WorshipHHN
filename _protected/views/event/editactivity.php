@@ -60,7 +60,10 @@ $GLOBALS['eventid']=$modelEvent->id;
 			<?php } ?>		
 			<?php if($modelActivityType->using_team!='Not used'){ ?>
 				<?= $form->field($model, 'team_id')->dropDownList(ArrayHelper::map(app\models\Team::find()->where([
-					'team_type_id' => $modelActivityType->team_type_id])->orderBy("name ASC")->all(), 'id', 'name'),['prompt' => Yii::t('app', 'Select')]) ?>
+					'team_type_id' => $modelActivityType->team_type_id])->orderBy("name ASC")->all(), 'id', 'name'),['prompt' => Yii::t('app', 'Select'),'onChange'=>'showHideFreehandTeam();']) ?>
+				<?php if($modelActivityType->allow_freehand_team){ ?>
+					<?= $form->field($model, 'freehand_team')->textInput() ?>
+				<?php } ?>
 			<?php } ?>	
 			<?php if($modelActivityType->using_user!='Not used'){ ?>
 				<?= $form->field($model, 'user_id')->hiddenInput() ?>
@@ -84,6 +87,9 @@ $GLOBALS['eventid']=$modelEvent->id;
 				<?php } ?>
 
 				</select>
+				<?php if($modelActivityType->allow_freehand_user){ ?>
+					<?= $form->field($model, 'freehand_user')->textInput() ?>
+				<?php } ?>
 
 			<?php } ?>				
 			<?php if($modelActivityType->using_song!='Not used'){ ?>
@@ -172,18 +178,7 @@ $GLOBALS['eventid']=$modelEvent->id;
 		</div>
 	 <?php } ?>	
 </div>
-<script>
-	$('#ddslick-user_id').ddslick({
-		height:400,
-	    onSelected: function (data) {
-	    	$('#activity-user_id').val(data.selectedData.value);
-	    }
-	});
-	<?php if(isset($selectedUserIndex)){ ?>
-		$('#ddslick-user_id').ddslick('select', {index: <?= $selectedUserIndex ?> }); 
-	<?php } ?>
 
-</script>
 <script>
 
 var chaptersInBook=[50,40,27,36,34,24,21,4,31,24,22,25,29,36,10,13,10,42,150,
@@ -601,8 +596,41 @@ function startupRepopulate(data){
 		AddToDisplay(parseInt(parts[0]),parseInt(parts[1]),parseInt(parts[2]),parseInt(parts[3]));
 	}
 }
+function showHideFreehandTeam(){
+	if($('#activity-team_id').val() || $('#activity-team_id').val().length>0){
+		$( "#activity-freehand_team" ).prop( "disabled", true );
+		$( "#activity-freehand_team" ).val('');
+	}else{
+		$( "#activity-freehand_team" ).prop( "disabled", false );
+	}
+}
+function showHideFreehandUser(){
+	if($('#activity-user_id').val() || $('#activity-user_id').val().length>0){
+		$( "#activity-freehand_user" ).prop( "disabled", true );
+		$( "#activity-freehand_user" ).val('');
+	}else{
+		$( "#activity-freehand_user" ).prop( "disabled", false );
+	}
+}
+$('#ddslick-user_id').ddslick({
+	height:400,
+	onSelected: function (data) {
+		$('#activity-user_id').val(data.selectedData.value);
+		<?php if($modelActivityType->using_user!='Not used' && $modelActivityType->allow_freehand_user){ ?>
+			showHideFreehandUser();
+		<?php } ?>
+	}
+});
+<?php if(isset($selectedUserIndex)){ ?>
+	$('#ddslick-user_id').ddslick('select', {index: <?= $selectedUserIndex ?> }); 
+<?php } ?>
 $(document).ready(function () {
-
+	<?php if($modelActivityType->using_team!='Not used' && $modelActivityType->allow_freehand_team){ ?>
+		showHideFreehandTeam();
+	<?php } ?>		
+	<?php if($modelActivityType->using_user!='Not used' && $modelActivityType->allow_freehand_user){ ?>
+		showHideFreehandUser();
+	<?php } ?>		
     var book = $("#book").val();
     populateChapter(book);
     $("#book").change(function () {

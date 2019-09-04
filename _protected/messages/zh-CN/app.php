@@ -347,4 +347,7 @@
 'Delivered to the GSM network	' => '交付给GSM网络',
 'Delivered to the phone' => '送到手机',
 'Delivery to phone failed' => '送到手机失败了',
+'Allow text name entry' => '允许输入文本名称',
+'Text name entry' => '文字名称输入',
+'Mobilephone number' => '手机号码',
 ];

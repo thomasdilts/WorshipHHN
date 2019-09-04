@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => 'Sie müssen die im Betreff dieser E-Mail angegebene Aufgabe ausführen. Bitte lassen Sie uns wissen, ob Sie kommen können oder nicht, indem Sie auf einen der unten stehenden Buttons klicken. Wenn Sie mehr über die Veranstaltung erfahren möchten, klicken Sie auf den Link unten in der E-Mail. Danke und möge Gott dich segnen!',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => 'Sie sollten dies wahrscheinlich immer auf true setzen. Daraufhin wird am Ende der E-Mail ein Link eingefügt, der angibt, dass der Benutzer genau zu dem Ereignis gelangt, um das es in der Nachricht geht, wenn er auf den Link drückt.',
 'the Creator' => 'der Schöpfer',
+'Allow text name entry for team' => 'Erlaube die Eingabe eines Textnamens für das Team',
+'If you want a team selected will you allow a text entry of the team instead?' => 'Wenn Sie ein Team auswählen möchten, erlauben Sie stattdessen eine Texteingabe des Teams?',
+'Allow text name entry for user' => 'Eingabe von Textnamen für Benutzer zulassen',
+'If you want a user selected will you allow a text entry of the user instead?' => 'Wenn Sie möchten, dass ein Benutzer ausgewählt wird, können Sie stattdessen eine Texteingabe des Benutzers zulassen?',
+'Mobilephone number' => 'Handynummer',
+'This is used by the SMS messaging system to send SMS to this user.' => 'Dies wird vom SMS-Nachrichtensystem zum Senden von SMS an diesen Benutzer verwendet.',
 ];

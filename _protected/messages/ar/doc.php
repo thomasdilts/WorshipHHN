@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => 'من المقرر أن تقوم بالمهمة الموضحة في موضوع هذا البريد الإلكتروني. يرجى إعلامنا إذا كان بإمكانك الحضور أو لا بالنقر على أحد الأزرار أدناه. إذا كنت تريد معرفة المزيد عن الحدث ، فانقر على الرابط أسفل البريد الإلكتروني. شكرا لكم وبارك الله فيكم!',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => 'ربما يجب عليك دائمًا تعيين هذا على "صحيح". سيؤدي هذا إلى إضافة رابط في أسفل البريد الإلكتروني بأنه إذا ضغط المستخدم على الرابط ، فسيصل إلى الحدث المحدد الذي تدور حوله الرسالة.',
 'the Creator' => 'الخالق',
+'Allow text name entry for team' => 'السماح بإدخال اسم النص للفريق',
+'If you want a team selected will you allow a text entry of the team instead?' => 'إذا كنت ترغب في اختيار فريق ، هل تسمح بإدخال نص للفريق بدلاً من ذلك؟',
+'Allow text name entry for user' => 'السماح بإدخال اسم النص للمستخدم',
+'If you want a user selected will you allow a text entry of the user instead?' => 'إذا كنت تريد اختيار مستخدم ما ، فهل ستسمح بإدخال نص للمستخدم بدلاً من ذلك؟',
+'Mobilephone number' => 'رقم الهاتف الجوال',
+'This is used by the SMS messaging system to send SMS to this user.' => 'يستخدم هذا من خلال نظام الرسائل النصية القصيرة لإرسال الرسائل القصيرة إلى هذا المستخدم.',
 ];

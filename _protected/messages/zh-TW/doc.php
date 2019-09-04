@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => '您計劃執行此電子郵件主題中給出的任務。如果您能來或不通過點擊下面的其中一個按鈕，請告訴我們。如果您想了解有關該活動的更多信息，請單擊電子郵件底部的鏈接。謝謝，祝愿上帝保佑你！',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => '您可能應該始終將此設置為true。這將在電子郵件的底部添加一個鏈接，如果用戶按下鏈接，它們將進入消息所針對的確切事件。',
 'the Creator' => '創造者',
+'Allow text name entry for team' => '允許團隊輸入文本名稱',
+'If you want a team selected will you allow a text entry of the team instead?' => '如果您希望選擇一個團隊，您是否允許團隊的文本輸入？',
+'Allow text name entry for user' => '允許用戶輸入文本名稱',
+'If you want a user selected will you allow a text entry of the user instead?' => '如果您想要選擇用戶，您是否允許用戶輸入文本？',
+'Mobilephone number' => '手機號碼',
+'This is used by the SMS messaging system to send SMS to this user.' => 'SMS消息傳遞系統使用它向此用戶發送SMS。',
 ];

@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => 'Sinun on tarkoitus suorittaa tämän sähköpostin aiheessa annettu tehtävä. Kerro meille, voitko tulla tai ei, napsauttamalla yhtä alla olevista painikkeista. Jos haluat nähdä lisää tapahtumasta, napsauta sähköpostin alareunassa olevaa linkkiä. Kiitos ja siunatkoon Jumala sinua!',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => 'Sinun pitäisi aina asettaa tämä totta. Tämä lisää linkin sähköpostin alareunaan, että jos käyttäjä painaa linkkiä, he tulevat tarkkaan tapahtumaan, josta viesti on.',
 'the Creator' => 'luoja',
+'Allow text name entry for team' => 'Salli tekstinimen syöttäminen joukkueelle',
+'If you want a team selected will you allow a text entry of the team instead?' => 'Jos haluat valitun joukkueen, sallitko sen sijaan tekstin kirjoittamisen joukkueelle?',
+'Allow text name entry for user' => 'Salli käyttäjän tekstinimen syöttäminen',
+'If you want a user selected will you allow a text entry of the user instead?' => 'Jos haluat käyttäjän valitun, sallitaanko käyttäjän tekstinsyöttö sen sijaan?',
+'Mobilephone number' => 'Matkapuhelimen numero',
+'This is used by the SMS messaging system to send SMS to this user.' => 'SMS-viestijärjestelmä käyttää tätä lähettämään tekstiviestejä tälle käyttäjälle.',
 ];

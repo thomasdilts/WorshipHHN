@@ -108,7 +108,7 @@ class AllEventsExportFile extends Activity
 				$event[$row->activityType->id]=['color'=>$status[1],'text'=>''];
 			}
 			$activity=$event[$row->activityType->id];
-			$username=isset($row->team)?$row->team->name:(isset($row->user)?$row->user->display_name:'');
+			$username=isset($row->team)?$row->team->name:(isset($row->user)?$row->user->display_name:(isset($row->freehand_team)?$row->freehand_team:(isset($row->freehand_user)?$row->freehand_user:'')));
 			
 			$activity['text'].=($isHtml?'<a href="'.URL::toRoute('event/editactivity'). '?id='.$row->id.'&eventid='.$row->event->id.'&returnurl=alltasksbyevent%3Fstart%3D'.$start_date . '%26end%3D'.$end_date.'" >':'')
 				 .$username. (strlen($username)>0&&strlen($status[0])>0?'; ':'') . $status[0] . ($isHtml?'</a>':'');

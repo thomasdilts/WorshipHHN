@@ -51,6 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
 						<td></td>		
 					</tr>
 					<tr>
+						<td><?= Html::encode(Yii::t('doc', 'Mobilephone number'))?> </td>
+						<td><?= Html::encode(Yii::t('doc', 'This is used by the SMS messaging system to send SMS to this user.'))?></td>
+						<td></td>		
+					</tr>
+					<tr>
 						<td><?= Html::encode(Yii::t('doc', 'Password'))?> </td>
 						<td><?= Html::encode(Yii::t('doc', 'A standard password input. you will be challenged to put in a reasonably difficult password.'))?></td>	
 						<td></td>	

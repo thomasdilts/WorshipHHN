@@ -347,4 +347,7 @@
 'Delivered to the GSM network	' => 'GSMネットワークに配信',
 'Delivered to the phone' => '電話に配信',
 'Delivery to phone failed' => '電話への配信に失敗しました',
+'Allow text name entry' => 'テキスト名の入力を許可',
+'Text name entry' => 'テキスト名の入力',
+'Mobilephone number' => '携帯電話番号',
 ];

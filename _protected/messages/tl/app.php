@@ -347,4 +347,7 @@
 'Delivered to the GSM network	' => 'Naihatid sa network ng GSM',
 'Delivered to the phone' => 'Naihatid sa telepono',
 'Delivery to phone failed' => 'Nabigo ang paghahatid sa telepono',
+'Allow text name entry' => 'Payagan ang pagpasok ng pangalan ng teksto',
+'Text name entry' => 'Pagpasok ng pangalan ng teksto',
+'Mobilephone number' => 'Numero ng mobile phone',
 ];

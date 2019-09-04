@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => 'このメールの件名に記載されているタスクを実行するようにスケジュールされています。下のボタンのいずれかをクリックして、来られるかどうかをお知らせください。イベントの詳細を表示するには、メールの下部にあるリンクをクリックしてください。ありがとう、神のご加護がありますように！',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => 'おそらく常にこれをtrueに設定する必要があります。これにより、ユーザーがリンクを押すと、メッセージに関する正確なイベントに移動するリンクが電子メールの下部に追加されます。',
 'the Creator' => 'クリエイター',
+'Allow text name entry for team' => 'チームのテキスト名入力を許可する',
+'If you want a team selected will you allow a text entry of the team instead?' => 'チームを選択したい場合は、代わりにチームのテキスト入力を許可しますか？',
+'Allow text name entry for user' => 'ユーザーにテキスト名の入力を許可する',
+'If you want a user selected will you allow a text entry of the user instead?' => 'ユーザーを選択したい場合は、代わりにユーザーのテキスト入力を許可しますか？',
+'Mobilephone number' => '携帯電話番号',
+'This is used by the SMS messaging system to send SMS to this user.' => 'これは、SMSメッセージングシステムがこのユーザーにSMSを送信するために使用されます。',
 ];

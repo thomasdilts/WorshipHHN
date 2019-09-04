@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => 'คุณถูกกำหนดให้ทำงานที่ได้รับในหัวข้อของอีเมลนี้ โปรดแจ้งให้เราทราบหากคุณสามารถมาได้หรือไม่โดยคลิกที่ปุ่มใดปุ่มหนึ่งด้านล่าง หากคุณต้องการดูข้อมูลเพิ่มเติมเกี่ยวกับกิจกรรมให้คลิกที่ลิงก์ที่ด้านล่างของอีเมล ขอบคุณและขอให้พระเจ้าคุ้มครองคุณ!',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => 'คุณควรตั้งค่านี้เป็นจริงเสมอ นี่จะเพิ่มลิงค์ที่ด้านล่างของอีเมลว่าหากผู้ใช้กดลิงก์พวกเขาจะมาถึงเหตุการณ์ที่แน่นอนข้อความนั้นเกี่ยวกับ',
 'the Creator' => 'ผู้สร้าง',
+'Allow text name entry for team' => 'อนุญาตให้ป้อนชื่อข้อความสำหรับทีม',
+'If you want a team selected will you allow a text entry of the team instead?' => 'หากคุณต้องการให้ทีมที่เลือกคุณจะอนุญาตให้ป้อนข้อความของทีมแทน?',
+'Allow text name entry for user' => 'อนุญาตให้ป้อนชื่อข้อความสำหรับผู้ใช้',
+'If you want a user selected will you allow a text entry of the user instead?' => 'หากคุณต้องการให้ผู้ใช้ที่เลือกคุณจะอนุญาตให้ป้อนข้อความของผู้ใช้แทน?',
+'Mobilephone number' => 'เบอร์โทรศัพท์',
+'This is used by the SMS messaging system to send SMS to this user.' => 'ระบบส่งข้อความ SMS นี้ใช้เพื่อส่ง SMS ไปยังผู้ใช้รายนี้',
 ];

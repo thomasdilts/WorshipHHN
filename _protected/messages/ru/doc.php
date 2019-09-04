@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => 'Вы должны выполнить задачу, указанную в теме этого письма. Пожалуйста, дайте нам знать, если вы можете прийти или нет, нажав на одну из кнопок ниже. Если вы хотите узнать больше о мероприятии, нажмите на ссылку внизу письма. Спасибо и пусть Бог благословит вас!',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => 'Вы, вероятно, всегда должны установить это в true. Это добавит ссылку внизу письма, что, если пользователь нажмет ссылку, он придет к точному событию, о котором говорится в сообщении.',
 'the Creator' => 'Создатель',
+'Allow text name entry for team' => 'Разрешить ввод текстового имени для команды',
+'If you want a team selected will you allow a text entry of the team instead?' => 'Если вы хотите, чтобы команда была выбрана, вы позволите вместо нее ввести текст команды?',
+'Allow text name entry for user' => 'Разрешить ввод имени пользователя для пользователя',
+'If you want a user selected will you allow a text entry of the user instead?' => 'Если вы хотите, чтобы пользователь был выбран, разрешите ли вы вместо него ввод текста?',
+'Mobilephone number' => 'Номер мобильного телефона',
+'This is used by the SMS messaging system to send SMS to this user.' => 'Это используется системой обмена сообщениями SMS для отправки SMS этому пользователю.',
 ];

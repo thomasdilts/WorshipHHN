@@ -66,11 +66,11 @@ class EventActivitySearch extends Activity
 			$color='red';			
 		}	
 		
-		if($model->activityType->using_team=='Demand' && !$model->team_id ){
+		if($model->activityType->using_team=='Demand' && !$model->team_id && (!$model->freehand_team || strlen($model->freehand_team)<2) ){
 			$value.=strlen($value)>0?'; ':'';
 			$value.=($isHtml?'<span style="color:red">':'').Yii::t('app', 'Missing-team').($isHtml?'</span>':'');	
 			$color='red';			
-		}elseif($model->activityType->using_user=='Demand' && !$model->user_id){
+		}elseif($model->activityType->using_user=='Demand' && !$model->user_id && (!$model->freehand_user || strlen($model->freehand_user)<2)){
 			$value.=strlen($value)>0?'; ':'';
 			$value.=($isHtml?'<span style="color:red">':'').Yii::t('app', 'Missing-user').($isHtml?'</span>':'');		
 			$color='red';			

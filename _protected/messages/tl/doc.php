@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => 'Ikaw ay nakatakdang gawin ang gawain na ibinigay sa paksa ng email na ito. Mangyaring ipaalam sa amin kung maaari kang dumating o hindi sa pamamagitan ng pag-click sa isa sa mga pindutan sa ibaba. Kung nais mong makita ang higit pa tungkol sa kaganapan pagkatapos ay mag-click sa link sa ilalim ng email. Salamat at sana pagpalain ka ng Diyos!',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => 'Marahil ay dapat mong palaging itakda ito sa totoo. Magdaragdag ito ng isang link sa ilalim ng email na kung pipilitin ng gumagamit ang link ay darating sila sa eksaktong kaganapan tungkol sa mensahe.',
 'the Creator' => 'ang Lumikha',
+'Allow text name entry for team' => 'Payagan ang pagpasok ng pangalan ng teksto para sa koponan',
+'If you want a team selected will you allow a text entry of the team instead?' => 'Kung nais mo ang isang koponan na napili ay papayagan mo ang isang text entry ng koponan sa halip?',
+'Allow text name entry for user' => 'Payagan ang pagpasok ng pangalan ng teksto para sa gumagamit',
+'If you want a user selected will you allow a text entry of the user instead?' => 'Kung nais mo ang isang napiling gumagamit ay papayagan mo ang isang text entry ng gumagamit sa halip?',
+'Mobilephone number' => 'Numero ng mobile phone',
+'This is used by the SMS messaging system to send SMS to this user.' => 'Ginagamit ito ng SMS messaging system upang maipadala ang SMS sa gumagamit na ito.',
 ];

@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title ;
 							'attribute' => 'team_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
-								return $model->team ? Html::encode($model->team->name) : '';
+								return $model->team ? Html::encode($model->team->name) : ($model->freehand_team?$model->freehand_team:'');
 							},
 						],					
 						[
@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title ;
 							'attribute' => 'user_display_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
-								return $model->user ? Html::encode($model->user->display_name) : '';
+								return $model->user ? Html::encode($model->user->display_name) : ($model->freehand_user?$model->freehand_user:'');
 							},
 						],					
 						[

@@ -39,7 +39,7 @@ class ActivityType extends \yii\db\ActiveRecord
     {
         return [
             [['church_id', 'name', 'notify_user_event_errors', 'use_globally', 'default_global_order'], 'required'],
-            [['church_id', 'notify_user_event_errors', 'team_type_id', 'use_globally', 'default_global_order'], 'integer'],
+            [['church_id', 'notify_user_event_errors', 'team_type_id','allow_freehand_user','allow_freehand_team', 'use_globally', 'default_global_order'], 'integer'],
             [['using_user', 'using_team', 'description', 'using_song', 'file', 'bible_verse', 'special_needs'], 'string'],
             [['default_start_time', 'default_end_time'], 'safe'],
             [['name'], 'string', 'max' => 100],
@@ -49,7 +49,7 @@ class ActivityType extends \yii\db\ActiveRecord
     }
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['name', 'using_team','using_user', 'description', 'using_song', 'file','bible_verse','special_needs', 'use_globally','default_start_time', 'default_end_time', 'default_global_order','demand_team','demand_user','demand_description','demand_song','demand_file','notify_user_event_errors'];
+		$scenarios['create'] = ['name','allow_freehand_user','allow_freehand_team', 'using_team','using_user', 'description', 'using_song', 'file','bible_verse','special_needs', 'use_globally','default_start_time', 'default_end_time', 'default_global_order','demand_team','demand_user','demand_description','demand_song','demand_file','notify_user_event_errors'];
 		return $scenarios;
 	}
     /**
@@ -72,7 +72,25 @@ class ActivityType extends \yii\db\ActiveRecord
             'default_end_time' => Yii::t('app','Default End Time'),
             'default_global_order' => Yii::t('app','Default global order'),
 			'team_type_id' => Yii::t('app','Team type'),
+			'allow_freehand_team' => Yii::t('app','Allow text name entry'),
+			'allow_freehand_user' => Yii::t('app','Allow text name entry'),
         ];
+    }
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'name='.$this->name.'; using_team='.$this->using_team.'; using_user='.$this->using_user
+			.'description='.$this->description.'; use_globally='.$this->use_globally.'; using_song='.$this->using_song
+			.'file='.$this->file.'; bible_verse='.$this->bible_verse.'; special_needs='.$this->special_needs
+			.'notify_user_event_errors='.$this->notify_user_event_errors.'; default_start_time='.$this->default_start_time.'; default_end_time='.$this->default_end_time
+			.'default_global_order='.$this->default_global_order.'; team_type_id='.$this->team_type_id.'; allow_freehand_team='.$this->allow_freehand_team
+			.'allow_freehand_user='.$this->allow_freehand_user;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
     }
     public static function getAllActivityTypes($church_id)
     {

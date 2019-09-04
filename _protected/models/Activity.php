@@ -39,7 +39,7 @@ class Activity extends \yii\db\ActiveRecord
     }
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['name','bible_verse', 'description', 'start_time','end_time','church_id','activity_type_id','event_id','user_id', 'team_id', 'song_id','global_order'];
+		$scenarios['create'] = ['freehand_user','freehand_team','name','bible_verse', 'description', 'start_time','end_time','church_id','activity_type_id','event_id','user_id', 'team_id', 'song_id','global_order'];
 		return $scenarios;
 	}
     /**
@@ -52,7 +52,7 @@ class Activity extends \yii\db\ActiveRecord
             [['activity_type_id', 'event_id', 'user_id', 'team_id', 'song_id', 'global_order'], 'integer'],
             [['description','bible_verse'], 'string'],
             [['start_time', 'end_time'], 'safe'],
-            [['name'], 'string', 'max' => 100],
+            [['name','freehand_user','freehand_team'], 'string', 'max' => 100],
             [['activity_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ActivityType::className(), 'targetAttribute' => ['activity_type_id' => 'id']],
             [['event_id'], 'exist', 'skipOnError' => true, 'targetClass' => Event::className(), 'targetAttribute' => ['event_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -82,6 +82,8 @@ class Activity extends \yii\db\ActiveRecord
 			'team_name' => Yii::t('app', 'Name'),
 			'start_date' => Yii::t('app', 'Start Date'),
 			'event_name' => Yii::t('app', 'Name'),
+			'freehand_user' => Yii::t('app', 'Text name entry'),
+			'freehand_team' => Yii::t('app', 'Text name entry'),
         ];
     }
 	public function __toString()
@@ -90,7 +92,7 @@ class Activity extends \yii\db\ActiveRecord
         {
             return (string) 'id='.$this->id.'; name='.$this->name.'; description='.$this->description.'; start_time='
 				.$this->start_time.'; end_time='.$this->end_time.'; global_order='
-				.$this->global_order.'; team_id='.$this->team_id.'; user_id='.$this->user_id
+				.$this->global_order.'; team_id='.$this->team_id.'; freehand_team='.$this->freehand_team.'; user_id='.$this->user_id.'; freehand_user='.$this->freehand_user
 				.'; song_id='.$this->song_id.'; bible_verse='.$this->bible_verse;
         } 
         catch (Exception $exception) 
@@ -198,10 +200,10 @@ class Activity extends \yii\db\ActiveRecord
 				($isTeamBlocked
 					?$preRed.Yii::t('app', 'Unavailable-team').$postRed
 					:$team->name)
-				:($model->activityType->using_team=='Demand'
+				:($model->activityType->using_team=='Demand' && (!$model->freehand_team || strlen($model->freehand_team)<2)
 					?$preRed.Yii::t('app', 'Missing-team').$postRed
-					:'');		
-            if (($model->activityType->using_team=='Demand' && ($team == null || strlen($team->name) == 0)) ||$isTeamBlocked)
+					:($model->freehand_team && strlen($model->freehand_team)>1)?$model->freehand_team:'');		
+            if (($model->activityType->using_team=='Demand' && ($team == null || strlen($team->name) == 0)&& (!$model->freehand_team || strlen($model->freehand_team)<2)) ||$isTeamBlocked)
             {
                 $isRed = true;
             }					
@@ -212,8 +214,8 @@ class Activity extends \yii\db\ActiveRecord
 			$isUserBlocked=$user!=null ? $user->IsUserBlocked($start_date):false;
 			$value.=$user!=null && strlen($user->display_name)>0
 				?($isUserBlocked?$preRed.Yii::t('app', 'Unavailable-user').$postRed:($showImages?User::getThumbnailMedium($user->id):'').$user->display_name)
-				:($model->activityType->using_user=='Demand'?$preRed.Yii::t('app', 'Missing-user').$postRed:'');							
-            if (($model->activityType->using_user=='Demand' && ($user == null || strlen($user->display_name) == 0)) || $isUserBlocked)
+				:($model->activityType->using_user=='Demand' && (!$model->freehand_user || strlen($model->freehand_user)<2)?$preRed.Yii::t('app', 'Missing-user').$postRed:($model->freehand_user && strlen($model->freehand_user)>1?$model->freehand_user:''));							
+            if (($model->activityType->using_user=='Demand' && ($user == null || strlen($user->display_name) == 0)&& (!$model->freehand_user || strlen($model->freehand_user)<2)) || $isUserBlocked)
             {
                 $isRed = true;
             }

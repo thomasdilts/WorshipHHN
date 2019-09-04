@@ -242,4 +242,10 @@
 'You are scheduled to do the task given in the subject of this email. Please let us know if you can come or not by clicking on one of the buttons below. If you want to see more about the event then click on the link at the bottom of the email. Thank you and may God Bless You!' => 'Anda dijadwalkan untuk melakukan tugas yang diberikan dalam subjek email ini. Beri tahu kami jika Anda bisa datang atau tidak dengan mengklik salah satu tombol di bawah ini. Jika Anda ingin melihat lebih banyak tentang acara tersebut, klik tautan di bagian bawah email. Terima kasih dan semoga Tuhan memberkati Anda!',
 'You probably should always set this to true. This will add a link at the bottom of the email that if the user presses the link they will come to the exact event the message is about.' => 'Anda mungkin harus selalu mengatur ini menjadi kenyataan. Ini akan menambahkan tautan di bagian bawah surel bahwa jika pengguna menekan tautan, mereka akan datang ke acara yang tepat tentang pesan tersebut.',
 'the Creator' => 'sang Pencipta',
+'Allow text name entry for team' => 'Izinkan entri nama teks untuk tim',
+'If you want a team selected will you allow a text entry of the team instead?' => 'Jika Anda ingin tim yang dipilih akankah Anda mengizinkan entri teks dari tim sebagai gantinya?',
+'Allow text name entry for user' => 'Izinkan entri nama teks untuk pengguna',
+'If you want a user selected will you allow a text entry of the user instead?' => 'Jika Anda ingin pengguna yang dipilih, apakah Anda akan mengizinkan entri teks dari pengguna?',
+'Mobilephone number' => 'Nomor ponsel',
+'This is used by the SMS messaging system to send SMS to this user.' => 'Ini digunakan oleh sistem pesan SMS untuk mengirim SMS ke pengguna ini.',
 ];

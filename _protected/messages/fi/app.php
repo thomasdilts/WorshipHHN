@@ -347,4 +347,7 @@
 'Delivered to the GSM network	' => 'Toimitetaan GSM-verkkoon',
 'Delivered to the phone' => 'Toimitetaan puhelimeen',
 'Delivery to phone failed' => 'Toimitus puhelimeen epäonnistui',
+'Allow text name entry' => 'Salli tekstinimen syöttäminen',
+'Text name entry' => 'Tekstinimen syöttäminen',
+'Mobilephone number' => 'Matkapuhelimen numero',
 ];

@@ -347,4 +347,7 @@
 'Delivered to the GSM network	' => 'تسليمها إلى شبكة GSM',
 'Delivered to the phone' => 'سلمت إلى الهاتف',
 'Delivery to phone failed' => 'فشل التسليم إلى الهاتف',
+'Allow text name entry' => 'السماح بإدخال اسم النص',
+'Text name entry' => 'إدخال اسم النص',
+'Mobilephone number' => 'رقم الهاتف الجوال',
 ];

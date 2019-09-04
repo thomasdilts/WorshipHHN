@@ -347,4 +347,7 @@
 'Delivered to the GSM network	' => 'GSM 네트워크에 전달',
 'Delivered to the phone' => '전화로 배달',
 'Delivery to phone failed' => '전화 배달 실패',
+'Allow text name entry' => '텍스트 이름 입력 허용',
+'Text name entry' => '텍스트 이름 입력',
+'Mobilephone number' => '휴대 전화 번호',
 ];
