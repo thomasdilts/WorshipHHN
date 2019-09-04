@@ -67,7 +67,7 @@ class AppController extends Controller
 					],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['deleteactivityfile','fileactivitydownload','alltasks','index', 'create', 'update', 'delete','removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'copy', 'notifications', 'exportexcel', 'exportpdf', 'notify', 'seenotify', 'deletenotify'],
+                        'actions' => ['deleteactivityfile','exportalltasksbyevent','alltasksbyevent','fileactivitydownload','alltasks','index', 'create', 'update', 'delete','removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'copy', 'notifications', 'exportexcel', 'exportpdf', 'notify', 'seenotify', 'deletenotify'],
                         'allow' => true,
                         'roles' => ['EventManager','ChurchAdmin','theCreator'],
 					],
@@ -79,7 +79,7 @@ class AppController extends Controller
                     ],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['fileactivitydownload','filesup','alltasks','index', 'activities','files', 'filedownload', 'deletefile', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
+                        'actions' => ['exportalltasksbyevent','alltasksbyevent','fileactivitydownload','filesup','alltasks','index', 'activities','files', 'filedownload', 'deletefile', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
                         'allow' => true,
                         'roles' => ['Member'],
                     ],
