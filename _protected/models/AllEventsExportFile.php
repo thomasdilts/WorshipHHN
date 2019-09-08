@@ -36,9 +36,9 @@ class AllEventsExportFile extends Activity
 		'AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ',
 		'BA','BB','BC','BD','BE','BF','BG','BH','BI','BJ','BK','BL','BM','BN','BO','BP','BQ','BR','BS','BT','BU','BV','BW','BX','BY','BZ',
 		'CA','CB','CC','CD','CE','CF','CG','CH','CI','CJ','CK','CL','CM','CN','CO','CP','CQ','CR','CS','CT','CU','CV','CW','CX','CY','CZ'];
-    public function exportExcel($start_date,$end_date)
+    public function exportExcel($start_date,$end_date,$filters)
     {
-        $spreadsheet = AllEventsExportFile::CreateEventReport($start_date,$end_date);
+        $spreadsheet = AllEventsExportFile::CreateEventReport($start_date,$end_date,$filters);
         $filePath = File::getTempFile();
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($filePath);
@@ -78,7 +78,7 @@ class AllEventsExportFile extends Activity
 		$spreadsheet->getActiveSheet()
 		->getCell($cell)->setValue($richBoldText);
     }
-	public static function getDataArray($start_date,$end_date,$isHtml=true,$model=null){
+	public static function getDataArray($start_date,$end_date,$isHtml=true,$filters=null){
 		$searchModel = new EventActivitySearch();
 		
         $searchModel = new EventActivitySearch();
@@ -130,16 +130,17 @@ class AllEventsExportFile extends Activity
 		ksort($uniqueNames);
 		
 		$dataByEventFiltered=[];
-		if($model){
+		if($filters){
 			$namesByKey=array();
 			$i=0;
+			$filtersArray=explode(':',$filters);
 			foreach( $uniqueNames as $rowKey=>$rowValue){
 				$namesByKey[$rowKey]=$i;
 				$i++;
 			}
 			
 			foreach( $dataByEvent as $rowKey=>$rowValue){
-				if($model->{'i'.$namesByKey[$rowValue['event_name_real']]}){
+				if($filtersArray[$namesByKey[$rowValue['event_name_real']]]){
 					$dataByEventFiltered[$rowKey]=$rowValue;
 				}
 			} 			
@@ -150,7 +151,7 @@ class AllEventsExportFile extends Activity
 		ksort($columns);
 		return [$dataByEventFiltered,$columns,$uniqueNames];
 	}
-    private function CreateEventReport($start_date,$end_date)
+    private function CreateEventReport($start_date,$end_date,$filters)
     {
         // This sucks, but we have to try to find the composer autoloader
         $paths = [__DIR__ . '/../vendor/autoload.php', // In case PhpSpreadsheet is cloned directly
@@ -170,7 +171,7 @@ class AllEventsExportFile extends Activity
             throw new \Exception('Composer autoloader could not be found. Install dependencies with `composer install` and try again.');
         }
 		
-		$dataByEvent = AllEventsExportFile::getDataArray($start_date,$end_date,false);
+		$dataByEvent = AllEventsExportFile::getDataArray($start_date,$end_date,false,$filters);
 		$columns=$dataByEvent[1];
 		$dataRows=$dataByEvent[0];
 		

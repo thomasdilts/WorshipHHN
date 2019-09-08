@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\models\AllEventsExportFile;
-use app\models\EventNameFilter;
 use app\models\Log;
 
 use app\models\LogWhat;
@@ -505,28 +504,30 @@ class EventController extends AppController
 		$model=Event::findOne(['id'=>$eventid]);
         return $this->redirect(['activities','id'=>$eventid]);
 	}
-	public function actionExportalltasksbyevent($start, $end)
+	public function actionExportalltasksbyevent($start, $end, $filters=null)
     {
-    	return AllEventsExportFile::exportExcel($start, $end);
+    	return AllEventsExportFile::exportExcel($start, $end, $filters);
 	}
-    public function actionAlltasksbyevent($start, $end)
+    public function actionAlltasksbyevent($start, $end, $filters=null)
     {
+		/*
 		$model = new EventNameFilter();
 		$model->resetTo(1);
         if ($model->load(Yii::$app->request->post())) {
             //Log::write('Activity', LogWhat::CREATE, serialize($model ), (string)$start);
         }		
-		$queries = AllEventsExportFile::getDataArray($start, $end, true, $model);
+		*/
+		$queries = AllEventsExportFile::getDataArray($start, $end, true, $filters);
 		
 		
-		$model->setFieldNames($queries[2]);
+		//$model->setFieldNames($queries[2]);
 		return $this->render('alltasksbyevent', [
             'start' => $start,
             'end' => $end,
             'columns' => $queries[1],
             'dataRows' => $queries[0],
 			'filterNames' => $queries[2],
-			'model' => $model,
+			'filters' => $filters,
         ]);
 	}
     public function actionAlltasks($start, $end)
