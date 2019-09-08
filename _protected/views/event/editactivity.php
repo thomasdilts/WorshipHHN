@@ -54,6 +54,7 @@ $GLOBALS['eventid']=$modelEvent->id;
 							'stepping' => 1,
 						],
 				]);?>
+				<?= $form->field($model, 'duration')->textInput() ?>
 			<?php }else{ ?>
 				<?= $form->field($model, 'global_order')->textInput(
 						['placeholder' => Yii::t('app', 'Global order')]) ?>	

@@ -100,6 +100,9 @@ $this->params['breadcrumbs'][] = $this->title;
 						},
 					],						
 					'name',
+					[
+						'attribute' => 'description',
+					],
 					// buttons
 					['class' => 'yii\grid\ActionColumn',
 					'header' => Yii::t('app', 'Menu'),

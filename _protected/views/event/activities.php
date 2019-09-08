@@ -50,7 +50,12 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 								$value=$model->start_time==null || strlen($model->start_time)==0 ? '<span style="color:red">'.Yii::t('app', 'Missing').'</span>': 
 								date('H:i',mktime( (int)substr($model->start_time, 0,2),(int)substr($model->start_time, 3,2),(int)substr($model->start_time, 6,2),1,1,1990));
 							}
-							return $value;
+							if($model->activityType->use_globally || !Yii::$app->user->can('EventEditor')){
+								return $value;
+							}else{
+								return $value . ' ' . Html::a('', URL::toRoute('event/uptime'). '?eventid='.$GLOBALS['event_id'].'&activityid='.$model->id, ['title'=>Yii::t('app', 'Add one minute to the duration'), 'class'=>'glyphicon glyphicon-triangle-top menubutton','id'=>'actid'.$model->id])
+										. Html::a('', URL::toRoute('event/downtime'). '?eventid='.$GLOBALS['event_id'].'&activityid='.$model->id, ['title'=>Yii::t('app', 'Subtract one minute from the duration'), 'class'=>'glyphicon glyphicon-triangle-bottom menubutton','id'=>'actid'.$model->id]);
+							}	
 						},
 					],				
 					'name',
@@ -63,8 +68,22 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 					// buttons
 					['class' => 'yii\grid\ActionColumn',
 					'header' => Yii::t('app', 'Menu'),
-					'template' => '{editactivity} {removefromevent}',
+					'template' => '{moveup} {movedown} {editactivity} {removefromevent}',
 						'buttons' => [
+							'moveup' => function ($url, $model, $key) {
+								if($model->activityType->use_globally){
+									return '';
+								}else{
+									return Yii::$app->user->can('EventEditor')?Html::a('', $url. '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Move the task up'), 'class'=>'glyphicon glyphicon-arrow-up menubutton']):'';
+								}								
+							},
+							'movedown' => function ($url, $model, $key) {
+								if($model->activityType->use_globally){
+									return '';
+								}else{
+									return Yii::$app->user->can('EventEditor')?Html::a('', $url. '&eventid='.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Move the task down'), 'class'=>'glyphicon glyphicon-arrow-down menubutton']):'';
+								}								
+							},
 							'editactivity' => function ($url, $model, $key) {
 								return Yii::$app->user->can('EventEditor')?Html::a('', $url. '&eventid='.$GLOBALS['event_id'].'&returnurl=activities%3Fid%3D'.$GLOBALS['event_id'], ['title'=>Yii::t('app', 'Edit'), 'class'=>'glyphicon glyphicon-pencil menubutton']):'';
 							},
@@ -87,6 +106,10 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 			]); ?>				
 			
 		</div>		
+
+	</div>
+	<div class="row">
+	
 		<?php if(Yii::$app->user->can('EventEditor')) { ?>
 			<div class="col-lg-6">
 				<h1>
@@ -117,7 +140,16 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 				]); ?>				
 				
 			</div>
-		<?php } ?>
+		<?php } ?>	
 	</div>
-	
 </div>
+<script>
+$( document ).ready(function() {
+	<?php if($activityid){ ?>
+		$(document).scrollTop( $("#actid<?=$activityid?>").offset().top-100 );  
+	<?php } ?>
+});
+$(function() {
+});
+
+</script>

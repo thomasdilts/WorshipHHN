@@ -67,13 +67,13 @@ class AppController extends Controller
 					],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['deleteactivityfile','exportalltasksbyevent','alltasksbyevent','fileactivitydownload','alltasks','index', 'create', 'update', 'delete','removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'copy', 'notifications', 'exportexcel', 'exportpdf', 'notify', 'seenotify', 'deletenotify'],
+                        'actions' => ['downtime','uptime','moveup','movedown','deleteactivityfile','exportalltasksbyevent','alltasksbyevent','fileactivitydownload','alltasks','index', 'create', 'update', 'delete','removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'copy', 'notifications', 'exportexcel', 'exportpdf', 'notify', 'seenotify', 'deletenotify'],
                         'allow' => true,
                         'roles' => ['EventManager','ChurchAdmin','theCreator'],
 					],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['deleteactivityfile','fileactivitydownload','exportalltasksbyevent','alltasksbyevent','alltasks','index', 'removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
+                        'actions' => ['downtime','uptime','moveup','movedown','deleteactivityfile','fileactivitydownload','exportalltasksbyevent','alltasksbyevent','alltasks','index', 'removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
                         'allow' => true,
                         'roles' => ['TeamManager','EventEditor'],
                     ],

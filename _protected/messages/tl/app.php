@@ -350,4 +350,9 @@
 'Allow text name entry' => 'Payagan ang pagpasok ng pangalan ng teksto',
 'Text name entry' => 'Pagpasok ng pangalan ng teksto',
 'Mobilephone number' => 'Numero ng mobile phone',
+'Add one minute to the duration' => 'Magdagdag ng isang minuto sa tagal',
+'Subtract one minute from the duration' => 'Magbawas ng isang minuto mula sa tagal',
+'Move the task up' => 'Ilipat ang gawain',
+'Move the task down' => 'Ilipat ang gawain',
+'Duration in minutes' => 'Tagal ng ilang minuto',
 ];

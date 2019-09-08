@@ -350,4 +350,9 @@
 'Allow text name entry' => '允許輸入文本名稱',
 'Text name entry' => '文字名稱輸入',
 'Mobilephone number' => '手機號碼',
+'Add one minute to the duration' => '添加一分鐘到持續時間',
+'Subtract one minute from the duration' => '從持續時間減去一分鐘',
+'Move the task up' => '移動任務',
+'Move the task down' => '將任務下移',
+'Duration in minutes' => '持續時間（分鐘）',
 ];

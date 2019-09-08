@@ -350,4 +350,9 @@
 'Allow text name entry' => 'อนุญาตให้ป้อนชื่อข้อความ',
 'Text name entry' => 'รายการชื่อข้อความ',
 'Mobilephone number' => 'เบอร์โทรศัพท์',
+'Add one minute to the duration' => 'เพิ่มหนึ่งนาทีในช่วงเวลา',
+'Subtract one minute from the duration' => 'ลบหนึ่งนาทีจากระยะเวลา',
+'Move the task up' => 'เลื่อนงานขึ้น',
+'Move the task down' => 'เลื่อนงานลง',
+'Duration in minutes' => 'ระยะเวลาเป็นนาที',
 ];

@@ -36,18 +36,6 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
 		<div id="using_use_globally" style = "padding-left:30px">
         <?= $form->field($model, 'default_global_order')->textInput(['type' => 'number','placeholder' => Yii::t('app', 'Integer value')]);?>
 		</div>
-		<div id="not_using_use_globally" style = "padding-left:30px">
-		<?= $form->field($model, 'default_start_time')->widget(
-			DatePicker::className(), [
-				'addon' => false,
-				'size' => 'sm',
-				'language'=>Language::getLanguageIsoNameForCalendar($language),
-				'clientOptions' => [
-					'format' => 'HH:mm',
-					'stepping' => 1,
-				],
-		]);?>
-		</div>
 		<div class="form-group">     
 			<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 
 				: Yii::t('app', 'Update'), ['class' => $model->isNewRecord 
@@ -76,12 +64,10 @@ function redrawScreen(){
 		$( "#using_the_user" ).show();
 	}
 	if($('#activitytype-use_globally').is(":checked")){
-		$( "#not_using_use_globally" ).hide();
 		$( "#using_use_globally" ).show();
 	}else{
 		$( "#activitytype-default_global_order" ).val('0');
 		$( "#using_use_globally" ).hide();
-		$( "#not_using_use_globally" ).show();
 	}
 }
 

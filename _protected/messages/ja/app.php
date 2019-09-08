@@ -350,4 +350,9 @@
 'Allow text name entry' => 'テキスト名の入力を許可',
 'Text name entry' => 'テキスト名の入力',
 'Mobilephone number' => '携帯電話番号',
+'Add one minute to the duration' => '期間に1分を追加します',
+'Subtract one minute from the duration' => '期間から1分を引く',
+'Move the task up' => 'タスクを上に移動する',
+'Move the task down' => 'タスクを下に移動する',
+'Duration in minutes' => '分単位の期間',
 ];

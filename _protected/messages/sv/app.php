@@ -350,4 +350,9 @@
 'Allow text name entry' => 'Tillåt inmatning av textnamn',
 'Text name entry' => 'Inmatning av textnamn',
 'Mobilephone number' => 'Mobilnummer',
+'Add one minute to the duration' => 'Lägg till en minut till varaktigheten',
+'Subtract one minute from the duration' => 'Dra en minut från varaktigheten',
+'Move the task up' => 'Flytta uppgiften',
+'Move the task down' => 'Flytta ner uppgiften',
+'Duration in minutes' => 'Varaktighet i minuter',
 ];

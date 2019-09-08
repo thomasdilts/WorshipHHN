@@ -12,6 +12,9 @@ use yii\helpers\ArrayHelper;
 use app\models\User;
 use yii\helpers\Url;
 
+$GLOBALS['filter_start_date']=$searchModel->filter_start_date;
+$GLOBALS['filter_end_date']=$searchModel->filter_end_date;
+
 $this->title = Yii::t('app', 'Tasks');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Events'), 'url' => ['index?EventSearch%5Bfilter_start_date%5D='.$searchModel->filter_start_date.'&EventSearch%5Bfilter_end_date%5D='.$searchModel->filter_end_date]];
 $this->params['breadcrumbs'][] = $this->title ;
@@ -81,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title ;
 							'value' => function ($model, $index, $widget) {
 
 								return Yii::$app->user->can('EventManager')?
-									Html::a($model->name, URL::toRoute('event/editactivity'). '?id='.$model->id.'&eventid='.$model->event->id, ['title'=>Yii::t('app', 'View')])
+									Html::a($model->name, URL::toRoute('event/editactivity'). '?id='.$model->id.'&eventid='.$model->event->id.'&returnurl=alltasks%3Fstart%3D'.$GLOBALS['filter_start_date'] . '%26end%3D'.$GLOBALS['filter_end_date'], ['title'=>Yii::t('app', 'View')])
 									:Html::encode($model->name);
 							},
 						],						

@@ -350,4 +350,9 @@
 'Allow text name entry' => '允许输入文本名称',
 'Text name entry' => '文字名称输入',
 'Mobilephone number' => '手机号码',
+'Add one minute to the duration' => '添加一分钟到持续时间',
+'Subtract one minute from the duration' => '从持续时间减去一分钟',
+'Move the task up' => '移动任务',
+'Move the task down' => '将任务下移',
+'Duration in minutes' => '持续时间（分钟）',
 ];

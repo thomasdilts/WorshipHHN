@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use app\models\AllEventsExportFile;
+use app\models\EventNameFilter;
 use app\models\Log;
+
 use app\models\LogWhat;
 use app\models\User;
 use app\models\File;
@@ -39,7 +41,7 @@ class EventController extends AppController
      * How many EventS we want to display per page.
      * @var int
      */
-    protected $_pageSize = 30;
+    protected $_pageSize = 1000;
 
 	public function actionExportexcel($id)
     {
@@ -110,14 +112,32 @@ class EventController extends AppController
 		File::deleteFile($id,$fileownerid,$this);
 		return $this->redirect(['editactivity','id'=>$fileownerid,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
 	}	
-	
-    public function actionEditactivity($id,$eventid,$returnurl)
-    {
-        $modelEvent = $this->findModel($eventid);
-		$modelActivity = Activity::findOne($id);
-		$modelActivityOld= clone $modelActivity;
-		$modelActivityType=ActivityType::findOne($modelActivity->activity_type_id);
+	private function getDuration($model,$event,$modelActivityType){
+		if($modelActivityType->use_globally){
+			return 1;
+		}
+		$searchModel = new ActivitySearch();
+		$searchModel->event = $event;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->_pageSize);
 		
+        if (($sort = $dataProvider->getSort()) !== false) {
+            $dataProvider->query->addOrderBy($sort->getOrders());
+        }	
+
+		$dataByRows=$dataProvider->query->all();
+		$foundPreviousRow=null;
+		$collection = new \CachingIterator(
+                  new \ArrayIterator($dataByRows));		
+        foreach ($collection as $row)
+        {
+			if($row->id==$model->id){
+				$duration = $collection->hasNext() ? $this->minutesDiff($row->start_time,$collection->getInnerIterator()->current()->start_time) : 1;
+				return $duration>0 ? $duration : 1;
+			}
+		}
+		return 1;
+	}	
+	private function getEditActivityModelArray($modelEvent,$modelActivityType,$modelActivity,$returnurl){
         $searchModel = new SongSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 5);
 		
@@ -128,14 +148,38 @@ class EventController extends AppController
 		$arrayViewModel['searchModel']=$searchModel;
 		$arrayViewModel['dataProvider']=$dataProvider;
 		$arrayViewModel['returnurl']=$returnurl;
+		return $arrayViewModel;
+	}
+    public function actionEditactivity($id,$eventid,$returnurl)
+    {
+        $modelEvent = $this->findModel($eventid);
+		$modelActivity = Activity::findOne($id);
+		$modelActivityType=ActivityType::findOne($modelActivity->activity_type_id);
+		$modelActivity->duration = $this->getDuration($modelActivity,$modelEvent,$modelActivityType);
+		$modelActivityOld= clone $modelActivity;
+		
+		$arrayViewModel = $this->getEditActivityModelArray($modelEvent,$modelActivityType,$modelActivity,$returnurl);
 
         if (!$modelActivity->load(Yii::$app->request->post())) {
+			// adjust the start_time or else it looks funny in the screen
+			$modelActivity->start_time=substr($modelActivity->start_time,0,5);
             return $this->render('editactivity', $arrayViewModel);
         }		
+		if($modelActivityType->use_globally){
+			$modelActivity->duration=1;
+			$modelActivity->start_time='00:00:01';
+		}	
+
         if ($modelActivity->save()) {
+			if(!$modelActivityType->use_globally){
+				$duration=$this->getDuration($modelActivity,$modelEvent,$modelActivityType);
+				if($modelActivity->duration!= $duration){
+					$this->changeDuration($eventid,$id,$modelActivity->duration - $duration );
+				}
+			}
 			Log::write('Activity', LogWhat::UPDATE, (string)$modelActivityOld, (string)$modelActivity);
-            Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
 			File::addFiles($modelActivity);
+            Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
 			return $this->redirect([urldecode($returnurl)]);			
         } else {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to update"));
@@ -198,7 +242,124 @@ class EventController extends AppController
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect('index');
     }
-	
+	private function addTime($time, $minutesToAdd){
+		$split = explode ( ':' , $time);
+		$minutes= (int)$split[0]*60 + (int)$split[1];
+		$minutes+=$minutesToAdd;
+		$hours = (int)($minutes/60);
+		return sprintf('%02d', $hours) . ':' . sprintf('%02d', ($minutes % 60));
+	}
+	private function minutesDiff($timeStart, $timeFinish){
+		$split = explode ( ':' , $timeStart);
+		$minutesStart= (int)$split[0]*60 + (int)$split[1];
+		$split = explode ( ':' , $timeFinish);
+		$minutesFinish= (int)$split[0]*60 + (int)$split[1];
+		return $minutesFinish - $minutesStart;
+	}	
+	private function changeDuration($eventid,$activityid,$minutesToAdd){
+		$model = $this->findModel($eventid);
+		$searchModel = new ActivitySearch();
+		$searchModel->event = $model;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->_pageSize);
+		
+        if (($sort = $dataProvider->getSort()) !== false) {
+            $dataProvider->query->addOrderBy($sort->getOrders());
+        }	
+
+		$dataByRows=$dataProvider->query->all();
+		$foundActivity=false;
+		$foundActTime='';
+        foreach ($dataByRows as $row)
+        {
+			if($foundActivity){
+				$row->start_time=$this->addTime($row->start_time, $minutesToAdd);
+				if($foundActTime>=$row->start_time){
+					break;
+				}
+				$row->save();
+			}
+			if($row->id==$activityid){
+				$foundActivity=true;
+				$foundActTime=$this->addTime($row->start_time, 0);
+			}
+		}				
+	}
+    public function actionUptime($eventid,$activityid)
+    {
+		$this->changeDuration($eventid,$activityid,1);
+		return $this->redirect(['activities','id'=>$eventid,'activityid'=>$activityid]);	
+	}
+    public function actionDowntime($eventid,$activityid)
+    {
+		$this->changeDuration($eventid,$activityid,-1);
+		return $this->redirect(['activities','id'=>$eventid,'activityid'=>$activityid]);			
+	}	
+    public function actionMoveup($eventid,$id)
+    {
+		$model = $this->findModel($eventid);
+		$searchModel = new ActivitySearch();
+		$searchModel->event = $model;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->_pageSize);
+		
+        if (($sort = $dataProvider->getSort()) !== false) {
+            $dataProvider->query->addOrderBy($sort->getOrders());
+        }	
+
+		$dataByRows=$dataProvider->query->all();
+		$foundPreviousRow=null;
+		$collection = new \CachingIterator(
+                  new \ArrayIterator($dataByRows));		
+        foreach ($collection as $row)
+        {
+			if($row->id==$id && $foundPreviousRow!=null){
+				if($foundPreviousRow!=null){
+					$durationThis=$collection->hasNext()?$this->minutesDiff($row->start_time,$collection->getInnerIterator()->current()->start_time):1;
+					$row->start_time=$foundPreviousRow->start_time;
+					$foundPreviousRow->start_time = $this->addTime($foundPreviousRow->start_time, $durationThis);
+					$row->save();
+					$foundPreviousRow->save();
+				}
+				break;
+			}
+			if(!$row->activityType->use_globally){
+				$foundPreviousRow=$row;
+			}
+		}			
+
+		return $this->redirect(['activities','id'=>$eventid,'activityid'=>$id]);		
+	}
+    public function actionMovedown($eventid,$id)
+    {
+		$model = $this->findModel($eventid);
+		$searchModel = new ActivitySearch();
+		$searchModel->event = $model;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->_pageSize);
+		
+        if (($sort = $dataProvider->getSort()) !== false) {
+            $dataProvider->query->addOrderBy($sort->getOrders());
+        }	
+
+		$dataByRows=$dataProvider->query->all();
+		$keys = array_keys($dataByRows);
+		for ($i = 0; $i < count($keys); $i++) {
+			$row=$dataByRows[$keys[$i]];
+			if($row->id==$id){
+				if(($i+1) < count($keys)){
+					$foundNextRow=$dataByRows[$keys[$i+1]];
+					$durationNext=($i+2) < count($keys) ? $this->minutesDiff($foundNextRow->start_time,$dataByRows[$keys[$i+2]]->start_time):1;
+					$foundNextRow->start_time=$row->start_time;
+					$row->start_time = $this->addTime($row->start_time, $durationNext);
+					$row->save();
+					$foundNextRow->save();
+				}
+				
+				break;
+			}
+		}
+
+		return $this->redirect(['activities','id'=>$eventid,'activityid'=>$id]);	
+	}	
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -216,7 +377,7 @@ class EventController extends AppController
         }		
     }
 	
-	private function getActivitiesToShow($model)
+	private function getActivitiesToShow($model,$activityid)
 	{
 
         $searchModel = new ActivitySearch();
@@ -230,6 +391,7 @@ class EventController extends AppController
             'dataMembersProvider' =>$dataProvider,
             'searchTypesModel' => $searchTypesModel,
             'dataTypesProvider' => $dataTypesProvider,
+			'activityid' => $activityid,
 			];			
 	}
 
@@ -297,11 +459,11 @@ class EventController extends AppController
             'dataNotificationProvider' => $dataNotificationProvider,
 			]);	
 	}
-	public function actionActivities($id)
+	public function actionActivities($id,$activityid=null)
     {
 		$model=Event::findOne(['id'=>$id]);
 		
-        return $this->render('activities', $this->getActivitiesToShow($model));	
+        return $this->render('activities', $this->getActivitiesToShow($model,$activityid));	
 	}
 	public function actionRemovefromevent($id,$eventid)
     {
@@ -319,21 +481,26 @@ class EventController extends AppController
 
 	public function actionAddtoevent($id,$eventid)
     {	
-		$activityType=ActivityType::findOne(['id'=>$id]);
-        $eventActivity = new Activity(['scenario' => 'create']);
-		$eventActivity->activity_type_id=$id;
-		$eventActivity->event_id=$eventid;
+		$modelActivityType=ActivityType::findOne(['id'=>$id]);
+        $modelActivity = new Activity(['scenario' => 'create']);
+		$modelActivity->activity_type_id=$id;
+		$modelActivity->event_id=$eventid;
+		$modelEvent=Event::findOne(['id'=>$eventid]);
 		
-		$eventActivity->start_time=$activityType->default_start_time;
-		$eventActivity->end_time=$activityType->default_end_time;
-		$eventActivity->global_order=$activityType->default_global_order;
-		$eventActivity->name=$activityType->name;
-		
-        if (!$eventActivity->save()) {
+		$modelActivity->start_time= Yii::$app->formatter->asDate($modelEvent->start_date, "HH:mm");
+		$modelActivity->end_time=$modelActivityType->default_end_time;
+		$modelActivity->global_order=$modelActivityType->default_global_order;
+		$modelActivity->name=$modelActivityType->name;
+		if($modelActivityType->use_globally){
+			$modelActivity->duration=1;
+			$modelActivity->start_time='00:00:01';
+		}
+
+        if (!$modelActivity->save()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to add"));
         }else{
-			Log::write('Activity', LogWhat::CREATE, null , (string)$eventActivity);
-			return $this->redirect(['editactivity','id'=>$eventActivity->id,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
+			Log::write('Activity', LogWhat::CREATE, null , (string)$modelActivity);
+			return $this->redirect(['editactivity','id'=>$modelActivity->id,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
 		}
 		$model=Event::findOne(['id'=>$eventid]);
         return $this->redirect(['activities','id'=>$eventid]);
@@ -344,14 +511,22 @@ class EventController extends AppController
 	}
     public function actionAlltasksbyevent($start, $end)
     {
-		$queries = AllEventsExportFile::getDataArray($start, $end);
+		$model = new EventNameFilter();
+		$model->resetTo(1);
+        if ($model->load(Yii::$app->request->post())) {
+            //Log::write('Activity', LogWhat::CREATE, serialize($model ), (string)$start);
+        }		
+		$queries = AllEventsExportFile::getDataArray($start, $end, true, $model);
+		
+		
+		$model->setFieldNames($queries[2]);
 		return $this->render('alltasksbyevent', [
             'start' => $start,
             'end' => $end,
             'columns' => $queries[1],
             'dataRows' => $queries[0],
-            'start' => $start,
-            'end' => $end,
+			'filterNames' => $queries[2],
+			'model' => $model,
         ]);
 	}
     public function actionAlltasks($start, $end)
@@ -372,7 +547,7 @@ class EventController extends AppController
 		$searchModel = new EventSearch();
 
 		$searchModel->filter_start_date = date('Y-m-d'); // get start date
-		$searchModel->filter_end_date = date("Y-m-d", strtotime('+2 month'));
+		$searchModel->filter_end_date = date("Y-m-d", strtotime('+5 month'));
 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->_pageSize);
 

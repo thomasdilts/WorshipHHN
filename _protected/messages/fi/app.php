@@ -350,4 +350,9 @@
 'Allow text name entry' => 'Salli tekstinimen syöttäminen',
 'Text name entry' => 'Tekstinimen syöttäminen',
 'Mobilephone number' => 'Matkapuhelimen numero',
+'Add one minute to the duration' => 'Lisää minuutti kestoon',
+'Subtract one minute from the duration' => 'Vähennä minuutti kestosta',
+'Move the task up' => 'Siirrä tehtävä ylös',
+'Move the task down' => 'Siirrä tehtävä alas',
+'Duration in minutes' => 'Kesto minuutteina',
 ];

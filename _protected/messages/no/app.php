@@ -350,4 +350,9 @@
 'Allow text name entry' => 'Tillat oppføring av tekstnavn',
 'Text name entry' => 'Oppføring av tekstnavn',
 'Mobilephone number' => 'Mobiltelefonnummer',
+'Add one minute to the duration' => 'Legg til ett minutt til varigheten',
+'Subtract one minute from the duration' => 'Trekk ett minutt fra varigheten',
+'Move the task up' => 'Flytt oppgaven opp',
+'Move the task down' => 'Flytt oppgaven',
+'Duration in minutes' => 'Varighet i minutter',
 ];

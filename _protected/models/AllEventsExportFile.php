@@ -78,7 +78,7 @@ class AllEventsExportFile extends Activity
 		$spreadsheet->getActiveSheet()
 		->getCell($cell)->setValue($richBoldText);
     }
-	public static function getDataArray($start_date,$end_date,$isHtml=true){
+	public static function getDataArray($start_date,$end_date,$isHtml=true,$model=null){
 		$searchModel = new EventActivitySearch();
 		
         $searchModel = new EventActivitySearch();
@@ -88,19 +88,25 @@ class AllEventsExportFile extends Activity
             ->request->queryParams, 10000);
         if (($sort = $dataProvider->getSort()) !== false) {
             $dataProvider->query->addOrderBy($sort->getOrders());
-        }	
+        }        	
 
 		$dataByRows=$dataProvider->query->all();
 		$dataByEvent=[];
 		$columns=[];
+		$uniqueNames=[];
         foreach ($dataByRows as $row)
         {
 			if(!array_key_exists($row->event_id,$dataByEvent)){
 				$event = [];
 				$event['event_name']=($isHtml?'<a href="'.URL::toRoute('event/activities').'?id='.$row->event_id.'">':'').$row->event->name.($isHtml?'</a>':'');
+				$event['event_name_real']=$row->event->name;
 				$event['start_date']=date('Y-m-d H:i',strtotime($row->event->start_date));
+				$event['description']=$row->event->description;
 				$dataByEvent[$row->event_id]=$event;
 			}	
+			if(!array_key_exists($row->event->name,$uniqueNames)){
+				$uniqueNames[$row->event->name]=$row->event->name;
+			}
 			$event=$dataByEvent[$row->event_id];
 			$status=EventActivitySearch::getStatus($row,$isHtml);
 			$status[0]=$status[0]==Yii::t('app', 'Accepted')?'':$status[0];
@@ -120,9 +126,29 @@ class AllEventsExportFile extends Activity
 				$columns[$columnKey]=['name'=>$row->activityType->name,'id'=>$row->activityType->id];
 			}
         }	
-		// sort the columns by globalOrder		
+		// sort the columns by globalOrder	
+		ksort($uniqueNames);
+		
+		$dataByEventFiltered=[];
+		if($model){
+			$namesByKey=array();
+			$i=0;
+			foreach( $uniqueNames as $rowKey=>$rowValue){
+				$namesByKey[$rowKey]=$i;
+				$i++;
+			}
+			
+			foreach( $dataByEvent as $rowKey=>$rowValue){
+				if($model->{'i'.$namesByKey[$rowValue['event_name_real']]}){
+					$dataByEventFiltered[$rowKey]=$rowValue;
+				}
+			} 			
+		}else{
+			$dataByEventFiltered=$dataByEvent;
+		}
+
 		ksort($columns);
-		return [$dataByEvent,$columns];
+		return [$dataByEventFiltered,$columns,$uniqueNames];
 	}
     private function CreateEventReport($start_date,$end_date)
     {
@@ -176,7 +202,8 @@ class AllEventsExportFile extends Activity
 		// set the column headers	
 		AllEventsExportFile::SetBold('A3',$spreadsheet,Yii::t('app', 'Start Date'));
 		AllEventsExportFile::SetBold('B3',$spreadsheet,Yii::t('app', 'Event'));
-		$i=2;
+		AllEventsExportFile::SetBold('C3',$spreadsheet,Yii::t('app', 'Description'));
+		$i=3;
 		foreach($columns as $key => $value){
 			AllEventsExportFile::SetBold(AllEventsExportFile::ColumnNumToColumnLetter[$i].'3',$spreadsheet,$value['name']);
 			$i++;
@@ -218,8 +245,9 @@ class AllEventsExportFile extends Activity
         {
             $spreadsheet->setActiveSheetIndex(0)
                 ->setCellValue('A' . $row, $rowValue['start_date'])
-                ->setCellValue('B' . $row, $rowValue['event_name']);
-			$i=2;
+                ->setCellValue('B' . $row, $rowValue['event_name'])
+                ->setCellValue('C' . $row, $rowValue['description']);
+			$i=3;
 			foreach($columns as $key=>$value){
 				if(array_key_exists($value['id'],$rowValue)){
 					if ($rowValue[$value['id']]['color']=='red')
@@ -239,14 +267,14 @@ class AllEventsExportFile extends Activity
 			}
 			$colorSetting=$setRowColor? $rowColor1:$rowColor2;
 
-	        $spreadsheet->getActiveSheet()->getStyle('A' . $row.':'.AllEventsExportFile::ColumnNumToColumnLetter[count($columns)+1] . $row)->applyFromArray($colorSetting);
+	        $spreadsheet->getActiveSheet()->getStyle('A' . $row.':'.AllEventsExportFile::ColumnNumToColumnLetter[count($columns)+2] . $row)->applyFromArray($colorSetting);
             $setRowColor = !$setRowColor;
             $row++;
 
         }
         $row--;
 
-		$spreadsheet->getActiveSheet()->getStyle('A3:'.AllEventsExportFile::ColumnNumToColumnLetter[count($columns)+1].'3')->applyFromArray(
+		$spreadsheet->getActiveSheet()->getStyle('A3:'.AllEventsExportFile::ColumnNumToColumnLetter[count($columns)+2].'3')->applyFromArray(
 		    ['fill' => [
 		                'fillType' => Fill::FILL_SOLID,
 		                'color' => ['argb' => 'CCD5D5D5'],
@@ -263,7 +291,7 @@ class AllEventsExportFile extends Activity
             ->getStyle('A2:B2')
             ->applyFromArray($styleThinBlackBorderOutline);
 		
-		for($i=0;$i<count($columns)+2;$i++){
+		for($i=0;$i<count($columns)+3;$i++){
 			$spreadsheet->getActiveSheet()
 				->getStyle(AllEventsExportFile::ColumnNumToColumnLetter[$i].'3:'. AllEventsExportFile::ColumnNumToColumnLetter[$i] . $row)->applyFromArray($styleThinBlackBorderOutline);
 			$spreadsheet->getActiveSheet()

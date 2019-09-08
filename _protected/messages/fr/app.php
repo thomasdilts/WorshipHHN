@@ -350,4 +350,9 @@
 'Allow text name entry' => 'Autoriser la saisie du nom du texte',
 'Text name entry' => 'Saisie du nom du texte',
 'Mobilephone number' => 'Numéro de téléphone portable',
+'Add one minute to the duration' => 'Ajouter une minute à la durée',
+'Subtract one minute from the duration' => 'Soustraire une minute de la durée',
+'Move the task up' => 'Déplacer la tâche vers le haut',
+'Move the task down' => 'Déplacer la tâche vers le bas',
+'Duration in minutes' => 'Durée en minutes',
 ];

@@ -350,4 +350,9 @@
 'Allow text name entry' => '텍스트 이름 입력 허용',
 'Text name entry' => '텍스트 이름 입력',
 'Mobilephone number' => '휴대 전화 번호',
+'Add one minute to the duration' => '지속 시간에 1 분 추가',
+'Subtract one minute from the duration' => '지속 시간에서 1 분 빼기',
+'Move the task up' => '작업을 위로 이동',
+'Move the task down' => '작업을 아래로 이동',
+'Duration in minutes' => '분 단위',
 ];

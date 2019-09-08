@@ -30,6 +30,7 @@ use Yii;
 class Activity extends \yii\db\ActiveRecord
 {
 	public $imageFiles;
+	public $duration;
     /**
      * {@inheritdoc}
      */
@@ -39,7 +40,7 @@ class Activity extends \yii\db\ActiveRecord
     }
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['freehand_user','freehand_team','name','bible_verse', 'description', 'start_time','end_time','church_id','activity_type_id','event_id','user_id', 'team_id', 'song_id','global_order'];
+		$scenarios['create'] = ['duration','freehand_user','freehand_team','name','bible_verse', 'description', 'start_time','end_time','church_id','activity_type_id','event_id','user_id', 'team_id', 'song_id','global_order'];
 		return $scenarios;
 	}
     /**
@@ -53,6 +54,7 @@ class Activity extends \yii\db\ActiveRecord
             [['description','bible_verse'], 'string'],
             [['start_time', 'end_time'], 'safe'],
             [['name','freehand_user','freehand_team'], 'string', 'max' => 100],
+			[['duration'], 'integer', 'max' => 300, 'min' => 1],
             [['activity_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ActivityType::className(), 'targetAttribute' => ['activity_type_id' => 'id']],
             [['event_id'], 'exist', 'skipOnError' => true, 'targetClass' => Event::className(), 'targetAttribute' => ['event_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -84,6 +86,7 @@ class Activity extends \yii\db\ActiveRecord
 			'event_name' => Yii::t('app', 'Name'),
 			'freehand_user' => Yii::t('app', 'Text name entry'),
 			'freehand_team' => Yii::t('app', 'Text name entry'),
+			'duration' => Yii::t('app', 'Duration in minutes'),
         ];
     }
 	public function __toString()

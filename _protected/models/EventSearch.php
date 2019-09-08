@@ -21,7 +21,7 @@ class EventSearch extends Event
     public function rules()
     {
         return [
-            [['filter_start_date','filter_end_date','name','use_team_or_user','use_name','use_globally','use_song','use_file','default_start_time','default_end_time'], 'safe'],
+            [['description','filter_start_date','filter_end_date','name','use_team_or_user','use_name','use_globally','use_song','use_file','default_start_time','default_end_time'], 'safe'],
         ];
     }
 
@@ -61,6 +61,10 @@ class EventSearch extends Event
             'asc' => ['name' => SORT_ASC],
             'desc' => ['name' => SORT_DESC],
         ];
+        $dataProvider->sort->attributes['description'] = [
+            'asc' => ['description' => SORT_ASC],
+            'desc' => ['description' => SORT_DESC],
+        ];
 		
 		$this->load($params);
         if (!$this->validate()) {
@@ -68,7 +72,8 @@ class EventSearch extends Event
         }
 
 		$query->andFilterWhere(['between', 'start_date', $this->filter_start_date, $this->filter_end_date])
-			->andFilterWhere(['like', 'name', $this->name]);
+			->andFilterWhere(['like', 'name', $this->name])
+			->andFilterWhere(['like', 'description', $this->description]);
         return $dataProvider;
     }
 }

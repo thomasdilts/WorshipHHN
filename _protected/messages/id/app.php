@@ -350,4 +350,9 @@
 'Allow text name entry' => 'Izinkan entri nama teks',
 'Text name entry' => 'Entri nama teks',
 'Mobilephone number' => 'Nomor ponsel',
+'Add one minute to the duration' => 'Tambahkan satu menit ke durasi',
+'Subtract one minute from the duration' => 'Kurangi satu menit dari durasi',
+'Move the task up' => 'Pindahkan tugas ke atas',
+'Move the task down' => 'Pindahkan tugas ke bawah',
+'Duration in minutes' => 'Durasi dalam hitungan menit',
 ];

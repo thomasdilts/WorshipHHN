@@ -350,4 +350,9 @@
 'Allow text name entry' => 'Разрешить ввод имени текста',
 'Text name entry' => 'Текстовое имя',
 'Mobilephone number' => 'Номер мобильного телефона',
+'Add one minute to the duration' => 'Добавьте одну минуту к продолжительности',
+'Subtract one minute from the duration' => 'Вычтите одну минуту из продолжительности',
+'Move the task up' => 'Переместить задачу вверх',
+'Move the task down' => 'Переместить задачу вниз',
+'Duration in minutes' => 'Продолжительность в минутах',
 ];

@@ -15,6 +15,8 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
 
 			<?= $form->field($model, 'name')->textInput(
 					['placeholder' => Yii::t('app', 'Create Event name'), 'autofocus' => true]) ?>
+			<?= $form->field($model, 'description')->textarea(
+					['placeholder' => Yii::t('app', 'Description')]) ?>
 			<?= $form->field($model, 'start_date')->widget(
 				DatePicker::className(), [
 					'addon' => false,
