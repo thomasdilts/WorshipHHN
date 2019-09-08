@@ -355,4 +355,6 @@
 'Move the task up' => 'نقل المهمة لأعلى',
 'Move the task down' => 'نقل المهمة لأسفل',
 'Duration in minutes' => 'المدة بالدقائق',
+'All' => 'الكل',
+'None' => 'لا شيء',
 ];

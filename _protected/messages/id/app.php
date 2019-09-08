@@ -355,4 +355,6 @@
 'Move the task up' => 'Pindahkan tugas ke atas',
 'Move the task down' => 'Pindahkan tugas ke bawah',
 'Duration in minutes' => 'Durasi dalam hitungan menit',
+'All' => 'Semua',
+'None' => 'Tidak ada',
 ];

@@ -355,4 +355,6 @@
 'Move the task up' => 'タスクを上に移動する',
 'Move the task down' => 'タスクを下に移動する',
 'Duration in minutes' => '分単位の期間',
+'All' => 'すべて',
+'None' => '無し',
 ];

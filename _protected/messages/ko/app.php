@@ -355,4 +355,6 @@
 'Move the task up' => '작업을 위로 이동',
 'Move the task down' => '작업을 아래로 이동',
 'Duration in minutes' => '분 단위',
+'All' => '모든',
+'None' => '없음',
 ];

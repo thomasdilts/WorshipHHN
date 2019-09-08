@@ -355,4 +355,6 @@
 'Move the task up' => 'Siirrä tehtävä ylös',
 'Move the task down' => 'Siirrä tehtävä alas',
 'Duration in minutes' => 'Kesto minuutteina',
+'All' => 'Kaikki',
+'None' => 'Ei mitään',
 ];

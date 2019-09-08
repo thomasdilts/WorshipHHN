@@ -355,4 +355,6 @@
 'Move the task up' => 'Ilipat ang gawain',
 'Move the task down' => 'Ilipat ang gawain',
 'Duration in minutes' => 'Tagal ng ilang minuto',
+'All' => 'Lahat',
+'None' => 'Wala',
 ];

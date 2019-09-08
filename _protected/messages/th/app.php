@@ -355,4 +355,6 @@
 'Move the task up' => 'เลื่อนงานขึ้น',
 'Move the task down' => 'เลื่อนงานลง',
 'Duration in minutes' => 'ระยะเวลาเป็นนาที',
+'All' => 'ทั้งหมด',
+'None' => 'ไม่มี',
 ];

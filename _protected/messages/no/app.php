@@ -355,4 +355,6 @@
 'Move the task up' => 'Flytt oppgaven opp',
 'Move the task down' => 'Flytt oppgaven',
 'Duration in minutes' => 'Varighet i minutter',
+'All' => 'Alle',
+'None' => 'Ingen',
 ];

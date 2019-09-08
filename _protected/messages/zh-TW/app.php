@@ -355,4 +355,6 @@
 'Move the task up' => '移動任務',
 'Move the task down' => '將任務下移',
 'Duration in minutes' => '持續時間（分鐘）',
+'All' => '所有',
+'None' => '沒有',
 ];

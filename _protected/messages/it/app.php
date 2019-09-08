@@ -355,4 +355,6 @@
 'Move the task up' => 'Sposta l\'attività verso l\'alto',
 'Move the task down' => 'Sposta l\'attività verso il basso',
 'Duration in minutes' => 'Durata in minuti',
+'All' => 'Tutti',
+'None' => 'Nessuna',
 ];

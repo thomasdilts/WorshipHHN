@@ -355,4 +355,6 @@
 'Move the task up' => 'Mover a tarefa para cima',
 'Move the task down' => 'Mover a tarefa para baixo',
 'Duration in minutes' => 'Duração em minutos',
+'All' => 'Todos',
+'None' => 'Nenhum',
 ];
