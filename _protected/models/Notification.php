@@ -66,7 +66,8 @@ class Notification extends \yii\db\ActiveRecord
         {
             return (string) 'id='.$this->id.'; status='.$this->status.'; notified_date='.$this->notified_date.'; message_name='
 				.$this->message_name.'; activity_id='.$this->activity_id.'; event_id='
-				.$this->event_id.'; user_id='.$this->user_id;
+				.$this->event_id.'; user_id='.$this->user_id
+				.'sms_id='.$this->sms_id.'; sms_status_id='.$this->sms_status_id.'; sms_status='.$this->sms_status;
         } 
         catch (Exception $exception) 
         {
@@ -214,7 +215,7 @@ class Notification extends \yii\db\ActiveRecord
 				$htmlMessage.="\r\n" . $model->custom_message;
 			}			
 			if($template->use_auto_subject){
-				$subject = "\r\n" . $event->name . ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm") . ' ' . $activityname;
+				$htmlMessage.= "\r\n" . $event->name . ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm") . ' ' . $activityname;
 			}
 			if($template->show_link_to_object){
 				$htmlMessage.= "\r\n" . $linkHost. '/event/activities?id=' . $event->id;

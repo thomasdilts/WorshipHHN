@@ -200,12 +200,8 @@ class Activity extends \yii\db\ActiveRecord
 			$isTeamBlocked=$team!=null ? $team->IsTeamBlocked($start_date):false;
 			$value.=strlen($value)>0?$seperator:'';
 			$value.=$team!=null && strlen($team->name)>0?
-				($isTeamBlocked
-					?$preRed.Yii::t('app', 'Unavailable-team').$postRed
-					:$team->name)
-				:($model->activityType->using_team=='Demand' && (!$model->freehand_team || strlen($model->freehand_team)<2)
-					?$preRed.Yii::t('app', 'Missing-team').$postRed
-					:($model->freehand_team && strlen($model->freehand_team)>1)?$model->freehand_team:'');		
+				($isTeamBlocked?$preRed.Yii::t('app', 'Unavailable-team').$postRed:$team->name)
+				:($model->activityType->using_team=='Demand' && (!$model->freehand_team || strlen($model->freehand_team)<2)?$preRed.Yii::t('app', 'Missing-team').$postRed:($model->freehand_team && strlen($model->freehand_team)>1?$model->freehand_team:''));		
             if (($model->activityType->using_team=='Demand' && ($team == null || strlen($team->name) == 0)&& (!$model->freehand_team || strlen($model->freehand_team)<2)) ||$isTeamBlocked)
             {
                 $isRed = true;
