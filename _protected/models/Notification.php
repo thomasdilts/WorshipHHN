@@ -181,7 +181,7 @@ class Notification extends \yii\db\ActiveRecord
 				$htmlMessage.="<hr style='color:lightblue;background-color:lightblue;height:2px;margin:3px;' />\r\n";
 			}
 
-			$htmlMessage.="<p  style='width:100%;margin-bottom:30px;' >" . Notification::HtmlizeString($template->body) . "</p>\r\n";
+			$htmlMessage.=$template->body?"<p  style='width:100%;margin-bottom:30px;' >" . Notification::HtmlizeString($template->body) . "</p>\r\n":'';
 			if($template->show_reject_button || $template->show_accept_button){
 				$htmlMessage.="<div  style='min-width:100%;' >\r\n";
 			}
@@ -210,15 +210,18 @@ class Notification extends \yii\db\ActiveRecord
 			Log::write('Notification', LogWhat::CREATE, 'email='.$user->email.'; subject='.$subject, 'template='.$template->name.'; custom_message='.$model->custom_message);
 		}else{
 			// SMS
-			$htmlMessage=$template->body;
+			$htmlMessage=$template->body?$template->body:'';
 			if($template->allow_custom_message && $model->custom_message && strlen($model->custom_message)>0){
-				$htmlMessage.="\r\n" . $model->custom_message;
+				$htmlMessage.=strlen($htmlMessage)>0?"\r\n":'';
+				$htmlMessage.=$model->custom_message;
 			}			
 			if($template->use_auto_subject){
-				$htmlMessage.= "\r\n" . $event->name . ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm") . ' ' . $activityname;
+				$htmlMessage.=strlen($htmlMessage)>0?"\r\n":'';
+				$htmlMessage.= $event->name . ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm") . ' ' . $activityname;
 			}
 			if($template->show_link_to_object){
-				$htmlMessage.= "\r\n" . $linkHost. '/event/activities?id=' . $event->id;
+				$htmlMessage.=strlen($htmlMessage)>0?"\r\n":'';
+				$htmlMessage.= $linkHost. '/event/activities?id=' . $event->id;
 			}
 			
 			$smsResponse = Yii::$app->SmsMessaging->sendSms($htmlMessage, $user->mobilephone, $model->send_from_address?Yii::$app->user->identity->mobilephone:'');

@@ -46,7 +46,7 @@ class MessageTemplate extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['church_id', 'message_type_id','language_id', 'name', 'show_accept_button','use_auto_subject', 'show_reject_button', 'show_link_to_object', 'allow_custom_message','body',], 'required'],
+            [['church_id', 'message_type_id','language_id', 'name', 'show_accept_button','use_auto_subject', 'show_reject_button', 'show_link_to_object', 'allow_custom_message',], 'required'],
             [['church_id', 'show_accept_button', 'show_reject_button', 'show_link_to_object', 'allow_custom_message','language_id','message_type_id'], 'integer'],
             [['body','message_system'], 'string'],
             [['name'], 'string', 'max' => 100],
