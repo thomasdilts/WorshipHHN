@@ -8,7 +8,15 @@ use nex\datepicker\DatePicker;
 use app\models\Notification;
 use yii\helpers\ArrayHelper;
 use app\models\User;
+use app\models\Church;
 use app\models\Language;
+
+$church=Church::findOne(Yii::$app->user->identity->church_id);
+Yii::$app->formatter->defaultTimeZone=$church->time_zone;
+Yii::$app->formatter->timeZone=$church->time_zone;
+$today= strtotime(Yii::$app->formatter->asDate(time() , "Y-MM-dd HH:mm"));
+$GLOBALS['today']=$today;
+$GLOBALS['showAcceptRefuseForDays']=$church->refuse_task_days;
 
 $language=Language::findOne(Yii::$app->user->identity->language_id);
 $this->title = Yii::t('app', 'Tasks') . ' - ' .$model->display_name;
@@ -158,7 +166,8 @@ $this->params['breadcrumbs'][] = $this->title;
 						'template' => '{taskaccept} {taskreject}',
 							'buttons' => [
 								'taskaccept' => function ($url, $model, $key) {
-									return $model->team || Yii::$app->user->identity->id != $model->user_id?'':Html::a('', $url, 
+									$daysDiff=(strtotime($model->event->start_date) - $GLOBALS['today'])/60/60/24;	
+									return $model->team || Yii::$app->user->identity->id != $model->user_id || $daysDiff<$GLOBALS['showAcceptRefuseForDays']?'':Html::a('', $url, 
 									['title'=>Yii::t('app', 'Accept'), 
 										'class'=>'glyphicon glyphicon-check menubutton',
 										'data' => [
@@ -167,7 +176,8 @@ $this->params['breadcrumbs'][] = $this->title;
 									]);
 								},
 								'taskreject' => function ($url, $model, $key) {
-									return $model->team || Yii::$app->user->identity->id != $model->user_id?'':Html::a('', $url, 
+									$daysDiff=(strtotime($model->event->start_date) - $GLOBALS['today'])/60/60/24;	
+									return $model->team || Yii::$app->user->identity->id != $model->user_id || $daysDiff<$GLOBALS['showAcceptRefuseForDays']?'':Html::a('', $url, 
 									['title'=>Yii::t('app', 'Delete'), 
 										'class'=>'glyphicon glyphicon-trash menubutton',
 										'data' => [
@@ -231,7 +241,8 @@ $this->params['breadcrumbs'][] = $this->title;
 						'template' => '{taskaccept} {taskreject}',
 							'buttons' => [
 								'taskaccept' => function ($url, $model, $key) {
-									return $model->team|| Yii::$app->user->identity->id != $model->user_id?'':Html::a('', $url, 
+									$daysDiff=(strtotime($model->event->start_date) - $GLOBALS['today'])/60/60/24;	
+									return $model->team|| Yii::$app->user->identity->id != $model->user_id || $daysDiff<$GLOBALS['showAcceptRefuseForDays']?'':Html::a('', $url, 
 									['title'=>Yii::t('app', 'Accept'), 
 										'class'=>'glyphicon glyphicon-check menubutton',
 										'data' => [
@@ -240,7 +251,8 @@ $this->params['breadcrumbs'][] = $this->title;
 									]);
 								},
 								'taskreject' => function ($url, $model, $key) {
-									return $model->team|| Yii::$app->user->identity->id != $model->user_id?'':Html::a('', $url, 
+									$daysDiff=(strtotime($model->event->start_date) - $GLOBALS['today'])/60/60/24;	
+									return $model->team|| Yii::$app->user->identity->id != $model->user_id || $daysDiff<$GLOBALS['showAcceptRefuseForDays']?'':Html::a('', $url, 
 									['title'=>Yii::t('app', 'Delete'), 
 										'class'=>'glyphicon glyphicon-trash menubutton',
 										'data' => [

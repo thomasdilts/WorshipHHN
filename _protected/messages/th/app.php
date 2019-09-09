@@ -357,4 +357,5 @@
 'Duration in minutes' => 'ระยะเวลาเป็นนาที',
 'All' => 'ทั้งหมด',
 'None' => 'ไม่มี',
+'Allow the refusal of tasks for this number of days' => 'อนุญาตให้ปฏิเสธงานเป็นจำนวนวัน',
 ];

@@ -357,4 +357,5 @@
 'Duration in minutes' => 'Duração em minutos',
 'All' => 'Todos',
 'None' => 'Nenhum',
+'Allow the refusal of tasks for this number of days' => 'Permitir a recusa de tarefas por esse número de dias',
 ];

@@ -357,4 +357,5 @@
 'Duration in minutes' => 'Kesto minuutteina',
 'All' => 'Kaikki',
 'None' => 'Ei mitään',
+'Allow the refusal of tasks for this number of days' => 'Salli tehtävien epääminen tämän päivän päivien ajan',
 ];

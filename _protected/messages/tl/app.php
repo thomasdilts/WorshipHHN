@@ -357,4 +357,5 @@
 'Duration in minutes' => 'Tagal ng ilang minuto',
 'All' => 'Lahat',
 'None' => 'Wala',
+'Allow the refusal of tasks for this number of days' => 'Payagan ang pagtanggi ng mga gawain para sa bilang ng mga araw na ito',
 ];

@@ -357,4 +357,5 @@
 'Duration in minutes' => 'Varighed i minutter',
 'All' => 'Alle',
 'None' => 'Ingen',
+'Allow the refusal of tasks for this number of days' => 'Tillad afvisning af opgaver i dette antal dage',
 ];

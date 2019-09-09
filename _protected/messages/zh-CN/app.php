@@ -357,4 +357,5 @@
 'Duration in minutes' => '持续时间（分钟）',
 'All' => '所有',
 'None' => '没有',
+'Allow the refusal of tasks for this number of days' => '允许在这几天内拒绝任务',
 ];

@@ -357,4 +357,5 @@
 'Duration in minutes' => '분 단위',
 'All' => '모든',
 'None' => '없음',
+'Allow the refusal of tasks for this number of days' => '이 일 동안 작업 거부를 허용',
 ];

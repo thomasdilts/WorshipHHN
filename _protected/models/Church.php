@@ -30,7 +30,7 @@ class Church extends \yii\db\ActiveRecord
     }
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['name', 'admin_email'];
+		$scenarios['create'] = ['name', 'admin_email','refuse_task_days'];
 		return $scenarios;
 
 	}
@@ -63,7 +63,8 @@ class Church extends \yii\db\ActiveRecord
             ['admin_email', 'required'],
             ['admin_email', 'email'],
 			['paper_margin_top_bottom', 'double','min' => 0, 'max' => 1],
-			['paper_margin_right_left', 'double','min' => 0, 'max' => 1],
+			['paper_margin_top_bottom', 'double','min' => 0, 'max' => 1],
+			['refuse_task_days', 'integer','min' => 0, 'max' => 1000],
             ['admin_email', 'string', 'max' => 100],			
         ];
     }
@@ -73,7 +74,7 @@ class Church extends \yii\db\ActiveRecord
         {
             return (string) 'id='.$this->id.'; name='.$this->name.'; time_zone='.$this->time_zone.'; paper_size='
 				.$this->paper_size.'; admin_email='.$this->admin_email.'; margin-top='
-				.$this->paper_margin_top_bottom.'; margin-side='.$this->paper_margin_right_left;
+				.$this->paper_margin_top_bottom.'; margin-side='.$this->paper_margin_right_left.'; refuse_task_days='.$this->refuse_task_days;
         } 
         catch (Exception $exception) 
         {
@@ -92,6 +93,7 @@ class Church extends \yii\db\ActiveRecord
             'paper_size' => Yii::t('app', 'Paper size'). ' ' . '(A4, Letter, ...)',
             'paper_margin_top_bottom' => Yii::t('app', 'Paper margin top and bottom from zero to one'),
             'paper_margin_right_left' => Yii::t('app', 'Paper margin right and left from zero to one'),
+            'refuse_task_days' => Yii::t('app', 'Allow the refusal of tasks for this number of days'),
         ];
     }
 

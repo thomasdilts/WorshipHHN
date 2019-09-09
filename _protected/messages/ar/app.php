@@ -357,4 +357,5 @@
 'Duration in minutes' => 'المدة بالدقائق',
 'All' => 'الكل',
 'None' => 'لا شيء',
+'Allow the refusal of tasks for this number of days' => 'اسمح برفض المهام لهذا العدد من الأيام',
 ];

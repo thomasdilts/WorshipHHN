@@ -357,4 +357,5 @@
 'Duration in minutes' => 'Durasi dalam hitungan menit',
 'All' => 'Semua',
 'None' => 'Tidak ada',
+'Allow the refusal of tasks for this number of days' => 'Izinkan penolakan tugas selama beberapa hari ini',
 ];

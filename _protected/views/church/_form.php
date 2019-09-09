@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'paper_size')->textInput() ?>
         <?= $form->field($model, 'paper_margin_top_bottom')->input('float') ?>
         <?= $form->field($model, 'paper_margin_right_left')->input('float') ?>
+        <?= $form->field($model, 'refuse_task_days')->input('integer') ?>
 
     <div class="form-group">     
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 

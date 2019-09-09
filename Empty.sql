@@ -256,7 +256,8 @@ CREATE TABLE `church` (
   `time_zone` varchar(50) NOT NULL DEFAULT 'Europe/Stockholm',
   `paper_size` varchar(50) NOT NULL DEFAULT 'A4',
   `paper_margin_top_bottom` float NOT NULL DEFAULT 0.25,
-  `paper_margin_right_left` float NOT NULL DEFAULT 0.5
+  `paper_margin_right_left` float NOT NULL DEFAULT 0.5,
+  `refuse_task_days` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

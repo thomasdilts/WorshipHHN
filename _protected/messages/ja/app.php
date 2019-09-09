@@ -357,4 +357,5 @@
 'Duration in minutes' => '分単位の期間',
 'All' => 'すべて',
 'None' => '無し',
+'Allow the refusal of tasks for this number of days' => 'この日数の間タスクの拒否を許可する',
 ];

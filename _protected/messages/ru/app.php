@@ -357,4 +357,5 @@
 'Duration in minutes' => 'Продолжительность в минутах',
 'All' => 'Все',
 'None' => 'Никто',
+'Allow the refusal of tasks for this number of days' => 'Разрешить отказ от заданий на это количество дней',
 ];
