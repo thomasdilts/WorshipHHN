@@ -21,13 +21,15 @@ $this->params['breadcrumbs'][] = $this->title ;
 ?>
 
 <div class="eventtemplate-form">
-	<h1>
-		<?= Html::encode( Yii::t('app', 'Tasks'))?>  
-		<span class="pull-right" style="margin-bottom:5px;display:inline-block">
-			<a href='alltasksbyevent?start=<?=$searchModel->filter_start_date?>&end=<?=$searchModel->filter_end_date?>' class='btn btn-primary'><span class="glyphicon glyphicon-tasks"></span><?=Yii::t('app', 'Tasks by event')?></a>
-			<a href="index?EventSearch%5Bfilter_start_date%5D=<?=$searchModel->filter_start_date?>&EventSearch%5Bfilter_end_date%5D=<?=$searchModel->filter_end_date?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
-		</span>  			
-	</h1>
+	<div class="row">
+		<h1 style="margin-left:15px;">
+			<?= Html::encode( Yii::t('app', 'Tasks'))?>  
+			<span class="pull-right" style="margin-bottom:5px;">
+				<a href='alltasksbyevent?start=<?=$searchModel->filter_start_date?>&end=<?=$searchModel->filter_end_date?>' class='btn btn-primary'><span class="glyphicon glyphicon-tasks"></span><?=Yii::t('app', 'Tasks by event')?></a>
+				<a href="index?EventSearch%5Bfilter_start_date%5D=<?=$searchModel->filter_start_date?>&EventSearch%5Bfilter_end_date%5D=<?=$searchModel->filter_end_date?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+			</span>  			
+		</h1>
+	</div>
 	<div class="row">
 
 		<div class="col-lg-6">

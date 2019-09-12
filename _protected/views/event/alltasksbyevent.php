@@ -63,13 +63,15 @@ $this->params['breadcrumbs'][] = $this->title ;
 	}
 </style>
 <div class="eventtemplate-form">
-	<h1>
-		<?= Html::encode( Yii::t('app', 'Tasks by event'))?>  
-		<span class="pull-right" style="margin-bottom:5px;display:inline-block">
-			<a href="exportalltasksbyevent?start=<?=$start?>&end=<?=$end?><?=$filters?'&filters='.$filters:''?>" class='btn btn-success'><span class="glyphicon glyphicon-download-alt"></span>Excel</a>
-			<a href="alltasks?start=<?=$start?>&end=<?=$end?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
-		</span>  					
-	</h1>
+	<div class="row">
+		<h1 style="margin-left:15px;">
+			<?= Html::encode( Yii::t('app', 'Tasks by event'))?>  
+			<span class="pull-right" style="margin-bottom:5px;display:inline-block">
+				<a href="exportalltasksbyevent?start=<?=$start?>&end=<?=$end?><?=$filters?'&filters='.$filters:''?>" class='btn btn-success'><span class="glyphicon glyphicon-download-alt"></span>Excel</a>
+				<a href="alltasks?start=<?=$start?>&end=<?=$end?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
+			</span>  					
+		</h1>
+	</div>
 	<div class="row">
 
 	<table class="table table-striped table-bordered">

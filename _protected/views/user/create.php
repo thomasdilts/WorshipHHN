@@ -11,17 +11,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-create">
 
-    <h1><?= Html::encode($this->title) ?>
-		<span class="pull-right" style="margin-bottom:5px">
-			<a href='<?=URL::toRoute('doc/doc')?>?page=user-profile&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('user/create')?>%3Ftemp%3Dtemp' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			                 
-		</span>
-	</h1>
-
-    <div class="">
+	<div class="row">
+		<h1 style="margin-left:15px;">
+			<?= Html::encode($this->title) ?>
+			<span class="pull-right" style="margin-bottom:5px">
+				<a href='<?=URL::toRoute('doc/doc')?>?page=user-profile&returnName=<?=$this->title?>&returnUrl=<?=URL::toRoute('user/create')?>%3Ftemp%3Dtemp' class='btn btn-primary'><span class="glyphicon glyphicon-question-sign"></span></a>			                 
+			</span>
+		</h1>
+	</div>
+	<div class="row">	
 
         <?= $this->render('_form', ['model' => $model,'returnUrl'=>'index','image'=>$image]) ?>
 
-    </div>
-
+	</div>
 </div>
 

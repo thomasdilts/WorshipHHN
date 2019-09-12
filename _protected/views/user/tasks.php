@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-task">
 	<div class="row">
-		<h1>
+		<h1 style="margin-left:15px;">
 			<?= Html::encode($this->title) . User::getThumbnailMedium($model->id) ?>
 			<span class="pull-right" style="margin-bottom:5px">
 				<a href="taskexportexcel?id=<?=$model->id?>&start=<?=$searchModel->filter_start_date?>&end=<?=$searchModel->filter_end_date?>" class='btn btn-success'><span class="glyphicon glyphicon-download-alt"></span>Excel</a>
