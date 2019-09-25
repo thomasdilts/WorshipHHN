@@ -533,6 +533,31 @@ ALTER TABLE `log`
 ALTER TABLE `log`
   ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`church_id`) REFERENCES `church` (`id`);
 
+CREATE TABLE `user_notification` (
+  `id` int(11) NOT NULL,
+  `sms_status` varchar(400) DEFAULT NULL,
+  `sms_status_id` varchar(200) DEFAULT NULL,
+  `sms_id` varchar(200) DEFAULT NULL,
+  `user_from_id` int(11) NOT NULL,
+  `user_to_id` int(11) NOT NULL,
+  `team_id` int(11) DEFAULT NULL,
+  `notified_date` datetime DEFAULT NULL,
+  `message_html` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+
+ALTER TABLE `user_notification`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_notification_ibfk_2` (`user_to_id`),
+  ADD KEY `user_notification_ibfk_3` (`user_from_id`),
+  ADD KEY `user_notification_ibfk_4` (`team_id`);
+
+ALTER TABLE `user_notification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+ALTER TABLE `user_notification`
+  ADD CONSTRAINT `user_notification_ibfk_2` FOREIGN KEY (`user_to_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `user_notification_ibfk_3` FOREIGN KEY (`user_from_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `user_notification_ibfk_4` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`);
 
 --
 -- Indexes for dumped tables
