@@ -11,9 +11,12 @@ use app\models\UserSearch;
 use app\models\ActivityExportFile;
 use app\models\UserActivitySearch;
 use app\models\Notification;
+use app\models\UserNotification;
+use app\models\UserNotificationSearch;
 use yii\web\NotFoundHttpException;
 use yii\web\ServerErrorHttpException;
 use yii\helpers\ArrayHelper;
+use yii\data\ActiveDataProvider;
 use Yii;
 
 /**
@@ -274,6 +277,78 @@ class UserController extends AppController
 		Log::write('User', LogWhat::DELETE, (string)$userString, null);
         return $this->redirect(['index']);
     }
+	
+	public function actionSeenotify($id, $userid)
+    {
+    	$model=UserNotification::findOne($id);
+    	$userFrom=User::findOne($model->user_from_id);
+    	$userTo=User::findOne($model->user_to_id);
+
+    	return $this->render('seenotify', ['model'=>$model, 'userid'=>$userid, 'userFrom'=>$userFrom, 'userTo'=>$userTo]);	
+	}
+	public function actionDeletenotify($id, $userid)
+    {
+    	try {
+			$model=UserNotification::findOne($id);
+			if (!$model->delete()) {
+				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+			}
+		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
+			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+			return $this->redirect(['notifications','id'=>$teamid]);
+		}       
+		Log::write('UserNotification', LogWhat::DELETE, (string)$model, null);
+        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+
+    	return $this->redirect(['notifications','id'=>$userid]);
+	}
+
+	public function actionNotify($id)
+    {
+		$model = new UserNotification();
+        if ($model->load(Yii::$app->request->post())) {
+			Log::write('actionNotify', LogWhat::DELETE, (string)$model, null);
+			if($model->message_html && strlen($model->message_html)>2 && $model->user_to_id && strlen($model->user_to_id)>0){
+				UserNotification::sendSMSForMany($model->user_to_id, null, $model->message_html);
+				return $this->redirect(['notifications','id'=>$id]);
+			}
+			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to update"));
+        }	
+
+		Yii::$app->session->setFlash("success", Yii::t("app", "Successful create"));
+		return $this->redirect(['notifications','id'=>$id]);
+    }
+
+	public function actionNotifications($id=null)
+    {
+		
+		if((!$id && !Yii::$app->user->can('ChurchAdmin')) || ($id && $id!=Yii::$app->user->identity->id)){
+			throw new ServerErrorHttpException(Yii::t('app', 'Error'));
+		}
+		
+		$model = new UserNotification();
+		
+		
+        $searchNotificationModel = new UserNotificationSearch();
+        $searchNotificationModel->user_from_id = $id;
+        $dataNotificationProvider = $searchNotificationModel->search(Yii::$app->request->queryParams, $this->_pageSize);		
+		if (Yii::$app->request->post()) {
+			//this is a request to refresh SMS notifications.
+			foreach($dataNotificationProvider->query->all() as $notify){
+				$notify->updateSmsNotificationStatus();
+			}
+			
+        }			
+		
+        return $this->render('notifications', [
+			'id' => $id,
+			'church_id' => Yii::$app->user->identity->church_id,
+            'searchNotificationModel' => $searchNotificationModel,
+            'dataNotificationProvider' => $dataNotificationProvider,
+			'model' => $model,
+			]);	
+	}
+	
 
     /**
      * Finds the User model based on its primary key value.

@@ -358,4 +358,12 @@
 'All' => 'Alle',
 'None' => 'Ingen',
 'Allow the refusal of tasks for this number of days' => 'Tillat avslag på oppgaver i dette antall dager',
+'Text message to send' => 'Tekstmelding du vil sende',
+'Send text message to' => 'Send tekstmelding til',
+'List of users to receive a message' => 'Liste over brukere som skal motta en melding',
+'User to add to the message' => 'Bruker å legge til i meldingen',
+'From' => 'Fra',
+'Number of weeks to copy to' => 'Antall uker å kopiere til',
+'Copy all persons and teams' => 'Kopier alle personer og team',
+'Copy all songs' => 'Kopier alle sangene',
 ];

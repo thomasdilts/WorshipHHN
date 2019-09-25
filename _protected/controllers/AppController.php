@@ -61,7 +61,7 @@ class AppController extends Controller
                     ],					
                     [
                         'controllers' => ['user','team-type','activity-type','event-template','message-template','message-type'],
-                        'actions' => ['index', 'create','deletemessage','deletetype','createtype','createmessage', 'update', 'delete', 'view', 'addtotemplate','activities', 'removefromtemplate','fileuploadadmin','filedeleteadmin',],
+                        'actions' => ['index', 'create','deletemessage','deletetype','createtype','createmessage', 'update', 'delete', 'view', 'addtotemplate','activities', 'removefromtemplate','fileuploadadmin','filedeleteadmin','deletenotify'],
                         'allow' => true,
                         'roles' => ['ChurchAdmin','theCreator'],
 					],
@@ -85,7 +85,7 @@ class AppController extends Controller
                     ],
                     [
                         'controllers' => ['team'],
-                        'actions' => ['index', 'update', 'view', 'players', 'addtoteam', 'removefromteam','playersadmin','files', 'filedownload', 'deletefile', 'unavailability', 'unavailabilitycreate', 'unavailabilitydelete', 'unavailabilityupdate', 'tasks', 'taskreject','taskaccept', 'taskexportpdf', 'taskexportexcel', 'taskexportics'],
+                        'actions' => ['index', 'update', 'view', 'players', 'addtoteam', 'removefromteam','playersadmin','files', 'filedownload', 'deletefile', 'unavailability', 'unavailabilitycreate', 'unavailabilitydelete', 'unavailabilityupdate', 'tasks', 'taskreject','taskaccept', 'taskexportpdf', 'taskexportexcel', 'taskexportics', 'deletenotify','removefromnotify'],
                         'allow' => true,
                         'roles' => ['TeamManager','ChurchAdmin','theCreator','EventManager'],
 					],
@@ -97,7 +97,7 @@ class AppController extends Controller
 					],					
                     [
                         'controllers' => ['team','user-blocked'],
-                        'actions' => ['index', 'filedownload','files', 'players', 'deletefile', 'unavailability','tasks', 'taskexportpdf', 'taskexportexcel', 'taskexportics'],
+                        'actions' => ['index', 'filedownload','files', 'players', 'deletefile', 'unavailability','tasks', 'taskexportpdf', 'taskexportexcel', 'taskexportics', 'notifications', 'notify', 'seenotify'],
                         'allow' => true,
                         'roles' => ['Member','EventEditor'],
 					],	
@@ -121,7 +121,7 @@ class AppController extends Controller
                     ],  
                     [
                         'controllers' => ['user'],
-                        'actions' => ['viewme','fileupload','filedelete','updateme','tasks','taskreject','taskaccept', 'taskexportpdf', 'taskexportexcel', 'taskexportics'],
+                        'actions' => ['viewme','fileupload','filedelete','updateme','tasks','taskreject','taskaccept', 'taskexportpdf', 'taskexportexcel', 'taskexportics','notifications','notify','seenotify'],
                         'allow' => true,
                         'roles' => ['TeamManager','ChurchAdmin','theCreator','EventManager','Member','EventEditor'],
                     ],  

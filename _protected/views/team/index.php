@@ -40,13 +40,16 @@ $this->params['breadcrumbs'][] = $this->title;
 				// buttons
 				['class' => 'yii\grid\ActionColumn',
 				'header' => Yii::t('app', 'Menu'),
-				'template' => '{tasks} {players} {unavailability} {files} {update} {delete}',
+				'template' => '{tasks} {players} {notifications} {unavailability} {files} {update} {delete}',
 					'buttons' => [
 						'tasks' => function ($url, $model, $key) {
 							return Html::a('', $url, ['title'=>Yii::t('app', 'Tasks'), 'class'=>'glyphicon glyphicon-tasks menubutton']);
 						},
 						'players' => function ($url, $model, $key) {
 							return Html::a('', $url, ['title'=>Yii::t('app', 'Team members'), 'class'=>'glyphicon glyphicon-user menubutton']);
+						},
+						'notifications' => function ($url, $model, $key) {
+							return Html::a('', $url, ['title'=>Yii::t('app', 'Notifications'), 'class'=>'glyphicon glyphicon-envelope menubutton','style'=>Yii::$app->has('SmsMessaging')?'display:inline;':'display:none;']);
 						},
 						'files' => function ($url, $model, $key) {
 							return Html::a('', $url, ['title'=>Yii::t('app', 'Files'), 'class'=>'glyphicon glyphicon-folder-open menubutton']);

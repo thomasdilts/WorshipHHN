@@ -358,4 +358,12 @@
 'All' => '所有',
 'None' => '沒有',
 'Allow the refusal of tasks for this number of days' => '允許在這幾天內拒絕任務',
+'Text message to send' => '短信發送',
+'Send text message to' => '發送短信給',
+'List of users to receive a message' => '接收消息的用戶列表',
+'User to add to the message' => '用戶添加到消息',
+'From' => '從',
+'Number of weeks to copy to' => '要復製到的周數',
+'Copy all persons and teams' => '複製所有人員和團隊',
+'Copy all songs' => '複製所有歌曲',
 ];

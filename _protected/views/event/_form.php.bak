@@ -40,9 +40,8 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
 			<?= Html::activeHiddenInput($model, 'church_id') ?>
 			<?php if($model->copyFromEventId) {?>
 				<?= Html::activeHiddenInput($model, 'copyFromEventId') ?>			
-				<?= $form->field($model, 'copy_persons_teams')->checkbox();?>
-				<?= $form->field($model, 'copy_all_songs')->checkbox();?>
-				<?= $form->field($model, 'number_weeks_repeat')->textInput();?>
+				<?= $form->field($model, 'copyAllPersonsTeams')->checkbox();?>
+				<?= $form->field($model, 'copyAllSongs')->checkbox();?>
 			<?php } ?>
 			<div class="form-group">     
 				<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') 

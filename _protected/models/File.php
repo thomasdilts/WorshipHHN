@@ -58,7 +58,19 @@ class File extends ActiveRecord
             'mime' => 'Mime'*/
         ];
     }
-
+	
+	public function __toString()
+    {
+        try 
+        {
+            return (string) 'itemId='.$this->itemId.'; name='.$this->name.'; model='.$this->model.'; size='
+				.$this->size.'; mime='.$this->mime;
+        } 
+        catch (Exception $exception) 
+        {
+            return '';
+        }
+    }
     public function getUrl()
     {
         return Url::to(['/attachments/file/download', 'id' => $this->id]);
@@ -291,6 +303,16 @@ class File extends ActiveRecord
 			return $controller->redirect(['files','id'=>$teamid]);		
 		}
 	}	
+	public static function deleteAllFiles($model)
+    {
+		$files = File::getAllFiles($model->tableName(),$model->id)->all();
+		foreach($files as $file){
+			if($file){
+				$file->deletefile($file->id);
+				Log::write('File', LogWhat::DELETE, (string)$file, null);
+			}
+		}
+	}
 	
 	/**
 	 * Generate a random string, using a cryptographically secure 

@@ -358,4 +358,12 @@
 'All' => 'ทั้งหมด',
 'None' => 'ไม่มี',
 'Allow the refusal of tasks for this number of days' => 'อนุญาตให้ปฏิเสธงานเป็นจำนวนวัน',
+'Text message to send' => 'ข้อความที่จะส่ง',
+'Send text message to' => 'ส่งข้อความถึง',
+'List of users to receive a message' => 'รายชื่อผู้ใช้ที่จะได้รับข้อความ',
+'User to add to the message' => 'ผู้ใช้ที่จะเพิ่มไปยังข้อความ',
+'From' => 'จาก',
+'Number of weeks to copy to' => 'จำนวนสัปดาห์ที่จะคัดลอกไป',
+'Copy all persons and teams' => 'คัดลอกบุคคลและทีมทั้งหมด',
+'Copy all songs' => 'คัดลอกเพลงทั้งหมด',
 ];

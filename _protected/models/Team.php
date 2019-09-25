@@ -24,6 +24,7 @@ use yii\helpers\ArrayHelper;
 class Team extends \yii\db\ActiveRecord
 {
 	public $imageFiles;
+	public $custom_sms;
     /**
      * {@inheritdoc}
      */
@@ -41,13 +42,14 @@ class Team extends \yii\db\ActiveRecord
             [['church_id', 'team_type_id', 'name'], 'required'],
             [['church_id', 'team_type_id'], 'integer'],
             [['name'], 'string', 'max' => 100],
+            [['custom_sms'], 'string','max' => 1000],
             [['church_id'], 'exist', 'skipOnError' => true, 'targetClass' => Church::className(), 'targetAttribute' => ['church_id' => 'id']],
             [['team_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => TeamType::className(), 'targetAttribute' => ['team_type_id' => 'id']],
         ];
     }
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['name','team_type_id','church_id'];
+		$scenarios['create'] = ['custom_sms','name','team_type_id','church_id'];
 		return $scenarios;
 	}
     /**
@@ -61,6 +63,7 @@ class Team extends \yii\db\ActiveRecord
 			'team_type.name' => Yii::t('app', 'Team type name'),
             'imageFiles' => Yii::t('app', 'Files'),                        
             'teamtypename' => Yii::t('app', 'Team type name'),                        
+            'custom_sms' => Yii::t('app', 'Text message to send'),                                               
         ];
     }
 	public function __toString()

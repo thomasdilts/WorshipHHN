@@ -358,4 +358,12 @@
 'All' => 'Alle',
 'None' => 'Ingen',
 'Allow the refusal of tasks for this number of days' => 'Tillad afvisning af opgaver i dette antal dage',
+'Text message to send' => 'SMS, der skal sendes',
+'Send text message to' => 'Send tekstbesked til',
+'List of users to receive a message' => 'Liste over brugere, der skal modtage en meddelelse',
+'User to add to the message' => 'Bruger til at føje til beskeden',
+'From' => 'Fra',
+'Number of weeks to copy to' => 'Antal uger, der skal kopieres til',
+'Copy all persons and teams' => 'Kopier alle personer og hold',
+'Copy all songs' => 'Kopier alle sange',
 ];

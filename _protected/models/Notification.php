@@ -273,12 +273,20 @@ class Notification extends \yii\db\ActiveRecord
                 $manager=User::findOne($manageractivity->user_id);
                 $language=Language::findOne($manager->language_id);
                 Yii::$app->language = $language->iso_name;                
+				$linkHost = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 
+					"https" : "http") . "://" . $_SERVER['HTTP_HOST'] . Yii::$app->request->baseUrl ;
+								
+				$linkHostActivity=$linkHost. '/event/editactivity?id='.$activity->id.'&eventid='.$event->id.'&returnurl=activities%3Fid%3D'.$event->id; 	
+				$linkHostEvent=$linkHost. '/event/activities?id='.$event->id; 	
+
                 $htmlMessage='';
                 $htmlMessage.=$subject.'<br />';
-                $htmlMessage.="<span style='font-weight:bold;'>".Yii::t('app', 'Event') .'</span>'. ': '. $event->name. ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm").'<br />';
-                $htmlMessage.="<span style='font-weight:bold;'>".Yii::t('app', 'Activity') .'</span>' . ': '. $activity->name.'<br />';
+                $htmlMessage.="<a href='" . $linkHostEvent ."'><span style='font-weight:bold;'>".Yii::t('app', 'Event') .'</span>'. ': '. $event->name. ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm")."</a><br />"; 
+                $htmlMessage.="<a href='" . $linkHostActivity ."'><span style='font-weight:bold;'>".Yii::t('app', 'Activity') .'</span>' . ': '. $activity->name."</a><br />"; 
                 $htmlMessage.="<span style='font-weight:bold;'>".Yii::t('app', 'User') .'</span>' . ': '. $user->display_name.'<br />';
-                Yii::$app->mailer->compose()
+                $htmlMessage.="<span style='font-weight:bold;'>".Yii::t('app', 'User') .'</span>' . ': '. $user->display_name.'<br />';           
+				
+				Yii::$app->mailer->compose()
                     ->setTo($manager->email)
                     ->setFrom(Yii::$app->params['senderEmail'])
                     ->setSubject($subject)

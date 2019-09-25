@@ -89,6 +89,7 @@ $this->beginBody() ?>
                     ['label' => Yii::t('app', 'Message templates'), 'url' => ['/message-template/index']],
 					['label' => Yii::t('app', 'Languages'), 'url' => ['/language/index']],
 					['label' => Yii::t('app', 'Activity log'), 'url' => ['/log/index']],
+					Yii::$app->has('SmsMessaging') ? ['label' => Yii::t('app', 'Notifications'), 'url' => ['/user/notifications']] :'',
 					['label' => Yii::t('app', 'Churches'), 'url' => Yii::$app->user->can('theCreator')?['/church/index']:['/church/update?id='.Yii::$app->user->identity->church_id]],
 				],
 			];
@@ -116,6 +117,7 @@ $this->beginBody() ?>
 					['label' => '<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> '.Yii::t('app', 'Profile'), 'url' => ['/user/viewme']],
 					['label' => '<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> '.Yii::t('app', 'Tasks'), 'url' => ['/user/tasks','id'=>Yii::$app->user->identity->id]],
 					['label' => '<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> '.Yii::t('app', 'Unavailability'), 'url' => ['/user-blocked/index','id'=>Yii::$app->user->identity->id]],
+					Yii::$app->has('SmsMessaging') ? ['label' => '<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> ' . Yii::t('app', 'Notifications'), 'url' => ['/user/notifications','id'=>Yii::$app->user->identity->id]]:'',
 					['label' => '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ' . Yii::t('app', 'Documentation'), 'url' => ['/doc/doc','page'=>'home','returnName'=>'home','returnUrl'=>'/site/home']],
 					'<li class="divider"></li>',
 					['label' => '<i class="glyphicon glyphicon-off"></i> '.Yii::t('app', 'Sign Out'),

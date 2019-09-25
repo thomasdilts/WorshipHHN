@@ -358,4 +358,12 @@
 'All' => 'Semua',
 'None' => 'Tidak ada',
 'Allow the refusal of tasks for this number of days' => 'Izinkan penolakan tugas selama beberapa hari ini',
+'Text message to send' => 'Pesan teks untuk dikirim',
+'Send text message to' => 'Kirim pesan teks ke',
+'List of users to receive a message' => 'Daftar pengguna untuk menerima pesan',
+'User to add to the message' => 'Pengguna untuk menambahkan pesan',
+'From' => 'Dari',
+'Number of weeks to copy to' => 'Jumlah minggu untuk menyalin',
+'Copy all persons and teams' => 'Salin semua orang dan tim',
+'Copy all songs' => 'Salin semua lagu',
 ];

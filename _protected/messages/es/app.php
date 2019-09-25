@@ -358,4 +358,12 @@
 'All' => 'Todos',
 'None' => 'Ninguna',
 'Allow the refusal of tasks for this number of days' => 'Permitir el rechazo de tareas durante este número de días.',
+'Text message to send' => 'Mensaje de texto para enviar',
+'Send text message to' => 'Enviar mensaje de texto a',
+'List of users to receive a message' => 'Lista de usuarios para recibir un mensaje',
+'User to add to the message' => 'Usuario para agregar al mensaje',
+'From' => 'De',
+'Number of weeks to copy to' => 'Número de semanas para copiar',
+'Copy all persons and teams' => 'Copie todas las personas y equipos.',
+'Copy all songs' => 'Copia todas las canciones',
 ];

@@ -358,4 +358,12 @@
 'All' => 'Allt',
 'None' => 'Ingen',
 'Allow the refusal of tasks for this number of days' => 'Låt vägran av uppgifter under detta antal dagar',
+'Text message to send' => 'Textmeddelande som ska skickas',
+'Send text message to' => 'Skicka textmeddelande till',
+'List of users to receive a message' => 'Lista över användare som ska få ett meddelande',
+'User to add to the message' => 'Användare att lägga till i meddelandet',
+'From' => 'Från',
+'Number of weeks to copy to' => 'Antal veckor att kopiera till',
+'Copy all persons and teams' => 'Kopiera alla personer och team',
+'Copy all songs' => 'Kopiera alla låtar',
 ];

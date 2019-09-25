@@ -358,4 +358,12 @@
 'All' => 'Lahat',
 'None' => 'Wala',
 'Allow the refusal of tasks for this number of days' => 'Payagan ang pagtanggi ng mga gawain para sa bilang ng mga araw na ito',
+'Text message to send' => 'Text message upang maipadala',
+'Send text message to' => 'Magpadala ng text message sa',
+'List of users to receive a message' => 'Listahan ng mga gumagamit upang makatanggap ng isang mensahe',
+'User to add to the message' => 'Gumagamit upang idagdag sa mensahe',
+'From' => 'Mula sa',
+'Number of weeks to copy to' => 'Bilang ng mga linggo upang makopya sa',
+'Copy all persons and teams' => 'Kopyahin ang lahat ng mga tao at koponan',
+'Copy all songs' => 'Kopyahin ang lahat ng mga kanta',
 ];

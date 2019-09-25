@@ -358,4 +358,12 @@
 'All' => 'الكل',
 'None' => 'لا شيء',
 'Allow the refusal of tasks for this number of days' => 'اسمح برفض المهام لهذا العدد من الأيام',
+'Text message to send' => 'رسالة نصية لإرسال',
+'Send text message to' => 'إرسال رسالة نصية إلى',
+'List of users to receive a message' => 'قائمة المستخدمين لتلقي رسالة',
+'User to add to the message' => 'المستخدم لإضافة إلى الرسالة',
+'From' => 'من عند',
+'Number of weeks to copy to' => 'عدد الأسابيع للنسخ إلى',
+'Copy all persons and teams' => 'نسخ جميع الأشخاص والفرق',
+'Copy all songs' => 'نسخ جميع الأغاني',
 ];

@@ -358,4 +358,12 @@
 'All' => 'Kaikki',
 'None' => 'Ei mitään',
 'Allow the refusal of tasks for this number of days' => 'Salli tehtävien epääminen tämän päivän päivien ajan',
+'Text message to send' => 'Lähetettävä tekstiviesti',
+'Send text message to' => 'Lähetä tekstiviesti',
+'List of users to receive a message' => 'Luettelo käyttäjistä, jotka vastaanottavat viestin',
+'User to add to the message' => 'Käyttäjä, joka lisää viestiin',
+'From' => 'alkaen',
+'Number of weeks to copy to' => 'Viikkojen lukumäärä kopioitavaksi',
+'Copy all persons and teams' => 'Kopioi kaikki henkilöt ja joukkueet',
+'Copy all songs' => 'Kopioi kaikki kappaleet',
 ];

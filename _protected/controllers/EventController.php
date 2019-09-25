@@ -205,39 +205,53 @@ class EventController extends AppController
 				$model->end_date=$modelToCopy->end_date;
 				$model->name=$modelToCopy->name;
 				$model->copyFromEventId=$copyFromEventId;
-				$model->copyAllPersonsTeams=0;
-				$model->copyAllSongs=0;			
+				$model->copy_persons_teams=0;
+				$model->copy_all_songs=0;			
+				$model->number_weeks_repeat=1;			
 			}
             return $this->render('create', ['model'=>$model]);
         }
 			
-        if (!$model->save()) {
-			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
-            return $this->render('create', ['model'=>$model]);
-        }
-	
 		if($copyFromEventId){
 			$query = Activity::getAllActivities($copyFromEventId)->all();
-			foreach($query as $activity){
-				$newActivity = new Activity(['scenario' => 'create']);
-				$newActivity->activity_type_id=$activity->activity_type_id;
-				$newActivity->event_id=$model->id;		
-				$newActivity->start_time=$activity->start_time;
-				$newActivity->end_time=$activity->end_time;
-				$newActivity->global_order=$activity->global_order;
-				$newActivity->name=$activity->name;
-				if($model->copyAllPersonsTeams){
-					$newActivity->user_id=$activity->user_id;
-					$newActivity->team_id=$activity->team_id;
-				}
-				if($model->copyAllSongs){
-					$newActivity->song_id=$activity->song_id;
-				}
-				$newActivity->save();
-			}			
+			$modelToSave=$model;
+			for($i=0;$i<$model->number_weeks_repeat;$i++){
+				if ($modelToSave->save()) {
+					foreach($query as $activity){
+						$newActivity = new Activity(['scenario' => 'create']);
+						$newActivity->activity_type_id=$activity->activity_type_id;
+						$newActivity->event_id=$modelToSave->id;		
+						$newActivity->start_time=$activity->start_time;
+						$newActivity->end_time=$activity->end_time;
+						$newActivity->global_order=$activity->global_order;
+						$newActivity->name=$activity->name;
+						if($model->copy_persons_teams){
+							$newActivity->user_id=$activity->user_id;
+							$newActivity->team_id=$activity->team_id;
+						}
+						if($model->copy_all_songs){
+							$newActivity->song_id=$activity->song_id;
+						}
+						$newActivity->save();
+					}
+					$lastModel=$modelToSave;
+					Log::write('Event', LogWhat::CREATE, null, (string)$modelToSave);
+					$modelToSave=new Event(['scenario' => 'create']);
+					$modelToSave->church_id=Yii::$app->user->identity->church_id;				
+					$modelToSave->name=$lastModel->name;					
+					$modelToSave->description=$lastModel->description;
+					$modelToSave->start_date=date('Y-m-d H:i:s', strtotime($lastModel->start_date. ' + 7 days'))	;
+					$modelToSave->end_date=date('Y-m-d H:i:s', strtotime($lastModel->end_date. ' + 7 days'))		;
+				}				
+			}
+		}
+		else if (!$model->save()) {
+			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
+            return $this->render('create', ['model'=>$model]);
+        }else{
+			Log::write('Event', LogWhat::CREATE, null, (string)$model);
 		}
 		
-		Log::write('Event', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect('index');
     }
@@ -467,6 +481,7 @@ class EventController extends AppController
 	public function actionRemovefromevent($id,$eventid)
     {
 		$model=Activity::findOne(['id'=>$id]);
+		File::deleteAllFiles($model);
 		if (!$model->delete()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to delete"));
         }else{
@@ -562,6 +577,24 @@ class EventController extends AppController
     {
 		try {
 			$model=$this->findModel($id);
+			// delete all messages
+			$searchNotificationModel = new NotificationSearch();
+			$searchNotificationModel->event = $model;
+			$dataNotificationProvider = $searchNotificationModel->search(Yii::$app->request->queryParams, $this->_pageSize);		
+			foreach($dataNotificationProvider->query->all() as $notify){
+				$notify->delete();
+			}
+
+			// delete all activities(removeing files)
+			$query = Activity::getAllActivities($id)->all();
+			foreach($query as $activity){	
+				File::deleteAllFiles($activity);
+				$activity->delete();
+			}			
+			
+			// remove files 
+			File::deleteAllFiles($model);
+			
 			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}

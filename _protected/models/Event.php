@@ -21,8 +21,9 @@ use Yii;
 class Event extends \yii\db\ActiveRecord
 {
 	public $copyFromEventId;
-	public $copyAllPersonsTeams;
-	public $copyAllSongs;
+	public $copy_persons_teams;
+	public $copy_all_songs;
+	public $number_weeks_repeat;
     public $imageFiles;
     /**
      * {@inheritdoc}
@@ -33,7 +34,7 @@ class Event extends \yii\db\ActiveRecord
     }
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['copyFromEventId','copyAllPersonsTeams','copyAllSongs','name', 'description', 'start_date','end_date','church_id'];
+		$scenarios['create'] = ['number_weeks_repeat','copyFromEventId','copy_persons_teams','copy_all_songs','name', 'description', 'start_date','end_date','church_id'];
 		return $scenarios;
 	}
     /**
@@ -43,7 +44,8 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['church_id', 'name', 'start_date','end_date'], 'required'],
-            [['church_id'], 'integer'],
+            [['church_id','copy_persons_teams','copy_all_songs'], 'integer'],
+            [['number_weeks_repeat'], 'integer','min' => 1,'max' => 16],
             [['description'], 'string'],
             [['start_date','end_date'], 'safe'],
             [['name'], 'string', 'max' => 100],
@@ -64,6 +66,9 @@ class Event extends \yii\db\ActiveRecord
             'filter_start_date' => Yii::t('app', 'Start Date'),
             'filter_end_date' => Yii::t('app', 'End Date'),   
             'imageFiles' => Yii::t('app', 'Files'),   
+            'number_weeks_repeat' => Yii::t('app', 'Number of weeks to copy to'),   
+            'copy_persons_teams' => Yii::t('app', 'Copy all persons and teams'),   
+            'copy_all_songs' => Yii::t('app', 'Copy all songs'),   
 
         ];
     }

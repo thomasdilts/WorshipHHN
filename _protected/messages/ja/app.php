@@ -358,4 +358,12 @@
 'All' => 'すべて',
 'None' => '無し',
 'Allow the refusal of tasks for this number of days' => 'この日数の間タスクの拒否を許可する',
+'Text message to send' => '送信するテキストメッセージ',
+'Send text message to' => 'テキストメッセージを送信する',
+'List of users to receive a message' => 'メッセージを受信するユーザーのリスト',
+'User to add to the message' => 'メッセージに追加するユーザー',
+'From' => 'から',
+'Number of weeks to copy to' => 'コピーする週数',
+'Copy all persons and teams' => 'すべての人とチームをコピーする',
+'Copy all songs' => 'すべての曲をコピーする',
 ];

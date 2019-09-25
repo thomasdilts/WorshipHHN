@@ -358,4 +358,12 @@
 'All' => '모든',
 'None' => '없음',
 'Allow the refusal of tasks for this number of days' => '이 일 동안 작업 거부를 허용',
+'Text message to send' => '보낼 문자 메시지',
+'Send text message to' => '에 문자 메시지 보내기',
+'List of users to receive a message' => '메시지를받을 사용자 목록',
+'User to add to the message' => '메시지에 추가 할 사용자',
+'From' => '에서',
+'Number of weeks to copy to' => '복사 할 주 수',
+'Copy all persons and teams' => '모든 사람과 팀을 복사',
+'Copy all songs' => '모든 노래를 복사',
 ];

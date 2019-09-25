@@ -358,4 +358,12 @@
 'All' => 'Все',
 'None' => 'Никто',
 'Allow the refusal of tasks for this number of days' => 'Разрешить отказ от заданий на это количество дней',
+'Text message to send' => 'Текстовое сообщение для отправки',
+'Send text message to' => 'Отправить текстовое сообщение на',
+'List of users to receive a message' => 'Список пользователей для получения сообщения',
+'User to add to the message' => 'Пользователь, чтобы добавить к сообщению',
+'From' => 'Из',
+'Number of weeks to copy to' => 'Количество недель для копирования',
+'Copy all persons and teams' => 'Скопируйте всех людей и команды',
+'Copy all songs' => 'Скопируйте все песни',
 ];

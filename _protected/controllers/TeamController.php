@@ -13,6 +13,8 @@ use app\models\TeamBlockedSearch;
 use app\models\TeamMemberSearch;
 use app\models\ActivityExportFile;
 use app\models\Notification;
+use app\models\UserNotificationSearch;
+use app\models\UserNotification;
 use app\models\File;
 use app\models\UserSearch;
 use app\models\FileSearch;
@@ -21,6 +23,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\ServerErrorHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 use Yii;
 
 
@@ -222,7 +225,92 @@ class TeamController extends AppController
 		}
         return $this->redirect(['players','id'=>$teamid]);		
 	}
+	public function actionSeenotify($id, $teamid)
+    {
+    	$model=UserNotification::findOne($id);
+    	$team=Team::findOne($teamid);
+    	$userFrom=User::findOne($model->user_from_id);
+    	$userTo=User::findOne($model->user_to_id);
 
+    	return $this->render('seenotify', ['model'=>$model, 'team'=>$team, 'userFrom'=>$userFrom, 'userTo'=>$userTo]);	
+	}
+	public function actionDeletenotify($id, $teamid)
+    {
+    	try {
+			$model=UserNotification::findOne($id);
+			if (!$model->delete()) {
+				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
+			}
+		} catch (\yii\db\IntegrityException|Exception|Throwable  $e) {
+			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
+			return $this->redirect(['notifications','id'=>$teamid]);
+		}       
+		Log::write('UserNotification', LogWhat::DELETE, (string)$model, null);
+        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
+
+    	return $this->redirect(['notifications','id'=>$teamid]);
+	}
+	public function actionRemovefromnotify($id, $ids, $teamid)
+    {
+		$idArray= explode(".",$ids);
+		if (($key = array_search($id, $idArray)) !== false) {
+			unset($idArray[$key]);
+		}		
+		return $this->redirect(['notify','id'=>implode('.',$idArray),'teamid'=>$teamid]);
+	}
+	public function actionNotify($id, $teamid)
+    {
+    	$model = new Team(['scenario' => 'create']);
+        if ($model->load(Yii::$app->request->post())) {
+			if($model->custom_sms && strlen($model->custom_sms)>2 && $id && strlen($id)>0){
+				UserNotification::sendSMSForMany($id, $teamid, $model->custom_sms);
+				return $this->redirect(['notifications','id'=>$teamid]);
+			}
+			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to update"));
+        }	
+
+		$query = User::find()->where(['id' => explode(".",$id)]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort'=> ['defaultOrder' => ['display_name'=>SORT_ASC]],
+            'pagination' => ['pageSize' => 1000]
+        ]);		
+
+		return $this->render('notify', [
+			'model'=> $this->findModel($teamid),
+			'ids'=> $id,
+			'membersNotify'=>$dataProvider ]);	    	
+    }
+
+	public function actionNotifications($id)
+    {
+		$model = $this->findModel($id);
+
+        $searchMembersModel = new TeamMemberSearch();
+		$searchMembersModel ->teamModel=$model;
+        $dataMembersProvider = $searchMembersModel->search(Yii::$app->request->queryParams, $this->_pageSize);	
+		
+        $searchNotificationModel = new UserNotificationSearch();
+        $searchNotificationModel->team_id = $id;
+        $dataNotificationProvider = $searchNotificationModel->search(Yii::$app->request->queryParams, $this->_pageSize);		
+		if (Yii::$app->request->post()) {
+			//this is a request to refresh SMS notifications.
+			foreach($dataNotificationProvider->query->all() as $notify){
+				$notify->updateSmsNotificationStatus();
+			}
+			
+        }			
+        return $this->render('notifications', [
+			'model' => $model, 
+			'church_id' => Yii::$app->user->identity->church_id,
+            'searchMembersModel' => $searchMembersModel,
+            'dataMembersProvider' => $dataMembersProvider,
+            'searchNotificationModel' => $searchNotificationModel,
+            'dataNotificationProvider' => $dataNotificationProvider,
+			]);	
+	}
+	
     public function actionPlayers($id)
     {
         $model = $this->findModel($id);
@@ -269,6 +357,7 @@ class TeamController extends AppController
     {
 		try {
 			$model=$this->findModel($id);
+			File::deleteAllFiles($model);
 			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
