@@ -22,7 +22,8 @@
         "phpoffice/phpspreadsheet": "^1.8",
         "dompdf/dompdf": "^0.8.3",
         "nex/yii2-datepicker": "dev-master",
-        "thomasdilts/sms_worshiphhn_ip1": "^1.0"
+        "thomasdilts/sms_worshiphhn_ip1": "^1.0",
+        "kekaadrenalin/yii2-module-recaptcha-v3": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -7,6 +7,7 @@ use app\models\User;
 use app\models\File;
 use app\models\Language;
 use app\models\Activity;
+use app\models\UserActivityType;
 use app\models\UserSearch;
 use app\models\ActivityExportFile;
 use app\models\UserActivitySearch;
@@ -91,11 +92,19 @@ class UserController extends AppController
      */
     public function actionView($id)
     {
-        return $this->render('view', ['model' => User::find()->where(['user.id'=>$id])->joinWith('language')->one(),'updateUrl'=>'update?id='.$id]);
+		$model = $this->findModel($id);
+        return $this->render('view', 
+			['model' => User::find()->where(['user.id'=>$id])->joinWith('language')->one(),
+			'updateUrl'=>'update?id='.$id,
+			'abilities'=>$model->getActivityTypesForUser()]);
     }
     public function actionViewme()
     {
-        return $this->render('view', ['model' => User::find()->where(['user.id'=>Yii::$app->user->identity->id])->joinWith('language')->one(),'updateUrl'=>'updateme']);
+		$model = $this->findModel(Yii::$app->user->identity->id);
+        return $this->render('view', 
+			['model' => User::find()->where(['user.id'=>Yii::$app->user->identity->id])->joinWith('language')->one(),
+			'updateUrl'=>'updateme',
+			'abilities'=>$model->getActivityTypesForUser()]);
     }
 
     public function actionFileupload()
@@ -152,7 +161,8 @@ class UserController extends AppController
         if (!$user->save()) {
             return $this->render('create', ['model'=>$user,'image'=>File::findOne(['model'=>$user->tableName(),'itemId'=>$user->id])]);
         }
-
+		
+		UserActivityType::saveActivityTypesForUser($user->id,$user->abilities);	
         $auth = Yii::$app->authManager;
         $role = $auth->getRole($user->item_name);
         $info = $auth->assign($role, $user->getId());
@@ -212,6 +222,8 @@ class UserController extends AppController
         if (!$user->save()) {
             return $this->render('update', ['role' => $user->item_name,'returnUrl'=>$returnUrl,'model'=>$user,'model'=>$user, 'image'=>File::findOne(['model'=>$user->tableName(),'itemId'=>$user->id])]);
         }
+		
+		UserActivityType::saveActivityTypesForUser($user->id,$user->abilities);	
 
         // take new role from the form
         $newRole = $auth->getRole($user->item_name);
@@ -267,6 +279,7 @@ class UserController extends AppController
         if (isset($role)) {
             $info = $auth->revoke($auth->getRole($role), $id);
         }
+		UserActivityType::deleteAll('user_id = '.$user->id);
 
         if (!$info) {
             Yii::$app->session->setFlash('error', Yii::t('app', 'There was some error while deleting user role.'));

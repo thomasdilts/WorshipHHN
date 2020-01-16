@@ -88,7 +88,16 @@ class SongController extends AppController
             'dataProvider' => $dataProvider,
         ]);
     }
+    public function actionView($id)
+    {
+		$model = $this->findModel($id);
+        $searchModel = new SongSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->_pageSize);
 
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);

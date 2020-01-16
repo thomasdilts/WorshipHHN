@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => 'Jumlah minggu untuk menyalin',
 'Copy all persons and teams' => 'Salin semua orang dan tim',
 'Copy all songs' => 'Salin semua lagu',
+'Abilities' => 'Kemampuan',
 ];

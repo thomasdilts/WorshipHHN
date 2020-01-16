@@ -8,12 +8,15 @@ use yii\helpers\ArrayHelper;
 use app\helpers\CssHelper;
 use yii\grid\GridView;
 use app\models\Language;
+use app\models\ActivityType;
+use yii\widgets\ActiveField;
 $language=Language::findOne(Yii::$app->user->identity->language_id);
 $fileVault = substr(Yii::$app->params['fileVaultPath'],strlen(dirname(__DIR__,3)));
 /* @var $this yii\web\View */
 /* @var $user app\models\User */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+
 <div class="row">
     <div class="col-md-5 well">
         <div class="user-form">
@@ -43,7 +46,7 @@ $fileVault = substr(Yii::$app->params['fileVaultPath'],strlen(dirname(__DIR__,3)
                 <?php endif ?>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
 
                     <?= $form->field($model, 'status')->dropDownList($model->statusList,!Yii::$app->user->can('ChurchAdmin')?['disabled'=>'']:[]) ?>
 
@@ -56,6 +59,17 @@ $fileVault = substr(Yii::$app->params['fileVaultPath'],strlen(dirname(__DIR__,3)
 
                     <?= $form->field($model, 'language_id')->dropDownList(ArrayHelper::map(app\models\Language::find()->where([
                         'church_id' => Yii::$app->user->identity->church_id])->orderBy("display_name_native ASC")->all(), 'id', 'display_name_native')) ?>
+<?php $model->abilities = ArrayHelper::map($model->getActivityTypesForUser()->all(),'id','id'); ?>
+					<?= $form->field($model, 'abilities')->checkboxList(ArrayHelper::map(ActivityType::getActivityTypesUsingUsers()->all(),'id','name'),['separator'=>'<br />']) ?>
+
+
+
+
+
+
+
+
+
                 </div>
 
             </div>

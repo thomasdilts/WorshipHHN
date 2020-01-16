@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => 'Antal uger, der skal kopieres til',
 'Copy all persons and teams' => 'Kopier alle personer og hold',
 'Copy all songs' => 'Kopier alle sange',
+'Abilities' => 'Evner',
 ];

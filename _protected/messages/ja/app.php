@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => 'コピーする週数',
 'Copy all persons and teams' => 'すべての人とチームをコピーする',
 'Copy all songs' => 'すべての曲をコピーする',
+'Abilities' => '能力',
 ];

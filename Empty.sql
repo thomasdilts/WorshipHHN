@@ -33,9 +33,7 @@ CREATE TABLE `activity` (
   `activity_type_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `freehand_user` varchar(100) DEFAULT NULL,
   `team_id` int(11) DEFAULT NULL,
-  `freehand_team` varchar(100) DEFAULT NULL,
   `song_id` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
@@ -57,10 +55,8 @@ CREATE TABLE `activity_type` (
   `church_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `using_user` enum('Not used','Allow','Demand') NOT NULL DEFAULT 'Not used',
-  `allow_freehand_user` tinyint(4) NOT NULL DEFAULT 0,
   `notify_user_event_errors` tinyint(4) NOT NULL,
   `using_team` enum('Not used','Allow','Demand') NOT NULL DEFAULT 'Not used',
-  `allow_freehand_team` tinyint(4) NOT NULL DEFAULT 0,
   `team_type_id` int(11) DEFAULT NULL,
   `description` enum('Not used','Allow','Demand') NOT NULL DEFAULT 'Not used',
   `use_globally` tinyint(4) NOT NULL,
@@ -256,8 +252,7 @@ CREATE TABLE `church` (
   `time_zone` varchar(50) NOT NULL DEFAULT 'Europe/Stockholm',
   `paper_size` varchar(50) NOT NULL DEFAULT 'A4',
   `paper_margin_top_bottom` float NOT NULL DEFAULT 0.25,
-  `paper_margin_right_left` float NOT NULL DEFAULT 0.5,
-  `refuse_task_days` int(11) NOT NULL DEFAULT 0
+  `paper_margin_right_left` float NOT NULL DEFAULT 0.5
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -533,32 +528,20 @@ ALTER TABLE `log`
 ALTER TABLE `log`
   ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`church_id`) REFERENCES `church` (`id`);
 
-CREATE TABLE `user_notification` (
+CREATE TABLE `user_activity_type` (
   `id` int(11) NOT NULL,
-  `sms_status` varchar(400) DEFAULT NULL,
-  `sms_status_id` varchar(200) DEFAULT NULL,
-  `sms_id` varchar(200) DEFAULT NULL,
-  `user_from_id` int(11) NOT NULL,
-  `user_to_id` int(11) NOT NULL,
-  `team_id` int(11) DEFAULT NULL,
-  `notified_date` datetime DEFAULT NULL,
-  `message_html` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+  `user_id` int(11) NOT NULL,
+  `activity_type_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `user_notification`
+ALTER TABLE `user_activity_type`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_notification_ibfk_2` (`user_to_id`),
-  ADD KEY `user_notification_ibfk_3` (`user_from_id`),
-  ADD KEY `user_notification_ibfk_4` (`team_id`);
-
-ALTER TABLE `user_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
-ALTER TABLE `user_notification`
-  ADD CONSTRAINT `user_notification_ibfk_2` FOREIGN KEY (`user_to_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `user_notification_ibfk_3` FOREIGN KEY (`user_from_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `user_notification_ibfk_4` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`);
-
+  ADD KEY `activity_type_id` (`activity_type_id`),
+  ADD KEY `user_id` (`user_id`);
+  
+ALTER TABLE `user_activity_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1; 
+  
 --
 -- Indexes for dumped tables
 --

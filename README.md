@@ -69,6 +69,17 @@ adminEmail and senderEmail must get valid emails. showWhhnServerOffer you might 
   'showWhhnServerOffer' => 'true',
 ```
 
+If you want your contact screen to be "ReCaptcha V3" protected then you need to change the file _protected/config/web.php by replacing the KEYS with valid keys from GOOGLE.
+ the following to your 
+```php
+		'reCaptcha3' => [
+				'class'      => 'kekaadrenalin\recaptcha3\ReCaptcha',
+				// you must supply your own keys. Get from "google developer recaptcha v3"
+				'site_key'   => '', // put YOUR.SITE.KEY.FROM.GOOGLE inside the quotes
+				'secret_key' => '', // put YOUR.SECRET.KEY.FROM.GOOGLE inside the quotes 
+			],	
+```
+
 Extremely important is the .htaccess file. If you install the zip file correctly the .htaccess file should be installed. But if you make a mistake, below is the .htaccess file that must be in the root of where you installed WorshipHHN
 ```txt
 RewriteEngine on
@@ -91,26 +102,4 @@ If you are installing this in your own linux/ubuntu type server then you will pr
 ```txt
 sudo chown -R www-data:www-data *
 ```
-### SMS Messaging
 
-Adding the SMS messaging to your installation of WorshipHHN is only for people with programming experience.
-This is because you will surely need to add your own SMS module that you yourself program for your SMS supplier. However if you want to try
-my SMS module that I personally use you need to add the following component in the _protected/config/web.php
-
-```txt
-    'components' => [
-...
-	'SmsMessaging' => [
-		'class' => 'thomasdilts\sms_worshiphhn_ip1\SmsForIp1',
-		'account' => 'YOUR_ACCOUNT',
-		'password' => 'YOUR_PASSWORD',
-		'apiUrl' => 'api.ip1sms.com',
-		'messageFrom' => 'FROM_NAME_OR_PHONE_NUMBER',
-		'phoneNumberCountryCode' => '46', 
-		'removeLeadingZeroFromPhoneNumber' => 'true', 			
-	]		
-    ],
-```
-
-You then need to eventually completely rewrite the file [_protected/vendor/thomasdilts/sms_worshiphhn_ip1/SmsForIp1.php](https://github.com/thomasdilts/sms_worshiphhn_ip1) to 
-make it work with your SMS supplier. By "rewrite" I mean to copy to another file and class and then rewrite. Your class must be a sub-class of [thomasdilts\sms_worshiphhn\Sms](https://github.com/thomasdilts/sms_worshiphhn) to be useable by WorshipHHN.

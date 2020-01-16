@@ -3,6 +3,7 @@
 namespace app\models;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use Yii;
 
 /**
@@ -175,8 +176,14 @@ class Activity extends \yii\db\ActiveRecord
             if ($model->activityType->using_song=='Demand' && ($song == null || strlen($song->name) == 0))
             {
                 $isRed = true;
-            }			
-			$value.=$song!=null && strlen($song->name)>0?$song->name:($model->activityType->using_song=='Demand'?$preRed.Yii::t('app', 'Missing-song').$postRed:'');							
+            }
+			$songText='';			
+			if ($song!=null && strlen($song->name)>0)
+            {
+				$songText = (strlen($preRed)==0?'':'<a href="'.URL::toRoute('song/view').'?id='.$song->id.'">'). $song->name . (strlen($preRed)==0?'':'</a>') ;
+			}
+
+			$value.=$song!=null && strlen($song->name)>0?$songText:($model->activityType->using_song=='Demand'?$preRed.Yii::t('app', 'Missing-song').$postRed:'');							
 		}
 
 		if($model->activityType->using_team!='Not used' || $model->activityType->using_user!='Not used'){
@@ -238,7 +245,7 @@ class Activity extends \yii\db\ActiveRecord
 		if($model->activityType->description!='Not used'){
 			$value.=strlen($value)>0?$seperator:'';
 			$value.=$model->description!=null && strlen($model->description)>0
-				?$model->description:($model->activityType->description=='Demand'?$preRed.Yii::t('app', 'Missing-description').$postRed:'');						
+				?str_replace ("\r\n",$seperator,$model->description):($model->activityType->description=='Demand'?$preRed.Yii::t('app', 'Missing-description').$postRed:'');						
             if ($model->activityType->description=='Demand' && ($model->description == null || strlen($model->description) == 0))
             {
                 $isRed = true;

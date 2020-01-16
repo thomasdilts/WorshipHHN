@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\models\User;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -62,6 +63,11 @@ $this->params['breadcrumbs'][] = $this->title;
 					'value' => User::getImage($model->id),
 					'format' => 'raw'
 				],
+				[
+					'attribute'=>'abilities',
+					'value' => implode('<br />', ArrayHelper::map($abilities->all(),'name','name')),
+					'format' => 'raw'
+				],				
 			],
 		]) ?>
 	</div>

@@ -128,4 +128,17 @@ class ActivityType extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TeamType::className(), ['id' => 'team_type_id']);
     }
+	
+	public function getUsersForActivityType()
+    {
+		return $this->hasMany(User::className(), ['id' => 'user_id'])
+			->viaTable('user_activity_type',['activity_type_id' => 'id'])
+			->orderBy('display_name');
+    }
+	public function getActivityTypesUsingUsers()
+    {
+		return ActivityType::find()->where(['and',['church_id' => Yii::$app->user->identity->church_id],['or', ['using_user'=>'Demand'],['using_user'=>'Allow']]])
+			->orderBy('name');;
+    }
+	
 }

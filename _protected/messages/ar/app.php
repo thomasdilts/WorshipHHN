@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => 'عدد الأسابيع للنسخ إلى',
 'Copy all persons and teams' => 'نسخ جميع الأشخاص والفرق',
 'Copy all songs' => 'نسخ جميع الأغاني',
+'Abilities' => 'قدرات',
 ];

@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => '要復製到的周數',
 'Copy all persons and teams' => '複製所有人員和團隊',
 'Copy all songs' => '複製所有歌曲',
+'Abilities' => '能力',
 ];

@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => '복사 할 주 수',
 'Copy all persons and teams' => '모든 사람과 팀을 복사',
 'Copy all songs' => '모든 노래를 복사',
+'Abilities' => '능력',
 ];

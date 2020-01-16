@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => 'Antall uker å kopiere til',
 'Copy all persons and teams' => 'Kopier alle personer og team',
 'Copy all songs' => 'Kopier alle sangene',
+'Abilities' => 'Ferdigheter',
 ];

@@ -30,16 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'subject')->textInput(['placeholder' => Yii::t('app', 'Enter the subject')]) ?>
 
             <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
-
-            <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                'template' => 
-                    '<div class="row">
-                        <div class="col-lg-4">{image}</div>
-                        <div class="col-lg-8">{input}</div>
-                    </div>',
-                'options' => ['placeholder' => Yii::t('app', 'Enter verification code'),'class' => 'form-control'],
-                ]) 
-            ?>
+			
+			<?php if(Yii::$app->has('reCaptcha3') && strlen(Yii::$app->reCaptcha3->site_key) && strlen(Yii::$app->reCaptcha3->secret_key)){ ?>
+				<?= $form->field($model, 'reCaptcha')->widget(\kekaadrenalin\recaptcha3\ReCaptchaWidget::class) ?>
+			<?php }else{ ?>
+				<?= Html::activeHiddenInput($model, 'reCaptcha') ?>
+			<?php } ?>
 
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('app', 'Submit'), 

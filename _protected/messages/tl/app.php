@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => 'Bilang ng mga linggo upang makopya sa',
 'Copy all persons and teams' => 'Kopyahin ang lahat ng mga tao at koponan',
 'Copy all songs' => 'Kopyahin ang lahat ng mga kanta',
+'Abilities' => 'Mga Kakayahan',
 ];

@@ -15,12 +15,12 @@ $this->title = Yii::t('app', 'Forum');
 	<script type="text/javascript" src="../forum/js/embed.js"></script>
 	<noscript>
 		Please enable JavaScript to view the
-		<a href="../forum/?ref_noscript">
+		<a href="//worshiphhn.org/whhn/forum/?ref_noscript">
 			discussions powered by Vanilla.
 		</a>
 	</noscript>
 	<div class="vanilla-credit">
-		<a class="vanilla-anchor" href="../forum">
+		<a class="vanilla-anchor" href="//worshiphhn.org/whhn/forum">
 			Discussions by <span class="vanilla-logo">Vanilla</span>
 		</a>
 	</div>

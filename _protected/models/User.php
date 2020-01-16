@@ -44,10 +44,11 @@ class User extends UserIdentity
      * @var \app\rbac\models\Role
      */
     public $item_name;
+	public $abilities;
 	
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['username','mobilephone', 'password', 'email','status','created_at','updated_at','item_name','church_id','display_name','admin','language_id','image','hide_user_icons'];
+		$scenarios['create'] = ['username','mobilephone', 'password', 'email','status','created_at','updated_at','item_name','church_id','display_name','admin','language_id','image','hide_user_icons','abilities'];
 		return $scenarios;
 	}
     /**
@@ -88,7 +89,8 @@ class User extends UserIdentity
             ['display_name', 'string', 'min' => 4, 'max' => 100],
             [['language_id','hide_user_icons'], 'integer'],
             [['language_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['language_id' => 'id']],
-            ['item_name', 'string', 'min' => 3, 'max' => 64]
+            ['item_name', 'string', 'min' => 3, 'max' => 64],
+			[['abilities'], 'safe'],
         ];
     }
 
@@ -148,6 +150,7 @@ class User extends UserIdentity
             'hide_user_icons' => Yii::t('app', 'Hide user icons'), 
             'imageFiles' => Yii::t('app', 'Files'), 
             'mobilephone' => Yii::t('app', 'Mobilephone number'), 
+            'abilities' => Yii::t('app', 'Abilities'), 
         ];
     }
 	public function __toString()
@@ -156,15 +159,19 @@ class User extends UserIdentity
         {
 			$auth = Yii::$app->authManager;
 			$role='';
+			$able='empty';
 			// get user role if he has one
 			if ($roles = $auth->getRolesByUser($this->id)) {
 				// it's enough for us the get first assigned role name
 				$role = array_keys($roles)[0];
 			}
+			if ($this->abilities && count($this->abilities)) {
+				$able=implode(',',$this->abilities);
+			}
             return (string) 'id='.$this->id.'; username='.$this->username.'; email='.$this->email.'; mobilephone='.$this->mobilephone
 				.'; status='.$this->statusList[$this->status]
 				.'; role='.$role.'; display_name='.$this->display_name.'; language_id='.$this->language_id
-				.'; hide_user_icons='.$this->hide_user_icons;
+				.'; hide_user_icons='.$this->hide_user_icons.'; abilities='.$able;
         } 
         catch (Exception $exception) 
         {
@@ -386,5 +393,10 @@ class User extends UserIdentity
         }
         
     }
-
+	public function getActivityTypesForUser()
+    {
+		return $this->hasMany(ActivityType::className(), ['id' => 'activity_type_id'])
+			->viaTable('user_activity_type',['user_id' => 'id'])
+			->orderBy('name');
+    }
 }

@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => 'จำนวนสัปดาห์ที่จะคัดลอกไป',
 'Copy all persons and teams' => 'คัดลอกบุคคลและทีมทั้งหมด',
 'Copy all songs' => 'คัดลอกเพลงทั้งหมด',
+'Abilities' => 'ความสามารถ',
 ];

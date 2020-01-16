@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => 'Numero di settimane in cui copiare',
 'Copy all persons and teams' => 'Copia tutte le persone e le squadre',
 'Copy all songs' => 'Copia tutte le canzoni',
+'Abilities' => 'Capacità',
 ];

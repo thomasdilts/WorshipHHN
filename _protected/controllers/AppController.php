@@ -103,7 +103,7 @@ class AppController extends Controller
 					],	
                     [
                         'controllers' => ['song'],
-                        'actions' => ['index', 'create', 'delete', 'update','songimportopenlp', 'songimportcsv', 'songexportcsv' ],
+                        'actions' => ['index', 'create', 'delete', 'update','view','songimportopenlp', 'songimportcsv', 'songexportcsv' ],
                         'allow' => true,
                         'roles' => ['TeamManager','ChurchAdmin','theCreator','EventManager','EventEditor',],
 					],					

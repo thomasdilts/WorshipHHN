@@ -69,14 +69,13 @@ $GLOBALS['eventid']=$modelEvent->id;
 			<?php if($modelActivityType->using_user!='Not used'){ ?>
 				<?= $form->field($model, 'user_id')->hiddenInput() ?>
 
-
-
-
-
 				<select id="ddslick-user_id" class="form-control" name="ddslick" aria-invalid="false">
 					<option value=""><?=Yii::t('app', 'Select')?></option>
 				<?php 
-				$users=app\models\User::find()->where(['church_id' => $modelEvent->church_id])->orderBy("display_name ASC")->all();
+				$users=$modelActivityType->getUsersForActivityType()->all();
+				if($users==null || count($users)==0){
+					$users=app\models\User::find()->where(['church_id' => $modelEvent->church_id])->orderBy("display_name ASC")->all();
+				}
 				$rowCounter=1;
 				$fileVault = substr(Yii::$app->params['fileVaultPath'],strlen(dirname(__DIR__,3)));
 				foreach($users as $user){ 

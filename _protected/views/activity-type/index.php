@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            'default_start_time',
             'default_global_order',
             // buttons
             ['class' => 'yii\grid\ActionColumn',

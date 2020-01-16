@@ -366,4 +366,5 @@
 'Number of weeks to copy to' => 'Viikkojen lukumäärä kopioitavaksi',
 'Copy all persons and teams' => 'Kopioi kaikki henkilöt ja joukkueet',
 'Copy all songs' => 'Kopioi kaikki kappaleet',
+'Abilities' => 'Kyvyt',
 ];

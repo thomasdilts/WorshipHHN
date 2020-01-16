@@ -70,11 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?= Html::activeHiddenInput($model, 'message_id') ?> 
 				<?= Html::activeHiddenInput($model, 'message_type_id') ?>  
 				<?= Html::activeHiddenInput($model, 'language_id') ?>
-				<?php if(Yii::$app->has('SmsMessaging')){ ?>
-					<?= $form->field($model, 'message_system')->dropDownList(['Email'=>Yii::t('app', 'Email'),'SMS'=>Yii::t('app', 'SMS'),],['onChange'=>'redrawPreview();']) ?>
-				<?php }else{ ?>
-					<?= Html::activeHiddenInput($model, 'message_system') ?>
-				<?php } ?>				
+				<?= $form->field($model, 'message_system')->dropDownList(['Email'=>Yii::t('app', 'Email'),'SMS'=>Yii::t('app', 'SMS'),],['onChange'=>'redrawPreview();']) ?>
 				<div id='show_accept_button'>
 					<?= $form->field($model, 'show_accept_button')->checkbox(['onChange'=>'redrawPreview();']);?>
 					<?= $form->field($model, 'accept_button_text')->textInput(['onChange'=>'redrawPreview();','onKeyUp'=>'redrawPreview();']);?>

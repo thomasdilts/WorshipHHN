@@ -115,7 +115,13 @@ $config = [
                 //],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
+        'db' => require(__DIR__ . '/db.php'),		
+		'reCaptcha3' => [
+			'class'      => 'kekaadrenalin\recaptcha3\ReCaptcha',
+			// you must supply your own keys. Get from "google developer recaptcha v3"
+			'site_key'   => '', // put YOUR.SITE.KEY.FROM.GOOGLE inside the quotes
+			'secret_key' => '', // put YOUR.SECRET.KEY.FROM.GOOGLE inside the quotes 
+		],		
     ],
     'params' => $params,
     'defaultRoute' => 'site/home',
