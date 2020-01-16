@@ -69,8 +69,8 @@ adminEmail and senderEmail must get valid emails. showWhhnServerOffer you might 
   'showWhhnServerOffer' => 'true',
 ```
 
-If you want your contact screen to be "ReCaptcha V3" protected then you need to change the file _protected/config/web.php by replacing the KEYS with valid keys from GOOGLE.
- the following to your 
+If you want your contact screen to be "ReCaptcha V3" protected then you need to change the file _protected/config/web.php by 
+putting your recaptcha3 keys from google between the quotes for site_key and secret_key.
 ```php
 		'reCaptcha3' => [
 				'class'      => 'kekaadrenalin\recaptcha3\ReCaptcha',
