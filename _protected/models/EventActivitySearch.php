@@ -91,7 +91,7 @@ class EventActivitySearch extends Activity
 		
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['start_date'=>SORT_ASC,'global_order'=>SORT_ASC]],
+            'sort'=> ['defaultOrder' => ['start_date'=>SORT_ASC]],
             'pagination' => ['pageSize' => $pageSize]
         ]);
 		

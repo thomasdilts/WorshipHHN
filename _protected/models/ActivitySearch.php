@@ -38,6 +38,10 @@ class ActivitySearch extends Activity
             'sort'=> ['defaultOrder' => ['start_time'=>SORT_ASC,'global_order'=>SORT_ASC]],
             'pagination' => ['pageSize' => $pageSize]
         ]);
+        $dataProvider->sort->attributes['start_time'] = [
+            'asc' => ['start_time' => SORT_ASC,'global_order'=>SORT_ASC],
+            'desc' => ['start_time' => SORT_DESC,'global_order'=>SORT_DESC],
+        ];		
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
