@@ -33,16 +33,44 @@ class ActivityExportFile extends UserActivitySearch
 {
     public function exportIcs($user_id,$teamArray,$start,$end)
     {
+		$church= Church::findOne(Yii::$app
+				->user
+				->identity
+				->church_id);
+		$events = ActivityExportFile::getEvents($user_id,$teamArray,$start,$end,$church);
+
+		if(!$events || count($events)==0){
+			return Yii::$app
+				->response
+				->sendContentAsFile('', ActivityExportFile::GetFileName($user_id,$teamArray) . '.ics', $options = ['inline' => true, 'mimeType' => 'text/calendar']);
+		}
+        $ics = new Ics($events);
+        $filePath = File::getTempFile();
+		
+        file_put_contents($filePath, $ics->prepare($church->time_zone));
+
+        return Yii::$app
+            ->response
+            ->sendContentAsFile(file_get_contents($filePath), ActivityExportFile::GetFileName($user_id,$teamArray) . '.ics', $options = ['inline' => true, 'mimeType' => 'text/calendar']);
+    }
+	public function getIcsText($user_id,$teamArray,$start,$end,$church)
+    {
+		$events = ActivityExportFile::getEvents($user_id,$teamArray,$start,$end,$church);
+
+		if(!$events || count($events)==0){
+			return '';
+		}
+		$ics = new Ics($events);
+		return $ics->prepare($church->time_zone);
+    }
+	private function getEvents($user_id,$teamArray,$start,$end,$church)
+    {
         $data = ActivityExportFile::GetAllData($user_id,$teamArray,$start,$end, 20000);
         if (($sort = $data['dataProvider']->getSort()) !== false) {
             $data['dataProvider']->query->addOrderBy($sort->getOrders());
         }
   
         $activities = $data['dataProvider']->query->all($data['dataProvider']->db); 
-		$church= Church::findOne(Yii::$app
-            ->user
-            ->identity
-            ->church_id);
         $churchname =$church->name;
         $linkHost = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 
                 "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . Yii::$app->request->baseUrl;    
@@ -72,30 +100,19 @@ class ActivityExportFile extends UserActivitySearch
                 $status.=Yii::t('app', 'Unavailable-user');
                 $isRed=true;                         
             }    
+			
             $events[] = array(
                 'location' => $churchname,
                 'description' => $activity->team?$activity->team->name:'' . "; " . $status. "; " . $activity->name,
-                'dtstart' => Yii::$app->formatter->asTime($activity->event->start_date, "YMMddTH:mm:ss"),
-                'dtend' => Yii::$app->formatter->asTime($activity->event->end_date, "YMMddTH:mm:ss"),
+                'dtstart' => Yii::$app->formatter->asTime($activity->event->start_date, "php:Ymd\TH:i:s"),
+                'dtend' => Yii::$app->formatter->asTime($activity->event->end_date, "php:Ymd\TH:i:s"),
                 'summary' => $activity->event->name. "; " . $activity->name,
                 'url' => $linkHost . "/event/activities?id=".$activity->id,
                 'alarm' => '30M'
             );                           
         }
-
-		if(!$events || count($events)==0){
-			return Yii::$app
-				->response
-				->sendContentAsFile('', ActivityExportFile::GetFileName($user_id,$teamArray) . '.ics', $options = ['inline' => true, 'mimeType' => 'text/calendar']);
-		}
-        $ics = new Ics($events);
-        $filePath = File::getTempFile();
-        file_put_contents($filePath, $ics->prepare($church->time_zone));
-
-        return Yii::$app
-            ->response
-            ->sendContentAsFile(file_get_contents($filePath), ActivityExportFile::GetFileName($user_id,$teamArray) . '.ics', $options = ['inline' => true, 'mimeType' => 'text/calendar']);
-    }
+		return $events;
+	}
     public function GetAllData($user_id,$teamArray,$start,$end, $page_size){
         $searchModel = new UserActivitySearch();
         $team = count($teamArray)>0?Team::findOne($teamArray[0]):null;

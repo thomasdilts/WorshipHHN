@@ -8,6 +8,7 @@ use app\models\User;
 use app\models\Church;
 use app\models\Language;
 use app\models\Activity;
+use app\models\ActivityExportFile;
 use app\models\Event;
 use app\models\Notification;
 use app\models\LoginForm;
@@ -22,6 +23,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -61,6 +63,11 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?',],
+                    ],
+                    [
+                        'actions' => ['usercalendar'],
                         'allow' => true,
                         'roles' => ['?',],
                     ],
@@ -141,7 +148,27 @@ class SiteController extends Controller
 		//we need to do a one time recursion here to put the lang on the url
 		return $this->redirect(['home','lang'=>$model->language_iso_name]);
     }
-
+	public function actionUsercalendar($name){
+		
+        $user = User::find()->where(['username' => $name])->one();
+		
+		//Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+		$headers = Yii::$app->response->headers;
+		$headers->add('Content-Type', 'text/calendar');
+		if($user==null){
+			return $this->renderPartial('ics', [
+				'textToShow' => ''
+			]);
+		}
+		$church= Church::findOne($user->church_id);
+        $query =  $user->getTeams()->all();
+		//die(print_r($user->username, true ));
+		$start = date('Y-m-d', strtotime('-2 month')); // get start date
+		$end= date("Y-m-d", strtotime('+5 month'));		
+		return $this->renderPartial('ics', [
+				'textToShow' => ActivityExportFile::getIcsText($user->id,ArrayHelper::getColumn($query , 'id'),$start,$end,$church)
+			]);
+    }
     /**
      * Displays the about static page.
      *
