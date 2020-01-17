@@ -23,7 +23,7 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
 					'size' => 'sm',	
 					'language'=>Language::getLanguageIsoNameForCalendar($language),				
 					'clientOptions' => [
-						'format' => 'YYYY-MM-DD HH:mm',
+						'format' => 'YYYY-MM-DD HH:mm:ss',
 						'stepping' => 1,
 					],
 			]);?>
@@ -31,9 +31,9 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
 				DatePicker::className(), [
 					'addon' => false,
 					'size' => 'sm',
-					'language'=>Language::getLanguageIsoNameForCalendar($language),					
+					'language'=>Language::getLanguageIsoNameForCalendar($language),		
 					'clientOptions' => [
-						'format' => 'YYYY-MM-DD HH:mm',
+						'format' => 'YYYY-MM-DD HH:mm:ss',
 						'stepping' => 1,
 					],
 			]);?>
