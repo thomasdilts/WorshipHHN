@@ -99,13 +99,14 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div id="div_wide" style="display:none">
 				<?= GridView::widget([
 					'dataProvider' => $dataProvider,
-
+					'filterModel' => $searchModel,
 					'summary' => false,
 					'columns' => [
 						[
-							'attribute' => 'event.name',
+							'attribute' => 'event_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
+								//print_r($model);die();
 								return Html::a($model->event->name, URL::toRoute('event/activities'). '?id='.$model->event->id, ['title'=>Yii::t('app', 'View')]);
 							},
 						],						
@@ -117,7 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							},
 						],						
 						[
-							'attribute' => 'team',
+							'attribute' => 'team_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
 								return $model->team ? Html::encode($model->team->name) : '';
@@ -196,11 +197,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div id="div_thin" style="display:none">			
 				<?= GridView::widget([
 					'dataProvider' => $dataProvider,
-
+					'filterModel' => $searchModel,
 					'summary' => false,
 					'columns' => [
 						[
-							'attribute' => 'event.name',
+							'attribute' => 'event_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
 								$value=Html::a($model->event->name, URL::toRoute('event/activities'). '?id='.$model->event->id, ['title'=>Yii::t('app', 'View')]);

@@ -16,6 +16,8 @@ class UserActivitySearch extends Activity
     public $filter_end_date;
     public $teamIdArray;
     public $user;
+	public $team_name;
+    public $event_name;
 
     /**
      * Returns a list of scenarios and the corresponding active attributes.
@@ -27,13 +29,13 @@ class UserActivitySearch extends Activity
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
-        public function rules()
+    
+	public function rules()
     {
         return [
-            [['filter_start_date','filter_end_date','name','description'], 'safe'],
+            [['filter_start_date','filter_end_date','name','description','team_name', 'event_name'], 'safe'],
         ];
     }
-
 
     /**
      * Creates data provider instance with search query applied.
@@ -45,7 +47,11 @@ class UserActivitySearch extends Activity
     public function search($params, $pageSize = 30)
     {
         if($this->teamIdArray && $this->user){
-            $query = Activity::find()->joinWith('event',true)->joinWith('team', true)->joinWith('user', true)->where(['or', ['activity.user_id'=>$this->user->id],['activity.team_id'=>$this->teamIdArray]]);
+            $query = Activity::find()
+				->joinWith('event',true)
+				->joinWith('team', true)
+				->joinWith('user', true)
+				->where(['or', ['activity.user_id'=>$this->user->id],['activity.team_id'=>$this->teamIdArray]]);
         }elseif($this->teamIdArray){
             $query = Activity::find()->joinWith('event',true)->joinWith('team', true)->joinWith('user', true)->where(['activity.team_id'=>$this->teamIdArray]);
         }else{
@@ -59,18 +65,22 @@ class UserActivitySearch extends Activity
         ]);
 		
         $dataProvider->sort->attributes['start_date'] = [
-            'asc' => ['start_date' => SORT_ASC],
-            'desc' => ['start_date' => SORT_DESC],
+            'asc' => ['event.start_date' => SORT_ASC],
+            'desc' => ['event.start_date' => SORT_DESC],
         ];
-        $dataProvider->sort->attributes['team'] = [
-            'asc' => ['team' => SORT_ASC],
-            'desc' => ['team' => SORT_DESC],
+        $dataProvider->sort->attributes['team_name'] = [
+            'asc' => ['team.name' => SORT_ASC],
+            'desc' => ['team.name' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['name'] = [
+            'asc' => ['name' => SORT_ASC],
+            'desc' => ['name' => SORT_DESC],
         ];
         $dataProvider->sort->attributes['status'] = [
             'asc' => ['status' => SORT_ASC],
             'desc' => ['status' => SORT_DESC],
         ];
-        $dataProvider->sort->attributes['event.name'] = [
+        $dataProvider->sort->attributes['event_name'] = [
             'asc' => ['event.name' => SORT_ASC],
             'desc' => ['event.name' => SORT_DESC],
         ];		
@@ -81,8 +91,12 @@ class UserActivitySearch extends Activity
             $query->andFilterWhere(['between', 'event.start_date', $this->filter_start_date, $this->filter_end_date]);
             return $dataProvider;
         }
-
-        $query->andFilterWhere(['between', 'event.start_date', $this->filter_start_date, $this->filter_end_date]);
+		//print_r($this);die();
+        $query->andFilterWhere(['between', 'event.start_date', $this->filter_start_date, $this->filter_end_date])
+			->andFilterWhere(['like', 'event.name', $this->event_name])
+			->andFilterWhere(['like', 'activity.name', $this->name])
+			->andFilterWhere(['like', 'team.name', $this->team_name])
+			;
         return $dataProvider;
     }
 }

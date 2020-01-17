@@ -103,11 +103,11 @@ $GLOBALS['task_id']=$model->id;
 			<div id="div_wide" style="display:none">
 				<?= GridView::widget([
 					'dataProvider' => $dataProvider,
-
+					'filterModel' => $searchModel,
 					'summary' => false,
 					'columns' => [
 						[
-							'attribute' => 'event.name',
+							'attribute' => 'event_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
 								return Html::a($model->event->name, URL::toRoute('event/activities'). '?id='.$model->event->id, ['title'=>Yii::t('app', 'View')]);
@@ -192,11 +192,11 @@ $GLOBALS['task_id']=$model->id;
 			<div id="div_thin" style="display:none">				
 				<?= GridView::widget([
 					'dataProvider' => $dataProvider,
-
+					'filterModel' => $searchModel,
 					'summary' => false,
 					'columns' => [
 						[
-							'attribute' => 'event.name',
+							'attribute' => 'event_name',
 							'format' => 'raw',
 							'value' => function ($model, $index, $widget) {
 								$value=Html::a($model->event->name, URL::toRoute('event/activities'). '?id='.$model->event->id, ['title'=>Yii::t('app', 'View')]);

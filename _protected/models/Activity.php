@@ -32,6 +32,7 @@ class Activity extends \yii\db\ActiveRecord
 {
 	public $imageFiles;
 	public $duration;
+
     /**
      * {@inheritdoc}
      */
@@ -70,7 +71,7 @@ class Activity extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Activity'),
             'description' => Yii::t('app', 'Description'),
             'start_time' => Yii::t('app', 'Start Time'),
             'end_time' => Yii::t('app', 'End Time'),
@@ -82,9 +83,9 @@ class Activity extends \yii\db\ActiveRecord
 			'bible_verse' => Yii::t('app', 'Bible verses'), 
 			'user_display_name' => Yii::t('app', 'Display name'), 
 			'status' => Yii::t('app', 'Status'),
-			'team_name' => Yii::t('app', 'Name'),
+			'team_name' => Yii::t('app', 'Team'),
 			'start_date' => Yii::t('app', 'Start Date'),
-			'event_name' => Yii::t('app', 'Name'),
+			'event_name' => Yii::t('app', 'Event Name'),
 			'freehand_user' => Yii::t('app', 'Text name entry'),
 			'freehand_team' => Yii::t('app', 'Text name entry'),
 			'duration' => Yii::t('app', 'Duration in minutes'),
