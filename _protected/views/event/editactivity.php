@@ -166,7 +166,7 @@ $GLOBALS['eventid']=$modelEvent->id;
 		</div>	
 	<?php } ?>	
 	<?php if($modelActivityType->file!='Not used'){ ?>
-		<div class="row">
+		<div class="col-lg-6">
 			<?= $this->render('../_file', [
 				'model' => $model,
 				'dataProvider' => $fileDataProvider,
@@ -177,6 +177,7 @@ $GLOBALS['eventid']=$modelEvent->id;
 				'deletefileUrl' => 'deleteactivityfile']) ?>		
 		</div>
 	 <?php } ?>	
+	 </div>
 </div>
 
 <script>

@@ -9,14 +9,21 @@ use yii\helpers\Url;
 use app\models\Language;
 $language=Language::findOne(Yii::$app->user->identity->language_id);
 $GLOBALS['urlAddition']=$urlAddition;
+function startsWith ($string, $startString) 
+{ 
+    $len = strlen($startString); 
+    return (substr($string, 0, $len) === $startString); 
+} 
 ?>
 <div class="row">
 	<div class="col-lg-6">	
 		<h1>
 			<?= Html::encode( Yii::t('app', 'File sharing')) ?> 
+			<?php if(!startsWith($backurl,"activities")){ ?>
 			<span class="pull-right">
 				<a href="<?=$backurl?>" class='btn btn-warning'><span class="glyphicon glyphicon-step-backward"></span><?=Yii::t('app', 'Return')?></a>
-			</span>  				
+			</span>  	
+			<?php } ?>			
 		</h1>	
 		<?= GridView::widget([
 			'dataProvider' => $dataProvider,
