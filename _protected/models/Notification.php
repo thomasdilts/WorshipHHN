@@ -48,7 +48,7 @@ class Notification extends \yii\db\ActiveRecord
         return [
             [['status'], 'string'],
             [['activity_id','event_id'], 'required'],
-            [['activity_id', 'event_id', 'user_id', 'team_id', 'message_template_id'], 'integer'],
+            [['activity_id', 'event_id', 'user_id', 'user_from_id', 'team_id', 'message_template_id'], 'integer'],
             [['notified_date', 'notify_replied_date'], 'safe'],
             [['notify_key'], 'string', 'max' => 100],
             [['message_name'], 'string', 'max' => 200],
@@ -56,6 +56,7 @@ class Notification extends \yii\db\ActiveRecord
             [['activity_id'], 'exist', 'skipOnError' => true, 'targetClass' => Activity::className(), 'targetAttribute' => ['activity_id' => 'id']],
             [['event_id'], 'exist', 'skipOnError' => true, 'targetClass' => Event::className(), 'targetAttribute' => ['event_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['user_from_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_from_id' => 'id']],
             [['team_id'], 'exist', 'skipOnError' => true, 'targetClass' => Team::className(), 'targetAttribute' => ['team_id' => 'id']],
             [['message_template_id'], 'exist', 'skipOnError' => true, 'targetClass' => MessageTemplate::className(), 'targetAttribute' => ['message_template_id' => 'id']],
         ];
@@ -67,7 +68,8 @@ class Notification extends \yii\db\ActiveRecord
             return (string) 'id='.$this->id.'; status='.$this->status.'; notified_date='.$this->notified_date.'; message_name='
 				.$this->message_name.'; activity_id='.$this->activity_id.'; event_id='
 				.$this->event_id.'; user_id='.$this->user_id
-				.'sms_id='.$this->sms_id.'; sms_status_id='.$this->sms_status_id.'; sms_status='.$this->sms_status;
+				.'sms_id='.$this->sms_id.'; sms_status_id='.$this->sms_status_id.'; sms_status='.$this->sms_status
+				.'; user_from_id='.$this->user_from_id.'; team_id='.$this->team_id.'; message_html='.$this->message_html;
         } 
         catch (Exception $exception) 
         {
@@ -242,6 +244,7 @@ class Notification extends \yii\db\ActiveRecord
         $newNotify->notify_key=($template->show_reject_button || $template->show_accept_button) && $template->message_system!='SMS'?$hash:null;;
         $newNotify->team_id=$activity?$activity->team_id:null;
         $newNotify->user_id=$userid;
+		$newNotify->user_from_id=Yii::$app->user->identity->id;
         $newNotify->notified_date=date("Y-m-d H:i:s",time());
         $newNotify->message_name=$template->name;
         $newNotify->message_html=$htmlMessage;
@@ -249,6 +252,44 @@ class Notification extends \yii\db\ActiveRecord
 
         $newNotify->save();
     } 
+    public function sendSmsOnlyForOne($user_to_id, $actionId, $eventId, $team_id, $message)
+    {
+		$smsId='';
+		$smsStatusId='';
+		$smsStatusText='';
+		$event=Event::findOne($eventId);
+		// SMS
+		$userTo = User::findOne($user_to_id);
+		if(!$userTo->mobilephone || strlen($userTo->mobilephone)<4){
+			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to create' ) . '. ' .$userTo->display_name);
+			return;
+		}
+		
+		$smsResponse = Yii::$app->SmsMessaging->sendSms($message, $userTo->mobilephone, Yii::$app->user->identity->mobilephone);
+		
+		$smsId=(string)$smsResponse['id'];
+		$smsStatusId=(string)$smsResponse['statusId'];
+		$smsStatusText=(string)$smsResponse['statusText'];
+		
+        $newNotify= new Notification();
+
+        $newNotify->sms_id=$smsId;
+        $newNotify->sms_status_id=$smsStatusId;
+        $newNotify->sms_status=$smsStatusText;
+        $newNotify->status='No reply requested';
+        $newNotify->activity_id=$actionId;
+        $newNotify->event_id=$event->id;
+        $newNotify->notify_key=null;;
+        $newNotify->team_id=$team_id;
+        $newNotify->user_id=$user_to_id;
+		$newNotify->user_from_id=Yii::$app->user->identity->id;
+        $newNotify->notified_date=date("Y-m-d H:i:s",time());
+        $newNotify->message_name=null;
+        $newNotify->message_html=$message;
+        $newNotify->message_template_id=null;
+        $newNotify->save();		
+		Log::write('Notification', LogWhat::CREATE, null, (string)$newNotify);
+    } 	
 	public function updateSmsNotificationStatus()
     {	
 		if($this->sms_id && strlen($this->sms_id)>0){

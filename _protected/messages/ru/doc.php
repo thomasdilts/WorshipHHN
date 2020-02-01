@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => 'Если вы хотите, чтобы пользователь был выбран, разрешите ли вы вместо него ввод текста?',
 'Mobilephone number' => 'Номер мобильного телефона',
 'This is used by the SMS messaging system to send SMS to this user.' => 'Это используется системой обмена сообщениями SMS для отправки SMS этому пользователю.',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => 'Это архив фотографий для вашей церкви. Эти картинки в основном предназначены для использования в видах деятельности, которые определили «использование картинок». Затем, когда вы определите упражнение, вы можете прикрепить к нему столько изображений, сколько пожелаете.',
+'A name that best describes the picture' => 'Имя, которое лучше всего описывает картину',
+'More detailed description of the picture. It may be left out' => 'Более подробное описание картины. Это может быть опущено',
+'The actual picture file' => 'Фактический файл изображения',
 ];

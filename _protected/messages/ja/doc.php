@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => 'ユーザーを選択したい場合は、代わりにユーザーのテキスト入力を許可しますか？',
 'Mobilephone number' => '携帯電話番号',
 'This is used by the SMS messaging system to send SMS to this user.' => 'これは、SMSメッセージングシステムがこのユーザーにSMSを送信するために使用されます。',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => 'これはあなたの教会の写真アーカイブです。これらの写真は、主に「写真の使用」を定義したアクティビティタイプで使用されます。次に、アクティビティを定義するときに、これらの写真を必要な数だけアクティビティに添付できます。',
+'A name that best describes the picture' => '写真を最もよく表す名前',
+'More detailed description of the picture. It may be left out' => '写真のより詳細な説明。省略される場合があります',
+'The actual picture file' => '実際の画像ファイル',
 ];

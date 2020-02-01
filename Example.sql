@@ -138,7 +138,8 @@ CREATE TABLE `activity_type` (
   `special_needs` enum('Not used','Allow','Demand') NOT NULL DEFAULT 'Not used',
   `default_global_order` int(11) NOT NULL,
   `default_start_time` time DEFAULT NULL,
-  `default_end_time` time DEFAULT NULL
+  `default_end_time` time DEFAULT NULL,
+  `using_picture` enum('Not used','Allow','Demand') NOT NULL DEFAULT 'Not used'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -536,7 +537,8 @@ CREATE TABLE `notification` (
   `notified_date` datetime DEFAULT NULL,
   `notify_replied_date` datetime DEFAULT NULL,
   `message_name` varchar(200) DEFAULT NULL,
-  `message_html` text DEFAULT NULL
+  `message_html` text DEFAULT NULL,
+  `user_from_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 --
@@ -775,6 +777,25 @@ ALTER TABLE `user_activity_type`
 ALTER TABLE `user_activity_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
   
+  
+
+CREATE TABLE `picture` (
+  `id` int(11) NOT NULL,
+  `church_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;  
+  
+ALTER TABLE `picture`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `church_id` (`church_id`); 
+
+ALTER TABLE `picture`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
+ALTER TABLE `picture`
+  ADD CONSTRAINT `picture_ibfk_1` FOREIGN KEY (`church_id`) REFERENCES `church` (`id`);    
+  
 --
 -- Indexes for dumped tables
 --
@@ -909,7 +930,8 @@ ALTER TABLE `notification`
   ADD KEY `team_user_notify_ibfk_2` (`user_id`),
   ADD KEY `notification_ibfk_3` (`event_id`),
   ADD KEY `notification_ibfk_4` (`team_id`),
-  ADD KEY `notification_ibfk_5` (`message_template_id`);
+  ADD KEY `notification_ibfk_5` (`message_template_id`),
+  ADD KEY `notification_ibfk_6` (`user_from_id`);
 
 --
 -- Indexes for table `song`
@@ -1179,7 +1201,8 @@ ALTER TABLE `notification`
   ADD CONSTRAINT `notification_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `notification_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   ADD CONSTRAINT `notification_ibfk_4` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`),
-  ADD CONSTRAINT `notification_ibfk_5` FOREIGN KEY (`message_template_id`) REFERENCES `message_template` (`id`);
+  ADD CONSTRAINT `notification_ibfk_5` FOREIGN KEY (`message_template_id`) REFERENCES `message_template` (`id`),
+  ADD CONSTRAINT `notification_ibfk_6` FOREIGN KEY (`user_from_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `song`

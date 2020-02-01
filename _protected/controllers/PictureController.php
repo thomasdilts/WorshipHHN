@@ -1,86 +1,53 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers; 
 
 use app\models\Log;
 use app\models\LogWhat;
-use app\models\Song;
-use app\models\SongImportFile;
-use app\models\SongSearch;
-use app\models\SongExportCsvFile;
+use app\models\Picture;
+use app\models\PictureActivity;
+use app\models\ActivityExportFile;
+use app\models\File;
+use app\models\FileSearch;
+use app\models\PictureSearch;
 use yii\web\NotFoundHttpException;
 use yii\web\ServerErrorHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 use Yii;
 
-class SongController extends AppController
+
+class PictureController extends AppController
 {
 	/**
-     * How many Songs we want to display per page.
+     * How many PictureS we want to display per page.
      * @var int
      */
-    protected $_pageSize = 11;
-
-    public function actionSongimportopenlp()
-    {
-        $model=new Song();
-
-        if ($model->load(Yii::$app->request->post())) {
-            $filePath=SongImportFile::getFileFromUser($model);
-            if($filePath && strlen($filePath)>0){
-                SongImportFile::importOpenLp($filePath);
-				Log::write('Song', LogWhat::CREATE, null, (string)'actionSongimportopenlp');
-            }
-			
-            return $this->redirect('index');
-        }   
-
-        return $this->render('songimport',[
-            'mimeType'=>'application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip',
-            'model'=>$model]);
-    }
-    public function actionSongimportcsv()
-    {
-        $model=new Song();
-
-        if ($model->load(Yii::$app->request->post())) {
-            $filePath=SongImportFile::getFileFromUser($model);
-            if($filePath && strlen($filePath)>0){
-                SongImportFile::importCsv($filePath);
-				Log::write('Song', LogWhat::CREATE, null, (string)'actionSongimportcsv');
-            }
-			
-            return $this->redirect('index');
-        }   
-		
-        return $this->render('songimport',['mimeType'=>'text/csv','model'=>$model]);
-    }
-    public function actionSongexportcsv()
-    {
-        return SongExportCsvFile::exportCsv();
-    }
+    protected $_pageSize = 31;
+ 
     public function actionCreate()
     {
-        $model = new Song(['scenario' => 'create']);
+        $model = new Picture(['scenario' => 'create']);
 
         if (!$model->load(Yii::$app->request->post())) {
-            return $this->render('create', ['model' => $model]);
+            return $this->render('create', ['model' => $model, 'church_id' => Yii::$app->user->identity->church_id,'image' => File::findOne(['model'=>$model->tableName(),'itemId'=>$model->id])]);
         }
 		$model->church_id=Yii::$app->user->identity->church_id;
 		
         if (!$model->save()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to create"));
-            return $this->render('create', ['model' => $model]);
+            return $this->render('create', ['model' => $model, 'church_id' => Yii::$app->user->identity->church_id]);
         }
-		Log::write('Song', LogWhat::CREATE, null, (string)$model);
+		File::addFiles($model);
+		Log::write('Picture', LogWhat::CREATE, null, (string)$model);
 		Yii::$app->session->setFlash('success', Yii::t('app', 'Successful create'));
         return $this->redirect('index');
     }
 
     public function actionIndex()
     {
-        $searchModel = new SongSearch();
+        $searchModel = new PictureSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->_pageSize);
 
         return $this->render('index', [
@@ -88,27 +55,38 @@ class SongController extends AppController
             'dataProvider' => $dataProvider,
         ]);
     }
+
+	public function actionFiledownload($id,$fileownerid)
+    {
+		return File::getFileDownload($id,$fileownerid,$this);		
+	}	
+	public function actionDeletefile($id)
+    {
+		File::deleteFile($id);
+		return $this->redirect(['index']);		
+	}		
     public function actionView($id)
     {
-		$model = $this->findModel($id);
-        return $this->render('view', [
-            'model' => $model,
-        ]);
+        $model = $this->findModel($id);
+        return $this->render('view', ['model' => $model]);	
     }
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 		$modelOld= clone $model;
         if (!$model->load(Yii::$app->request->post())) {
-            return $this->render('update', ['model' => $model]);
-        }		
+            return $this->render('update', ['model' => $model, 'church_id' => Yii::$app->user->identity->church_id,'image' => File::findOne(['model'=>$model->tableName(),'itemId'=>$model->id])]);
+        }	
+	
         if ($model->save()) {
-			Log::write('Song', LogWhat::UPDATE, (string)$modelOld, (string)$model);
+			File::addFiles($model);
+
+			Log::write('Picture', LogWhat::UPDATE, (string)$modelOld, (string)$model);
             Yii::$app->session->setFlash("success", Yii::t("app", "Successful update"));
             return $this->redirect(['index']);
         } else {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to update"));
-            return $this->render('update', ['model' => $model]);
+            return $this->render('update', ['model' => $model, 'church_id' => Yii::$app->user->identity->church_id]);
         }		
     }
 
@@ -116,6 +94,8 @@ class SongController extends AppController
     {
 		try {
 			$model=$this->findModel($id);
+			File::deleteAllFiles($model);
+			PictureActivity::DeleteAll(['picture_id'=>$id]);
 			if (!$model->delete()) {
 				throw new ServerErrorHttpException(Yii::t('app', 'Failed to delete'));
 			}
@@ -123,7 +103,7 @@ class SongController extends AppController
 			Yii::$app->session->setFlash('danger', Yii::t('app', 'Failed to delete. Object has dependencies that must be removed first.'). $e->getMessage());
 			return $this->redirect(['index']);
 		}       
-		Log::write('Song', LogWhat::DELETE, (string)$model, null);
+		Log::write('Picture', LogWhat::DELETE, (string)$model, null);
         Yii::$app->session->setFlash('success', Yii::t('app', 'Successful delete'));
         
         return $this->redirect(['index']);
@@ -139,7 +119,7 @@ class SongController extends AppController
      */
     protected function findModel($id)
     {
-        $model = Song::findOne($id);
+        $model = Picture::findOne($id);
 
         if (is_null($model)) {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
@@ -148,4 +128,3 @@ class SongController extends AppController
         return $model;
     }
 }
-

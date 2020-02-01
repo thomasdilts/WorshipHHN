@@ -27,6 +27,7 @@ $language=Language::findOne(Yii::$app->user->identity->language_id);
 		</div>
 		<?= $form->field($model, 'description')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
 		<?= $form->field($model, 'using_song')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
+		<?= $form->field($model, 'using_picture')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
 		<?= $form->field($model, 'file')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
 		<?= $form->field($model, 'bible_verse')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>
 		<?= $form->field($model, 'special_needs')->dropDownList(['Not used'=>Yii::t('app', 'Not used'),'Allow'=>Yii::t('app', 'Allow'),'Demand'=>Yii::t('app', 'Demand'),]) ?>

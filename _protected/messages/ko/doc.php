@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => '사용자를 선택하려면 대신 사용자의 텍스트 입력을 허용 하시겠습니까?',
 'Mobilephone number' => '휴대 전화 번호',
 'This is used by the SMS messaging system to send SMS to this user.' => 'SMS 메시징 시스템에서이 사용자에게 SMS를 보내는 데 사용됩니다.',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => '이것은 교회의 사진 보관소입니다. 이 그림은 주로 "그림 사용"을 정의한 활동 유형에 사용됩니다. 그런 다음 활동을 정의 할 때이 그림을 원하는만큼 활동에 첨부 할 수 있습니다.',
+'A name that best describes the picture' => '그림을 가장 잘 나타내는 이름',
+'More detailed description of the picture. It may be left out' => '그림에 대한 자세한 설명. 생략 될 수 있습니다',
+'The actual picture file' => '실제 사진 파일',
 ];

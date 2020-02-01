@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => 'Jika Anda ingin pengguna yang dipilih, apakah Anda akan mengizinkan entri teks dari pengguna?',
 'Mobilephone number' => 'Nomor ponsel',
 'This is used by the SMS messaging system to send SMS to this user.' => 'Ini digunakan oleh sistem pesan SMS untuk mengirim SMS ke pengguna ini.',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => 'Ini adalah arsip gambar untuk gereja Anda. Gambar-gambar ini terutama untuk digunakan dalam tipe aktivitas yang telah mendefinisikan "menggunakan gambar." Kemudian ketika Anda menentukan aktivitas, Anda dapat melampirkan sebanyak mungkin gambar ini ke aktivitas yang Anda inginkan.',
+'A name that best describes the picture' => 'Nama yang paling menggambarkan gambar',
+'More detailed description of the picture. It may be left out' => 'Penjelasan gambar lebih rinci. Mungkin ditinggalkan',
+'The actual picture file' => 'File gambar yang sebenarnya',
 ];

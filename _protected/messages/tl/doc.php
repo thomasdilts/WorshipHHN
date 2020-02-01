@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => 'Kung nais mo ang isang napiling gumagamit ay papayagan mo ang isang text entry ng gumagamit sa halip?',
 'Mobilephone number' => 'Numero ng mobile phone',
 'This is used by the SMS messaging system to send SMS to this user.' => 'Ginagamit ito ng SMS messaging system upang maipadala ang SMS sa gumagamit na ito.',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => 'Ito ay isang archive ng larawan para sa iyong simbahan. Ang mga larawang ito ay pangunahing ginagamit para sa mga uri ng aktibidad na tinukoy "gamit ang mga larawan." Pagkatapos kapag tinukoy mo ang aktibidad maaari kang maglakip ng maraming mga larawang ito sa aktibidad ayon sa gusto mo.',
+'A name that best describes the picture' => 'Isang pangalan na pinakamahusay na naglalarawan ng larawan',
+'More detailed description of the picture. It may be left out' => 'Mas detalyadong paglalarawan ng larawan. Maaari itong maiiwan',
+'The actual picture file' => 'Ang aktwal na file ng larawan',
 ];

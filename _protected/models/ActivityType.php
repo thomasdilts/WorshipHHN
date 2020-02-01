@@ -40,7 +40,7 @@ class ActivityType extends \yii\db\ActiveRecord
         return [
             [['church_id', 'name', 'notify_user_event_errors', 'use_globally', 'default_global_order'], 'required'],
             [['church_id', 'notify_user_event_errors', 'team_type_id','allow_freehand_user','allow_freehand_team', 'use_globally', 'default_global_order'], 'integer'],
-            [['using_user', 'using_team', 'description', 'using_song', 'file', 'bible_verse', 'special_needs'], 'string'],
+            [['using_picture','using_user', 'using_team', 'description', 'using_song', 'file', 'bible_verse', 'special_needs'], 'string'],
             [['default_start_time', 'default_end_time'], 'safe'],
             [['name'], 'string', 'max' => 100],
             [['church_id'], 'exist', 'skipOnError' => true, 'targetClass' => Church::className(), 'targetAttribute' => ['church_id' => 'id']],
@@ -49,7 +49,7 @@ class ActivityType extends \yii\db\ActiveRecord
     }
 	public function scenarios() {
 		$scenarios = parent::scenarios(); // This will cover you
-		$scenarios['create'] = ['name','allow_freehand_user','allow_freehand_team', 'using_team','using_user', 'description', 'using_song', 'file','bible_verse','special_needs', 'use_globally','default_start_time', 'default_end_time', 'default_global_order','demand_team','demand_user','demand_description','demand_song','demand_file','notify_user_event_errors'];
+		$scenarios['create'] = ['name','allow_freehand_user','allow_freehand_team', 'using_team','using_picture','using_user', 'description', 'using_song', 'file','bible_verse','special_needs', 'use_globally','default_start_time', 'default_end_time', 'default_global_order','demand_team','demand_user','demand_description','demand_song','demand_file','notify_user_event_errors'];
 		return $scenarios;
 	}
     /**
@@ -61,6 +61,7 @@ class ActivityType extends \yii\db\ActiveRecord
             'name' => Yii::t('app','Name'),
             'using_team' => Yii::t('app','Use Team'),
             'using_user' => Yii::t('app','Use User'),
+			'using_picture' => Yii::t('app','Use Picture'),
             'description' => Yii::t('app','Use Description'),
             'use_globally' => Yii::t('app','Use Globally (No start time)'),
             'using_song' => Yii::t('app','Use Song'),

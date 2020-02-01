@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => 'Hvis du vil have valgt en bruger, vil du tillade en tekstindtastning af brugeren i stedet?',
 'Mobilephone number' => 'Mobiltelefon nummer',
 'This is used by the SMS messaging system to send SMS to this user.' => 'Dette bruges af SMS-meddelelsessystemet til at sende SMS til denne bruger.',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => 'Dette er et billedarkiv til din kirke. Disse billeder er hovedsageligt til brug i aktivitetstyper, der har defineret "brug af billeder." Når du derefter definerer aktiviteten, kan du vedhæfte så mange af disse billeder til aktiviteten, som du ønsker.',
+'A name that best describes the picture' => 'Et navn, der bedst beskriver billedet',
+'More detailed description of the picture. It may be left out' => 'Mere detaljeret beskrivelse af billedet. Det kan være udeladt',
+'The actual picture file' => 'Den faktiske billedfil',
 ];

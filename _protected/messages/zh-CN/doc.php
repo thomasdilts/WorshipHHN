@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => '如果您想要选择用户，您是否允许用户输入文本？',
 'Mobilephone number' => '手机号码',
 'This is used by the SMS messaging system to send SMS to this user.' => 'SMS消息传递系统使用它向此用户发送SMS。',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => '这是您教堂的图片档案。这些图片主要用于已定义“使用图片”的活动类型。然后，当您定义活动时，您可以根据需要将尽可能多的这些图片附加到活动中。',
+'A name that best describes the picture' => '最能描述图片的名称',
+'More detailed description of the picture. It may be left out' => '图片的更详细描述。它可能被遗漏了',
+'The actual picture file' => '实际图片文件',
 ];

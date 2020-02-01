@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 		<h1>
 			<?= Html::encode( Yii::t('app', 'Choose message')) ?> 
 		</h1>	
-		<?php $form = ActiveForm::begin(['id' => 'form-notification']); ?>
+		
 			<?= $form->field($model, 'message_template_id')->dropDownList(ArrayHelper::map($templates, 'id', 'name'),['prompt' => Yii::t('app', 'Select')]) ?>
 			<?= $form->field($model, 'custom_message')->textArea(['style'=>'display:none;']) ?>
 			<?=  Html::checkbox('Notification[send_from_address]', strlen(Yii::$app->user->identity->mobilephone)>4,['style'=>'display:none;','id'=>'notification-send_from_address']); ?>
@@ -25,7 +25,6 @@ use yii\widgets\ActiveForm;
 
 				<?= Html::a(Yii::t('app', 'Cancel'), ['event/notifications?id='.$eventid], ['class' => 'btn btn-default','id'=>'cancel_button']) ?>
 			</div>
-		<?php ActiveForm::end(); ?>
 
 	</div>
 	<div id="preview-label" style="display:none;" class="col-lg-6">	
@@ -111,7 +110,7 @@ use yii\widgets\ActiveForm;
 						}
 						if(foundTemplate.show_link_to_object){
 							$linkHost = '<?=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . Yii::$app->request->baseUrl?>'; 
-							$("#preview").append("<div style='background-color: #d2f5ff;color:blue;text-decoration:underline;margin:5px' class='col-lg-6'>" + $linkHost + "/event/activities?id=19</div>");
+							$("#preview").append("<div style='background-color: #d2f5ff;color:blue;text-decoration:underline;margin:5px' class='col-lg-6'>" + $linkHost + "/event/activities?id=<?=$eventid?></div>");
 						}						
 					}
 

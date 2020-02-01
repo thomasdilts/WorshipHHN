@@ -63,6 +63,7 @@ class UserController extends AppController
         $query =  $user->getTeams()->all();
         return ActivityExportFile::exportIcs($id,ArrayHelper::getColumn($query , 'id'),$start,$end);
     }
+
     public function actionTasks($id)
     {
         $user = User::findOne($id);

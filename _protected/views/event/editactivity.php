@@ -1,6 +1,8 @@
 <?php
 use app\rbac\models\AuthItem;
 use app\models\EventTemplate;
+use app\models\PictureActivitySearch;
+use app\models\PictureSearch;
 use app\models\Song;
 use app\models\File;
 use app\models\BibleVerse;
@@ -11,6 +13,7 @@ use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use app\models\Language;
 $language=Language::findOne(Yii::$app->user->identity->language_id);
+$GLOBALS['fileVault'] = substr(Yii::$app->params['fileVaultPath'],strlen(dirname(__DIR__,3)));
 
 $this->title = Yii::t('app', 'Update event task') . ': ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Event'), 'url' => ['index']];
@@ -90,6 +93,10 @@ $GLOBALS['eventid']=$modelEvent->id;
 				<?php if($modelActivityType->allow_freehand_user){ ?>
 					<?= $form->field($model, 'freehand_user')->textInput() ?>
 				<?php } ?>
+				
+				<?php if( Yii::$app->user->can('EventManager')){ ?>
+					<?= Html::a(Yii::t('app', 'Find volunteers'), ['event/volunteers?eventid='.$modelEvent->id.'&userid=0&actionid='.$model->id.''], ['class' => 'btn btn-success','style'=>'margin-top:40px;margin-bottom:40px;']) ?>
+				<?php } ?>	
 
 			<?php } ?>				
 			<?php if($modelActivityType->using_song!='Not used'){ ?>
@@ -178,6 +185,99 @@ $GLOBALS['eventid']=$modelEvent->id;
 		</div>
 	 <?php } ?>	
 	 </div>
+<?php if($modelActivityType->using_picture!='Not used'){ ?>
+	<div class="row">
+		<div class="col-lg-6">	
+			<h1>
+				<?= Html::encode( Yii::t('app', 'Chosen pictures')) ?> 		
+			</h1>	
+			<?= GridView::widget([
+				'dataProvider' => $pictureDataProvider,
+
+				'summary' => false,
+				'columns' => [
+					[
+						'attribute' => 'name',
+						'contentOptions' => ['style' =>'white-space:pre-line;'],
+
+					],
+					[
+						'attribute' => 'description',
+						'contentOptions' => ['style' =>'white-space:pre-line;'],
+
+					],	  
+					[
+						'format' => 'raw',
+						'value' => function ($model) {
+							$image=File::findOne(['model'=>$model->tableName(),'itemId'=>$model->id]);
+							return $image==null?'':'<a href="'.Yii::$app->request->baseUrl. $GLOBALS['fileVault']. DIRECTORY_SEPARATOR . $image->hash.'"><img src="'. Yii::$app->request->baseUrl. $GLOBALS['fileVault']. DIRECTORY_SEPARATOR . $image->hash.'" style="max-width:250px"></a>';
+						}
+					],			
+					// buttons
+					['class' => 'yii\grid\ActionColumn',
+					'header' => Yii::t('app', 'Menu'),
+					'template' => '{deletepicture}',
+						'buttons' => [
+							'deletepicture' => function ($url, $model, $key) {
+								return Html::a('', $url. '&activityid='.$GLOBALS['activityid']. '&eventid='.$GLOBALS['eventid'], ['title'=>Yii::t('app', 'Remove picture from the task'), 'class'=>'glyphicon glyphicon-trash menubutton']);
+							},
+						]
+
+					], // ActionColumn
+
+				], // columns
+
+			]); ?>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">	
+				<h1>
+					<?= Html::encode( Yii::t('app', 'Add pictures')) ?> 		
+				</h1>	
+				<?= GridView::widget([
+					'dataProvider' => $allPictureDataProvider,
+					'filterModel' => $allPictureSearchModel,
+					'summary' => false,
+					'columns' => [
+						[
+							'attribute' => 'name',
+							'contentOptions' => ['style' =>'white-space:pre-line;'],
+
+						],
+						[
+							'attribute' => 'description',
+							'contentOptions' => ['style' =>'white-space:pre-line;'],
+
+						],	  
+						[
+							'format' => 'raw',
+							'value' => function ($model) {
+								$image=File::findOne(['model'=>$model->tableName(),'itemId'=>$model->id]);
+								return $image==null?'':'<a href="'.Yii::$app->request->baseUrl. $GLOBALS['fileVault']. DIRECTORY_SEPARATOR . $image->hash.'"><img src="'. Yii::$app->request->baseUrl. $GLOBALS['fileVault']. DIRECTORY_SEPARATOR . $image->hash.'" style="max-width:250px"></a>';
+							}
+						],			
+						// buttons
+						['class' => 'yii\grid\ActionColumn',
+						'header' => Yii::t('app', 'Menu'),
+						'template' => '{addpicture}',
+							'buttons' => [
+								'addpicture' => function ($url, $model, $key) {
+									return Html::a('', $url. '&activityid='.$GLOBALS['activityid']. '&eventid='.$GLOBALS['eventid'], ['title'=>Yii::t('app', 'Select picture for the task'), 'class'=>'glyphicon glyphicon-check']);
+								},
+							]
+
+						], // ActionColumn
+
+					], // columns
+
+				]); ?>
+		</div>
+	</div>		
+		
+		
+		
+	 <?php } ?>		 
 </div>
 
 <script>

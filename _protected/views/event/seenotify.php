@@ -48,20 +48,23 @@ $notify_replied_date->setTimezone(new DateTimeZone($church->time_zone));
 				<label style='min-width:100%;' ><?= Yii::t('app', 'Team')?></label>
 				<span style="margin-left:40px"><?= Html::encode($teamname) ?></span>
 			<?php } ?>
+			
+			<label style='min-width:100%;' ><?= Yii::t('app', 'From')?></label>
+			<span style="margin-left:40px"><?= Html::encode($user_from->display_name . ': ' . $user_from->email) ?></span>
 
 			<label style='min-width:100%;' ><?= Yii::t('app', 'To')?></label>
 			<span style="margin-left:40px"><?= Html::encode($user->display_name . ': ' . $user->email) ?></span>
 
 			<label style='min-width:100%;' ><?= Yii::t('app', 'Subject')?></label>
-			<?php if($template->use_auto_subject) { ?>
+			<?php if($template) { if($template->use_auto_subject) { ?>
 				<span style="margin-left:40px"><?=$event->name . ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm") . ' ' . $activity->name  ?></span>
 			<?php }else{ ?>   
 				<span style="margin-left:40px"><?= Html::encode($template->subject) ?></span>     
-			<?php } ?>    
+			<?php }} ?>    
 
 			<label style='min-width:100%;' ><?= Yii::t('app', 'Message')?></label>
 			<div class='well'>
-				<?=$template->message_system=='Email'?$htmlMessage:str_replace("\r\n",'<br />',Html::encode($htmlMessage))?>
+				<?=$template && $template->message_system=='Email'?$htmlMessage:str_replace("\r\n",'<br />',Html::encode($htmlMessage))?>
 			</div>
 		</div>	
     </div>

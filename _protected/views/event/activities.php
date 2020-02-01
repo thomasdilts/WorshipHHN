@@ -10,9 +10,41 @@ use app\models\BibleVerse;
 use yii\helpers\ArrayHelper;
 use app\models\User;
 use yii\helpers\Url;
+function minutesDiff($timeStart, $timeFinish){
+	$split = explode ( ':' , $timeStart);
+	$minutesStart= (int)$split[0]*60 + (int)$split[1];
+	$split = explode ( ':' , $timeFinish);
+	$minutesFinish= (int)$split[0]*60 + (int)$split[1];
+	return $minutesFinish - $minutesStart;
+}
+function getDuration($model,$dataMembersProvider){
+	$dataProvider = clone $dataMembersProvider;	
+	//deep clone---not needed. Above works fine
+	//$dataProvider = unserialize(serialize($dataMembersProvider));	
+	if (($sort = $dataProvider->getSort()) !== false) {
+		$dataProvider->query->addOrderBy($sort->getOrders());
+	}	
+
+	$dataByRows=$dataProvider->query->all();
+	$foundPreviousRow=null;
+	$collection = new \CachingIterator(
+			  new \ArrayIterator($dataByRows));		
+	foreach ($collection as $row)
+	{
+		if($row->id==$model->id){
+			$duration = $collection->hasNext() ? minutesDiff($row->start_time,$collection->getInnerIterator()->current()->start_time) : 1;
+			return $duration>=0 ? $duration : 0;
+		}
+	}
+	return 1;
+}
+
+
+
 
 $GLOBALS['event_id']=$model->id;
 $GLOBALS['start_date']=$model->start_date;
+$GLOBALS['dataMembersProvider']=$dataMembersProvider;
 
 $this->title = Yii::t('app', 'Tasks');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Events'), 'url' => ['index']];
@@ -54,13 +86,14 @@ $this->params['breadcrumbs'][] = $model->name . ' ' . Yii::$app->formatter->asDa
 								return $value;
 							}else{
 								return $value . ' ' . Html::a('', URL::toRoute('event/uptime'). '?eventid='.$GLOBALS['event_id'].'&activityid='.$model->id, ['title'=>Yii::t('app', 'Add one minute to the duration'), 'class'=>'glyphicon glyphicon-triangle-top menubutton','id'=>'actid'.$model->id])
+										. getDuration($model,$GLOBALS['dataMembersProvider'])
 										. Html::a('', URL::toRoute('event/downtime'). '?eventid='.$GLOBALS['event_id'].'&activityid='.$model->id, ['title'=>Yii::t('app', 'Subtract one minute from the duration'), 'class'=>'glyphicon glyphicon-triangle-bottom menubutton','id'=>'actid'.$model->id]);
 							}	
 						},
 					],				
 					'name',
 					[
-						'format' => 'raw',
+						'format' => 'raw',						
 						'value' => function ($model, $index, $widget) {
 							return Activity::getOtherColumnWeb($model,$GLOBALS['start_date']);
 						},

@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => 'إذا كنت تريد اختيار مستخدم ما ، فهل ستسمح بإدخال نص للمستخدم بدلاً من ذلك؟',
 'Mobilephone number' => 'رقم الهاتف الجوال',
 'This is used by the SMS messaging system to send SMS to this user.' => 'يستخدم هذا من خلال نظام الرسائل النصية القصيرة لإرسال الرسائل القصيرة إلى هذا المستخدم.',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => 'هذا أرشيف صور لكنيستك. هذه الصور مخصصة للاستخدام في أنواع الأنشطة التي حددت "استخدام الصور". ثم عند تحديد النشاط ، يمكنك إرفاق أكبر عدد ممكن من هذه الصور بالنشاط كما تريد.',
+'A name that best describes the picture' => 'اسم يصف الصورة بشكل أفضل',
+'More detailed description of the picture. It may be left out' => 'وصف أكثر تفصيلا للصورة. قد يتم استبعاده',
+'The actual picture file' => 'ملف الصورة الفعلي',
 ];

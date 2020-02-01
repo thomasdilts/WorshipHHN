@@ -60,20 +60,20 @@ class AppController extends Controller
                         'roles' => ['ChurchAdmin','theCreator'],
                     ],					
                     [
-                        'controllers' => ['user','team-type','activity-type','event-template','message-template','message-type'],
-                        'actions' => ['index', 'create','deletemessage','deletetype','createtype','createmessage', 'update', 'delete', 'view', 'addtotemplate','activities', 'removefromtemplate','fileuploadadmin','filedeleteadmin','deletenotify'],
+                        'controllers' => ['user','team-type','activity-type','event-template','message-template','message-type','picture'],
+                        'actions' => ['index', 'create','deletemessage','deletetype','createtype','createmessage', 'update', 'delete', 'view', 'addtotemplate','activities', 'removefromtemplate','fileuploadadmin','filedeleteadmin','deletenotify','deletefile'],
                         'allow' => true,
                         'roles' => ['ChurchAdmin','theCreator'],
 					],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['downtime','uptime','moveup','movedown','deleteactivityfile','exportalltasksbyevent','alltasksbyevent','fileactivitydownload','alltasks','index', 'create', 'update', 'delete','removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'copy', 'notifications', 'exportexcel', 'exportpdf', 'notify', 'seenotify', 'deletenotify'],
+                        'actions' => ['downtime','uptime','moveup','movedown','deleteactivityfile','exportalltasksbyevent','alltasksbyevent','fileactivitydownload','alltasks','index', 'create', 'update', 'delete','removefromevent','addtoevent','activities','files', 'filedownload', 'volunteers', 'deletefile','editactivity','selectsong','addpicture','deletepicture', 'copy', 'notifications', 'exportexcel', 'exportpdf', 'notify', 'seenotify', 'deletenotify'],
                         'allow' => true,
                         'roles' => ['EventManager','ChurchAdmin','theCreator'],
 					],
                     [
                         'controllers' => ['event'],
-                        'actions' => ['downtime','uptime','moveup','movedown','deleteactivityfile','fileactivitydownload','exportalltasksbyevent','alltasksbyevent','alltasks','index', 'removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
+                        'actions' => ['downtime','uptime','moveup','movedown','deleteactivityfile','fileactivitydownload','exportalltasksbyevent','alltasksbyevent','alltasks','index', 'removefromevent','addtoevent','activities','files', 'filedownload', 'deletefile','editactivity','selectsong', 'addpicture','deletepicture', 'notifications', 'exportexcel', 'exportpdf', 'seenotify'],
                         'allow' => true,
                         'roles' => ['TeamManager','EventEditor'],
                     ],
@@ -106,6 +106,12 @@ class AppController extends Controller
                         'actions' => ['index', 'create', 'delete', 'update','view','songimportopenlp', 'songimportcsv', 'songexportcsv' ],
                         'allow' => true,
                         'roles' => ['TeamManager','ChurchAdmin','theCreator','EventManager','EventEditor',],
+					],					
+                    [
+                        'controllers' => ['picture'],
+                        'actions' => ['view' ],
+                        'allow' => true,
+                        'roles' => ['TeamManager','ChurchAdmin','theCreator','EventManager','EventEditor','Member',],
 					],					
                     [
                         'controllers' => ['user-blocked'],

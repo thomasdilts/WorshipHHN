@@ -84,6 +84,7 @@ $this->beginBody() ?>
 			'items' => 
 				[
 					['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']],
+					['label' => Yii::t('app', 'Pictures'), 'url' => ['/picture/index']],
 					['label' => Yii::t('app', 'Team types'), 'url' => ['/team-type/index']],
                     ['label' => Yii::t('app', 'Task templates'), 'url' => ['/activity-type/index']],
                     ['label' => Yii::t('app', 'Message templates'), 'url' => ['/message-template/index']],

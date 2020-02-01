@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => 'Jos haluat käyttäjän valitun, sallitaanko käyttäjän tekstinsyöttö sen sijaan?',
 'Mobilephone number' => 'Matkapuhelimen numero',
 'This is used by the SMS messaging system to send SMS to this user.' => 'SMS-viestijärjestelmä käyttää tätä lähettämään tekstiviestejä tälle käyttäjälle.',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => 'Tämä on kuva-arkisto kirkollesi. Nämä kuvat on tarkoitettu pääasiassa aktiviteettityypeille, jotka on määritelty "käyttämään kuvia". Kun määrität aktiviteetin, voit liittää aktiviteettiin niin monta kuvaa kuin haluat.',
+'A name that best describes the picture' => 'Nimi, joka kuvaa kuvaa parhaiten',
+'More detailed description of the picture. It may be left out' => 'Yksityiskohtaisempi kuvaus kuvasta. Se voidaan jättää pois',
+'The actual picture file' => 'Varsinainen kuvatiedosto',
 ];

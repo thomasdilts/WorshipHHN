@@ -243,6 +243,26 @@ class Activity extends \yii\db\ActiveRecord
 				$isRed = true;
 			}
 		}
+		if($model->activityType->using_picture!='Not used'){
+			$activity = Activity::findOne(['id' => $model->id]);
+			$pictures = $activity->hasMany(Picture::className(), ['id' => 'picture_id'])
+				->viaTable('picture_activity',['activity_id' => 'id'])
+				->orderBy('name')
+				->all();			
+			$foundPicture=false;
+			if($pictures!=null && count($pictures)>0){
+				foreach($pictures as $picture){
+					$foundPicture=true;
+					$value.=strlen($value)>0?$seperator:'';
+					$value.=$preRed==''?$picture->name:Html::a($picture->name,URL::toRoute('picture/view') .'?id='.$picture->id, ['title'=>Yii::t('app', 'View picture')]);
+				}
+			}
+			if(!$foundPicture && $model->activityType->using_picture=='Demand'){
+				$value.=strlen($value)>0?$seperator:'';
+				$value.=$preRed.Yii::t('app', 'Missing-picture').$postRed;
+				$isRed = true;
+			}
+		}		
 		if($model->activityType->description!='Not used'){
 			$value.=strlen($value)>0?$seperator:'';
 			$value.=$model->description!=null && strlen($model->description)>0

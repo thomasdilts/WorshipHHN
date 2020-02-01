@@ -67,7 +67,18 @@ class EventExportFile extends Event
         $file = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '-', $title);
         return mb_ereg_replace("([\.]{2,})", '-', $file);
     }
-    private function GetStartTime($model)
+	private function minutesDiff($timeStart, $timeFinish){
+		$split = explode ( ':' , $timeStart);
+		$minutesStart= (int)$split[0]*60 + (int)$split[1];
+		$split = explode ( ':' , $timeFinish);
+		$minutesFinish= (int)$split[0]*60 + (int)$split[1];
+		return $minutesFinish - $minutesStart;
+	}
+	private function getDuration($model,$nextModel){
+		$duration = $nextModel!=null ? $this->minutesDiff($model->start_time,$nextModel->start_time) : 1;
+		return $duration>=0 ? $duration : 0;
+	}	
+    private function GetStartTime($model,$nextModel)
     {
         $value = '';
         $isRed = false;
@@ -80,7 +91,7 @@ class EventExportFile extends Event
         else
         {
             $isRed = $model->start_time == null || strlen($model->start_time) == 0;
-            $value = $isRed ? Yii::t('app', 'Missing') : $model->start_time;
+            $value = $isRed ? Yii::t('app', 'Missing') : substr($model->start_time,0,5) . ' - '. $this->getDuration($model,$nextModel);
         }
         return array(
             'value' => $value,
@@ -204,10 +215,11 @@ class EventExportFile extends Event
 		            ],
 		            'borders' => ['outline' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['argb' => 'FF000000'], ], ],
 		        ];
-
-        foreach ($activities as $activity)
+		$length=count($activities);
+        for($i=0;$i<$length;$i++)
         {
-            $startTime = $this->GetStartTime($activity);
+			$activity=$activities[$i];
+            $startTime = $this->GetStartTime($activity,$i<($length-1)?$activities[$i+1]:null);
             $other = Activity::getOtherColumn($activity,$this->start_date);
             $spreadsheet->setActiveSheetIndex(0)
                 ->setCellValue('A' . $row, $startTime['value'])

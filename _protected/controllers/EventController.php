@@ -10,6 +10,9 @@ use app\models\User;
 use app\models\File;
 use app\models\Event;
 use app\models\Team;
+use app\models\PictureActivity;
+use app\models\PictureActivitySearch;
+use app\models\PictureSearch;
 use app\models\MessageTemplate;
 use app\models\EventExportFile;
 use app\models\EventSearch;
@@ -18,7 +21,7 @@ use app\models\EventActivitySearch;
 use app\models\NotificationSearch;
 use app\models\Notification;
 use app\models\MessageTemplateSearch;
-
+use app\models\UserNotification;
 use app\models\SongSearch;
 use app\models\EventTemplate;
 use app\models\Activity;
@@ -102,6 +105,25 @@ class EventController extends AppController
 		return $this->redirect(['editactivity','id'=>$activityid,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
 	}
 	
+	public function actionAddpicture($id,$activityid,$eventid)
+    {
+		$modelActivity = Activity::findOne($activityid);
+		
+		$model = new PictureActivity(['scenario' => 'create']);
+		$model->picture_id=$id;
+		$model->activity_id=$activityid;
+		$model->save();		
+
+		return $this->redirect(['editactivity','id'=>$activityid,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
+	}
+	public function actionDeletepicture($id,$activityid,$eventid)
+    {
+		$modelActivity = Activity::findOne($activityid);
+		PictureActivity::DeleteAll(['activity_id'=>$activityid,'picture_id'=>$id]);
+
+		return $this->redirect(['editactivity','id'=>$activityid,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
+	}	
+	
 	public function actionFileactivitydownload($id,$fileownerid, $eventid)
     {
 		return File::getFileDownload($id,$fileownerid,$this);		
@@ -147,6 +169,17 @@ class EventController extends AppController
 		$arrayViewModel['searchModel']=$searchModel;
 		$arrayViewModel['dataProvider']=$dataProvider;
 		$arrayViewModel['returnurl']=$returnurl;
+				
+		$pictureSearchModel = new PictureActivitySearch();
+		$pictureSearchModel->activity_id=$modelActivity->id;
+		$pictureDataProvider = $pictureSearchModel->search(Yii::$app->request->queryParams, 10);			
+		$allPictureSearchModel = new PictureSearch();
+		$allPictureDataProvider = $allPictureSearchModel->search(Yii::$app->request->queryParams, 10);			
+		$arrayViewModel['pictureSearchModel']=$pictureSearchModel;
+		$arrayViewModel['pictureDataProvider']=$pictureDataProvider;
+		$arrayViewModel['allPictureSearchModel']=$allPictureSearchModel;
+		$arrayViewModel['allPictureDataProvider']=$allPictureDataProvider;		
+			
 		return $arrayViewModel;
 	}
     public function actionEditactivity($id,$eventid,$returnurl)
@@ -430,10 +463,40 @@ class EventController extends AppController
     	$activity=Activity::findOne($model->activity_id);
     	$event=Event::findOne($eventid);
     	$user=User::findOne($model->user_id);
+    	$user_from=User::findOne($model->user_from_id);
     	$template=MessageTemplate::findOne($model->message_template_id);
     	$teamname= $model->team_id?Team::findOne($model->team_id)->name:'';
-    	return $this->render('seenotify', ['model'=>$model, 'activity'=>$activity, 'event'=>$event, 'user'=>$user, 'teamname'=>$teamname, 'template'=>$template]);	
+    	return $this->render('seenotify', ['model'=>$model, 'activity'=>$activity, 'event'=>$event, 'user_from'=>$user_from, 'user'=>$user, 'teamname'=>$teamname, 'template'=>$template]);	
 	}
+	public function actionVolunteers($actionid, $userid, $eventid)
+    {
+    	$model = new UserNotification();
+		
+        if ($model->load(Yii::$app->request->post())) {
+			if($model->message_html && strlen($model->message_html)>2 && $model->user_to_id && strlen($model->user_to_id)>0){
+				Notification::sendSmsOnlyForOne($model->user_to_id, $actionid, $eventid, null, $model->message_html);
+				return $this->redirect(['editactivity','id'=>$actionid,'eventid'=>$eventid,'returnurl'=>'activities%3Fid%3D'.$eventid]);
+			}
+			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to update"));
+        }			
+
+		$event=Event::findOne($eventid);
+		$activity=Activity::findOne($actionid);
+		$eventname=$event->name . ' ' . Yii::$app->formatter->asDate($event->start_date, "Y-MM-dd H:mm") ;
+		$modelActivityType=ActivityType::findOne($activity->activity_type_id);
+		$users=$modelActivityType->getUsersForActivityType()->all();
+		if($users==null || count($users)==0){
+			$users=app\models\User::find()->where(['church_id' => $modelEvent->church_id])->orderBy("display_name ASC")->all();
+		}
+
+		return $this->render('volunteers', [
+			'model'=>$model,
+			'users'=>$users,
+			'eventname'=>$eventname,
+			'eventid'=>$eventid,
+			'activityname'=>$activity->name,
+		]);	    	
+    }	
 	public function actionNotify($actionid, $userid, $eventid)
     {
     	$model = new Notification(['scenario' => 'create']);
@@ -482,6 +545,7 @@ class EventController extends AppController
     {
 		$model=Activity::findOne(['id'=>$id]);
 		File::deleteAllFiles($model);
+		PictureActivity::deleteAll('activity_id = '.$id);
 		if (!$model->delete()) {
 			Yii::$app->session->setFlash("danger", Yii::t("app", "Failed to delete"));
         }else{
@@ -589,6 +653,7 @@ class EventController extends AppController
 			$query = Activity::getAllActivities($id)->all();
 			foreach($query as $activity){	
 				File::deleteAllFiles($activity);
+				PictureActivity::deleteAll('activity_id = '.$activity->id);
 				$activity->delete();
 			}			
 			

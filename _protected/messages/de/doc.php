@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => 'Wenn Sie möchten, dass ein Benutzer ausgewählt wird, können Sie stattdessen eine Texteingabe des Benutzers zulassen?',
 'Mobilephone number' => 'Handynummer',
 'This is used by the SMS messaging system to send SMS to this user.' => 'Dies wird vom SMS-Nachrichtensystem zum Senden von SMS an diesen Benutzer verwendet.',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => 'Dies ist ein Bildarchiv für Ihre Kirche. Diese Bilder sind hauptsächlich zur Verwendung in Aktivitätstypen gedacht, für die "Verwenden von Bildern" definiert wurde. Wenn Sie dann die Aktivität definieren, können Sie der Aktivität beliebig viele dieser Bilder hinzufügen.',
+'A name that best describes the picture' => 'Ein Name, der das Bild am besten beschreibt',
+'More detailed description of the picture. It may be left out' => 'Detaillierte Beschreibung des Bildes. Es kann weggelassen werden',
+'The actual picture file' => 'Die eigentliche Bilddatei',
 ];

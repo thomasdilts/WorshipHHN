@@ -248,4 +248,8 @@
 'If you want a user selected will you allow a text entry of the user instead?' => 'หากคุณต้องการให้ผู้ใช้ที่เลือกคุณจะอนุญาตให้ป้อนข้อความของผู้ใช้แทน?',
 'Mobilephone number' => 'เบอร์โทรศัพท์',
 'This is used by the SMS messaging system to send SMS to this user.' => 'ระบบส่งข้อความ SMS นี้ใช้เพื่อส่ง SMS ไปยังผู้ใช้รายนี้',
+'This is a picture archive for your church. These pictures are mainly for use in activity types that have defined "using pictures." Then when you define the activity you can attach as many of these pictures to the activity as you want.' => 'นี่คือภาพเก็บถาวรสำหรับคริสตจักรของคุณ รูปภาพเหล่านี้ส่วนใหญ่ใช้สำหรับประเภทกิจกรรมที่กำหนดไว้ "ใช้รูปภาพ" จากนั้นเมื่อคุณกำหนดกิจกรรมคุณสามารถแนบรูปภาพเหล่านี้เป็นจำนวนมากกับกิจกรรมตามที่คุณต้องการ',
+'A name that best describes the picture' => 'ชื่อที่อธิบายภาพได้ดีที่สุด',
+'More detailed description of the picture. It may be left out' => 'คำอธิบายรายละเอียดเพิ่มเติมของภาพ มันอาจจะถูกทิ้งไว้',
+'The actual picture file' => 'ไฟล์ภาพที่แท้จริง',
 ];
