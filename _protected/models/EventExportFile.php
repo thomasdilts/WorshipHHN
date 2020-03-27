@@ -172,17 +172,18 @@ class EventExportFile extends Event
             ->setKeywords('office 2007 openxml php')
             ->setCategory($churchname);
 
-		$this->SetBold('A2',$spreadsheet,Yii::t('app', 'Today'));
+		$this->SetBold('B2',$spreadsheet,Yii::t('app', 'Today'));
         Yii::$app->formatter->defaultTimeZone=$church->time_zone;
         Yii::$app->formatter->timeZone=$church->time_zone;
         $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('C1', $title)
-            ->setCellValue('B2', Yii::$app->formatter->asDate(time() , "Y-MM-dd HH:mm"))
-            ->setCellValue('C2', $churchname);
+            ->setCellValue('D1', $title)
+            ->setCellValue('C2', Yii::$app->formatter->asDate(time() , "Y-MM-dd HH:mm"))
+            ->setCellValue('D2', $churchname);
 
-		$this->SetBold('A3',$spreadsheet,Yii::t('app', 'Start time'));
-		$this->SetBold('B3',$spreadsheet,Yii::t('app', 'Name'));
-		$this->SetBold('C3',$spreadsheet,Yii::t('app', 'Other'));
+		$this->SetBold('A3',$spreadsheet,"    ");
+		$this->SetBold('B3',$spreadsheet,Yii::t('app', 'Start time'));
+		$this->SetBold('C3',$spreadsheet,Yii::t('app', 'Name'));
+		$this->SetBold('D3',$spreadsheet,Yii::t('app', 'Other'));
 
 		$spreadsheet->getActiveSheet()->getPageMargins()->setTop(floatval($church->paper_margin_top_bottom));
 		$spreadsheet->getActiveSheet()->getPageMargins()->setBottom(floatval($church->paper_margin_top_bottom));
@@ -222,19 +223,19 @@ class EventExportFile extends Event
             $startTime = $this->GetStartTime($activity,$i<($length-1)?$activities[$i+1]:null);
             $other = Activity::getOtherColumn($activity,$this->start_date);
             $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A' . $row, $startTime['value'])
-                ->setCellValue('B' . $row, $activity->name)
-                ->setCellValue('C' . $row, $other['value']);
+                ->setCellValue('B' . $row, $startTime['value'])
+                ->setCellValue('C' . $row, $activity->name)
+                ->setCellValue('D' . $row, $other['value']);
             if ($startTime['isRed'])
             {
-            	$this->SetRed('A' . $row,$spreadsheet,$startTime['value']);
+            	$this->SetRed('B' . $row,$spreadsheet,$startTime['value']);
             }
             if ($other['isRed'])
             {
-            	$this->SetRed('C' . $row,$spreadsheet,$other['value']);
+            	$this->SetRed('D' . $row,$spreadsheet,$other['value']);
             }elseif ($other['isYellow'])
             {
-                $this->SetYellow('C' . $row,$spreadsheet,$other['value']);
+                $this->SetYellow('D' . $row,$spreadsheet,$other['value']);
             }
             if($activity->activityType->use_globally)
             {
@@ -244,14 +245,14 @@ class EventExportFile extends Event
 	        {
 	        	$colorSetting=$setRowColor? $rowColor1:$rowColor2;
 	        }
-	        $spreadsheet->getActiveSheet()->getStyle('A' . $row.':'.'C' . $row)->applyFromArray($colorSetting);
+	        $spreadsheet->getActiveSheet()->getStyle('A' . $row.':'.'D' . $row)->applyFromArray($colorSetting);
             $setRowColor = !$setRowColor;
             $row++;
 
         }
         $row--;
 
-		$spreadsheet->getActiveSheet()->getStyle('A3:C3')->applyFromArray(
+		$spreadsheet->getActiveSheet()->getStyle('B3:D3')->applyFromArray(
 		    ['fill' => [
 		                'fillType' => Fill::FILL_SOLID,
 		                'color' => ['argb' => 'CCD5D5D5'],
@@ -265,7 +266,7 @@ class EventExportFile extends Event
             ->getStyle('A1:C2')
             ->applyFromArray($styleThinBlackBorderOutline);
         $spreadsheet->getActiveSheet()
-            ->getStyle('A2:B2')
+            ->getStyle('B2:C2')
             ->applyFromArray($styleThinBlackBorderOutline);
 
         $spreadsheet->getActiveSheet()
@@ -274,6 +275,8 @@ class EventExportFile extends Event
             ->getStyle('B3:B' . $row)->applyFromArray($styleThinBlackBorderOutline);
         $spreadsheet->getActiveSheet()
             ->getStyle('C3:C' . $row)->applyFromArray($styleThinBlackBorderOutline);
+        $spreadsheet->getActiveSheet()
+            ->getStyle('D3:D' . $row)->applyFromArray($styleThinBlackBorderOutline);
 
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('A')
@@ -284,8 +287,10 @@ class EventExportFile extends Event
         $spreadsheet->getActiveSheet()
             ->getColumnDimension('C')
             ->setAutoSize(true);
+        $spreadsheet->getActiveSheet()
+            ->getColumnDimension('D')
+            ->setAutoSize(true);
         return $spreadsheet;
 
     }
 }
-
