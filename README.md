@@ -1,4 +1,7 @@
 # WorshipHHN
+
+Replaced by https://github.com/thomasdilts/WorshipPlanner
+
 A worship service planner and organizer.
 
 Documentation and details can be found at http://worshiphhn.org/whhn
